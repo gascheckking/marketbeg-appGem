@@ -8,9 +8,11 @@ export default function Header() {
   return (
     <header className="header">
       <div className="header-inner">
-        <strong onClick={() => router.push("/feed")}>Marketbeg</strong>
-        <nav>
-          <button onClick={() => router.push("/feed")}>Flöde</button>
+        <div className="logo" onClick={() => router.push("/")}>
+          Marketbeg
+        </div>
+        <nav className="nav-links">
+          <button onClick={() => router.push("/feed")}>Annonser</button>
           <button onClick={() => router.push("/sell")}>Sälj</button>
           <button onClick={() => router.push("/profile")}>Profil</button>
         </nav>
