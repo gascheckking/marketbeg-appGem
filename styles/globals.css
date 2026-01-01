@@ -87,3 +87,46 @@ body {
   justify-content: space-between;
   align-items: center;
 }
+/* Speciella effekter för 2026-looken */
+.glow-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.glow-card::after {
+  content: "";
+  position: absolute;
+  top: -50%; left: -50%;
+  width: 200%; height: 200%;
+  background: conic-gradient(from 0deg, transparent, var(--accent), transparent);
+  animation: rotate-glow 10s linear infinite;
+  z-index: -1;
+  opacity: 0.1;
+}
+
+@keyframes rotate-glow {
+  100% { transform: rotate(360deg); }
+}
+
+.primary-btn {
+  background: white;
+  color: black;
+  border: none;
+  padding: 18px 36px;
+  border-radius: 16px;
+  font-weight: 800;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.2s;
+  box-shadow: 0 10px 30px rgba(255,255,255,0.1);
+}
+
+.primary-btn:hover {
+  transform: scale(1.02);
+  box-shadow: 0 15px 40px rgba(255,255,255,0.2);
+}
+
+.muted {
+  color: #888;
+  line-height: 1.6;
+}
