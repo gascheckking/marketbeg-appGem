@@ -1,49 +1,52 @@
 "use client";
 import { useState } from "react";
 
-export default function SellPage() {
-  const [step, setStep] = useState(1);
-  const [analyzing, setAnalyzing] = useState(false);
+export default function Sell() {
+  const [scanning, setScanning] = useState(false);
+  const [done, setDone] = useState(false);
 
-  const startScan = () => {
-    setAnalyzing(true);
+  const handleScan = () => {
+    setScanning(true);
     setTimeout(() => {
-      setStep(2);
-      setAnalyzing(false);
-    }, 3000);
+      setScanning(false);
+      setDone(true);
+    }, 2500);
   };
 
   return (
-    <div style={{padding: '20px', textAlign: 'center'}}>
-      {step === 1 && (
-        <div className="sell-hero">
-          <div className={`scan-container ${analyzing ? 'active' : ''}`}>
-             <div className="camera-box" style={{height: '400px', background: '#111', borderRadius: '40px', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-                {analyzing ? <div className="scan-line"></div> : <span style={{fontSize: '60px'}}>📸</span>}
-             </div>
+    <div className="app-shell" style={{padding: '20px', textAlign: 'center'}}>
+      {!done ? (
+        <>
+          <h1 style={{marginTop: '40px'}}>Sikta på varan</h1>
+          <div style={{
+            height: '400px', background: '#111', borderRadius: '40px', border: scanning ? '2px solid var(--accent)' : '2px solid #222',
+            display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', overflow: 'hidden', marginTop: '30px'
+          }}>
+            {scanning && <div className="scan-line" style={{position: 'absolute', width: '100%', height: '2px', background: 'var(--accent)', boxShadow: '0 0 15px var(--accent)', animation: 'scan 2s infinite'}}></div>}
+            <span style={{fontSize: '60px'}}>{scanning ? '🤖' : '📸'}</span>
           </div>
-          <h2 style={{fontSize: '2.5rem', marginTop: '30px'}}>Sikta på varan.</h2>
-          <p className="muted">BegAI sköter värdering och annons åt dig.</p>
-          <button className="primary-btn" onClick={startScan} disabled={analyzing}>
-            {analyzing ? "AI ANALYSERAR..." : "STARTA SCAN"}
+          <button className="primary-btn" onClick={handleScan} style={{marginTop: '40px', width: '100%'}}>
+            {scanning ? 'ANALYSERAR...' : 'STARTA AI-SCAN'}
           </button>
+        </>
+      ) : (
+        <div style={{marginTop: '40px'}}>
+          <div className="ai-text" style={{fontWeight: 800}}>IDENTIFIERAD</div>
+          <h1 style={{fontSize: '3rem'}}>iPhone 15 Pro</h1>
+          <div className="pay-card" style={{justifyContent: 'center', gap: '20px'}}>
+             <small className="muted">REK. PRIS</small>
+             <strong style={{fontSize: '1.5rem'}}>8 900 KR</strong>
+          </div>
+          <button className="primary-btn" onClick={() => window.location.href='/checkout'} style={{marginTop: '30px', width: '100%'}}>PUBLICERA & SÄLJ</button>
         </div>
       )}
 
-      {step === 2 && (
-        <div className="ai-result">
-          <div className="badge-ai">PRODUKT IDENTIFIERAD</div>
-          <h1 style={{fontSize: '3rem'}}>iPhone 15 Pro</h1>
-          <div className="price-suggestion">
-            <small>FÖRESLAGET PRIS</small>
-            <h2>8 900 kr</h2>
-          </div>
-          <div className="bento-info">
-             <p>✨ AI-Beskrivning: "Toppskick, Titanium Blue. Batterihälsa 98%."</p>
-          </div>
-          <button className="primary-btn" onClick={() => window.location.href='/checkout'}>PUBLICERA NU</button>
-        </div>
-      )}
+      <style jsx>{`
+        @keyframes scan {
+          0% { top: 0; }
+          100% { top: 100%; }
+        }
+      `}</style>
     </div>
   );
 }
