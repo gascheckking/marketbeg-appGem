@@ -1,40 +1,36 @@
+"use client";
+
+import { useState } from "react";
+import FeedCardSell from "../../components/FeedCardSell";
+
 const MOCK_LISTINGS = [
-  {
-    id: "1",
-    title: "iPhone 13",
-    price: 6500,
-    trust: "verified",
-  },
-  {
-    id: "2",
-    title: "AirPods Pro",
-    price: 1800,
-    trust: "unverified",
-  },
+  { id: "1", title: "iPhone 13", price: 6500, trust: 92 },
+  { id: "2", title: "AirPods Pro", price: 1800, trust: 81 },
 ];
 
 export default function FeedPage() {
-  return (
-    <main style={{ padding: 16 }}>
-      <h2>Flöde</h2>
+  const [tab, setTab] = useState<"sell" | "buy">("sell");
 
-      <ul style={{ marginTop: 16 }}>
-        {MOCK_LISTINGS.map((item) => (
-          <li
-            key={item.id}
-            style={{
-              padding: 12,
-              marginBottom: 12,
-              borderRadius: 8,
-              border: "1px solid #ddd",
-            }}
-          >
-            <strong>{item.title}</strong>
-            <div>{item.price} kr</div>
-            <small>{item.trust}</small>
-          </li>
-        ))}
-      </ul>
+  return (
+    <main className="container">
+      <div className="tabs">
+        <button
+          className={tab === "sell" ? "active" : ""}
+          onClick={() => setTab("sell")}
+        >
+          Säljes
+        </button>
+        <button
+          className={tab === "buy" ? "active" : ""}
+          onClick={() => setTab("buy")}
+        >
+          Köpes
+        </button>
+      </div>
+
+      {MOCK_LISTINGS.map((item) => (
+        <FeedCardSell key={item.id} {...item} />
+      ))}
     </main>
   );
 }
