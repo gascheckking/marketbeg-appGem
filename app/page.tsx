@@ -1,14 +1,20 @@
 "use client";
 
+import { useRouter } from "next/navigation";
+
 export default function Home() {
+  const router = useRouter();
+
   return (
-    <main style={{ padding: 24 }}>
+    <main className="container center">
       <h1>Marketbeg</h1>
-      <p>UI-only. Stabil grund.</p>
+      <p className="muted">
+        Sälj och köp begagnat – tryggt, snabbt, verifierat
+      </p>
 
       <button
-        onClick={() => alert("Login kommer senare")}
-        style={{ padding: 16, width: "100%" }}
+        className="primary"
+        onClick={() => router.push("/feed")}
       >
         Logga in
       </button>
