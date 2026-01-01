@@ -1,29 +1,22 @@
-export default function AdminDashboard() {
-  return (
-    <div className="main-container">
-      <h1>BegAI Control Room</h1>
-      <div className="bento-grid" style={{display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '20px'}}>
-        <div className="bento-item" style={{background: '#111', padding: '20px', borderRadius: '24px'}}>
-          <small>TOTAL VOLYM (24H)</small>
-          <h2>1.2M SEK</h2>
-        </div>
-        <div className="bento-item" style={{background: '#111', padding: '20px', borderRadius: '24px'}}>
-          <small>AI-VERIFIERADE ANNONSER</small>
-          <h2>14,502</h2>
-        </div>
-        <div className="bento-item" style={{background: '#111', padding: '20px', borderRadius: '24px'}}>
-          <small>AKTIVA DISPYTER</small>
-          <h2 style={{color: '#00ff88'}}>0</h2>
-        </div>
-      </div>
+"use client";
 
-      <div style={{marginTop: '40px', background: '#111', padding: '20px', borderRadius: '24px'}}>
-        <h3>Live Transaktioner</h3>
-        <div style={{fontSize: '14px', fontFamily: 'monospace'}}>
-          {/* Här har jag ändrat -> till en sträng eller tagit bort tecknet som stör */}
-          <p>[17:21] SE: iPhone 15 Pro såld (Swish) {"->"} +45 BegCredits till säljare</p>
-          <p>[17:20] NO: Rolex Submariner verifierad (BankID)</p>
-          <p>[17:18] FI: MobilePay-betalning initierad för Dyson V15</p>
+export default function Admin() {
+  return (
+    <div className="app-shell" style={{padding: '20px'}}>
+      <h1 className="logo">Admin <span className="ai-text">Control</span></h1>
+      
+      <div style={{display: 'grid', gap: '15px', marginTop: '30px'}}>
+        <div className="pay-card">
+          <span>Total Volym (24h)</span>
+          <strong>1.2M SEK</strong>
+        </div>
+        
+        <div style={{background: '#111', padding: '20px', borderRadius: '24px', fontFamily: 'monospace', fontSize: '12px'}}>
+          <h3 style={{marginTop: 0}}>Live Logg</h3>
+          {/* Här är fixen för pilen som kraschade bygget */}
+          <p>[20:54] SE: iPhone 15 {"->"} SÅLD (Swish)</p>
+          <p>[20:52] NO: Rolex {"->"} Verifierad (BankID)</p>
+          <p>[20:50] FI: Dyson {"->"} Matchscore 94%</p>
         </div>
       </div>
     </div>
