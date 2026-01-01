@@ -6,3 +6,12 @@ export default function FeedPage() {
     </main>
   );
 }
+const MOCK_LISTINGS = [
+  {
+    id: "1",
+    title: "iPhone 13",
+    price: 6500,
+    trust: "verified",
+  }
+];
+
