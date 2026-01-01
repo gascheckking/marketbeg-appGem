@@ -4,7 +4,67 @@
 
 body {
   margin: 0;
-  font-family: system-ui, sans-serif;
-  background: #0b0b0b;
-  color: #fff;
+  background: #0b0b0d;
+  color: #f2f2f2;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont;
+}
+
+.container {
+  padding: 24px;
+}
+
+.center {
+  text-align: center;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 16px 24px;
+  border-bottom: 1px solid #222;
+}
+
+.header button {
+  background: none;
+  border: none;
+  color: #aaa;
+}
+
+.card {
+  background: #15151d;
+  padding: 16px;
+  border-radius: 12px;
+  margin-bottom: 12px;
+}
+
+.price {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.trust {
+  font-size: 12px;
+  color: #7dd3fc;
+}
+
+.primary {
+  width: 100%;
+  padding: 16px;
+  border-radius: 12px;
+  border: none;
+  background: #e5e5e5;
+  color: #000;
+  font-weight: bold;
+}
+
+.secondary {
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px dashed #444;
+  background: transparent;
+  color: #aaa;
+}
+
+.muted {
+  color: #999;
 }
