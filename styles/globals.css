@@ -130,3 +130,20 @@ body {
   color: #888;
   line-height: 1.6;
 }
+.glow-card {
+  background: #000 !important;
+  border: 1px solid var(--accent) !important;
+  box-shadow: 0 0 20px rgba(0, 255, 136, 0.1);
+}
+
+.rent-locked:hover {
+  transform: none !important; /* Ingen rörelse på låsta kort */
+}
+
+.small-pay {
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+}
