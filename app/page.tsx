@@ -7,17 +7,21 @@ export default function Home() {
 
   return (
     <main className="container center">
-      <h1>Marketbeg</h1>
-      <p className="muted">
-        Sälj och köp begagnat – tryggt, snabbt, verifierat
-      </p>
+      <div style={{ maxWidth: '600px' }}>
+        <h1>Framtidens begagnat.</h1>
+        <p className="muted" style={{ marginBottom: '40px', fontSize: '20px' }}>
+          Ta en bild. AI skapar annonsen. Vi garanterar tryggheten med BankID och TrustScore.
+        </p>
 
-      <button
-        className="primary"
-        onClick={() => router.push("/feed")}
-      >
-        Logga in
-      </button>
+        <div style={{ display: 'flex', gap: '16px', justifyContent: 'center' }}>
+          <button className="primary" onClick={() => router.push("/feed")}>
+            Utforska marknaden
+          </button>
+          <button className="secondary" onClick={() => router.push("/sell")}>
+            Prova sälj med AI
+          </button>
+        </div>
+      </div>
     </main>
   );
 }
