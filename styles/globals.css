@@ -1,11 +1,10 @@
 :root {
-  --bg: #0b0b0d;
-  --bg-soft: #111116;
-  --card: #16161d;
-  --border: #22222c;
-  --text: #f2f2f2;
-  --muted: #9a9aa3;
-  --accent: #22c55e;
+  --bg: #f5f6f8;
+  --card: #ffffff;
+  --border: #e5e7eb;
+  --text: #111827;
+  --muted: #6b7280;
+  --accent: #2563eb;
 }
 
 * {
@@ -15,35 +14,30 @@
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Inter, sans-serif;
-  background: linear-gradient(180deg, #0b0b0d, #050507);
+  background: var(--bg);
   color: var(--text);
 }
 
-/* LAYOUT */
+/* APP WRAPPER */
 main.container {
   max-width: 420px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 16px;
   min-height: calc(100vh - 56px);
-}
-
-.center {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 16px;
 }
 
 /* HEADER */
 .header {
+  position: sticky;
+  top: 0;
   height: 56px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 16px;
-  background: rgba(10, 10, 14, 0.8);
-  backdrop-filter: blur(8px);
+  background: white;
   border-bottom: 1px solid var(--border);
+  z-index: 10;
 }
 
 .header strong {
@@ -58,23 +52,42 @@ main.container {
   cursor: pointer;
 }
 
-/* CARD */
+/* TABS (SIDOVY / FLÖDE) */
+.tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.tabs button {
+  flex: 1;
+  background: #f1f5f9;
+  border: 1px solid var(--border);
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.tabs button.active {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+}
+
+/* CARDS */
 .card {
-  background: linear-gradient(180deg, #16161d, #121218);
+  background: var(--card);
   border: 1px solid var(--border);
   border-radius: 14px;
-  padding: 16px;
+  padding: 14px;
   margin-bottom: 12px;
 }
 
 /* BUTTONS */
-button {
-  font: inherit;
-}
-
 button.primary {
   background: var(--accent);
-  color: #05120a;
+  color: white;
   border: none;
   padding: 14px;
   border-radius: 12px;
@@ -83,9 +96,8 @@ button.primary {
 }
 
 button.secondary {
-  background: transparent;
-  border: 1px dashed var(--border);
-  color: var(--muted);
+  background: white;
+  border: 1px solid var(--border);
   padding: 12px;
   border-radius: 12px;
   cursor: pointer;
@@ -99,7 +111,6 @@ button.secondary {
 
 .price {
   font-weight: 600;
-  margin-top: 4px;
 }
 
 .trust {
