@@ -5,6 +5,12 @@
   --swish: #ff0000; /* För Sverige */
   --glass: rgba(255, 255, 255, 0.03);
   --border: rgba(255, 255, 255, 0.1);
+  --muted: #888888;
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {
@@ -13,6 +19,7 @@ body {
   color: white;
   font-family: 'Inter', sans-serif;
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
 }
 
 .bg-glow {
@@ -20,14 +27,16 @@ body {
   top: 0; left: 0; width: 100vw; height: 100vh;
   background: radial-gradient(circle at 50% -20%, #1a1a1a 0%, transparent 70%);
   z-index: -1;
+  pointer-events: none;
 }
 
 .app-shell {
   width: 100%;
-  max-width: 600px; /* Mobile-first lyx */
+  max-width: 600px;
   margin: 0 auto;
   min-height: 100vh;
   padding-bottom: 120px;
+  position: relative;
 }
 
 .main-nav {
@@ -35,9 +44,14 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 30px 20px;
+  background: rgba(5, 5, 5, 0.8);
+  backdrop-filter: blur(10px);
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
-.logo { font-size: 28px; font-weight: 900; letter-spacing: -2px; }
+.logo { font-size: 28px; font-weight: 900; letter-spacing: -2px; cursor: pointer; }
 .ai-text { color: var(--accent); text-shadow: 0 0 15px var(--accent); }
 
 .stat-pill {
@@ -49,7 +63,7 @@ body {
   font-size: 14px;
 }
 
-/* Docking Menu */
+/* Bottom Menu */
 .bottom-dock {
   position: fixed;
   bottom: 30px;
@@ -63,17 +77,29 @@ body {
   padding: 15px 40px;
   border-radius: 100px;
   align-items: center;
+  z-index: 1000;
+}
+
+.bottom-dock button {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  transition: 0.2s;
 }
 
 .scan-btn {
-  background: white;
+  background: white !important;
+  color: black !important;
   width: 50px;
   height: 50px;
-  border-radius: 50%;
-  border: none;
-  font-size: 24px;
+  border-radius: 50% !important;
+  font-size: 24px !important;
   font-weight: 900;
   box-shadow: 0 0 20px rgba(255,255,255,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Payment Cards */
@@ -87,10 +113,14 @@ body {
   justify-content: space-between;
   align-items: center;
 }
-/* Speciella effekter för 2026-looken */
+
+/* Glow Card Effects */
 .glow-card {
   position: relative;
   overflow: hidden;
+  background: #000 !important;
+  border: 1px solid var(--accent) !important;
+  box-shadow: 0 0 20px rgba(0, 255, 136, 0.1);
 }
 
 .glow-card::after {
@@ -100,12 +130,30 @@ body {
   width: 200%; height: 200%;
   background: conic-gradient(from 0deg, transparent, var(--accent), transparent);
   animation: rotate-glow 10s linear infinite;
-  z-index: -1;
+  z-index: 0;
   opacity: 0.1;
+  pointer-events: none;
 }
 
 @keyframes rotate-glow {
   100% { transform: rotate(360deg); }
+}
+
+/* AI Scanner Animation */
+.scan-line {
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background: var(--accent);
+  box-shadow: 0 0 15px var(--accent);
+  animation: scan 2s infinite ease-in-out;
+  z-index: 10;
+}
+
+@keyframes scan {
+  0% { top: 0; }
+  50% { top: 100%; }
+  100% { top: 0; }
 }
 
 .primary-btn {
@@ -119,6 +167,7 @@ body {
   cursor: pointer;
   transition: 0.2s;
   box-shadow: 0 10px 30px rgba(255,255,255,0.1);
+  text-transform: uppercase;
 }
 
 .primary-btn:hover {
@@ -127,23 +176,18 @@ body {
 }
 
 .muted {
-  color: #888;
+  color: var(--muted);
   line-height: 1.6;
 }
-.glow-card {
-  background: #000 !important;
-  border: 1px solid var(--accent) !important;
-  box-shadow: 0 0 20px rgba(0, 255, 136, 0.1);
+
+/* Utils & Transitions */
+.content-area {
+  animation: fadeIn 0.4s ease-out;
 }
 
-.rent-locked:hover {
-  transform: none !important; /* Ingen rörelse på låsta kort */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-.small-pay {
-  border: none;
-  padding: 8px 16px;
-  border-radius: 8px;
-  font-weight: 700;
-  cursor: pointer;
-}
+::-webkit-scrollbar { display: none; }
