@@ -1,5 +1,4 @@
-import { LoadingAI } from "../../components/LoadingAI";
-
+import { LoadingAI } from "./LoadingAI";
 
 export default function CameraBatch() {
   return (
