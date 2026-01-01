@@ -1,3 +1,7 @@
 export function LoadingAI() {
-  return <p className="muted">AI analyserar objekt…</p>;
+  return (
+    <div className="loading-pulse">
+      ✨ AI analyserar pixlarna...
+    </div>
+  );
 }
