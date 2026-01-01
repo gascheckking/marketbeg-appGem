@@ -1,39 +1,67 @@
 "use client";
+import { useRouter } from 'next/navigation';
 
 export default function Home() {
+  const router = useRouter();
+
   return (
-    <div style={{padding: '20px', textAlign: 'center'}}>
-      <header style={{marginTop: '60px', marginBottom: '50px'}}>
-        <h1 style={{fontSize: '4rem', fontWeight: 900, letterSpacing: '-4px', margin: 0}}>
-          MARKET<span className="ai-text">BEG</span>
-        </h1>
-        <p className="muted" style={{fontSize: '14px', letterSpacing: '1px', textTransform: 'uppercase'}}>
-          Nordic AI Liquidity Engine
+    <div className="app-container">
+      {/* Hero Section */}
+      <section className="hero-2026">
+        <div className="ai-orb"></div>
+        <h1 className="hero-title">SELL AT THE <br/> SPEED OF LIGHT.</h1>
+        <p style={{fontSize: '24px', color: '#888', marginBottom: '30px'}}>
+          Ingen textinmatning. Vår AI skapar din annons på 5 sekunder.
         </p>
-      </header>
+        <button className="btn-ai" onClick={() => router.push('/sell')}>
+          Start Intelligent Scan
+        </button>
+      </section>
 
-      <div className="glow-card" onClick={() => window.location.href='/sell'} style={{
-        padding: '50px 30px', borderRadius: '40px', cursor: 'pointer', marginBottom: '30px'
-      }}>
-        <div style={{fontSize: '60px', marginBottom: '20px'}}>📸</div>
-        <h2 style={{fontSize: '1.8rem', fontWeight: 900}}>AI Quick Sell</h2>
-        <p className="muted">Låt AI skapa din annons på sekunder.</p>
-      </div>
+      {/* Bento Grid */}
+      <div className="bento-grid-2026">
+        <div className="bento-card wide">
+          <div>
+            <span style={{color: '#00ff88', fontWeight: 800}}>AI INSIGHT</span>
+            <h2 style={{fontSize: '40px', marginTop: '10px'}}>Market Pulse</h2>
+            <p style={{color: '#888'}}>iPhone 15 Pro ökar i efterfrågan.</p>
+          </div>
+        </div>
 
-      <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px'}}>
-        <div className="pay-card" style={{flexDirection: 'column', textAlign: 'center', padding: '25px'}}>
-          <strong style={{color: 'var(--accent)', fontSize: '1.2rem'}}>98% Match</strong>
-          <p style={{fontSize: '11px', margin: '5px 0 0 0'}} className="muted">Live efterfrågan</p>
+        <div className="bento-card">
+          <h3>99.9% Trust</h3>
+          <p style={{color: '#888'}}>Varje transaktion BankID-verifierad.</p>
+          <div style={{fontSize: '40px'}}>🛡️</div>
         </div>
-        <div className="pay-card" style={{flexDirection: 'column', textAlign: 'center', padding: '25px'}}>
-          <strong style={{fontSize: '1.2rem'}}>Trust 🛡️</strong>
-          <p style={{fontSize: '11px', margin: '5px 0 0 0'}} className="muted">BankID Secured</p>
+
+        <div className="bento-card tall">
+          <h3>Trending Now</h3>
+          <div style={{marginTop: '40px', display: 'flex', flexDirection: 'column', gap: '15px'}}>
+            <TrendItem name="Rolex" growth="+12%" />
+            <TrendItem name="Herman Miller" growth="+8%" />
+            <TrendItem name="PS5 Pro" growth="+24%" />
+            <TrendItem name="Leica Q3" growth="+5%" />
+          </div>
+        </div>
+
+        <div className="bento-card wide">
+          <h3>Live Feed</h3>
+          <div style={{display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '10px', marginTop: '20px'}}>
+            <div style={{height: '100px', background: '#111', borderRadius: '12px'}}></div>
+            <div style={{height: '100px', background: '#111', borderRadius: '12px'}}></div>
+            <div style={{height: '100px', background: '#111', borderRadius: '12px'}}></div>
+          </div>
         </div>
       </div>
-      
-      <div style={{marginTop: '40px'}} onClick={() => window.location.href='/feed'}>
-        <p className="muted" style={{fontSize: '12px', cursor: 'pointer', textDecoration: 'underline'}}>Bläddra i matchade annonser →</p>
-      </div>
+    </div>
+  );
+}
+
+function TrendItem({ name, growth }: { name: string, growth: string }) {
+  return (
+    <div style={{display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid #222', paddingBottom: '8px'}}>
+      <span>{name}</span>
+      <span style={{color: '#00ff88', fontWeight: 800}}>{growth}</span>
     </div>
   );
 }
