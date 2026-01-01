@@ -1,71 +1,60 @@
 "use client";
+import { useState } from "react";
+import BankIDSign from "../../components/BankIDSign";
 
 export default function Checkout() {
+  const [step, setStep] = useState("review"); // review, signing, complete
+
   return (
     <div className="app-shell" style={{ padding: '20px' }}>
-      <button onClick={() => window.history.back()} style={{ background: 'none', border: 'none', color: '#888', cursor: 'pointer', marginBottom: '20px' }}>← Tillbaka</button>
+      {step === "signing" && <BankIDSign onComplete={() => setStep("complete")} />}
+
+      <h1 style={{ marginTop: '40px', fontWeight: 900 }}>Checkout</h1>
       
-      <h1 style={{ fontSize: '2.5rem', fontWeight: 900, marginBottom: '10px' }}>Verifierad Betalning</h1>
-      <p className="muted" style={{ marginBottom: '30px' }}>
-        Pengarna hålls säkert i <strong>BegAI Escrow</strong> tills du har bekräftat att varan är mottagen.
-      </p>
-
-      <div className="payment-methods" style={{ display: 'grid', gap: '15px' }}>
-        {/* Sverige */}
-        <div className="pay-card" style={{ borderLeft: '4px solid #ff0000', background: 'rgba(255,0,0,0.02)' }}>
-          <div>
-            <strong style={{ display: 'block' }}>Swish</strong>
-            <small className="muted">Sverige • Omedelbart</small>
+      {step === "review" && (
+        <div style={{ animation: 'fadeIn 0.3s ease' }}>
+          <div className="pay-card" style={{ marginBottom: '20px' }}>
+            <div style={{ display: 'flex', gap: '15px' }}>
+              <div style={{ width: '60px', height: '60px', background: '#111', borderRadius: '12px' }}></div>
+              <div>
+                <strong>iPhone 15 Pro</strong>
+                <p className="muted" style={{ fontSize: '12px' }}>Skick: Nyskick (AI-Verifierad)</p>
+              </div>
+            </div>
+            <strong>8 900 kr</strong>
           </div>
-          <button className="small-pay" style={{ background: '#fff', color: '#000' }}>VÄLJ</button>
-        </div>
 
-        {/* Norge */}
-        <div className="pay-card" style={{ borderLeft: '4px solid #ff5b24', background: 'rgba(255,91,36,0.02)' }}>
-          <div>
-            <strong style={{ display: 'block' }}>Vipps</strong>
-            <small className="muted">Norge • Omedelbart</small>
+          <div className="glow-card" style={{ padding: '20px', borderRadius: '24px', marginBottom: '20px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
+              <span>Vara</span><span>8 900 kr</span>
+            </div>
+            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
+              <span>Frakt (Green-AI)</span><span style={{ color: 'var(--accent)' }}>GRATIS</span>
+            </div>
+            <div style={{ borderTop: '1px solid #222', marginTop: '10px', paddingTop: '10px', display: 'flex', justifyContent: 'space-between', fontWeight: 900 }}>
+              <span>TOTALT</span><span>8 900 kr</span>
+            </div>
           </div>
-          <button className="small-pay" style={{ background: '#fff', color: '#000' }}>VÄLJ</button>
-        </div>
 
-        {/* Danmark/Finland */}
-        <div className="pay-card" style={{ borderLeft: '4px solid #007aff', background: 'rgba(0,122,255,0.02)' }}>
-          <div>
-            <strong style={{ display: 'block' }}>MobilePay</strong>
-            <small className="muted">Danmark & Finland</small>
+          <button className="primary-btn" onClick={() => setStep("signing")} style={{ width: '100%', background: '#ff5b24', color: '#fff' }}>
+            BETALA MED SWISH
+          </button>
+        </div>
+      )}
+
+      {step === "complete" && (
+        <div style={{ textAlign: 'center', marginTop: '60px', animation: 'scaleUp 0.5s ease' }}>
+          <div style={{ fontSize: '80px' }}>🎉</div>
+          <h2 style={{ fontSize: '2rem', fontWeight: 900 }}>KÖPET KLART!</h2>
+          <p className="muted">Dina pengar hålls i AI-Escrow tills du godkänt varan.</p>
+          <div className="stat-pill" style={{ margin: '20px auto', display: 'inline-block' }}>
+            +120 BegTokens Intjänade 🪙
           </div>
-          <button className="small-pay" style={{ background: '#fff', color: '#000' }}>VÄLJ</button>
+          <button className="primary-btn" onClick={() => window.location.href='/feed'} style={{ width: '100%', marginTop: '30px' }}>
+            TILL MINA KÖP
+          </button>
         </div>
-
-        {/* Globalt */}
-        <div className="pay-card" style={{ borderLeft: '4px solid #333' }}>
-          <div>
-            <strong style={{ display: 'block' }}>Kreditkort</strong>
-            <small className="muted">Visa / Mastercard / Apple Pay</small>
-          </div>
-          <button className="small-pay" style={{ background: '#333', color: '#fff' }}>VÄLJ</button>
-        </div>
-      </div>
-
-      <div className="bankid-box" style={{ 
-        marginTop: '40px', 
-        background: 'linear-gradient(135deg, #003f88 0%, #001f44 100%)', 
-        padding: '35px', 
-        borderRadius: '32px', 
-        textAlign: 'center',
-        boxShadow: '0 20px 40px rgba(0,0,0,0.4)',
-        border: '1px solid rgba(255,255,255,0.1)'
-      }}>
-        <div style={{ fontSize: '40px', marginBottom: '15px' }}>🆔</div>
-        <h3 style={{ margin: '0 0 10px 0', fontSize: '1.4rem' }}>BankID Verifiering</h3>
-        <p style={{ fontSize: '13px', opacity: 0.8, marginBottom: '25px', lineHeight: '1.6' }}>
-          Säkerställ din identitet för att aktivera köparskyddet.
-        </p>
-        <button className="primary-btn" style={{ background: '#fff', color: '#003f88', width: '100%', boxShadow: 'none' }}>
-          ÖPPNA BANKID
-        </button>
-      </div>
+      )}
     </div>
   );
 }
