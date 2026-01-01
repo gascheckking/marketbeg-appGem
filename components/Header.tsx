@@ -7,12 +7,14 @@ export default function Header() {
 
   return (
     <header className="header">
-      <strong onClick={() => router.push("/feed")}>Marketbeg</strong>
-      <nav>
-        <button onClick={() => router.push("/feed")}>Flöde</button>
-        <button onClick={() => router.push("/sell")}>Sälj</button>
-        <button onClick={() => router.push("/profile")}>Profil</button>
-      </nav>
+      <div className="header-inner">
+        <strong onClick={() => router.push("/feed")}>Marketbeg</strong>
+        <nav>
+          <button onClick={() => router.push("/feed")}>Flöde</button>
+          <button onClick={() => router.push("/sell")}>Sälj</button>
+          <button onClick={() => router.push("/profile")}>Profil</button>
+        </nav>
+      </div>
     </header>
   );
 }
