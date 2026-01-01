@@ -6,7 +6,6 @@ export default function Home() {
 
   return (
     <div className="app-shell" style={{ padding: '20px' }}>
-      {/* Hero Section */}
       <section className="glow-card" style={{ padding: '40px 20px', textAlign: 'center', marginBottom: '30px', marginTop: '20px' }}>
         <div className="scan-line"></div>
         <h1 style={{ fontSize: '2.5rem', fontWeight: 900, lineHeight: 1.1, marginBottom: '20px' }}>
@@ -20,31 +19,25 @@ export default function Home() {
         </button>
       </section>
 
-      {/* Bento Grid Layout */}
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px' }}>
-        
-        {/* Market Insight (Wide) */}
         <div className="glow-card" style={{ gridColumn: 'span 2', padding: '20px' }}>
           <span style={{ color: 'var(--accent)', fontWeight: 800, fontSize: '12px' }}>AI INSIGHT</span>
           <h3 style={{ margin: '10px 0 5px 0' }}>Market Pulse</h3>
           <p className="muted" style={{ fontSize: '14px' }}>Efterfrågan på iPhone 15 Pro har ökat med 12% idag.</p>
         </div>
 
-        {/* Trust Card */}
         <div className="pay-card" style={{ flexDirection: 'column', alignItems: 'flex-start', gap: '10px' }}>
           <span style={{ fontSize: '24px' }}>🛡️</span>
           <strong>99.9% Trust</strong>
           <p className="muted" style={{ fontSize: '11px', margin: 0 }}>BankID-verifierat</p>
         </div>
 
-        {/* Token Card */}
         <div className="pay-card" style={{ flexDirection: 'column', alignItems: 'flex-start', gap: '10px' }}>
           <span style={{ fontSize: '24px' }}>🪙</span>
           <strong>Tokens</strong>
           <p className="muted" style={{ fontSize: '11px', margin: 0 }}>Tjäna på varje köp</p>
         </div>
 
-        {/* Trending List (Tall) */}
         <div className="glow-card" style={{ gridColumn: 'span 2', padding: '20px' }}>
           <h3 style={{ marginBottom: '15px' }}>Trending Right Now</h3>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
@@ -53,13 +46,11 @@ export default function Home() {
             <TrendItem name="Leica Q3" growth="+5%" />
           </div>
         </div>
-
       </div>
     </div>
   );
 }
 
-// Hjälpkomponent för listan
 function TrendItem({ name, growth }: { name: string, growth: string }) {
   return (
     <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '8px' }}>
