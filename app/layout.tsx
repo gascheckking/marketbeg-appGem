@@ -3,7 +3,7 @@ import Header from "../components/Header";
 
 export const metadata = {
   title: "Marketbeg",
-  description: "Sälj och köp begagnat – tryggt, AI-stött",
+  description: "Sälj och köp begagnat – tryggt i hela Norden",
 };
 
 export default function RootLayout({
