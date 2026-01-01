@@ -9,7 +9,7 @@ const MOCK_LISTINGS = [
 ];
 
 export default function FeedPage() {
-  const [tab, setTab] = useState<"sell" | "buy">("sell");
+  const [tab, setTab] = useState<"sell" | "buy" | "ai">("sell");
 
   return (
     <main className="container">
@@ -26,11 +26,28 @@ export default function FeedPage() {
         >
           Köpes
         </button>
+        <button
+          className={tab === "ai" ? "active" : ""}
+          onClick={() => setTab("ai")}
+        >
+          AI-match
+        </button>
       </div>
 
-      {MOCK_LISTINGS.map((item) => (
-        <FeedCardSell key={item.id} {...item} />
-      ))}
+      {tab !== "ai" &&
+        MOCK_LISTINGS.map((item) => (
+          <FeedCardSell key={item.id} {...item} />
+        ))}
+
+      {tab === "ai" && (
+        <div className="card">
+          <h3>AI-matchning</h3>
+          <p className="muted">
+            Ladda upp ett objekt så hittar vi rätt pris och köpare.
+          </p>
+          <button className="primary">Starta AI-analys</button>
+        </div>
+      )}
     </main>
   );
 }
