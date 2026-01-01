@@ -1,181 +1,129 @@
 :root {
-  --bg: #f8f9fa; /* Lyxig ljusgrå bas */
-  --surface: #ffffff;
-  --action: #000000;
-  --accent: #ff3b30; /* "Sale" röd - drar blicken till sig som Temu/Ebay */
-  --trust: #00c805; /* StockX Grön */
-  --border: #e2e4e8;
-  --radius: 20px;
+  --bg: #000000; /* Svart för att få färgerna att poppa */
+  --surface: #111111;
+  --accent: #00ff88; /* AI Neon */
+  --text-main: #ffffff;
+  --text-dim: #999999;
+  --glass: rgba(255, 255, 255, 0.03);
 }
+
+* { box-sizing: border-box; -webkit-font-smoothing: antialiased; }
 
 body {
   margin: 0;
   background: var(--bg);
+  color: var(--text-main);
   font-family: 'Inter', -apple-system, sans-serif;
-  color: #000;
+  /* Centrerar hela appen i mitten av skärmen oavsett bredd */
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
 }
 
-/* Page Layout - Skapa luft och marginaler */
-main.container {
-  max-width: 1400px;
+/* Denna container ser till att allt flyter i mitten med luft på sidorna */
+.app-container {
+  width: 100%;
+  max-width: 1400px; /* Maxbredd för att inte dra ut det för mycket */
   margin: 0 auto;
-  padding: 40px 60px; /* Flyttar ut allt från kanten */
+  padding: 0 80px; /* Ger den där lyxiga luften du saknade */
 }
 
-/* Header - Modern & Kompakt */
-.header {
-  background: white;
-  border-bottom: 1px solid var(--border);
-  padding: 15px 60px;
+/* HEADER - Flytande i mitten */
+.header-nav {
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
+  padding: 40px 0;
+  margin-bottom: 60px;
 }
 
-.logo {
-  font-size: 28px;
+.logo-ai {
+  font-size: 32px;
   font-weight: 900;
-  letter-spacing: -1.5px;
-  color: var(--action);
-  cursor: pointer;
+  letter-spacing: -2px;
+  background: linear-gradient(90deg, #fff, #555);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-/* AI Scan Area - Placeholder till vänster som du bad om */
-.hero-section {
-  display: grid;
-  grid-template-columns: 1.2fr 1fr; /* Plats för grafik till vänster */
-  gap: 60px;
-  align-items: center;
-  margin-bottom: 80px;
-}
-
-.ai-visual-box {
-  background: #000;
-  height: 500px;
-  border-radius: 40px;
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 40px 80px rgba(0,0,0,0.15);
-}
-
-.scan-line {
-  position: absolute;
-  width: 100%;
-  height: 4px;
-  background: var(--trust);
-  box-shadow: 0 0 20px var(--trust);
-  animation: scan 3s infinite linear;
-}
-
-/* Bento Grid för Marknadsplatsen */
-.market-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 25px;
-}
-
-.product-card {
-  background: white;
-  border-radius: var(--radius);
-  border: 1px solid var(--border);
-  padding: 15px;
-  transition: all 0.3s ease;
-  position: relative;
-}
-
-.product-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 30px rgba(0,0,0,0.08);
-  border-color: #000;
-}
-
-.product-image {
-  width: 100%;
-  aspect-ratio: 1/1;
-  background: #f0f0f0;
-  border-radius: 12px;
-  margin-bottom: 15px;
+/* HERO - Stor, centrerad och lyxig */
+.hero-2026 {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: 40px;
+  text-align: center;
+  padding: 100px 0;
+  gap: 40px;
 }
 
-/* Pris & Trust - Som StockX/Farfetch */
-.price-tag { font-size: 22px; font-weight: 800; color: #000; margin: 5px 0; }
-.bid-info { font-size: 13px; color: var(--accent); font-weight: 600; }
-.trust-pill {
-  background: #f0fff4;
-  color: var(--trust);
-  padding: 4px 10px;
-  border-radius: 6px;
-  font-size: 11px;
-  font-weight: 800;
-  text-transform: uppercase;
-  border: 1px solid #c6f6d5;
+.hero-title {
+  font-size: clamp(60px, 10vw, 120px);
+  font-weight: 900;
+  line-height: 0.85;
+  letter-spacing: -6px;
+  margin: 0;
 }
 
-/* Flytande "Sälj Nu" - Syns alltid på mobilen */
-.sell-button-fixed {
-  position: fixed;
-  bottom: 30px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #000;
-  color: #fff;
-  padding: 18px 40px;
-  border-radius: 100px;
+/* AI Visualizer - Denna tar plats i mitten */
+.ai-orb {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+  filter: blur(60px);
+  position: absolute;
+  z-index: -1;
+  opacity: 0.4;
+  animation: float 6s infinite ease-in-out;
+}
+
+/* BENTO GRID - Ingen Blocket-lista, bara stora tiles */
+.bento-grid-2026 {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 24px;
+  margin-top: 80px;
+}
+
+.bento-card {
+  background: var(--surface);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 40px;
+  padding: 40px;
+  grid-column: span 4;
+  transition: all 0.4s cubic-bezier(0.2, 0, 0, 1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.bento-card:hover {
+  border-color: var(--accent);
+  background: rgba(255,255,255,0.02);
+  transform: translateY(-10px);
+}
+
+.bento-card.wide { grid-column: span 8; }
+.bento-card.tall { grid-row: span 2; }
+
+/* Buttons - Ultra Minimalist */
+.btn-ai {
+  background: #fff;
+  color: #000;
+  padding: 24px 48px;
+  border-radius: 20px;
   font-weight: 800;
-  font-size: 18px;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-  z-index: 2000;
+  font-size: 20px;
   border: none;
   cursor: pointer;
+  text-transform: uppercase;
 }
 
-@keyframes scan {
-  0% { top: 0%; }
-  100% { top: 100%; }
-}
-/* AI Status Bar - Visar att hjärnan jobbar */
-.ai-status-bar {
-  background: rgba(0, 0, 0, 0.8);
-  border: 1px solid var(--border);
-  padding: 10px 20px;
-  border-radius: 99px;
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  font-family: 'Courier New', monospace; /* Ger en teknisk känsla */
-  font-size: 12px;
-  color: var(--trust);
-  margin-bottom: 20px;
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-30px); }
 }
 
-.pulse-dot {
-  width: 8px;
-  height: 8px;
-  background: var(--trust);
-  border-radius: 50%;
-  box-shadow: 0 0 10px var(--trust);
-  animation: pulse-dot 1.5s infinite;
-}
-
-@keyframes pulse-dot {
-  0% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.5); opacity: 0.5; }
-  100% { transform: scale(1); opacity: 1; }
-}
-
-/* Bento-item för AI-insikter */
-.bento-insight {
-  grid-column: span 3;
-  background: linear-gradient(90deg, #000 0%, #1a1a1a 100%);
-  border: 1px solid var(--ai-cyan);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }
