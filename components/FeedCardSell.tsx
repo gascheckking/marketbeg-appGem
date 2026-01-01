@@ -9,18 +9,24 @@ type Props = {
   title: string;
   price: number;
   trust: number;
-  tag?: string;
 };
 
-export default function FeedCardSell({ id, title, price, trust, tag }: Props) {
+export default function FeedCardSell({ id, title, price, trust }: Props) {
   const router = useRouter();
 
   return (
     <div className="card" onClick={() => router.push(`/listing/${id}`)}>
-      {tag && <span className="badge">{tag}</span>}
+      {/* Placeholder för produktbild */}
+      <div className="card-image-placeholder">
+        📷
+      </div>
+      
       <h3>{title}</h3>
       <PriceTag price={price} />
-      <TrustBadge score={trust} />
+      
+      <div style={{ marginTop: '12px' }}>
+        <TrustBadge score={trust} />
+      </div>
     </div>
   );
 }
