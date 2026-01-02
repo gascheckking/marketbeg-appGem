@@ -3,61 +3,37 @@
 export default function ShippingAI({ itemWeight }: { itemWeight: string }) {
   return (
     <div style={{ 
-      background: 'rgba(255,255,255,0.02)', 
-      padding: '25px', 
+      background: 'rgba(157, 78, 221, 0.05)', 
+      padding: '30px', 
       borderRadius: '32px', 
-      border: '1px solid var(--border)', 
-      marginTop: '20px',
-      position: 'relative',
-      overflow: 'hidden'
+      border: '1px solid rgba(157, 78, 221, 0.2)', 
+      marginTop: '25px'
     }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}>
-        <div className="pulse-dot" style={{ background: 'var(--accent)' }}></div>
-        <strong style={{ color: 'var(--accent)', fontSize: '12px', letterSpacing: '1px', textTransform: 'uppercase' }}>AI Logistics Engine</strong>
+        <div style={{ width: '8px', height: '8px', background: '#9d4edd', borderRadius: '50%' }}></div>
+        <strong style={{ color: '#9d4edd', fontSize: '12px', letterSpacing: '2px', textTransform: 'uppercase' }}>Karma Logistics</strong>
       </div>
 
-      <p style={{ fontSize: '14px', color: '#ccc', marginBottom: '25px', lineHeight: '1.6' }}>
-        Baserat på vikt ({itemWeight}) och din position föreslår jag följande optimerade rutter:
+      <p style={{ fontSize: '15px', color: '#ccc', marginBottom: '25px' }}>
+        Vi har hittat de smidigaste sätten att skicka din vara:
       </p>
 
-      <div style={{ display: 'grid', gap: '12px' }}>
-        <button className="pay-card" style={{ 
-          width: '100%', 
-          margin: 0, 
-          background: '#0a0a0a', 
-          border: '1px solid #222',
-          textAlign: 'left',
-          padding: '18px'
-        }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', alignItems: 'center' }}>
-            <div>
-              <span style={{ display: 'block', fontWeight: 700 }}>📦 Instabox</span>
-              <small className="muted">Närmaste box: 200m bort</small>
-            </div>
-            <strong style={{ color: 'var(--accent)' }}>49 kr</strong>
+      <div style={{ display: 'grid', gap: '15px' }}>
+        <button className="glow-card" style={{ padding: '20px', background: '#0a0a0a', display: 'flex', justifyContent: 'space-between', alignItems: 'center', cursor: 'pointer' }}>
+          <div>
+            <span style={{ display: 'block', fontWeight: 700 }}>📦 Skåp-till-skåp</span>
+            <small className="muted">Billigast & Klimatsmart</small>
           </div>
+          <strong style={{ color: '#00ff88' }}>49 kr</strong>
         </button>
 
-        <button className="pay-card" style={{ 
-          width: '100%', 
-          margin: 0, 
-          background: 'rgba(0,255,136,0.05)', 
-          border: '1px solid var(--accent)',
-          textAlign: 'left',
-          padding: '18px'
-        }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', alignItems: 'center' }}>
-            <div>
-              <span style={{ display: 'block', fontWeight: 700 }}>⚡ BegRunner</span>
-              <small style={{ color: 'var(--accent)', fontSize: '10px' }}>AI-REKOMMENDERAD</small>
-            </div>
-            <strong style={{ color: 'var(--accent)' }}>79 kr</strong>
+        <button className="glow-card" style={{ padding: '20px', background: 'rgba(157, 78, 221, 0.1)', border: '1px solid #9d4edd', display: 'flex', justifyContent: 'space-between', alignItems: 'center', cursor: 'pointer' }}>
+          <div>
+            <span style={{ display: 'block', fontWeight: 700 }}>⚡ Karma Express</span>
+            <small style={{ color: '#9d4edd', fontWeight: 'bold' }}>Hämtas vid dörren</small>
           </div>
+          <strong style={{ color: '#9d4edd' }}>79 kr</strong>
         </button>
-      </div>
-      
-      <div style={{ marginTop: '15px', textAlign: 'center' }}>
-        <small className="muted" style={{ fontSize: '10px' }}>CO2-optimerad frakt beräknad av MarketBeg AI</small>
       </div>
     </div>
   );
