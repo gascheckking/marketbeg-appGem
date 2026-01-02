@@ -1,25 +1,84 @@
 :root {
-  --accent: #00ff88;
-  --bg: #050505;
-  --glass: rgba(255, 255, 255, 0.03);
-  --border: rgba(255, 255, 255, 0.08);
+  --bg-deep: #02040a;
+  --glass-blue: rgba(10, 20, 40, 0.4);
+  --neon-purple: #9d4edd;
+  --neon-mint: #00ff88;
+  --text-main: #e0e0e0;
+  --border-glow: rgba(157, 78, 221, 0.15);
+  --muted: #666;
 }
 
-* { box-sizing: border-box; }
-body { margin: 0; background: var(--bg); color: white; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+body {
+  background: radial-gradient(circle at top right, #0a0e1a, var(--bg-deep));
+  color: var(--text-main);
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
 
+/* Den nya Sidebar Nav-stilen */
+.nav-item {
+  padding: 12px 0;
+  color: #888;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.nav-item:hover {
+  color: #fff;
+  transform: translateX(5px);
+}
+
+.nav-item.active {
+  color: var(--neon-purple);
+}
+
+/* Glassmorphism Kort */
+.glass-card {
+  background: var(--glass-blue);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border-glow);
+  border-radius: 24px;
+  padding: 24px;
+  transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card:hover {
+  box-shadow: 0 0 30px rgba(157, 78, 221, 0.1);
+  border-color: var(--neon-purple);
+  transform: translateY(-2px);
+}
+
+/* Grid System */
 .main-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 25px;
   width: 100%;
 }
 
-.filter-pill {
-  padding: 8px 16px;
-  background: var(--glass);
-  border: 1px solid var(--border);
-  border-radius: 99px;
-  font-size: 13px;
+.primary-btn {
+  background: linear-gradient(135deg, var(--neon-mint) 0%, #00bd65 100%);
+  color: #000;
+  border: none;
+  padding: 18px 32px;
+  border-radius: 14px;
+  font-weight: 900;
   cursor: pointer;
+  transition: 0.3s;
 }
+
+.primary-btn:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
+}
+
+.muted { color: var(--muted); font-size: 0.9rem; }
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-thumb { background: var(--neon-purple); border-radius: 10px; }
