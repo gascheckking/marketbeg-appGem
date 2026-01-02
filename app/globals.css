@@ -1,57 +1,89 @@
 :root {
   --bg-deep: #02040a;
-  --glass-blue: rgba(10, 20, 40, 0.4);
+  --glass: rgba(255, 255, 255, 0.03);
+  --border: rgba(255, 255, 255, 0.08);
   --neon-purple: #9d4edd;
   --neon-mint: #00ff88;
-  --text-main: #e0e0e0;
-  --border-glow: rgba(157, 78, 221, 0.15);
+  --text-main: #f0f0f0;
   --muted: #666;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 body {
-  background: radial-gradient(circle at top right, #0a0e1a, var(--bg-deep));
+  background: var(--bg-deep);
+  background-image: 
+    radial-gradient(circle at 50% -20%, rgba(157, 78, 221, 0.15), transparent),
+    radial-gradient(circle at 0% 100%, rgba(0, 255, 136, 0.05), transparent);
   color: var(--text-main);
   font-family: 'Inter', -apple-system, sans-serif;
   margin: 0;
-  padding: 0;
-  overflow-x: hidden;
+  min-height: 100vh;
 }
 
-/* Navigering */
-.nav-item {
-  padding: 12px 15px;
-  color: #888;
-  cursor: pointer;
-  font-weight: 600;
-  transition: 0.3s;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  border-radius: 10px;
-}
-
-.nav-item:hover {
-  background: rgba(255,255,255,0.05);
-  color: #fff;
-}
-
-/* Webb-layout klasser */
 .page-wrapper {
-  padding: 40px;
+  padding: 60px 40px;
   width: 100%;
 }
 
 .glass-card {
-  background: var(--glass-blue);
-  backdrop-filter: blur(12px);
-  border: 1px solid var(--border-glow);
-  border-radius: 24px;
-  padding: 24px;
+  background: var(--glass);
+  backdrop-filter: blur(15px);
+  border: 1px solid var(--border);
+  border-radius: 28px;
+  padding: 30px;
+  transition: all 0.3s ease;
 }
 
-.main-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 25px;
-  width: 100%;
+.glass-card:hover {
+  border-color: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.primary-btn {
+  background: var(--neon-purple);
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  border-radius: 14px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: transform 0.2s, filter 0.2s;
+}
+
+.primary-btn:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.nav-item {
+  padding: 15px 20px;
+  color: #888;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 14px;
+  transition: 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  border-radius: 14px;
+  margin-bottom: 5px;
+}
+
+.nav-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+}
+
+.nav-item.active {
+  background: rgba(157, 78, 221, 0.1);
+  color: #fff;
 }
