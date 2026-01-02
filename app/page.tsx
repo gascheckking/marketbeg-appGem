@@ -1,96 +1,146 @@
 "use client";
+import React from 'react';
+import { useRouter } from "next/navigation";
+import FeedCardSell from "@/components/FeedCardSell";
+import RentModule from "@/components/RentModule";
 
 export default function Marketplace() {
-  return (
-    <div style={{ width: '100%' }}>
-      {/* HEADER MED SÖK & RULLGARDINER */}
-      <section style={{ padding: '40px', borderBottom: '1px solid #1a1a1a' }}>
-        <div style={{ display: 'flex', gap: '20px', marginBottom: '30px' }}>
-          <div style={{ flex: 1, position: 'relative' }}>
-            <input type="text" placeholder="Sök efter märken, modeller eller kategorier..." 
-              style={{ width: '100%', padding: '20px 60px', borderRadius: '16px', background: '#111', border: '1px solid #222', color: '#fff', fontSize: '18px' }} />
-            <span style={{ position: 'absolute', left: '25px', top: '22px' }}>🔍</span>
-          </div>
-          <select style={{ padding: '0 20px', borderRadius: '16px', background: '#111', border: '1px solid #222', color: '#fff' }}>
-            <option>Hela Sverige</option>
-            <option>Stockholm</option>
-            <option>Göteborg</option>
-          </select>
-        </div>
+  const router = useRouter();
 
-        {/* TABS / FLIKAR (Vinted/Blocket style) */}
-        <div style={{ display: 'flex', gap: '30px', borderBottom: '1px solid #111' }}>
-          <div className="tab active">Alla Annonser</div>
-          <div className="tab">Mina Bevakningar</div>
-          <div className="tab">Auktioner</div>
-          <div className="tab">Direktköp</div>
+  return (
+    <div style={{ width: '100%', minHeight: '100vh' }}>
+      
+      {/* HERO / SEARCH SECTION */}
+      <section style={{ 
+        padding: '60px 40px', 
+        background: 'linear-gradient(to bottom, rgba(157,78,221,0.05) 0%, transparent 100%)',
+        borderBottom: '1px solid var(--border)' 
+      }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+          <h1 style={{ 
+            fontSize: '3.5rem', 
+            fontWeight: 900, 
+            letterSpacing: '-3px', 
+            marginBottom: '10px',
+            background: 'linear-gradient(to right, #fff, #666)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent'
+          }}>
+            Likviditet för dina prylar.
+          </h1>
+          <p className="muted" style={{ fontSize: '1.2rem', marginBottom: '40px' }}>
+            AI-driven matchning. Ingen väntan. Sälj direkt till verifierade köpare.
+          </p>
+
+          <div style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>
+            <div style={{ flex: 1, position: 'relative' }}>
+              <input 
+                type="text" 
+                placeholder="Sök i loopen (t.ex. iPhone 15 Pro, M3 Max...)" 
+                style={{ 
+                  width: '100%', 
+                  padding: '22px 65px', 
+                  borderRadius: '20px', 
+                  background: 'rgba(255,255,255,0.03)', 
+                  border: '1px solid rgba(255,255,255,0.08)', 
+                  color: '#fff', 
+                  fontSize: '18px',
+                  outline: 'none'
+                }} 
+              />
+              <span style={{ position: 'absolute', left: '25px', top: '24px', fontSize: '20px' }}>🔍</span>
+            </div>
+            <button className="glass-card" style={{ padding: '20px 30px', borderRadius: '20px', fontWeight: 700, cursor: 'pointer' }}>
+              📍 Hela Sverige
+            </button>
+          </div>
         </div>
       </section>
 
-      {/* PRODUKT-GRID (Täcker hela vägen) */}
-      <section style={{ padding: '40px' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '20px' }}>
-          <h2 style={{ fontWeight: 900 }}>Just nu i flödet 🔥</h2>
-          <div style={{ color: 'var(--accent)', cursor: 'pointer' }}>Visa alla →</div>
+      {/* MARKET PULSE TICKER (Din roadmap-idé) */}
+      <div style={{ 
+        background: 'rgba(0,255,136,0.03)', 
+        borderBottom: '1px solid rgba(0,255,136,0.1)', 
+        padding: '12px 0',
+        overflow: 'hidden',
+        whiteSpace: 'nowrap'
+      }}>
+        <div className="ticker-wrap" style={{ display: 'flex', gap: '50px', fontSize: '11px', fontWeight: 900, color: 'var(--neon-mint)', textTransform: 'uppercase', letterSpacing: '1px' }}>
+          <span>● IPHONES SÄLJS 23% SNABBARE IDAG</span>
+          <span>● HÖG EFTERFRÅGAN: MACBOOK M3</span>
+          <span>● TRENDING: PLAYSTATION 5 PRO</span>
+          <span>● NY LIKVIDITETS-NODE: GÖTEBORG ONLINE</span>
+          <span>● IPHONES SÄLJS 23% SNABBARE IDAG</span>
         </div>
+      </div>
+
+      <main style={{ maxWidth: '1200px', margin: '0 auto', padding: '60px 40px' }}>
         
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: '20px' }}>
-          {[1,2,3,4,5,6,7,8].map(i => (
-            <div key={i} className="glow-card" style={{ padding: 0, borderRadius: '12px' }}>
-              <div style={{ height: '200px', background: '#111', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '40px' }}>📦</div>
-              <div style={{ padding: '15px' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '12px', marginBottom: '5px' }}>
-                  <span style={{ color: 'var(--accent)', fontWeight: 800 }}>98% TRUST</span>
-                  <span className="muted">Stockholm</span>
-                </div>
-                <div style={{ fontWeight: 700 }}>Objekt Namn {i}</div>
-                <div style={{ fontSize: '18px', fontWeight: 900, marginTop: '5px' }}>4 200 kr</div>
-                <div style={{ fontSize: '10px', color: '#ff4444', marginTop: '5px' }}>🔥 12 BUD JUST NU</div>
-              </div>
+        {/* TABS */}
+        <div style={{ display: 'flex', gap: '30px', marginBottom: '40px', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
+          {['ALLA MATCHNINGAR', 'AUKTIONER', 'DIREKTKÖP'].map((tab, i) => (
+            <div key={tab} style={{ 
+              paddingBottom: '15px', 
+              fontSize: '13px', 
+              fontWeight: 900, 
+              letterSpacing: '1px',
+              cursor: 'pointer',
+              color: i === 0 ? '#fff' : '#444',
+              borderBottom: i === 0 ? '2px solid var(--neon-purple)' : 'none'
+            }}>
+              {tab}
             </div>
           ))}
         </div>
-      </section>
 
-      {/* REKLAM-BANNER */}
-      <section style={{ padding: '0 40px' }}>
-        <div style={{ background: 'linear-gradient(45deg, #111, #000)', padding: '40px', borderRadius: '24px', border: '1px solid #222', textAlign: 'center' }}>
-          <h2 style={{ margin: 0 }}>Sälj smartare med AI.</h2>
-          <p className="muted">Vi värderar dina prylar på 5 sekunder.</p>
-          <button className="primary-btn" style={{ marginTop: '20px', padding: '15px 40px' }}>STARTA AI-SCAN</button>
-        </div>
-      </section>
+        {/* PRODUKT-GRID */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '25px' }}>
+          {/* AI Quick Sell Promotion Card */}
+          <div className="glow-card" style={{ 
+            gridColumn: 'span 1', 
+            background: 'linear-gradient(135deg, var(--neon-purple) 0%, #000 100%)', 
+            padding: '30px',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-between'
+          }}>
+            <div>
+              <h3 style={{ fontSize: '1.5rem', fontWeight: 900, marginBottom: '10px' }}>Sälj på 5 sekunder.</h3>
+              <p style={{ fontSize: '13px', color: 'rgba(255,255,255,0.7)' }}>Vår AI skapar annonsen, värderar och hittar köpare direkt.</p>
+            </div>
+            <button 
+              onClick={() => router.push('/sell')}
+              className="primary-btn" 
+              style={{ background: '#fff', color: '#000', width: '100%', marginTop: '20px' }}
+            >
+              STARTA AI-SCAN
+            </button>
+          </div>
 
-      {/* FOOTER MED COOKIES & INFO */}
-      <footer style={{ marginTop: '100px', padding: '60px 40px', background: '#080808', borderTop: '1px solid #1a1a1a' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '40px' }}>
-          <div>
-            <div style={{ fontWeight: 900, fontSize: '20px', marginBottom: '20px' }}>KARMA/LOOP</div>
-            <p className="muted" style={{ fontSize: '13px' }}>Norden ledande AI-marknadsplats för cirkulär ekonomi. Tryggt, enkelt och verifierat.</p>
-          </div>
-          <div>
-            <h4 style={{ marginBottom: '20px' }}>Marknad</h4>
-            <div className="footer-link">Sälj prylar</div>
-            <div className="footer-link">Köpskydd</div>
-            <div className="footer-link">Fraktlösningar</div>
-          </div>
-          <div>
-            <h4 style={{ marginBottom: '20px' }}>Support</h4>
-            <div className="footer-link">Kundservice</div>
-            <div className="footer-link">Säkerhetscenter</div>
-            <div className="footer-link">BankID Guide</div>
-          </div>
-          <div>
-            <h4 style={{ marginBottom: '20px' }}>Rättsligt</h4>
-            <div className="footer-link">Användarvillkor</div>
-            <div className="footer-link">Sekretesspolicy</div>
-            <div className="footer-link" style={{ color: 'var(--accent)' }}>Cookie-inställningar ⚙️</div>
-          </div>
+          {/* MOCK DATA - Faktiska FeedCards */}
+          <FeedCardSell id="1" title="iPhone 15 Pro Max" price={11450} trust={99} matchScore={98} />
+          <FeedCardSell id="2" title="MacBook Pro M3" price={18900} trust={95} matchScore={87} />
+          <FeedCardSell id="3" title="Sony WH-1000XM5" price={2800} trust={92} matchScore={94} />
+          <FeedCardSell id="4" title="PlayStation 5" price={4500} trust={88} matchScore={76} />
         </div>
-        <div style={{ marginTop: '60px', textAlign: 'center', fontSize: '12px' }} className="muted">
-          © 2026 KARMA LOOP AB • Stockholm, Sweden
+
+        {/* RENT MODULE PREVIEW */}
+        <div style={{ marginTop: '60px' }}>
+          <h2 style={{ fontSize: '1.5rem', fontWeight: 900, marginBottom: '20px' }}>Passiv inkomst?</h2>
+          <RentModule />
         </div>
-      </footer>
+
+      </main>
+
+      <style jsx>{`
+        .ticker-wrap {
+          animation: ticker 30s linear infinite;
+        }
+        @keyframes ticker {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+      `}</style>
     </div>
   );
 }
