@@ -1,6 +1,9 @@
 "use client";
+import { useRouter } from 'next/navigation'; // Lägg till denna
 
 export default function ListingPage({ params }: { params: { id: string } }) {
+  const router = useRouter(); // Aktivera router
+
   return (
     <div className="app-shell" style={{ padding: '0 0 100px 0' }}>
       {/* Produktbild Hero */}
@@ -28,7 +31,8 @@ export default function ListingPage({ params }: { params: { id: string } }) {
           </div>
         </div>
 
-        <div className="pay-card" style={{ margin: '30px 0', background: 'rgba(255,255,255,0.02)' }}>
+        {/* Säljar-info (Viktigt för din Roadmap!) */}
+        <div className="pay-card" style={{ margin: '30px 0', background: 'rgba(255,255,255,0.02)', padding: '20px', borderRadius: '15px' }}>
           <div style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>
             <div style={{ width: '40px', height: '40px', background: '#222', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>🛡️</div>
             <div>
@@ -44,12 +48,16 @@ export default function ListingPage({ params }: { params: { id: string } }) {
           Säljaren är känd för snabba leveranser.
         </p>
 
-        {/* Action Buttons */}
+        {/* Action Buttons - Nu med router.push */}
         <div style={{ 
           position: 'fixed', bottom: '100px', left: '50%', transform: 'translateX(-50%)',
           width: '90%', maxWidth: '560px', display: 'flex', gap: '15px', zIndex: 100
         }}>
-          <button className="primary-btn" style={{ flex: 2, boxShadow: '0 20px 40px rgba(0,0,0,0.5)' }} onClick={() => window.location.href='/checkout'}>
+          <button 
+            className="primary-btn" 
+            style={{ flex: 2, boxShadow: '0 20px 40px rgba(0,0,0,0.5)' }} 
+            onClick={() => router.push('/checkout')} // Ändrat här
+          >
             KÖP MED GARANTI
           </button>
           <button className="primary-btn" style={{ flex: 1, background: '#111', color: '#fff', border: '1px solid #333' }}>
