@@ -1,48 +1,51 @@
 "use client";
 import "../styles/globals.css";
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
+  const router = useRouter();
 
   return (
     <html lang="sv">
       <head>
-        <title>MarketBeg | AI-Driven Marketplace</title>
+        <title>KARMA LOOP | Give your things a second life</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/> 
       </head>
       <body>
-        <div className="bg-glow"></div>
-        <main className="app-shell">
-          <header className="main-nav">
-            <div className="logo" onClick={() => window.location.href='/'} style={{cursor: 'pointer'}}>
-              BEG<span className="ai-text">.AI</span>
-            </div>
-            <div className="nav-stats" onClick={() => window.location.href='/wallet'} style={{cursor: 'pointer'}}>
-              <div className="stat-pill">🪙 2,450 <small>Credits</small></div>
-            </div>
-          </header>
+        <div className="web-container">
+          <div className="bg-glow"></div>
+          
+          <div className="content-wrapper">
+            {/* HEADER - Nu med KARMA/LOOP och Loyalty Points */}
+            <header className="main-nav">
+              <div className="logo" onClick={() => router.push('/')}>
+                KARMA<span>/LOOP</span>
+              </div>
+              
+              <div className="nav-stats" onClick={() => router.push('/points')} style={{cursor: 'pointer'}}>
+                <div className="stat-pill">
+                  <span style={{ color: '#00ff88' }}>●</span> 2,450 <small style={{ marginLeft: '4px', opacity: 0.6 }}>Loyalty Points</small>
+                </div>
+              </div>
+            </header>
 
-          <div className="content-area">
-            {children}
+            {/* CONTENT AREA */}
+            <main className="content-area">
+              {children}
+            </main>
+
+            {/* BOTTOM DOCK - Proffsigare navigering */}
+            <nav className="bottom-dock">
+              <button onClick={() => router.push('/')} style={{opacity: pathname === '/' ? 1 : 0.4}}>🏠</button>
+              <button onClick={() => router.push('/search')} style={{opacity: pathname === '/search' ? 1 : 0.4}}>🔍</button>
+              <button className="plus-btn" onClick={() => router.push('/sell')}>+</button>
+              <button onClick={() => router.push('/status')} style={{opacity: pathname === '/status' ? 1 : 0.4}}>🏆</button>
+              <button onClick={() => router.push('/my-karma')} style={{opacity: pathname === '/my-karma' ? 1 : 0.4}}>💳</button>
+            </nav>
           </div>
-
-          <nav className="bottom-dock">
-            <button onClick={() => window.location.href='/'} style={{opacity: pathname === '/' ? 1 : 0.4, fontSize: '22px'}}>🏠</button>
-            <button onClick={() => window.location.href='/feed'} style={{opacity: pathname === '/feed' ? 1 : 0.4, fontSize: '22px'}}>🔍</button>
-            <button className="scan-btn" onClick={() => window.location.href='/sell'}>+</button>
-            <button onClick={() => window.location.href='/leaderboard'} style={{opacity: pathname === '/leaderboard' ? 1 : 0.4, fontSize: '22px'}}>🏆</button>
-            <button onClick={() => window.location.href='/wallet'} style={{opacity: pathname === '/wallet' ? 1 : 0.4, fontSize: '22px'}}>💳</button>
-          </nav>
-        </main>
+        </div>
       </body>
     </html>
   );
 }
-
-// Dolt för framtida bruk
-const ExperimentalFeatures = () => (
-  <div style={{ display: 'none' }}>
-    {/* BegLoan, Crypto Engine, etc. */}
-  </div>
-);
