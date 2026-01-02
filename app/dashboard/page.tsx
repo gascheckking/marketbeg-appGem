@@ -1,39 +1,39 @@
 "use client";
+import { useRouter } from 'next/navigation';
 
-export default function Dashboard() {
+export default function MyKarmaPage() {
+  const router = useRouter();
+
   return (
-    <div className="app-shell" style={{padding: '20px'}}>
-      <div className="stat-pill" style={{marginBottom: '20px', display: 'inline-block'}}>
-        🪙 Balance: 2,450 BegCredits
-      </div>
-      
-      <h1 style={{fontSize: '2.5rem', fontWeight: 900}}>Min Ekonomi</h1>
+    <div className="web-container">
+      <div className="content-wrapper" style={{ maxWidth: '800px', padding: '60px 20px' }}>
+        <div className="stat-pill" style={{ marginBottom: '20px', display: 'inline-block', color: '#9d4edd' }}>
+          ✨ 2,450 Loyalty Points
+        </div>
+        
+        <h1 style={{ fontSize: '3.5rem', fontWeight: 900, marginBottom: '40px' }}>Min Karma</h1>
 
-      <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px', marginTop: '20px'}}>
-        <div className="glow-card" onClick={() => window.location.href='/sell'} style={{gridRow: 'span 2', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '20px', borderRadius: '24px'}}>
-          <span style={{fontSize: '30px'}}>💰</span>
-          <h3>Sälj nu</h3>
-          <p className="muted" style={{fontSize: '12px'}}>Omedelbar likviditet.</p>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+          <div className="glow-card" onClick={() => router.push('/sell')} style={{ padding: '40px', cursor: 'pointer', textAlign: 'center' }}>
+            <span style={{ fontSize: '40px' }}>📤</span>
+            <h3 style={{ margin: '15px 0' }}>Sälj prylar</h3>
+            <p className="muted">Ge dina saker en ny Loop.</p>
+          </div>
+
+          <div className="glow-card" style={{ padding: '40px', opacity: 0.5, textAlign: 'center' }}>
+            <span style={{ fontSize: '40px' }}>🔄</span>
+            <h3 style={{ margin: '15px 0' }}>Hyr ut</h3>
+            <p style={{ color: '#9d4edd', fontWeight: 'bold', fontSize: '10px' }}>KOMMER SNART</p>
+          </div>
         </div>
 
-        <div style={{background: '#111', padding: '20px', borderRadius: '24px', position: 'relative', overflow: 'hidden'}}>
-           <div style={{position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(4px)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 2}}>
-             <span style={{fontSize: '10px', fontWeight: 800, color: 'var(--accent)'}}>COMING SOON</span>
-           </div>
-           <h3>Hyr ut</h3>
+        <div className="glow-card" style={{ marginTop: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '30px' }}>
+          <div>
+            <strong>Använd poäng till frakt</strong>
+            <p className="muted">Du har tillräckligt för 5 fria frakter.</p>
+          </div>
+          <button style={{ background: '#fff', color: '#000', border: 'none', padding: '12px 25px', borderRadius: '15px', fontWeight: 800, cursor: 'pointer' }}>AKTIVERA</button>
         </div>
-
-        <div className="pay-card" style={{margin: 0}}>
-          <strong>2,450 BC</strong>
-        </div>
-      </div>
-
-      <div className="pay-card" style={{marginTop: '20px'}}>
-        <div>
-          <strong>Smart Logistik</strong>
-          <p className="muted" style={{fontSize: '12px', margin: 0}}>BegRunner hämtar vid dörren.</p>
-        </div>
-        <button className="small-pay" style={{background: '#fff', color: '#000', border: 'none', padding: '10px 15px', borderRadius: '10px', fontWeight: 800}}>BOKA</button>
       </div>
     </div>
   );
