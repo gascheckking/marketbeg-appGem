@@ -2,51 +2,33 @@
 
 export default function DisputePage() {
   return (
-    <div className="app-shell" style={{ padding: '20px' }}>
-      <div style={{ textAlign: 'center', marginTop: '60px', marginBottom: '40px' }}>
-        <div style={{ 
-          fontSize: '70px', 
-          textShadow: '0 0 30px rgba(0, 255, 136, 0.3)',
-          marginBottom: '20px' 
-        }}>🛡️</div>
-        <h1 style={{ fontSize: '2.5rem', fontWeight: 900, letterSpacing: '-1px' }}>AI Resolution</h1>
-        <p className="muted">Vår neurala motor analyserar chatthistorik, bilder och fraktdata för att lösa dispyten direkt.</p>
-      </div>
+    <div className="web-container">
+      <div className="content-wrapper" style={{ maxWidth: '800px', padding: '80px 20px', textAlign: 'center' }}>
+        <div style={{ fontSize: '80px', marginBottom: '30px' }}>🛡️</div>
+        <h1 style={{ fontSize: '3rem', fontWeight: 900 }}>Karma Resolution</h1>
+        <p className="muted" style={{ maxWidth: '500px', margin: '0 auto 50px' }}>
+          Något som inte blev rätt? Vårt trygghetssystem går igenom affären och hjälper er hitta en lösning på under 60 sekunder.
+        </p>
 
-      <div className="glow-card" style={{ padding: '30px', background: '#000', borderRadius: '32px' }}>
-        <h3 style={{ marginTop: 0 }}>Öppna ett ärende</h3>
-        <p className="muted" style={{ fontSize: '14px' }}>Beskriv problemet så fattar AI:n ett beslut inom 60 sekunder.</p>
-        
-        <label className="muted" style={{ fontSize: '10px', fontWeight: 800, textTransform: 'uppercase' }}>Kategori</label>
-        <select style={{ 
-          width: '100%', padding: '18px', background: '#111', color: '#fff', 
-          borderRadius: '16px', border: '1px solid var(--border)', marginTop: '8px',
-          appearance: 'none', outline: 'none'
-        }}>
-          <option>Varan stämmer inte med beskrivningen</option>
-          <option>Varan har inte kommit fram</option>
-          <option>Skada under transport</option>
-          <option>Annat problem</option>
-        </select>
+        <div className="glow-card" style={{ padding: '40px', textAlign: 'left', background: '#0a0a0a', borderRadius: '32px' }}>
+          <h3 style={{ marginBottom: '25px' }}>Vad har hänt?</h3>
+          
+          <label className="muted" style={{ fontSize: '11px', fontWeight: 800, textTransform: 'uppercase' }}>Anledning</label>
+          <select style={{ width: '100%', padding: '20px', background: '#111', color: '#fff', borderRadius: '18px', border: '1px solid #222', marginTop: '10px', marginBottom: '20px', appearance: 'none' }}>
+            <option>Varan stämmer inte med beskrivningen</option>
+            <option>Jag har inte fått min vara</option>
+            <option>Varan skadades i frakten</option>
+          </select>
 
-        <textarea 
-          placeholder="Vad har hänt?"
-          style={{ 
-            width: '100%', padding: '18px', background: '#111', color: '#fff', 
-            borderRadius: '16px', border: '1px solid var(--border)', marginTop: '15px',
-            minHeight: '120px', outline: 'none', fontFamily: 'inherit'
-          }}
-        ></textarea>
+          <textarea 
+            placeholder="Berätta kort vad som är fel..."
+            style={{ width: '100%', padding: '20px', background: '#111', color: '#fff', borderRadius: '18px', border: '1px solid #222', minHeight: '150px', outline: 'none' }}
+          ></textarea>
 
-        <button className="primary-btn" style={{ marginTop: '25px', width: '100%' }}>
-          STARTA AI-UTREDNING
-        </button>
-      </div>
-
-      <div style={{ marginTop: '30px', textAlign: 'center' }}>
-        <small className="muted" style={{ fontSize: '10px' }}>
-          94% av alla ärenden löses utan mänsklig inblandning.
-        </small>
+          <button className="primary-btn" style={{ marginTop: '30px', width: '100%', background: '#9d4edd', color: '#fff' }}>
+            ÖPPNA TRYGGHETSÄRENDE
+          </button>
+        </div>
       </div>
     </div>
   );
