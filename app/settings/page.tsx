@@ -2,36 +2,30 @@
 
 export default function Settings() {
   return (
-    <div className="app-shell" style={{ padding: '20px' }}>
-      <h1 style={{ marginTop: '40px', fontWeight: 900 }}>Inställningar</h1>
-      
-      <div style={{ marginTop: '30px' }}>
-        <h3 className="muted" style={{ fontSize: '12px', textTransform: 'uppercase' }}>Säkerhet</h3>
-        <div className="pay-card">
-          <span>BankID Verifiering</span>
-          <span style={{ color: 'var(--accent)' }}>AKTIV ✅</span>
-        </div>
-        
-        <h3 className="muted" style={{ fontSize: '12px', textTransform: 'uppercase', marginTop: '30px' }}>AI Notifikationer</h3>
-        <div className="pay-card">
-          <span>Pris-drops på bevakningar</span>
-          <div style={{ width: '40px', height: '20px', background: 'var(--accent)', borderRadius: '10px' }}></div>
-        </div>
-        <div className="pay-card">
-          <span>Nya High-Match objekt</span>
-          <div style={{ width: '40px', height: '20px', background: 'var(--accent)', borderRadius: '10px' }}></div>
-        </div>
+    <div style={{ maxWidth: '700px', margin: '0 auto' }}>
+      <h1 style={{ fontSize: '2.5rem', fontWeight: 900, marginBottom: '40px' }}>Settings</h1>
 
-        <h3 className="muted" style={{ fontSize: '12px', textTransform: 'uppercase', marginTop: '30px' }}>Betalpreferenser</h3>
-        <select style={{ width: '100%', padding: '20px', background: '#111', border: '1px solid #222', borderRadius: '16px', color: '#fff' }}>
-          <option>Primär: Swish / Vipps</option>
-          <option>BegTokens (Använd för frakt)</option>
-          <option>Krypto-Wallet (Solana)</option>
-        </select>
-      </div>
+      <section style={{ marginBottom: '40px' }}>
+        <h3 className="muted" style={{ fontSize: '12px', textTransform: 'uppercase', marginBottom: '15px' }}>Identity & Trust</h3>
+        <div className="pay-card" style={{ justifyContent: 'space-between', padding: '25px' }}>
+          <span>BankID Verification</span>
+          <span style={{ color: 'var(--accent)', fontWeight: 800 }}>VERIFIED ✅</span>
+        </div>
+      </section>
 
-      <button className="primary-btn" style={{ marginTop: '50px', width: '100%', background: 'transparent', color: '#ff4444', border: '1px solid #200' }}>
-        LOGGA UT
+      <section style={{ marginBottom: '40px' }}>
+        <h3 className="muted" style={{ fontSize: '12px', textTransform: 'uppercase', marginBottom: '15px' }}>Localization</h3>
+        <div className="pay-card" style={{ justifyContent: 'space-between', padding: '25px' }}>
+          <span>Primary Language</span>
+          <div style={{ display: 'flex', gap: '10px' }}>
+            <button style={{ background: 'var(--accent)', color: '#000', border: 'none', padding: '5px 12px', borderRadius: '6px', fontWeight: 800 }}>SV</button>
+            <button style={{ background: '#111', color: '#fff', border: '1px solid #222', padding: '5px 12px', borderRadius: '6px' }}>EN</button>
+          </div>
+        </div>
+      </section>
+
+      <button className="primary-btn" style={{ width: '100%', background: 'transparent', border: '1px solid #ff4444', color: '#ff4444', marginTop: '40px' }}>
+        LOG OUT OF SESSION
       </button>
     </div>
   );
