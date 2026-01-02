@@ -8,46 +8,47 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
   return (
     <html lang="sv">
-      <head>
-        <title>KARMA LOOP</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/> 
-      </head>
       <body>
-        <div style={{ display: 'flex', minHeight: '100vh', width: '100vw' }}>
+        <div style={{ display: 'flex', minHeight: '100vh', width: '100vw', background: '#02040a' }}>
           
-          {/* SIDEBAR (PC) */}
+          {/* SIDEBAR */}
           <aside style={{ 
-            width: '280px', borderRight: '1px solid rgba(255,255,255,0.08)', 
-            background: '#0a0a0a', padding: '30px', position: 'sticky', top: 0, height: '100vh'
+            width: '280px', 
+            borderRight: '1px solid rgba(255,255,255,0.08)', 
+            background: '#0a0a0a', 
+            padding: '30px', 
+            position: 'sticky', 
+            top: 0, 
+            height: '100vh',
+            display: 'flex',
+            flexDirection: 'column'
           }}>
-            <div onClick={() => router.push('/')} style={{ fontWeight: 900, fontSize: '24px', marginBottom: '10px', cursor: 'pointer' }}>
+            <div 
+              onClick={() => router.push('/')}
+              style={{ fontWeight: 900, fontSize: '24px', marginBottom: '40px', cursor: 'pointer', color: 'white' }}
+            >
               KARMA<span style={{color: '#9d4edd'}}>/LOOP</span>
             </div>
-            
-            <div style={{ padding: '15px', background: 'rgba(0,255,136,0.05)', borderRadius: '16px', marginBottom: '30px' }}>
-              <button style={{ width: '100%', background: '#00ff88', color: '#000', border: 'none', padding: '12px', borderRadius: '10px', fontWeight: 900 }}>🆔 BANKID LOGIN</button>
-            </div>
 
-            <nav>
+            <nav style={{ flex: 1 }}>
               <div onClick={() => router.push('/')} className="nav-item">🌐 Utforska</div>
-              <div onClick={() => router.push('/search')} className="nav-item">🛍️ Köp</div>
-              <div onClick={() => router.push('/sell')} className="nav-item">⚡ Sälj</div>
+              <div onClick={() => router.push('/search')} className="nav-item">🛍️ Köp prylar</div>
+              <div onClick={() => router.push('/sell')} className="nav-item">⚡ Sälj snabbt</div>
               <div onClick={() => router.push('/my-karma')} className="nav-item">💳 Ekonomi</div>
+              <div onClick={() => router.push('/dispute')} className="nav-item">🛡️ Säkerhet</div>
             </nav>
+
+            <div style={{ padding: '20px', background: 'rgba(0,255,136,0.05)', borderRadius: '15px' }}>
+              <button style={{ width: '100%', background: '#00ff88', color: '#000', border: 'none', padding: '10px', borderRadius: '8px', fontWeight: 900, cursor: 'pointer' }}>
+                BANKID LOGIN
+              </button>
+            </div>
           </aside>
 
-          {/* MAIN CONTENT */}
-          <main style={{ flex: 1, position: 'relative' }}>
+          {/* MAIN CONTENT AREA */}
+          <main style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
             {children}
           </main>
-
-          {/* BOTTOM DOCK (MOBIL) */}
-          <nav className="bottom-dock">
-            <button onClick={() => router.push('/')} style={{ background: 'none', border: 'none', fontSize: '24px' }}>🏠</button>
-            <button onClick={() => router.push('/search')} style={{ background: 'none', border: 'none', fontSize: '24px' }}>🔍</button>
-            <button onClick={() => router.push('/sell')} style={{ background: '#fff', border: 'none', borderRadius: '50%', width: '45px', height: '45px', fontWeight: 'bold' }}>+</button>
-            <button onClick={() => router.push('/my-karma')} style={{ background: 'none', border: 'none', fontSize: '24px' }}>💳</button>
-          </nav>
         </div>
       </body>
     </html>
