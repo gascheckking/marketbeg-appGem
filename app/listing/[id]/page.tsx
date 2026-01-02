@@ -1,67 +1,63 @@
 "use client";
-import { useRouter } from 'next/navigation'; // Lägg till denna
+import React from 'react';
+import PriceTag from "@/components/PriceTag";
+import TrustBadge from "@/components/TrustBadge";
 
 export default function ListingPage({ params }: { params: { id: string } }) {
-  const router = useRouter(); // Aktivera router
-
   return (
-    <div className="app-shell" style={{ padding: '0 0 100px 0' }}>
-      {/* Produktbild Hero */}
+    <div style={{ paddingBottom: '150px' }}>
       <div style={{ 
-        width: '100%', height: '40vh', background: '#111', 
+        width: '100%', height: '50vh', background: 'linear-gradient(to bottom, #111, #02040a)', 
         display: 'flex', alignItems: 'center', justifyContent: 'center',
-        fontSize: '80px', borderBottom: '1px solid var(--border)' 
+        fontSize: '120px', borderBottom: '1px solid var(--border)' 
       }}>
         📱
       </div>
 
-      <div style={{ padding: '30px 20px' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+      <div className="page-wrapper" style={{ maxWidth: '1000px', margin: '0 auto' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '40px' }}>
           <div>
-            <span className="stat-pill" style={{ fontSize: '10px' }}>ID: {params.id}</span>
-            <h1 style={{ fontSize: '2.2rem', fontWeight: 900, margin: '10px 0' }}>iPhone 15 Pro</h1>
-            <div style={{ display: 'flex', gap: '10px', marginTop: '5px' }}>
-              <span style={{ color: 'var(--accent)', fontSize: '12px', fontWeight: 800 }}>● NYSKICK</span>
-              <span style={{ color: '#888', fontSize: '12px' }}>● STOCKHOLM</span>
+            <div style={{ display: 'flex', gap: '10px', marginBottom: '15px' }}>
+              <span className="stat-pill" style={{ background: 'rgba(255,255,255,0.05)', color: '#888' }}>ID: {params.id}</span>
+              <span style={{ background: 'rgba(0,255,136,0.1)', color: 'var(--neon-mint)', padding: '5px 12px', borderRadius: '8px', fontSize: '11px', fontWeight: 900 }}>NYSKICK</span>
             </div>
+            <h1 style={{ fontSize: '3.5rem', fontWeight: 900, margin: 0, letterSpacing: '-2px' }}>iPhone 15 Pro</h1>
+            <p className="muted" style={{ fontSize: '1.1rem', marginTop: '10px' }}>📍 Stockholm, Sverige</p>
           </div>
           <div style={{ textAlign: 'right' }}>
-            <div style={{ fontSize: '2rem', fontWeight: 900 }}>9 200 kr</div>
-            <div style={{ fontSize: '11px', color: 'var(--accent)', fontWeight: 800 }}>LÄGSTA PRIS PÅ 30 DAGAR</div>
+            <PriceTag price={11450} />
+            <div style={{ fontSize: '12px', color: 'var(--neon-mint)', fontWeight: 900, marginTop: '10px' }}>BÄSTA PRIS I LOOPEN JUST NU</div>
           </div>
         </div>
 
-        {/* Säljar-info (Viktigt för din Roadmap!) */}
-        <div className="pay-card" style={{ margin: '30px 0', background: 'rgba(255,255,255,0.02)', padding: '20px', borderRadius: '15px' }}>
-          <div style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>
-            <div style={{ width: '40px', height: '40px', background: '#222', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>🛡️</div>
+        <div className="glass-card" style={{ marginBottom: '50px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
+            <div style={{ width: '50px', height: '50px', background: 'linear-gradient(45deg, var(--neon-purple), var(--neon-mint))', borderRadius: '50%' }}></div>
             <div>
-              <strong style={{ fontSize: '14px' }}>Säljare: Alex L.</strong>
-              <div style={{ fontSize: '11px', color: 'var(--accent)' }}>98.2% Trust Score (BankID Verifierad)</div>
+              <strong style={{ fontSize: '1.1rem' }}>Säljare: Alex L.</strong>
+              <div style={{ marginTop: '5px' }}><TrustBadge score={98.2} /></div>
             </div>
           </div>
+          <button className="glass-card" style={{ padding: '10px 20px', fontSize: '12px', fontWeight: 800 }}>SE PROFIL</button>
         </div>
 
-        <h3 style={{ fontSize: '1.1rem', fontWeight: 800 }}>AI Beskrivning</h3>
-        <p className="muted" style={{ lineHeight: '1.7', fontSize: '15px' }}>
-          Denna iPhone 15 Pro i Titanium har genomgått vår AI-validering. Inga repor på skärmen, 100% batterihälsa. 
-          Säljaren är känd för snabba leveranser.
+        <h3 style={{ fontSize: '1.4rem', fontWeight: 900, marginBottom: '20px' }}>AI Beskrivning & Analys</h3>
+        <p className="muted" style={{ lineHeight: '1.8', fontSize: '1.1rem', maxWidth: '700px' }}>
+          Denna iPhone 15 Pro i Natural Titanium har genomgått vår AI-validering. 
+          Enheten är i perfekt skick utan repor på sensorer eller skärm. 100% batterihälsa bekräftad via systemlogg. 
+          Säljaren har 42 tidigare försäljningar utan anmärkning.
         </p>
 
-        {/* Action Buttons - Nu med router.push */}
+        {/* Floating Action Bar */}
         <div style={{ 
-          position: 'fixed', bottom: '100px', left: '50%', transform: 'translateX(-50%)',
-          width: '90%', maxWidth: '560px', display: 'flex', gap: '15px', zIndex: 100
+          position: 'fixed', bottom: '40px', left: '50%', transform: 'translateX(-50%)',
+          width: '90%', maxWidth: '600px', display: 'flex', gap: '15px', zIndex: 100
         }}>
-          <button 
-            className="primary-btn" 
-            style={{ flex: 2, boxShadow: '0 20px 40px rgba(0,0,0,0.5)' }} 
-            onClick={() => router.push('/checkout')} // Ändrat här
-          >
-            KÖP MED GARANTI
+          <button className="primary-btn" style={{ flex: 2, padding: '20px', fontSize: '16px', boxShadow: '0 20px 50px rgba(0,0,0,0.6)' }}>
+            KÖP MED KARMA SHIELD
           </button>
-          <button className="primary-btn" style={{ flex: 1, background: '#111', color: '#fff', border: '1px solid #333' }}>
-            BUD
+          <button className="glass-card" style={{ flex: 1, fontWeight: 900, fontSize: '14px' }}>
+            LÄGG BUD
           </button>
         </div>
       </div>
