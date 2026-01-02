@@ -1,137 +1,96 @@
 "use client";
-import React, { useState } from 'react';
-import { useRouter } from 'next/navigation';
 
-export default function KarmaLoopWide() {
-  const router = useRouter();
-  const [lang, setLang] = useState('SV');
-  const [isSidebarOpen, setSidebarOpen] = useState(true);
-
-  const menuItems = [
-    { name: 'Utforska', icon: '🔍', path: '/feed' },
-    { name: 'Sälj prylar', icon: '📤', path: '/sell' },
-    { name: 'Trendande', icon: '🔥', path: '/trending' },
-    { name: 'Min Ekonomi', icon: '💳', path: '/my-karma' },
-    { name: 'Säkerhet', icon: '🛡️', path: '/dispute' },
-  ];
-
+export default function Marketplace() {
   return (
-    <div className="main-layout" style={{ display: 'flex', minHeight: '100vh', backgroundColor: '#050505', color: '#fff' }}>
-      
-      {/* --- VÄNSTER SIDEBAR (Liknande Gemini/Web-apps) --- */}
-      <aside className="sidebar" style={{ 
-        width: isSidebarOpen ? '260px' : '80px', 
-        borderRight: '1px solid #1a1a1a', 
-        padding: '20px', 
-        display: 'flex', 
-        flexDirection: 'column',
-        transition: 'width 0.3s ease',
-        background: '#0a0a0a'
-      }}>
-        <div className="logo" style={{ marginBottom: '40px', fontWeight: 900, fontSize: '20px' }}>
-          {isSidebarOpen ? 'KARMA/LOOP' : 'K/L'}
+    <div style={{ width: '100%' }}>
+      {/* HEADER MED SÖK & RULLGARDINER */}
+      <section style={{ padding: '40px', borderBottom: '1px solid #1a1a1a' }}>
+        <div style={{ display: 'flex', gap: '20px', marginBottom: '30px' }}>
+          <div style={{ flex: 1, position: 'relative' }}>
+            <input type="text" placeholder="Sök efter märken, modeller eller kategorier..." 
+              style={{ width: '100%', padding: '20px 60px', borderRadius: '16px', background: '#111', border: '1px solid #222', color: '#fff', fontSize: '18px' }} />
+            <span style={{ position: 'absolute', left: '25px', top: '22px' }}>🔍</span>
+          </div>
+          <select style={{ padding: '0 20px', borderRadius: '16px', background: '#111', border: '1px solid #222', color: '#fff' }}>
+            <option>Hela Sverige</option>
+            <option>Stockholm</option>
+            <option>Göteborg</option>
+          </select>
         </div>
 
-        <nav style={{ flex: 1 }}>
-          {menuItems.map((item) => (
-            <div 
-              key={item.name}
-              onClick={() => router.push(item.path)}
-              style={{ 
-                padding: '12px 15px', 
-                borderRadius: '12px', 
-                cursor: 'pointer', 
-                display: 'flex', 
-                alignItems: 'center', 
-                gap: '15px',
-                marginBottom: '8px',
-                transition: '0.2s',
-                backgroundColor: 'transparent'
-              }}
-              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#1a1a1a'}
-              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
-            >
-              <span>{item.icon}</span>
-              {isSidebarOpen && <span style={{ fontSize: '14px', fontWeight: 500 }}>{item.name}</span>}
+        {/* TABS / FLIKAR (Vinted/Blocket style) */}
+        <div style={{ display: 'flex', gap: '30px', borderBottom: '1px solid #111' }}>
+          <div className="tab active">Alla Annonser</div>
+          <div className="tab">Mina Bevakningar</div>
+          <div className="tab">Auktioner</div>
+          <div className="tab">Direktköp</div>
+        </div>
+      </section>
+
+      {/* PRODUKT-GRID (Täcker hela vägen) */}
+      <section style={{ padding: '40px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '20px' }}>
+          <h2 style={{ fontWeight: 900 }}>Just nu i flödet 🔥</h2>
+          <div style={{ color: 'var(--accent)', cursor: 'pointer' }}>Visa alla →</div>
+        </div>
+        
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: '20px' }}>
+          {[1,2,3,4,5,6,7,8].map(i => (
+            <div key={i} className="glow-card" style={{ padding: 0, borderRadius: '12px' }}>
+              <div style={{ height: '200px', background: '#111', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '40px' }}>📦</div>
+              <div style={{ padding: '15px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '12px', marginBottom: '5px' }}>
+                  <span style={{ color: 'var(--accent)', fontWeight: 800 }}>98% TRUST</span>
+                  <span className="muted">Stockholm</span>
+                </div>
+                <div style={{ fontWeight: 700 }}>Objekt Namn {i}</div>
+                <div style={{ fontSize: '18px', fontWeight: 900, marginTop: '5px' }}>4 200 kr</div>
+                <div style={{ fontSize: '10px', color: '#ff4444', marginTop: '5px' }}>🔥 12 BUD JUST NU</div>
+              </div>
             </div>
           ))}
-        </nav>
-
-        {/* Inställningar & BankID */}
-        <div style={{ borderTop: '1px solid #1a1a1a', paddingTop: '20px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '10px', cursor: 'pointer' }}>
-            <span style={{ fontSize: '18px' }}>⚙️</span>
-            {isSidebarOpen && <span style={{ fontSize: '14px' }}>Inställningar</span>}
-          </div>
-          <button style={{ 
-            width: '100%', 
-            background: '#fff', 
-            color: '#000', 
-            border: 'none', 
-            padding: '10px', 
-            borderRadius: '8px', 
-            fontWeight: 700, 
-            fontSize: '12px',
-            marginTop: '10px',
-            cursor: 'pointer'
-          }}>
-            {isSidebarOpen ? 'Logga in med BankID' : '🆔'}
-          </button>
         </div>
-      </aside>
+      </section>
 
-      {/* --- HUVUDINNEHÅLL (Utdraget över hela sidan) --- */}
-      <main style={{ flex: 1, padding: '40px', position: 'relative' }}>
-        
-        {/* Top Header i Main Content */}
-        <header style={{ 
-          display: 'flex', 
-          justifyContent: 'flex-end', 
-          gap: '20px', 
-          alignItems: 'center',
-          marginBottom: '60px' 
-        }}>
-          {/* Språkval */}
-          <div className="stat-pill" style={{ cursor: 'pointer' }} onClick={() => setLang(lang === 'SV' ? 'EN' : 'SV')}>
-            🌐 {lang}
-          </div>
-          
-          <div className="stat-pill" style={{ color: '#00ff88', borderColor: 'rgba(0,255,136,0.2)' }}>
-            ● 2,450 Loyalty Points
-          </div>
-        </header>
+      {/* REKLAM-BANNER */}
+      <section style={{ padding: '0 40px' }}>
+        <div style={{ background: 'linear-gradient(45deg, #111, #000)', padding: '40px', borderRadius: '24px', border: '1px solid #222', textAlign: 'center' }}>
+          <h2 style={{ margin: 0 }}>Sälj smartare med AI.</h2>
+          <p className="muted">Vi värderar dina prylar på 5 sekunder.</p>
+          <button className="primary-btn" style={{ marginTop: '20px', padding: '15px 40px' }}>STARTA AI-SCAN</button>
+        </div>
+      </section>
 
-        {/* Hero Section */}
-        <section style={{ maxWidth: '1000px', margin: '0 auto', textAlign: 'center' }}>
-          <h1 style={{ fontSize: 'clamp(2.5rem, 5vw, 4.5rem)', fontWeight: 900, letterSpacing: '-2px', lineHeight: 1 }}>
-            Give your things <br/>
-            <span style={{ color: '#9d4edd' }}>a second life.</span>
-          </h1>
-          <p className="muted" style={{ margin: '30px auto', maxWidth: '600px', fontSize: '1.1rem' }}>
-            Tryggt, enkelt och cirkulärt. Med Karma Shield handlar du alltid verifierat med BankID.
-          </p>
-          <button className="primary-btn" onClick={() => router.push('/sell')}>
-            Starta din Loop
-          </button>
-        </section>
-
-        {/* Grid Area - Täcker ytan */}
-        <section style={{ 
-          display: 'grid', 
-          gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', 
-          gap: '25px', 
-          marginTop: '80px' 
-        }}>
-          <div className="glow-card" style={{ border: '1px solid #9d4edd' }}>
-            <h3>Karma Shield</h3>
-            <p className="muted">BankID-verifierad trygghet för 100% säkra köp.</p>
+      {/* FOOTER MED COOKIES & INFO */}
+      <footer style={{ marginTop: '100px', padding: '60px 40px', background: '#080808', borderTop: '1px solid #1a1a1a' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '40px' }}>
+          <div>
+            <div style={{ fontWeight: 900, fontSize: '20px', marginBottom: '20px' }}>KARMA/LOOP</div>
+            <p className="muted" style={{ fontSize: '13px' }}>Norden ledande AI-marknadsplats för cirkulär ekonomi. Tryggt, enkelt och verifierat.</p>
           </div>
-          <div className="glow-card">
-            <h3>Karma Recycle</h3>
-            <p className="muted">Använd poäng för frakt eller spara till rewards.</p>
+          <div>
+            <h4 style={{ marginBottom: '20px' }}>Marknad</h4>
+            <div className="footer-link">Sälj prylar</div>
+            <div className="footer-link">Köpskydd</div>
+            <div className="footer-link">Fraktlösningar</div>
           </div>
-        </section>
-      </main>
+          <div>
+            <h4 style={{ marginBottom: '20px' }}>Support</h4>
+            <div className="footer-link">Kundservice</div>
+            <div className="footer-link">Säkerhetscenter</div>
+            <div className="footer-link">BankID Guide</div>
+          </div>
+          <div>
+            <h4 style={{ marginBottom: '20px' }}>Rättsligt</h4>
+            <div className="footer-link">Användarvillkor</div>
+            <div className="footer-link">Sekretesspolicy</div>
+            <div className="footer-link" style={{ color: 'var(--accent)' }}>Cookie-inställningar ⚙️</div>
+          </div>
+        </div>
+        <div style={{ marginTop: '60px', textAlign: 'center', fontSize: '12px' }} className="muted">
+          © 2026 KARMA LOOP AB • Stockholm, Sweden
+        </div>
+      </footer>
     </div>
   );
 }
