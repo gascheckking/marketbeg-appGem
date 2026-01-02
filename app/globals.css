@@ -15,11 +15,11 @@ body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
 }
 
+/* Navigering */
 .nav-item {
-  padding: 12px 0;
+  padding: 12px 15px;
   color: #888;
   cursor: pointer;
   font-weight: 600;
@@ -27,11 +27,18 @@ body {
   display: flex;
   align-items: center;
   gap: 12px;
+  border-radius: 10px;
 }
 
-.nav-item:hover, .nav-item.active {
+.nav-item:hover {
+  background: rgba(255,255,255,0.05);
   color: #fff;
-  transform: translateX(5px);
+}
+
+/* Webb-layout klasser */
+.page-wrapper {
+  padding: 40px;
+  width: 100%;
 }
 
 .glass-card {
@@ -48,38 +55,3 @@ body {
   gap: 25px;
   width: 100%;
 }
-
-.primary-btn {
-  background: white;
-  color: black;
-  border: none;
-  padding: 18px 32px;
-  border-radius: 14px;
-  font-weight: 900;
-  cursor: pointer;
-}
-
-.bottom-dock {
-  position: fixed;
-  bottom: 25px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(15, 15, 15, 0.8);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255,255,255,0.1);
-  padding: 12px 30px;
-  border-radius: 50px;
-  display: none; /* Dold på PC */
-  gap: 30px;
-  z-index: 2000;
-}
-
-/* MOBIL-ANPASSNING */
-@media (max-width: 900px) {
-  aside { display: none !important; }
-  main { margin-left: 0 !important; width: 100vw !important; padding-bottom: 100px; }
-  .bottom-dock { display: flex !important; }
-}
-
-.muted { color: var(--muted); font-size: 0.9rem; }
-::-webkit-scrollbar { display: none; }
