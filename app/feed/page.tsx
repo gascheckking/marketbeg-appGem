@@ -1,75 +1,58 @@
 "use client";
-import React, { useState } from 'react';
 
-const CATEGORIES = ["Alla", "Elektronik", "Mode", "Gaming", "Inredning"];
-const TRENDING = [
-  { id: 1, name: "MacBook Pro M3", price: "18.900 kr", img: "💻", trust: 99 },
-  { id: 2, name: "Jordan 1 Retro", price: "2.100 kr", img: "👟", trust: 95 },
-  { id: 3, name: "PS5 Pro", price: "8.400 kr", img: "🎮", trust: 98 },
-  { id: 4, name: "Dyson Airwrap", price: "4.200 kr", img: "🌬️", trust: 92 },
-];
-
-export default function GlobalMarketplace() {
+export default function GlobalMarket() {
   return (
-    <div style={{ width: '100%', paddingBottom: '100px' }}>
+    <div style={{ width: '100%', minHeight: '100vh' }}>
       
-      {/* --- HERO / SEARCH AREA --- */}
-      <header style={{ padding: '40px', borderBottom: '1px solid var(--border)' }}>
-        <h1 style={{ fontSize: '3rem', fontWeight: 900, marginBottom: '20px' }}>Utforska Loopen.</h1>
-        <div style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>
-          <input 
-            type="text" 
-            placeholder="Vad letar du efter? AI söker i hela Norden..." 
-            style={{ flex: 1, padding: '18px 25px', borderRadius: '16px', background: '#111', border: '1px solid #222', color: '#fff', fontSize: '16px' }}
-          />
-          <button style={{ padding: '18px 30px', background: 'var(--accent)', color: '#000', borderRadius: '16px', fontWeight: 900, border: 'none' }}>SÖK</button>
-        </div>
+      {/* Search & Tabs */}
+      <section style={{ padding: '40px 60px', background: 'linear-gradient(to bottom, rgba(157,78,221,0.05), transparent)' }}>
+        <h1 style={{ fontSize: '3rem', fontWeight: 900, marginBottom: '30px', letterSpacing: '-2px' }}>Utforska Loopen.</h1>
         
-        <div style={{ display: 'flex', gap: '10px', marginTop: '20px' }}>
-          {CATEGORIES.map(cat => <div key={cat} className="filter-pill">{cat}</div>)}
-          <div className="filter-pill" style={{ color: 'var(--accent)' }}>Sortera efter: Relevans ▼</div>
+        <div style={{ display: 'flex', gap: '20px', alignItems: 'center', marginBottom: '30px' }}>
+          <div style={{ flex: 1, position: 'relative' }}>
+            <input type="text" placeholder="Sök efter 'iPhone 15 Pro'..." 
+              style={{ 
+                width: '100%', padding: '20px 60px', borderRadius: '18px', 
+                background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', 
+                color: '#fff', fontSize: '18px', outline: 'none' 
+              }} />
+            <span style={{ position: 'absolute', left: '25px', top: '22px', fontSize: '20px' }}>🔍</span>
+          </div>
+          <div className="glass-card" style={{ padding: '18px 25px', borderRadius: '18px', cursor: 'pointer', fontWeight: 700 }}>
+            📍 Hela Sverige
+          </div>
         </div>
-      </header>
 
-      {/* --- TRENDANDE PRODUKTER (Vinted-style Grid) --- */}
-      <section style={{ padding: '40px' }}>
-        <h3 style={{ marginBottom: '25px', fontSize: '20px', display: 'flex', alignItems: 'center', gap: '10px' }}>
-          Populärt just nu <span style={{ padding: '4px 8px', background: 'rgba(255,0,0,0.1)', color: '#ff4444', borderRadius: '4px', fontSize: '10px' }}>HETASTE DEALSEN</span>
-        </h3>
-        <div className="main-grid">
-          {TRENDING.map(item => (
-            <div key={item.id} className="glow-card" style={{ padding: '0', overflow: 'hidden', position: 'relative' }}>
-              <div style={{ height: '200px', background: '#111', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '60px' }}>{item.img}</div>
-              <div style={{ padding: '15px' }}>
-                <div style={{ fontWeight: 800, fontSize: '1.1rem' }}>{item.name}</div>
-                <div style={{ color: 'var(--accent)', fontWeight: 900 }}>{item.price}</div>
-                <div style={{ fontSize: '11px', marginTop: '10px', opacity: 0.6 }}>🛡️ {item.trust}% Trust Score</div>
-              </div>
-            </div>
+        <div style={{ display: 'flex', gap: '40px' }}>
+          {['Senaste', 'Mest Matchning', 'Billigast', 'Auktioner'].map((t, i) => (
+            <div key={t} style={{ 
+              paddingBottom: '10px', 
+              borderBottom: i === 0 ? '3px solid #00ff88' : 'none', 
+              cursor: 'pointer', 
+              fontWeight: 800,
+              color: i === 0 ? '#fff' : '#444'
+            }}>{t}</div>
           ))}
         </div>
       </section>
 
-      {/* --- REKLAM-PLATS / PARTNERSHIPS --- */}
-      <section style={{ padding: '0 40px' }}>
-        <div style={{ 
-          width: '100%', height: '150px', borderRadius: '24px', 
-          background: 'linear-gradient(90deg, #1a1a1a 0%, #0a0a0a 100%)',
-          border: '1px dashed #333', display: 'flex', alignItems: 'center', justifyContent: 'center'
-        }}>
-          <p className="muted">REKLAM: Sälj din gamla iPhone - få 500 BegCredits extra denna vecka!</p>
-        </div>
-      </section>
-
-      {/* --- TOP TRADERS (Inspiration) --- */}
-      <section style={{ padding: '60px 40px' }}>
-        <h3 style={{ marginBottom: '25px' }}>Toppsäljare att följa</h3>
-        <div style={{ display: 'flex', gap: '20px', overflowX: 'auto', paddingBottom: '20px' }}>
-          {[1,2,3,4,5].map(i => (
-            <div key={i} style={{ minWidth: '200px', background: 'var(--glass)', padding: '20px', borderRadius: '20px', textAlign: 'center', border: '1px solid var(--border)' }}>
-              <div style={{ width: '60px', height: '60px', borderRadius: '50%', background: '#222', margin: '0 auto 10px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>👨‍🚀</div>
-              <div style={{ fontWeight: 700 }}>Trader_{i}99</div>
-              <div style={{ fontSize: '11px', color: 'var(--accent)' }}>GOD MODE</div>
+      {/* Grid Content */}
+      <section style={{ padding: '0 60px 100px 60px' }}>
+        <div className="main-grid">
+          {[1,2,3,4,5,6].map(i => (
+            <div key={i} className="glass-card">
+              <div style={{ height: '220px', background: '#050505', borderRadius: '16px', marginBottom: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '60px' }}>📱</div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
+                <span style={{ color: '#00ff88', fontSize: '11px', fontWeight: 900, letterSpacing: '1px' }}>AI MATCH 99%</span>
+                <span className="muted">2m sen</span>
+              </div>
+              <h3 style={{ margin: '0 0 10px 0', fontSize: '1.2rem' }}>iPhone 15 Pro Max</h3>
+              <div style={{ fontSize: '22px', fontWeight: 900, color: '#fff' }}>11 450 kr</div>
+              <button style={{ 
+                width: '100%', marginTop: '20px', padding: '12px', borderRadius: '10px', 
+                background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', 
+                color: '#fff', fontWeight: 700, cursor: 'pointer' 
+              }}>VISA DETALJER</button>
             </div>
           ))}
         </div>
