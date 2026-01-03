@@ -5,6 +5,12 @@ export const metadata: Metadata = {
   title: "KARMA | Nordic System",
   description: "Things deserve more than one life.",
   manifest: "/manifest.json",
+  // PWA-inställningar för iPhone
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "KARMA",
+  },
 };
 
 export const viewport: Viewport = {
