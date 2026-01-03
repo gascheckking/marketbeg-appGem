@@ -3,109 +3,68 @@ import React from 'react';
 
 export default function KarmaSellerDashboard() {
   const assets = [
-    { name: "Vintage Denim Jacket", status: "DELIVERED", value: "450 kr", sub: "Frigörs om 24h", color: 'var(--neon-purple)' },
-    { name: "Sony WH-1000XM4", status: "TRANSIT", value: "1 950 kr", sub: "Väntar på mottagning", color: '#444' },
-    { name: "North Face Parka", status: "VAULTED", value: "Est. 2 800 kr", sub: "Hög efterfrågan", color: 'var(--neon-mint)' }
+    { name: "Vintage Denim Jacket", status: "LEVERERAD", value: "450 kr", sub: "Frigörs om 24h", color: 'var(--neon-purple)' },
+    { name: "Sony WH-1000XM4", status: "I TRANSPORT", value: "1 950 kr", sub: "Väntar på mottagning", color: '#444' },
+    { name: "North Face Parka", status: "I LOOPEN", value: "Est. 2 800 kr", sub: "Hög efterfrågan", color: 'var(--neon-mint)' }
   ];
 
   return (
     <div className="page-wrapper" style={{ maxWidth: '1000px', margin: '0 auto' }}>
-      <header style={{ marginBottom: '60px' }}>
-        <h1 style={{ fontSize: '3.5rem', fontWeight: 900, letterSpacing: '-3px', margin: 0 }}>Vault</h1>
-        <div style={{ display: 'flex', gap: '15px', marginTop: '10px' }}>
-          <span className="stat-pill" style={{ borderColor: 'var(--neon-purple)', color: 'var(--neon-purple)' }}>TRUST SCORE: 4.9/5</span>
-          <span className="stat-pill" style={{ borderColor: 'var(--neon-mint)', color: 'var(--neon-mint)' }}>PROTOCOL: ACTIVE</span>
+      <header style={{ marginBottom: '30px' }}>
+        <h1 style={{ fontSize: 'clamp(2rem, 8vw, 3rem)', fontWeight: 900, letterSpacing: '-2px', margin: 0 }}>Ditt Saldo</h1>
+        <div style={{ display: 'flex', gap: '10px', marginTop: '10px', flexWrap: 'wrap' }}>
+          <span className="stat-pill" style={{ borderColor: 'var(--neon-purple)', color: 'var(--neon-purple)', fontSize: '10px' }}>TRUST: 4.9/5</span>
+          <span className="stat-pill" style={{ borderColor: 'var(--neon-mint)', color: 'var(--neon-mint)', fontSize: '10px' }}>SHIELD AKTIV</span>
         </div>
       </header>
 
-      {/* Saldo-kort: Den centrala "bank-känslan" */}
+      {/* Saldo-kort */}
       <div className="glass-card" style={{ 
-        background: 'linear-gradient(135deg, rgba(157, 78, 221, 0.05) 0%, rgba(2, 4, 10, 1) 100%)',
-        border: '1px solid rgba(157, 78, 221, 0.2)',
-        padding: '50px 40px',
-        marginBottom: '40px',
-        textAlign: 'center',
-        position: 'relative',
-        overflow: 'hidden'
+        background: 'linear-gradient(135deg, rgba(157, 78, 221, 0.08) 0%, rgba(2, 4, 10, 1) 100%)',
+        padding: '30px 20px', marginBottom: '30px', textAlign: 'center'
       }}>
-        <div style={{ position: 'absolute', top: '10px', right: '20px', fontSize: '10px', fontWeight: 800, color: 'var(--neon-purple)', letterSpacing: '2px' }}>SHIELD SECURED 🛡️</div>
-        <div className="muted" style={{ fontSize: '11px', fontWeight: 800, letterSpacing: '2px', textTransform: 'uppercase' }}>Tillgängligt Saldo</div>
-        <div style={{ fontSize: '4rem', fontWeight: 900, margin: '10px 0', letterSpacing: '-2px' }}>
-          14 250 <span style={{ fontSize: '1.5rem', verticalAlign: 'middle', opacity: 0.5 }}>KR</span>
+        <div className="muted" style={{ fontSize: '10px', fontWeight: 800, letterSpacing: '2px', textTransform: 'uppercase' }}>Tillgängligt för uttag</div>
+        <div style={{ fontSize: 'clamp(2.5rem, 12vw, 4rem)', fontWeight: 900, margin: '10px 0', letterSpacing: '-2px' }}>
+          14 250 <span style={{ fontSize: '1.2rem', opacity: 0.5 }}>KR</span>
         </div>
-        <button className="primary-btn" style={{ width: 'auto', padding: '15px 50px', fontSize: '14px', marginTop: '10px', background: '#fff', color: '#000' }}>
-          UTBETALNING VIA SWISH
+        <button className="primary-btn" style={{ width: '100%', maxWidth: '300px', background: '#fff', color: '#000', fontSize: '13px' }}>
+          TA UT VIA SWISH
         </button>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1.4fr 0.6fr', gap: '30px' }}>
-        
-        {/* Assets & Digitala Kvitton */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
-          <h3 style={{ fontSize: '14px', fontWeight: 800, letterSpacing: '1px', marginBottom: '10px' }}>DINA TILLGÅNGAR</h3>
-          {assets.map((item, i) => (
-            <div key={i} className="glass-card" style={{ 
-              display: 'flex', 
-              justifyContent: 'space-between', 
-              alignItems: 'center', 
-              padding: '25px 30px',
-              background: 'rgba(255,255,255,0.01)',
-              border: '1px solid var(--border)'
-            }}>
-              <div>
-                <div style={{ fontWeight: 800, fontSize: '16px' }}>{item.name}</div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginTop: '6px' }}>
-                  <span style={{ 
-                    fontSize: '9px', 
-                    padding: '3px 8px', 
-                    borderRadius: '4px', 
-                    background: item.color, 
-                    color: item.status === 'TRANSIT' ? '#888' : '#fff',
-                    fontWeight: 900 
-                  }}>{item.status}</span>
-                  <span className="muted" style={{ fontSize: '12px' }}>{item.sub}</span>
+      <div className="dashboard-grid">
+        <div className="assets-section">
+          <h3 style={{ fontSize: '12px', fontWeight: 800, letterSpacing: '1px', marginBottom: '15px', color: '#555' }}>DINA TILLGÅNGAR</h3>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+            {assets.map((item, i) => (
+              <div key={i} className="glass-card" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '15px 20px' }}>
+                <div>
+                  <div style={{ fontWeight: 800, fontSize: '14px' }}>{item.name}</div>
+                  <div style={{ fontSize: '11px', color: item.color, fontWeight: 900, marginTop: '4px' }}>{item.status}</div>
                 </div>
+                <div style={{ fontWeight: 900, fontSize: '16px' }}>{item.value}</div>
               </div>
-              <div style={{ textAlign: 'right', fontWeight: 900, fontSize: '18px' }}>
-                {item.value}
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
 
-        {/* AI Insight - Nu mer som en diskret widget */}
-        <div>
-          <h3 style={{ fontSize: '14px', fontWeight: 800, letterSpacing: '1px', marginBottom: '10px' }}>INSIGHTS</h3>
+        <div className="insights-section">
+          <h3 style={{ fontSize: '12px', fontWeight: 800, letterSpacing: '1px', marginBottom: '15px', color: '#555', marginTop: '30px' }}>INSIKTER</h3>
           <div className="glass-card" style={{ border: '1px solid var(--neon-mint)', background: 'rgba(0,255,136,0.02)' }}>
-            <div style={{ fontSize: '11px', fontWeight: 900, color: 'var(--neon-mint)', marginBottom: '10px' }}>MARKET PULSE</div>
-            <p style={{ fontSize: '14px', fontWeight: 600, lineHeight: '1.4' }}>
-              Efterfrågan på <span style={{ color: 'var(--neon-mint)' }}>vinterjackor</span> i ditt område är extremt hög.
+            <p style={{ fontSize: '13px', fontWeight: 600, margin: 0 }}>
+              Sälj din <span style={{ color: 'var(--neon-mint)' }}>North Face</span> nu – priserna toppar i Stockholm.
             </p>
-            <div style={{ marginTop: '20px', padding: '20px', background: 'rgba(0,0,0,0.4)', borderRadius: '15px', border: '1px solid rgba(0,255,136,0.1)' }}>
-              <div className="muted" style={{ fontSize: '10px', marginBottom: '5px' }}>DITT LAGER:</div>
-              <div style={{ fontSize: '13px', fontWeight: 800 }}>North Face Parka</div>
-              <button style={{ 
-                marginTop: '15px', 
-                width: '100%', 
-                padding: '10px', 
-                background: 'var(--neon-mint)', 
-                border: 'none', 
-                borderRadius: '10px', 
-                fontWeight: 900, 
-                fontSize: '11px',
-                cursor: 'pointer'
-              }}>LISTA NU (+12% VÄRDE)</button>
-            </div>
-          </div>
-          
-          <div className="glass-card" style={{ marginTop: '20px', padding: '20px', textAlign: 'center' }}>
-            <div className="muted" style={{ fontSize: '10px', marginBottom: '5px' }}>MILJÖPÅVERKAN</div>
-            <div style={{ fontSize: '1.5rem', fontWeight: 900 }}>124 <span style={{ fontSize: '12px' }}>kg CO2</span></div>
-            <div style={{ fontSize: '10px', color: 'var(--neon-mint)', fontWeight: 800, marginTop: '5px' }}>🌱 BESPARAD EMISSION</div>
+            <button style={{ marginTop: '15px', width: '100%', padding: '12px', background: 'var(--neon-mint)', border: 'none', borderRadius: '10px', fontWeight: 900, fontSize: '11px' }}>
+              LISTA NU (+320 kr)
+            </button>
           </div>
         </div>
-
       </div>
+
+      <style jsx>{`
+        .dashboard-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
+        @media (min-width: 768px) { .dashboard-grid { grid-template-columns: 1.4fr 0.6fr; } }
+      `}</style>
     </div>
   );
 }
