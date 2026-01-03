@@ -26,75 +26,51 @@ html, body {
 }
 
 body {
-  /* Subtil glöd i bakgrunden som inte stör innehållet */
+  /* Återställer din snygga bakgrundsglöd men mer subtil */
   background-image: 
     radial-gradient(circle at 50% -20%, rgba(157, 78, 221, 0.1), transparent),
     radial-gradient(circle at 0% 100%, rgba(0, 255, 136, 0.03), transparent);
+  background-attachment: fixed;
 }
 
-/* --- KARMA STEPPER (Fixar raden i profilen) --- */
-.karma-stepper {
-  display: flex;
-  justify-content: space-between;
-  padding: 12px 5px;
-  border-bottom: 1px solid var(--border);
-  margin-bottom: 25px;
-  gap: 8px;
-}
-
-.step-item {
-  font-size: 9px;
-  font-weight: 900;
-  letter-spacing: 0.5px;
-  color: var(--muted);
-  text-transform: uppercase;
-  transition: all 0.3s ease;
-}
-
-.step-item.active {
-  color: var(--neon-purple);
-  text-shadow: 0 0 8px rgba(157, 78, 221, 0.5);
-}
-
-/* --- TYPOGRAFI (Amazon-effektivitet men Karma-stil) --- */
+/* --- TYPOGRAFI (Nedskalad för "Utzoomad" känsla) --- */
 h1 {
-  font-size: clamp(1.8rem, 8vw, 2.8rem); /* Något mindre för att spara plats */
+  font-size: clamp(1.5rem, 7vw, 2.2rem); /* Mindre än förut */
   font-weight: 900;
-  letter-spacing: -1.5px;
-  margin-bottom: 0.5rem;
+  letter-spacing: -1px;
+  margin-bottom: 0.4rem;
 }
 
 h2 {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: 800;
   letter-spacing: -0.5px;
 }
 
-/* --- SID-BEHÅLLARE (Tajtad för mobil) --- */
+/* --- SID-BEHÅLLARE (Maximal yta) --- */
 .page-wrapper {
-  padding: 20px 16px; /* Mindre padding = mer plats för prylar */
+  padding: 12px 14px; /* Tajtare padding ger mer plats för innehåll */
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  min-height: calc(100vh - 80px);
 }
 
-/* --- GLASS CARDS (Inspirerade av Vinted men i dark mode) --- */
+/* --- GLASS CARDS (Nu mer slimmade) --- */
 .glass-card {
   background: var(--glass);
   backdrop-filter: blur(15px);
   -webkit-backdrop-filter: blur(15px);
   border: 1px solid var(--border);
-  border-radius: 20px; /* Något stramare hörn för modernare look */
-  padding: 16px; /* Mer kompakt */
+  border-radius: 16px; /* Något stramare för modern look */
+  padding: 12px;
   transition: all 0.2s ease;
 }
 
-/* Grid för flödet (Liknande Marketplace/Vinted) */
+/* Grid för flödet (Alltid 2 i bredd på mobil, mer "luft" emellan) */
 .product-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* Alltid 2 i bredd på mobil */
-  gap: 12px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px; /* Minskad gap för att visa mer content */
 }
 
 @media (min-width: 1025px) {
@@ -103,20 +79,50 @@ h2 {
   }
 }
 
-/* Knappar */
+/* --- KNAPPAR (Amazon-krispighet men Karma-stil) --- */
 .primary-btn {
-  background: #fff; /* Vit knapp mot svart bakgrund poppar bäst */
+  background: #fff;
   color: #000;
   border: none;
-  padding: 12px 20px;
-  border-radius: 12px;
+  padding: 10px 16px;
+  border-radius: 10px;
   font-weight: 800;
-  font-size: 13px;
+  font-size: 11px; /* Mindre text för pro-look */
   text-transform: uppercase;
   cursor: pointer;
-  width: 100%; /* Alltid full bredd i kort */
+  width: 100%;
+  letter-spacing: 0.5px;
+  transition: transform 0.1s active;
 }
 
+.primary-btn:active {
+  transform: scale(0.97);
+}
+
+/* --- KARMA STEPPER (Fixad för profil-vyn) --- */
+.karma-stepper {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 4px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 20px;
+  gap: 6px;
+}
+
+.step-item {
+  font-size: 8px; /* Mindre */
+  font-weight: 900;
+  letter-spacing: 0.5px;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+.step-item.active {
+  color: var(--neon-purple);
+  text-shadow: 0 0 8px rgba(157, 78, 221, 0.4);
+}
+
+/* Dölj scrollbar men behåll funktionalitet */
 ::-webkit-scrollbar {
   display: none;
 }
