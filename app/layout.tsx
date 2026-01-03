@@ -1,96 +1,90 @@
-"use client";
-import './globals.css';
-import { usePathname, useRouter } from 'next/navigation';
-import { CookieConsent } from '@/components/CookieConsent';
+import type { Metadata } from "next";
+import "./globals.css";
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const pathname = usePathname();
-  const router = useRouter();
+export const metadata: Metadata = {
+  title: "Loopen | Framtidens Marknadsplats",
+  description: "AI-driven cirkulär ekonomi",
+};
 
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="sv">
-      <body>
-        <div style={{ display: 'flex', minHeight: '100vh', background: 'var(--bg-deep)' }}>
+      <body style={{ background: 'var(--bg-deep)', color: '#fff', margin: 0, fontFamily: 'system-ui, sans-serif' }}>
+        <div style={{ display: 'flex', minHeight: '100vh' }}>
           
-          {/* SIDEBAR - Likviditetskontroll */}
-          <aside style={{ 
-            width: '300px', 
+          {/* Sidebar Nav - Desktop */}
+          <nav style={{ 
+            width: '280px', 
             borderRight: '1px solid var(--border)', 
-            background: 'rgba(2, 4, 10, 0.8)', 
-            padding: '40px 25px', 
-            position: 'sticky', 
-            top: 0, 
+            padding: '40px 20px', 
+            position: 'fixed', 
             height: '100vh',
             display: 'flex',
             flexDirection: 'column',
-            zIndex: 1000
+            gap: '10px'
           }}>
-            <div 
-              onClick={() => router.push('/')}
-              style={{ fontWeight: 900, fontSize: '24px', marginBottom: '50px', cursor: 'pointer', letterSpacing: '-1.5px' }}
-            >
-              MARKET<span style={{color: 'var(--neon-purple)'}}>BEG</span>
-            </div>
+            <div style={{ fontSize: '1.5rem', fontWeight: 900, marginBottom: '40px', letterSpacing: '-1px' }}>MARKETBEG.</div>
+            
+            {['Feed', 'Auctions', 'Leaderboard', 'My-Karma', 'Dashboard'].map((item) => (
+              <a 
+                key={item} 
+                href={`/${item.toLowerCase()}`}
+                className="nav-link"
+                style={{ 
+                  padding: '15px 20px', 
+                  borderRadius: '12px', 
+                  textDecoration: 'none', 
+                  color: '#888',
+                  fontWeight: 700,
+                  fontSize: '14px'
+                }}
+              >
+                {item.replace('-', ' ')}
+              </a>
+            ))}
+          </nav>
 
-            <nav style={{ flex: 1 }}>
-              <div onClick={() => router.push('/')} className={`nav-item ${pathname === '/' ? 'active' : ''}`}>
-                <span>🌐</span> Utforska Flödet
-              </div>
-              <div onClick={() => router.push('/feed')} className={`nav-item ${pathname === '/feed' ? 'active' : ''}`}>
-                <span>🛍️</span> Köp (Matchningar)
-              </div>
-              <div onClick={() => router.push('/sell')} className={`nav-item ${pathname === '/sell' ? 'active' : ''}`}>
-                <span>⚡</span> AI Quick Sell
-              </div>
-              <div onClick={() => router.push('/wallet')} className={`nav-item ${pathname === '/wallet' ? 'active' : ''}`}>
-                <span>💳</span> Vault (Ekonomi)
-              </div>
-              <div onClick={() => router.push('/admin')} className={`nav-item ${pathname === '/admin' ? 'active' : ''}`}>
-                <span>🛡️</span> System Status
-              </div>
-            </nav>
-
-            {/* Bottom Section: User Profile/BankID */}
-            <div style={{ marginTop: 'auto' }}>
-              <div style={{ 
-                padding: '20px', 
-                background: 'rgba(255,255,255,0.03)', 
-                borderRadius: '20px', 
-                marginBottom: '20px',
-                border: '1px solid var(--border)' 
-              }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '15px' }}>
-                  <div style={{ width: '35px', height: '35px', borderRadius: '50%', background: 'linear-gradient(45deg, var(--neon-purple), var(--neon-mint))' }}></div>
-                  <div>
-                    <div style={{ fontSize: '13px', fontWeight: 900 }}>Alex L.</div>
-                    <div style={{ fontSize: '10px', color: 'var(--neon-mint)' }}>98.2% Trust Score</div>
-                  </div>
-                </div>
-                <button 
-                  onClick={() => router.push('/auth')}
-                  style={{ 
-                    width: '100%', 
-                    background: '#fff', 
-                    color: '#000', 
-                    border: 'none', 
-                    padding: '12px', 
-                    borderRadius: '12px', 
-                    fontWeight: 900, 
-                    fontSize: '11px',
-                    cursor: 'pointer' 
-                  }}>
-                  RE-VERIFY BANKID
-                </button>
-              </div>
-            </div>
-          </aside>
-
-          {/* MAIN CONTENT */}
-          <main style={{ flex: 1, position: 'relative' }}>
+          {/* Main Content Area */}
+          <main style={{ marginLeft: '280px', flex: 1, position: 'relative' }}>
             {children}
-            <CookieConsent />
           </main>
         </div>
+
+        {/* CSS Globals Injection */}
+        <style dangerouslySetInnerHTML={{ __html: `
+          :root {
+            --bg-deep: #02040a;
+            --border: rgba(255,255,255,0.08);
+            --neon-mint: #00ff88;
+            --neon-purple: #9d4edd;
+            --glass: rgba(255,255,255,0.03);
+          }
+          .glass-card {
+            background: var(--glass);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            backdrop-filter: blur(10px);
+            padding: 25px;
+          }
+          .primary-btn {
+            background: var(--neon-mint);
+            color: #000;
+            border: none;
+            padding: 18px 30px;
+            border-radius: 16px;
+            font-weight: 900;
+            cursor: pointer;
+            transition: 0.2s;
+          }
+          .primary-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0,255,136,0.2); }
+          .muted { color: #666; }
+          .page-wrapper { padding: 60px 40px; }
+          .nav-link:hover { background: var(--glass); color: #fff; }
+        `}} />
       </body>
     </html>
   );
