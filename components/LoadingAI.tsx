@@ -6,30 +6,30 @@ export function LoadingAI() {
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
-      gap: '15px',
-      padding: '20px'
+      gap: '10px', // Minskad gap
+      padding: '15px'
     }}>
       <div className="loading-pulse" style={{
-        fontSize: '14px',
+        fontSize: '10px', // Mindre text för pro-look
         fontWeight: 800,
         color: 'var(--neon-purple)',
-        letterSpacing: '2px',
+        letterSpacing: '1.5px',
         textTransform: 'uppercase',
         display: 'flex',
         alignItems: 'center',
-        gap: '10px'
+        gap: '8px'
       }}>
         <div className="dot-spin"></div>
-        ✨ AI analyserar pixlarna...
+        AI ANALYSERAR PIXLAR...
       </div>
       
       <style jsx>{`
         .dot-spin {
-          width: 10px;
-          height: 10px;
+          width: 6px;
+          height: 6px;
           border-radius: 50%;
           background: var(--neon-purple);
-          box-shadow: 0 0 15px var(--neon-purple);
+          box-shadow: 0 0 12px var(--neon-purple);
           animation: pulse 1.5s infinite;
         }
         @keyframes pulse {
