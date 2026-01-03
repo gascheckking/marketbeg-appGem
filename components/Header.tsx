@@ -6,44 +6,56 @@ export default function Header() {
 
   return (
     <header style={{
-      padding: '15px 25px',
+      padding: '12px 20px', // Mer kompakt
       display: 'flex',
       justifyContent: 'space-between',
       alignItems: 'center',
-      background: 'rgba(2,4,10,0.6)',
-      backdropFilter: 'blur(15px)',
-      borderBottom: '1px solid var(--border)',
+      background: 'rgba(2,4,10,0.8)',
+      backdropFilter: 'blur(20px)',
+      borderBottom: '1px solid rgba(255,255,255,0.05)',
       position: 'sticky',
       top: 0,
       zIndex: 100
     }}>
-      {/* KARMA LOGO */}
       <div 
-        className="logo" 
+        className="logo-container" 
         onClick={() => router.push("/")} 
-        style={{ fontSize: '1.4rem', fontWeight: 900, cursor: 'pointer', letterSpacing: '2px' }}
+        style={{ cursor: 'pointer', textAlign: 'left' }}
       >
-        KARMA<span style={{color: 'var(--neon-purple)'}}>.</span>
+        <div style={{ fontSize: '1.1rem', fontWeight: 900, letterSpacing: '3px', lineHeight: 1 }}>
+          KARMA<span style={{color: 'var(--neon-mint)'}}>∞</span>
+        </div>
+        <div style={{ 
+          fontSize: '6px', 
+          fontWeight: 800, 
+          letterSpacing: '1.5px', 
+          color: 'var(--neon-mint)', 
+          marginTop: '4px',
+          opacity: 0.7
+        }}>
+          REUSE • MATCH • AGAIN
+        </div>
       </div>
       
-      <div style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>
+      <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
         <button 
-          onClick={() => router.push('/dashboard/seller')}
+          onClick={() => router.push('/vault')}
           style={{ 
-            background: 'rgba(157, 78, 221, 0.1)', 
-            border: '1px solid rgba(157, 78, 221, 0.3)', 
-            color: '#fff', padding: '8px 14px', borderRadius: '12px', 
-            fontSize: '11px', fontWeight: 800, cursor: 'pointer' 
+            background: 'rgba(255, 255, 255, 0.03)', 
+            border: '1px solid rgba(255, 255, 255, 0.1)', 
+            color: '#fff', padding: '6px 12px', borderRadius: '8px', 
+            fontSize: '9px', fontWeight: 800, cursor: 'pointer',
+            letterSpacing: '0.5px'
           }}
         >
           SALDO 💰
         </button>
         <div 
           style={{ 
-            width: '38px', height: '38px', borderRadius: '50%', 
-            background: 'linear-gradient(45deg, #111, #222)', 
+            width: '32px', height: '32px', borderRadius: '50%', 
+            background: '#111', 
             display: 'flex', alignItems: 'center', justifyContent: 'center', 
-            cursor: 'pointer', border: '1px solid var(--border)' 
+            cursor: 'pointer', border: '1px solid var(--border)', fontSize: '14px'
           }} 
           onClick={() => router.push('/profile')}
         >
