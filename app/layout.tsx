@@ -1,9 +1,19 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
   title: "KARMA | Nordic System",
   description: "Things deserve more than one life.",
+  manifest: "/manifest.json",
+};
+
+// Här läggs din meta-tagg in på "Next.js-vis"
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+  viewportFit: "cover",
 };
 
 export default function RootLayout({
@@ -16,20 +26,8 @@ export default function RootLayout({
       <body style={{ background: 'var(--bg-deep)', color: '#fff', margin: 0, fontFamily: 'system-ui, sans-serif', overflowX: 'hidden' }}>
         <div style={{ display: 'flex', minHeight: '100vh' }}>
           
-          {/* Sidebar Nav - Desktop */}
-          <nav style={{ 
-            width: '280px', 
-            borderRight: '1px solid var(--border)', 
-            padding: '40px 20px', 
-            position: 'fixed', 
-            height: '100vh',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '8px',
-            background: 'var(--bg-deep)',
-            zIndex: 100
-          }}>
-            {/* Ny Logo-filosofi: Rent, stort avstånd, ingen symbol */}
+          {/* Sidebar Nav - Desktop (Göms på mobil via CSS) */}
+          <nav className="desktop-nav">
             <div style={{ padding: '0 20px', marginBottom: '50px' }}>
               <div style={{ fontSize: '1.8rem', fontWeight: 900, letterSpacing: '6px', color: '#fff' }}>KARMA</div>
               <div style={{ fontSize: '9px', fontWeight: 800, color: 'var(--neon-purple)', letterSpacing: '2px', marginTop: '5px' }}>
@@ -46,25 +44,11 @@ export default function RootLayout({
               { name: 'Burst Mode (Lager)', path: '/sell/burst' },
               { name: 'Support / Shield', path: '/dispute' }
             ].map((link) => (
-              <a 
-                key={link.path} 
-                href={link.path}
-                className="nav-link"
-                style={{ 
-                  padding: '12px 20px', 
-                  borderRadius: '12px', 
-                  textDecoration: 'none', 
-                  color: '#888',
-                  fontWeight: 700,
-                  fontSize: '13px',
-                  transition: '0.2s all'
-                }}
-              >
+              <a key={link.path} href={link.path} className="nav-link">
                 {link.name.toUpperCase()}
               </a>
             ))}
 
-            {/* Shield Indicator Status */}
             <div style={{ 
               marginTop: 'auto', 
               padding: '20px', 
@@ -81,9 +65,18 @@ export default function RootLayout({
           </nav>
 
           {/* Main Content Area */}
-          <main style={{ marginLeft: '280px', flex: 1, position: 'relative', minHeight: '100vh' }}>
+          <main className="main-content">
             {children}
           </main>
+
+          {/* Mobile Tab Bar (Visas bara på mobil) */}
+          <div className="mobile-nav">
+            <a href="/feed" className="mobile-tab"><span>🧭</span><small>Hem</small></a>
+            <a href="/auctions" className="mobile-tab"><span>🤝</span><small>Match</small></a>
+            <a href="/sell/instant" className="mobile-tab-center"><span>+</span></a>
+            <a href="/my-karma" className="mobile-tab"><span>💎</span><small>Karma</small></a>
+            <a href="/dashboard/seller" className="mobile-tab"><span>💰</span><small>Vault</small></a>
+          </div>
         </div>
 
         <style dangerouslySetInnerHTML={{ __html: `
@@ -94,7 +87,93 @@ export default function RootLayout({
             --neon-purple: #9d4edd;
             --glass: rgba(255,255,255,0.03);
           }
-          
+
+          /* Desktop Sidebar Layout */
+          .desktop-nav {
+            width: 280px;
+            border-right: 1px solid var(--border);
+            padding: 40px 20px;
+            position: fixed;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            background: var(--bg-deep);
+            z-index: 100;
+          }
+
+          .main-content {
+            margin-left: 280px;
+            flex: 1;
+            min-height: 100vh;
+          }
+
+          .nav-link {
+            padding: 12px 20px;
+            border-radius: 12px;
+            text-decoration: none;
+            color: #888;
+            font-weight: 700;
+            font-size: 13px;
+            transition: 0.2s all;
+          }
+
+          .nav-link:hover { background: var(--glass); color: #fff; }
+
+          /* Mobile Nav (Dold som standard) */
+          .mobile-nav { display: none; }
+
+          /* Responsive Breakpoint för Mobil */
+          @media (max-width: 1024px) {
+            .desktop-nav { display: none; }
+            .main-content { margin-left: 0 !important; }
+            .page-wrapper { padding: 40px 20px !important; }
+
+            .mobile-nav {
+              display: flex;
+              position: fixed;
+              bottom: 0;
+              left: 0;
+              right: 0;
+              height: 75px;
+              background: rgba(2, 4, 10, 0.95);
+              backdrop-filter: blur(20px);
+              border-top: 1px solid var(--border);
+              justify-content: space-around;
+              align-items: center;
+              padding-bottom: env(safe-area-inset-bottom);
+              z-index: 1000;
+            }
+
+            .mobile-tab {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              text-decoration: none;
+              color: #666;
+              gap: 4px;
+            }
+
+            .mobile-tab span { font-size: 20px; }
+            .mobile-tab small { font-size: 9px; font-weight: 800; text-transform: uppercase; }
+
+            .mobile-tab-center {
+              width: 54px;
+              height: 54px;
+              background: var(--neon-purple);
+              border-radius: 50%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              color: #fff;
+              font-size: 30px;
+              text-decoration: none;
+              margin-top: -35px;
+              border: 5px solid var(--bg-deep);
+              box-shadow: 0 4px 15px rgba(157, 78, 221, 0.3);
+            }
+          }
+
           .glass-card {
             background: var(--glass);
             border: 1px solid var(--border);
@@ -110,43 +189,14 @@ export default function RootLayout({
             padding: 18px 30px;
             border-radius: 16px;
             font-weight: 900;
-            cursor: pointer;
-            transition: 0.2s ease;
           }
 
-          .primary-btn:hover { 
-            transform: translateY(-2px);
-            filter: brightness(1.2);
-          }
-
-          .muted { color: #555; }
-          
           .page-wrapper { 
             padding: 60px 80px; 
             max-width: 1400px;
           }
 
-          .nav-link:hover { 
-            background: var(--glass); 
-            color: #fff; 
-          }
-
-          .stat-pill {
-            padding: 6px 14px;
-            border-radius: 20px;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid var(--border);
-            font-size: 12px;
-            font-weight: 800;
-          }
-
-          .pulse {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            display: inline-block;
-          }
-
+          .pulse { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
           ::-webkit-scrollbar { display: none; }
         `}} />
       </body>
