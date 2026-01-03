@@ -1,0 +1,11 @@
+{
+  "name": "KARMA",
+  "short_name": "KARMA",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#020410",
+  "theme_color": "#9d4edd",
+  "icons": [
+    { "src": "/icon.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
