@@ -63,7 +63,7 @@ export default function FeedCardSell({ id, title, price, trust, matchScore = 95 
         </h3>
         
         <div style={{ transform: 'scale(0.9)', transformOrigin: 'left' }}>
-          <PriceTag price={price} />
+          <PriceTag price={price} size="sm" />
         </div>
         
         <div style={{ 
