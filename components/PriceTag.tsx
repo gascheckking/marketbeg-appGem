@@ -12,11 +12,11 @@ export default function PriceTag({ price, size = 'md' }: Props) {
     maximumFractionDigits: 0 
   }).format(price);
 
-  // Definierar storlekar för att matcha olika vyer
+  // Minskade storlekar för en mer utzoomad och lyxig känsla
   const sizes = {
-    sm: { fontSize: '1.1rem', glow: '10px' },
-    md: { fontSize: '1.4rem', glow: '15px' },
-    lg: { fontSize: '2.4rem', glow: '30px' } // För produktsidan
+    sm: { fontSize: '0.85rem', glow: '8px' },
+    md: { fontSize: '1.1rem', glow: '12px' },
+    lg: { fontSize: '1.8rem', glow: '20px' } 
   };
 
   const currentStyle = sizes[size];
@@ -26,8 +26,8 @@ export default function PriceTag({ price, size = 'md' }: Props) {
       fontSize: currentStyle.fontSize,
       fontWeight: 900,
       color: 'var(--neon-mint)',
-      letterSpacing: size === 'lg' ? '-2px' : '-1px',
-      textShadow: `0 0 ${currentStyle.glow} rgba(0, 255, 136, 0.3)`,
+      letterSpacing: size === 'lg' ? '-1.5px' : '-0.5px',
+      textShadow: `0 0 ${currentStyle.glow} rgba(0, 255, 136, 0.25)`,
       lineHeight: 1
     }}>
       {formatted}
@@ -37,7 +37,6 @@ export default function PriceTag({ price, size = 'md' }: Props) {
           display: inline-block;
           animation: pulse-glow 3s infinite ease-in-out;
         }
-
         @keyframes pulse-glow {
           0%, 100% { opacity: 1; filter: brightness(1); }
           50% { opacity: 0.9; filter: brightness(1.2); }
