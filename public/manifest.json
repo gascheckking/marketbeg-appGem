@@ -1,11 +1,18 @@
 {
-  "name": "KARMA",
+  "name": "KARMA Nordic System",
   "short_name": "KARMA",
+  "description": "Things deserve more than one life. AI-driven circular economy.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#020410",
-  "theme_color": "#9d4edd",
+  "orientation": "portrait",
+  "background_color": "#02040a",
+  "theme_color": "#02040a",
   "icons": [
-    { "src": "/icon.png", "sizes": "512x512", "type": "image/png" }
+    {
+      "src": "/icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
   ]
 }
