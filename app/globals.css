@@ -8,32 +8,54 @@
   --muted: #666;
 }
 
+/* Grundinställningar för att förhindra zoom-buggar */
 * {
   box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
 }
 
-body {
+html, body {
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden; /* Förhindrar horisontell scroll helt */
+  margin: 0;
+  padding: 0;
   background: var(--bg-deep);
-  background-image: 
-    radial-gradient(circle at 50% -20%, rgba(157, 78, 221, 0.15), transparent),
-    radial-gradient(circle at 0% 100%, rgba(0, 255, 136, 0.05), transparent);
   color: var(--text-main);
   font-family: 'Inter', -apple-system, sans-serif;
-  margin: 0;
   min-height: 100vh;
 }
 
-.page-wrapper {
-  padding: 60px 40px;
-  width: 100%;
+body {
+  background-image: 
+    radial-gradient(circle at 50% -20%, rgba(157, 78, 221, 0.15), transparent),
+    radial-gradient(circle at 0% 100%, rgba(0, 255, 136, 0.05), transparent);
 }
 
+/* Sid-behållare */
+.page-wrapper {
+  padding: 40px 20px; /* Optimerat för mobil */
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  min-height: calc(100vh - 75px); /* Tar höjd för mobila nav-baren */
+}
+
+/* Desktop-justering */
+@media (min-width: 1025px) {
+  .page-wrapper {
+    padding: 60px 40px;
+  }
+}
+
+/* Kort & Designelement */
 .glass-card {
   background: var(--glass);
   backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
   border: 1px solid var(--border);
   border-radius: 28px;
-  padding: 30px;
+  padding: 24px;
   transition: all 0.3s ease;
 }
 
@@ -64,6 +86,7 @@ body {
   color: var(--muted);
 }
 
+/* Navigerings-items */
 .nav-item {
   padding: 15px 20px;
   color: #888;
@@ -78,12 +101,21 @@ body {
   margin-bottom: 5px;
 }
 
-.nav-item:hover {
+.nav-item:hover, .nav-item.active {
   background: rgba(255, 255, 255, 0.05);
   color: #fff;
 }
 
 .nav-item.active {
   background: rgba(157, 78, 221, 0.1);
-  color: #fff;
+}
+
+/* Utils */
+.mobile-only { display: none; }
+@media (max-width: 768px) {
+  .mobile-only { display: block; }
+}
+
+::-webkit-scrollbar {
+  display: none; /* Dölj scrollbar för en "app-känsla" */
 }
