@@ -6,29 +6,47 @@ export default function Header() {
 
   return (
     <header style={{
-      padding: '20px 40px',
+      padding: '15px 25px',
       display: 'flex',
       justifyContent: 'space-between',
       alignItems: 'center',
-      background: 'rgba(2,4,10,0.4)',
-      backdropFilter: 'blur(10px)',
+      background: 'rgba(2,4,10,0.6)',
+      backdropFilter: 'blur(15px)',
       borderBottom: '1px solid var(--border)',
       position: 'sticky',
       top: 0,
       zIndex: 100
     }}>
-      <div className="logo" onClick={() => router.push("/")} style={{ fontSize: '1.2rem', fontWeight: 900, cursor: 'pointer' }}>
-        MARKET<span style={{color: 'var(--neon-purple)'}}>BEG</span>
+      {/* KARMA LOGO */}
+      <div 
+        className="logo" 
+        onClick={() => router.push("/")} 
+        style={{ fontSize: '1.4rem', fontWeight: 900, cursor: 'pointer', letterSpacing: '2px' }}
+      >
+        KARMA<span style={{color: 'var(--neon-purple)'}}>.</span>
       </div>
       
-      <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
+      <div style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>
         <button 
-          onClick={() => router.push('/vault')}
-          style={{ background: 'transparent', border: '1px solid #333', color: '#fff', padding: '8px 15px', borderRadius: '10px', fontSize: '12px', fontWeight: 700, cursor: 'pointer' }}
+          onClick={() => router.push('/dashboard/seller')}
+          style={{ 
+            background: 'rgba(157, 78, 221, 0.1)', 
+            border: '1px solid rgba(157, 78, 221, 0.3)', 
+            color: '#fff', padding: '8px 14px', borderRadius: '12px', 
+            fontSize: '11px', fontWeight: 800, cursor: 'pointer' 
+          }}
         >
-          VALVET 💎
+          SALDO 💰
         </button>
-        <div style={{ width: '40px', height: '40px', borderRadius: '12px', background: '#111', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', border: '1px solid var(--border)' }} onClick={() => router.push('/profile')}>
+        <div 
+          style={{ 
+            width: '38px', height: '38px', borderRadius: '50%', 
+            background: 'linear-gradient(45deg, #111, #222)', 
+            display: 'flex', alignItems: 'center', justifyContent: 'center', 
+            cursor: 'pointer', border: '1px solid var(--border)' 
+          }} 
+          onClick={() => router.push('/profile')}
+        >
           👤
         </div>
       </div>
