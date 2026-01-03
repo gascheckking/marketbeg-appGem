@@ -6,23 +6,23 @@ export default function MyKarmaPage() {
 
   return (
     <div className="page-wrapper">
-      <header style={{ marginBottom: '40px' }}>
-        <h1 style={{ fontSize: '2.5rem', fontWeight: 900, letterSpacing: '-2px', margin: 0 }}>Din Karma</h1>
-        <p className="muted" style={{ fontSize: '1rem', marginTop: '5px' }}>Värde som rör sig vidare.</p>
+      <header style={{ marginBottom: '30px' }}>
+        <h1 style={{ margin: 0 }}>Din Karma</h1>
+        <p className="muted" style={{ fontSize: '14px', marginTop: '4px' }}>Verifierad handels-identitet.</p>
       </header>
 
-      {/* KARMA CYCLE - Fixad layout */}
-      <section className="glass-card" style={{ padding: '20px', marginBottom: '30px' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '5px' }}>
+      {/* KARMA STEPPER - Fixad med snygga avstånd */}
+      <section className="glass-card" style={{ padding: '24px 16px', marginBottom: '20px' }}>
+        <div className="karma-stepper">
           {steps.map((step, i) => (
-            <div key={step} style={{ flex: 1, textAlign: 'center' }}>
-              <div style={{ fontWeight: 900, fontSize: '8px', color: i === 2 ? 'var(--neon-purple)' : '#666', letterSpacing: '0.5px' }}>
-                {step.toUpperCase()}
+            <div key={step} style={{ flex: 1, textAlign: 'center', position: 'relative' }}>
+              <div className={`step-item ${i === 2 ? 'active' : ''}`}>
+                {step}
               </div>
               <div style={{ 
-                height: '3px', borderRadius: '2px', marginTop: '8px',
+                height: '4px', borderRadius: '10px', marginTop: '10px',
                 background: i <= 2 ? 'var(--neon-purple)' : '#222',
-                boxShadow: i === 2 ? '0 0 10px var(--neon-purple)' : 'none'
+                boxShadow: i === 2 ? '0 0 15px var(--neon-purple)' : 'none'
               }}></div>
             </div>
           ))}
@@ -30,20 +30,20 @@ export default function MyKarmaPage() {
       </section>
 
       <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '15px' }}>
-        <div className="glass-card" style={{ padding: '25px' }}>
-          <div className="muted" style={{ fontSize: '10px', fontWeight: 800 }}>VÄRDE I RÖRELSE</div>
-          <div style={{ fontSize: '2.2rem', fontWeight: 900, margin: '5px 0' }}>24 800 kr</div>
-          <div style={{ fontSize: '12px', color: 'var(--neon-mint)' }}>↑ 12% denna månad</div>
+        <div className="glass-card" style={{ padding: '24px', textAlign: 'center' }}>
+          <div className="muted" style={{ fontSize: '10px', fontWeight: 900, letterSpacing: '1px' }}>DIN TRUST SCORE</div>
+          <div style={{ fontSize: '3.5rem', fontWeight: 900, margin: '5px 0', color: 'var(--neon-mint)' }}>98.2%</div>
+          <p style={{ fontSize: '12px', opacity: 0.7 }}>Du tillhör topp 1% av cirkulära handlare.</p>
         </div>
         
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px' }}>
           <div className="glass-card" style={{ padding: '20px' }}>
-             <div className="muted" style={{ fontSize: '9px', fontWeight: 800 }}>RELAY SCORE</div>
-             <div style={{ fontSize: '1.5rem', fontWeight: 900 }}>98%</div>
+             <div className="muted" style={{ fontSize: '9px', fontWeight: 900 }}>VÄRDE GENERERAT</div>
+             <div style={{ fontSize: '1.4rem', fontWeight: 900 }}>42 500 kr</div>
           </div>
           <div className="glass-card" style={{ padding: '20px' }}>
-             <div className="muted" style={{ fontSize: '9px', fontWeight: 800 }}>SHIELD</div>
-             <div style={{ fontSize: '1.5rem', fontWeight: 900, color: 'var(--neon-mint)' }}>AKTIV</div>
+             <div className="muted" style={{ fontSize: '9px', fontWeight: 900 }}>CO2 SPARAT</div>
+             <div style={{ fontSize: '1.4rem', fontWeight: 900, color: 'var(--neon-mint)' }}>124 kg</div>
           </div>
         </div>
       </div>
