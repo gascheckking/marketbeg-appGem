@@ -1,16 +1,16 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 
-export default function AISellPage() {
+// Vi flyttar din logik till en intern komponent
+function AISellForm() {
   const searchParams = useSearchParams();
   const isAgainMode = searchParams.get("source") === "history";
   
-  const [mode, setMode] = useState(isAgainMode ? "single" : "single");
+  const [mode, setMode] = useState("single");
   const [bulkPrice, setBulkPrice] = useState(50);
   const [minPurchase, setMinPurchase] = useState(150);
   
-  // AI-data som "hämtas" om man kör AGAIN-loopen
   const [listingData, setListingData] = useState({
     title: isAgainMode ? "iPad Air (4th Gen)" : "",
     category: isAgainMode ? "Elektronik" : "Välj automatiskt (AI)",
@@ -51,13 +51,11 @@ export default function AISellPage() {
         )}
       </div>
 
-      {/* Kamera / Media Section */}
       <div className="glass-card" style={{ padding: '40px', textAlign: 'center', marginBottom: '30px', border: isAgainMode ? '2px solid var(--neon-purple)' : '2px dashed #333', background: isAgainMode ? 'rgba(157, 78, 221, 0.05)' : 'transparent' }}>
         {isAgainMode ? (
           <div>
             <div style={{ fontSize: '50px' }}>📱</div>
             <p style={{ fontWeight: 800, marginTop: '15px' }}>Vi använder dina tidigare bilder.</p>
-            <p className="muted" style={{ fontSize: '12px' }}>Lägg gärna till en ny bild om skicket ändrats.</p>
           </div>
         ) : (
           <div>
@@ -70,7 +68,6 @@ export default function AISellPage() {
         </button>
       </div>
 
-      {/* Input Fields */}
       <div className="glass-card">
         <h3 style={{ marginBottom: '25px', display: 'flex', alignItems: 'center', gap: '10px' }}>
           <span>📋 Annonsdetaljer</span>
@@ -81,19 +78,12 @@ export default function AISellPage() {
           <div style={{ marginBottom: '30px', padding: '25px', background: 'rgba(0,255,136,0.05)', borderRadius: '20px', border: '1px solid rgba(0,255,136,0.2)' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '20px' }}>
               <label style={{ fontWeight: 900 }}>PRIS PER ARTIKEL: <span style={{ color: 'var(--neon-mint)' }}>{bulkPrice} kr</span></label>
-              <label style={{ fontWeight: 900 }}>KÖP MINST FÖR: <span style={{ color: 'var(--neon-purple)' }}>{minPurchase} kr</span></label>
             </div>
             <input 
               type="range" min="10" max="1000" step="10" 
               value={bulkPrice} 
               onChange={(e) => setBulkPrice(Number(e.target.value))}
-              style={{ width: '100%', accentColor: 'var(--neon-mint)', marginBottom: '20px', cursor: 'pointer' }}
-            />
-            <input 
-              type="range" min="50" max="2000" step="50" 
-              value={minPurchase} 
-              onChange={(e) => setMinPurchase(Number(e.target.value))}
-              style={{ width: '100%', accentColor: 'var(--neon-purple)', cursor: 'pointer' }}
+              style={{ width: '100%', accentColor: 'var(--neon-mint)', cursor: 'pointer' }}
             />
           </div>
         )}
@@ -105,37 +95,15 @@ export default function AISellPage() {
               type="text" 
               value={listingData.title}
               onChange={(e) => setListingData({...listingData, title: e.target.value})}
-              placeholder="T.ex. Nike Air Max" 
               style={{ width: '100%', padding: '15px', borderRadius: '12px', background: '#080808', border: '1px solid var(--border)', color: '#fff', marginTop: '8px' }} 
             />
-          </div>
-          <div>
-            <label className="muted" style={{ fontSize: '11px', fontWeight: 900, letterSpacing: '1px' }}>KATEGORI</label>
-            <select 
-              value={listingData.category}
-              style={{ width: '100%', padding: '15px', borderRadius: '12px', background: '#080808', border: '1px solid var(--border)', color: '#fff', marginTop: '8px' }}
-            >
-              <option>Välj automatiskt (AI)</option>
-              <option>Elektronik</option>
-              <option>Mode</option>
-              <option>Samlarobjekt</option>
-            </select>
           </div>
           <div>
             <label className="muted" style={{ fontSize: '11px', fontWeight: 900, letterSpacing: '1px' }}>PRIS (KR)</label>
             <input 
               type="number" 
               value={listingData.price}
-              placeholder="Sätt ett pris..."
               style={{ width: '100%', padding: '15px', borderRadius: '12px', background: '#080808', border: '1px solid var(--border)', color: 'var(--neon-mint)', fontWeight: 800, marginTop: '8px' }} 
-            />
-          </div>
-          <div>
-            <label className="muted" style={{ fontSize: '11px', fontWeight: 900, letterSpacing: '1px' }}>SKICK</label>
-            <input 
-              type="text" 
-              value={listingData.condition}
-              style={{ width: '100%', padding: '15px', borderRadius: '12px', background: '#080808', border: '1px solid var(--border)', color: '#fff', marginTop: '8px' }} 
             />
           </div>
         </div>
@@ -145,5 +113,14 @@ export default function AISellPage() {
         </button>
       </div>
     </div>
+  );
+}
+
+// Huvudexporten som omsluter allt i Suspense
+export default function AISellPage() {
+  return (
+    <Suspense fallback={<div className="page-wrapper">Initialiserar K.A.R.M.A Protocol...</div>}>
+      <AISellForm />
+    </Suspense>
   );
 }
