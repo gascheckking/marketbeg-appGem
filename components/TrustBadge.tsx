@@ -1,59 +1,22 @@
 "use client";
 import React from 'react';
 
-interface TrustBadgeProps {
-  score: number;
-}
-
-export default function TrustBadge({ score }: TrustBadgeProps) {
-  const getTrustColor = (s: number) => {
-    if (s >= 95) return 'var(--neon-mint)'; 
-    if (s >= 80) return 'var(--neon-purple)'; 
-    return '#888'; 
-  };
-
-  const trustColor = getTrustColor(score);
+export default function TrustBadge({ score }: { score: number }) {
+  const color = score >= 95 ? 'var(--neon-mint)' : 'var(--neon-purple)';
 
   return (
-    <div className="trust-badge" style={{
-      display: 'inline-flex',
-      alignItems: 'center',
-      gap: '10px',
-      padding: '5px 12px',
-      background: 'rgba(0,0,0,0.4)',
-      borderRadius: '8px',
-      border: `1px solid ${trustColor}33`,
-      backdropFilter: 'blur(10px)'
+    <div style={{
+      display: 'inline-flex', alignItems: 'center', gap: '6px',
+      padding: '4px 10px', background: 'rgba(255,255,255,0.03)',
+      borderRadius: '6px', border: `1px solid ${color}44`
     }}>
-      {/* Status-punkt som pulserar om score är hög */}
       <div style={{
-        width: '6px',
-        height: '6px',
-        borderRadius: '50%',
-        background: trustColor,
-        boxShadow: `0 0 8px ${trustColor}`
-      }} className={score >= 95 ? 'pulse-dot' : ''}></div>
-      
-      <span style={{ 
-        fontSize: '10px', 
-        fontWeight: 900, 
-        letterSpacing: '1px',
-        color: '#fff',
-        textTransform: 'uppercase'
-      }}>
-        TRUST <span style={{ color: trustColor }}>{score}%</span>
+        width: '5px', height: '5px', borderRadius: '50%',
+        background: color, boxShadow: `0 0 8px ${color}`
+      }}></div>
+      <span style={{ fontSize: '9px', fontWeight: 900, color: '#fff', letterSpacing: '0.5px' }}>
+        TRUST {score}%
       </span>
-
-      <style jsx>{`
-        .pulse-dot {
-          animation: dot-pulse 2s infinite ease-in-out;
-        }
-        @keyframes dot-pulse {
-          0% { transform: scale(1); opacity: 1; }
-          50% { transform: scale(1.5); opacity: 0.5; }
-          100% { transform: scale(1); opacity: 1; }
-        }
-      `}</style>
     </div>
   );
 }
