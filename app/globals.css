@@ -126,3 +126,19 @@ h2 {
 ::-webkit-scrollbar {
   display: none;
 }
+@keyframes scanLine {
+  0% { transform: translateY(0); opacity: 0; }
+  50% { opacity: 1; }
+  100% { transform: translateY(380px); opacity: 0; }
+}
+
+.scanner-laser {
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background: var(--neon-mint);
+  box-shadow: 0 0 15px var(--neon-mint);
+  z-index: 10;
+  animation: scanLine 2s infinite linear;
+}
+
