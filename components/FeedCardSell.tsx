@@ -3,39 +3,43 @@ import { useRouter } from "next/navigation";
 import PriceTag from "./PriceTag";
 import TrustBadge from "./TrustBadge";
 
-type Props = { id: string; title: string; price: number; trust: number; matchScore?: number; };
+type Props = { id: string; title: string; price: number; trust: number; matchScore?: number; instant?: boolean; };
 
-export default function FeedCardSell({ id, title, price, trust, matchScore = 95 }: Props) {
+export default function FeedCardSell({ id, title, price, trust, matchScore = 95, instant = true }: Props) {
   const router = useRouter();
 
   return (
     <div className="feed-card" onClick={() => router.push(`/listing/${id}`)}
       style={{ 
-        cursor: 'pointer', position: 'relative', background: 'rgba(255, 255, 255, 0.02)',
-        borderRadius: '12px', border: '1px solid var(--border)', overflow: 'hidden', transition: '0.2s'
+        cursor: 'pointer', position: 'relative', background: 'var(--glass)',
+        borderRadius: '16px', border: '1px solid var(--border)', overflow: 'hidden'
       }}>
       
-      {/* AI Match Badge */}
-      <div style={{ 
-        position: 'absolute', top: '6px', right: '6px', zIndex: 5,
-        background: 'rgba(0,0,0,0.85)', padding: '2px 5px', borderRadius: '5px', border: '1px solid rgba(0,255,136,0.3)'
-      }}>
-        <div style={{ color: 'var(--neon-mint)', fontSize: '7px', fontWeight: 900 }}>
-          {matchScore}% <span style={{fontSize: '5px', opacity: 0.7}}>MATCH</span>
+      {/* Top Badges */}
+      <div style={{ position: 'absolute', top: '8px', left: '8px', right: '8px', display: 'flex', justifyContent: 'space-between', zIndex: 5 }}>
+        {/* Instant Sell Badge */}
+        {instant && (
+          <div style={{ background: 'var(--neon-purple)', padding: '2px 6px', borderRadius: '4px', fontSize: '6px', fontWeight: 900, color: '#fff' }}>
+            INSTANT ⚡
+          </div>
+        )}
+        {/* Match Score */}
+        <div style={{ background: 'rgba(0,0,0,0.7)', padding: '2px 6px', borderRadius: '4px', border: '1px solid var(--neon-mint)', color: 'var(--neon-mint)', fontSize: '6px', fontWeight: 900 }}>
+          {matchScore}% MATCH
         </div>
       </div>
 
-      <div style={{ aspectRatio: '1/1', background: '#0a0a0a', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '20px' }}>
-        📦
+      <div style={{ aspectRatio: '1/1.1', background: '#080808', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '32px' }}>
+        {title.toLowerCase().includes('phone') ? '📱' : '📦'}
       </div>
       
-      <div style={{ padding: '8px' }}>
-        <h3 style={{ margin: '0 0 2px 0', fontSize: '0.75rem', fontWeight: 800, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+      <div style={{ padding: '10px' }}>
+        <h3 style={{ margin: '0 0 4px 0', fontSize: '11px', fontWeight: 800, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
           {title}
         </h3>
         <PriceTag price={price} size="sm" />
-        <div style={{ marginTop: '6px', paddingTop: '6px', borderTop: '1px solid rgba(255,255,255,0.03)' }}>
-          <div style={{ transform: 'scale(0.8)', transformOrigin: 'left' }}>
+        <div style={{ marginTop: '8px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <div style={{ transform: 'scale(0.85)', transformOrigin: 'left' }}>
             <TrustBadge score={trust} />
           </div>
         </div>
