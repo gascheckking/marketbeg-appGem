@@ -1,3 +1,4 @@
+// // app/orders/[id]/approve/page.tsx
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -7,52 +8,55 @@ export default function ApproveOrderPage({ params }: { params: { id: string } })
   const router = useRouter();
 
   const handleFinalApprove = () => {
-    // Här triggas utbetalning till säljaren i backend
-    alert("Karma Shield: Utbetalning påbörjad till säljaren!");
-    router.push('/dashboard');
+    // Karma Shield utbetalning
+    alert("KARMA SHIELD: Utbetalning påbörjad!");
+    router.push('/dashboard/seller');
   };
 
   return (
-    <div className="page-wrapper" style={{ maxWidth: '600px', margin: '0 auto' }}>
-      <div className="glass-card" style={{ textAlign: 'center', padding: '50px' }}>
-        <div style={{ fontSize: '60px', marginBottom: '20px' }}>📦</div>
-        <h1 style={{ fontSize: '2.2rem', fontWeight: 900, marginBottom: '10px' }}>Har du fått varan?</h1>
-        <p className="muted">Kontrollera att varan stämmer överens med beskrivningen innan du godkänner.</p>
+    <div className="page-wrapper" style={{ padding: '20px' }}>
+      <div className="glass-card" style={{ textAlign: 'center', padding: '40px 20px', borderRadius: '32px', border: '1px solid rgba(255,255,255,0.05)' }}>
+        <div style={{ position: 'relative', width: '80px', height: '80px', margin: '0 auto 25px' }}>
+          <div style={{ fontSize: '50px' }}>📦</div>
+          <div style={{ position: 'absolute', bottom: 0, right: 0, background: 'var(--neon-mint)', borderRadius: '50%', width: '24px', height: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '12px', boxShadow: '0 0 15px var(--neon-mint)' }}>✅</div>
+        </div>
+
+        <h1 style={{ fontSize: '1.8rem', fontWeight: 900, marginBottom: '10px', letterSpacing: '-1px' }}>Verifiera Leverans</h1>
+        <p className="muted" style={{ fontSize: '12px', lineHeight: '1.6' }}>
+          Genom att godkänna bekräftar du att varan matchar AI-analysen och beskrivningen.
+        </p>
         
-        <div style={{ margin: '40px 0', textAlign: 'left', background: 'rgba(0,0,0,0.2)', padding: '20px', borderRadius: '15px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '15px', marginBottom: '15px' }}>
+        <div style={{ margin: '30px 0', background: 'rgba(255,255,255,0.02)', padding: '20px', borderRadius: '20px', border: '1px solid rgba(255,255,255,0.05)' }}>
+          <div style={{ display: 'flex', gap: '12px', alignItems: 'flex-start', textAlign: 'left' }}>
             <input 
               type="checkbox" 
-              id="check1" 
+              id="approve-check"
               onChange={(e) => setApproved(e.target.checked)}
-              style={{ width: '20px', height: '20px', accentColor: 'var(--neon-mint)' }} 
+              style={{ width: '22px', height: '22px', marginTop: '3px', accentColor: 'var(--neon-mint)' }} 
             />
-            <label htmlFor="check1" style={{ fontSize: '14px' }}>Jag har kontrollerat skicket och godkänner varan.</label>
+            <label htmlFor="approve-check" style={{ fontSize: '13px', fontWeight: 600, lineHeight: '1.4' }}>
+              Jag har kontrollerat varan och godkänner att pengarna betalas ut till säljaren.
+            </label>
           </div>
-          <p style={{ fontSize: '11px', color: 'var(--neon-purple)', fontWeight: 800 }}>
-            ⚠️ EFTER GODKÄNNANDE KAN PENGARNA INTE LÄNGRE STOPPAS.
-          </p>
         </div>
 
         <button 
           disabled={!approved}
           onClick={handleFinalApprove}
-          className="primary-btn" 
+          className="primary-btn"
           style={{ 
-            width: '100%', 
-            background: approved ? 'var(--neon-mint)' : '#222', 
-            color: approved ? '#000' : '#444',
-            opacity: approved ? 1 : 0.5
+            background: approved ? 'var(--neon-mint)' : 'rgba(255,255,255,0.05)', 
+            color: approved ? '#000' : '#444'
           }}
         >
-          GODKÄNN OCH SLÄPP PENGAR
+          {approved ? "SLÄPP PENGAR DIREKT" : "VÄNTAR PÅ GODKÄNNANDE"}
         </button>
         
         <button 
-          style={{ background: 'none', border: 'none', color: '#ff4444', marginTop: '20px', fontSize: '12px', fontWeight: 800, cursor: 'pointer' }}
+          style={{ background: 'none', border: 'none', color: '#ff4444', marginTop: '20px', fontSize: '11px', fontWeight: 900, letterSpacing: '1px' }}
           onClick={() => router.push('/dispute')}
         >
-          NÅGOT ÄR FEL? ÖPPNA TVIST
+          RAPPORTERA PROBLEM
         </button>
       </div>
     </div>
