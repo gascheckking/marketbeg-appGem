@@ -1,11 +1,12 @@
+/* // app/globals.css */
 :root {
   --bg-deep: #02040a;
   --glass: rgba(255, 255, 255, 0.03);
-  --border: rgba(255, 255, 255, 0.08);
+  --border: rgba(255, 255, 255, 0.06);
   --neon-purple: #9d4edd;
   --neon-mint: #00ff88;
   --text-main: #f0f0f0;
-  --muted: #666;
+  --muted: #555;
 }
 
 * {
@@ -13,132 +14,63 @@
   -webkit-tap-highlight-color: transparent;
 }
 
-html, body {
-  width: 100%;
-  max-width: 100vw;
-  overflow-x: hidden;
-  margin: 0;
-  padding: 0;
+body {
   background: var(--bg-deep);
   color: var(--text-main);
   font-family: 'Inter', -apple-system, sans-serif;
-  min-height: 100vh;
-}
-
-body {
-  /* Återställer din snygga bakgrundsglöd men mer subtil */
+  margin: 0;
   background-image: 
-    radial-gradient(circle at 50% -20%, rgba(157, 78, 221, 0.1), transparent),
-    radial-gradient(circle at 0% 100%, rgba(0, 255, 136, 0.03), transparent);
+    radial-gradient(circle at 50% -20%, rgba(157, 78, 221, 0.08), transparent),
+    radial-gradient(circle at 0% 100%, rgba(0, 255, 136, 0.02), transparent);
   background-attachment: fixed;
+  letter-spacing: -0.2px;
 }
 
-/* --- TYPOGRAFI (Nedskalad för "Utzoomad" känsla) --- */
-h1 {
-  font-size: clamp(1.5rem, 7vw, 2.2rem); /* Mindre än förut */
-  font-weight: 900;
-  letter-spacing: -1px;
-  margin-bottom: 0.4rem;
-}
-
-h2 {
-  font-size: 1.1rem;
-  font-weight: 800;
-  letter-spacing: -0.5px;
-}
-
-/* --- SID-BEHÅLLARE (Maximal yta) --- */
 .page-wrapper {
-  padding: 12px 14px; /* Tajtare padding ger mer plats för innehåll */
-  width: 100%;
+  padding: 15px;
   max-width: 1200px;
   margin: 0 auto;
 }
 
-/* --- GLASS CARDS (Nu mer slimmade) --- */
 .glass-card {
   background: var(--glass);
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--border);
-  border-radius: 16px; /* Något stramare för modern look */
-  padding: 12px;
-  transition: all 0.2s ease;
+  border-radius: 20px;
+  padding: 15px;
+  transition: transform 0.2s ease;
 }
 
-/* Grid för flödet (Alltid 2 i bredd på mobil, mer "luft" emellan) */
-.product-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px; /* Minskad gap för att visa mer content */
-}
-
-@media (min-width: 1025px) {
-  .product-grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
-/* --- KNAPPAR (Amazon-krispighet men Karma-stil) --- */
 .primary-btn {
   background: #fff;
   color: #000;
   border: none;
-  padding: 10px 16px;
-  border-radius: 10px;
-  font-weight: 800;
-  font-size: 11px; /* Mindre text för pro-look */
+  padding: 14px;
+  border-radius: 12px;
+  font-weight: 900;
+  font-size: 11px;
   text-transform: uppercase;
+  letter-spacing: 1px;
   cursor: pointer;
   width: 100%;
-  letter-spacing: 0.5px;
-  transition: transform 0.1s active;
 }
 
-.primary-btn:active {
-  transform: scale(0.97);
-}
+.muted { color: var(--muted); }
 
-/* --- KARMA STEPPER (Fixad för profil-vyn) --- */
-.karma-stepper {
-  display: flex;
-  justify-content: space-between;
-  padding: 10px 4px;
-  border-bottom: 1px solid var(--border);
-  margin-bottom: 20px;
-  gap: 6px;
-}
-
-.step-item {
-  font-size: 8px; /* Mindre */
-  font-weight: 900;
-  letter-spacing: 0.5px;
-  color: var(--muted);
-  text-transform: uppercase;
-}
-
-.step-item.active {
-  color: var(--neon-purple);
-  text-shadow: 0 0 8px rgba(157, 78, 221, 0.4);
-}
-
-/* Dölj scrollbar men behåll funktionalitet */
-::-webkit-scrollbar {
-  display: none;
-}
 @keyframes scanLine {
   0% { transform: translateY(0); opacity: 0; }
   50% { opacity: 1; }
-  100% { transform: translateY(380px); opacity: 0; }
+  100% { transform: translateY(200px); opacity: 0; }
 }
 
 .scanner-laser {
   position: absolute;
   width: 100%;
-  height: 2px;
+  height: 1px;
   background: var(--neon-mint);
-  box-shadow: 0 0 15px var(--neon-mint);
-  z-index: 10;
-  animation: scanLine 2s infinite linear;
+  box-shadow: 0 0 10px var(--neon-mint);
+  animation: scanLine 2.5s infinite linear;
 }
 
+::-webkit-scrollbar { display: none; }
