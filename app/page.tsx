@@ -1,142 +1,81 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from "next/navigation";
-import FeedCardSell from "@/components/FeedCardSell";
 
-export default function Marketplace() {
+export default function AISellPage() {
+  const [scanning, setScanning] = useState(false);
+  const [foundItems, setFoundItems] = useState<string[]>([]);
   const router = useRouter();
-  const [activeTab, setActiveTab] = useState('ALLA MATCHNINGAR');
 
-  // Demo-data för "Eftersökt" snabbvy
-  const quickWanted = [
-    { id: 1, item: "PoP Skaljacka", size: "116", demand: "HÖG" },
-    { id: 2, item: "Versace Tofflor", size: "42", demand: "EXTREM" }
-  ];
+  const startScan = () => {
+    setScanning(true);
+    // Simulerar mass-detektering av objekt
+    setTimeout(() => setFoundItems(prev => [...prev, "iPhone 15 Pro"]), 1000);
+    setTimeout(() => setFoundItems(prev => [...prev, "AirPods Max"]), 2000);
+    setTimeout(() => setFoundItems(prev => [...prev, "Leather Wallet"]), 2800);
+  };
 
   return (
     <div className="page-wrapper" style={{ padding: '10px 15px' }}>
-      {/* HEADER - Kompakt & Krispig */}
-      <section style={{ padding: '10px 0 20px' }}>
-        <h1 style={{ fontSize: '1.4rem', fontWeight: 900, lineHeight: '1.1', margin: '0 0 5px 0', letterSpacing: '-0.5px' }}>
-          Likviditet <span style={{ color: 'var(--neon-purple)' }}>för dina prylar.</span>
-        </h1>
-        <p style={{ fontSize: '9px', fontWeight: 800, opacity: 0.4, marginBottom: '15px', letterSpacing: '0.5px' }}>
-          KNOW • ACQUIRE • REUSE • MATCH • AGAIN
-        </p>
-        
-        {/* SÖK - Mindre och tajtare */}
-        <input 
-          type="text" 
-          placeholder="Sök i loopen (t.ex. iPhone, Gorpcore...)" 
-          style={{ 
-            width: '100%', padding: '10px 12px', borderRadius: '10px', 
-            background: 'rgba(255,255,255,0.03)', border: '1px solid var(--border)', 
-            color: '#fff', fontSize: '12px' 
-          }} 
-        />
-      </section>
+      <header style={{ marginBottom: '20px' }}>
+        <div style={{ fontSize: '8px', fontWeight: 900, color: 'var(--neon-purple)', letterSpacing: '2px' }}>QUICK SELL v2</div>
+        <h1 style={{ fontSize: '2rem', fontWeight: 900, letterSpacing: '-1.5px', lineHeight: 1 }}>AI Vision Scan</h1>
+        <p style={{ fontSize: '10px', opacity: 0.5 }}>Fota upp till 25 objekt samtidigt. AI sköter rubrik, pris och matchning.</p>
+      </header>
 
-      {/* SMART FOLDERS - AI lär sig vad folk söker */}
-      <div style={{ display: 'flex', gap: '8px', overflowX: 'auto', marginBottom: '25px', paddingBottom: '5px' }}>
-        {['Vinterjackor', 'Apple Tech', 'Sneakers', 'Vintage'].map((folder) => (
-          <div key={folder} style={{ 
-            padding: '6px 12px', borderRadius: '20px', background: 'rgba(0,255,136,0.05)', 
-            border: '1px solid rgba(0,255,136,0.1)', fontSize: '9px', fontWeight: 900, 
-            color: 'var(--neon-mint)', whiteSpace: 'nowrap' 
-          }}>
-            📂 {folder.toUpperCase()}
-          </div>
-        ))}
-      </div>
-
-      {/* TABS - Nu med EFTERSÖKT */}
-      <div className="tab-container" style={{ 
-        marginBottom: '15px', 
-        borderBottom: '1px solid var(--border)', 
-        display: 'flex', 
-        gap: '15px',
-        overflowX: 'auto' 
+      {/* SCANNER VIEWPORT */}
+      <div style={{ 
+        position: 'relative', width: '100%', aspectRatio: '3/4', background: '#000', 
+        borderRadius: '24px', border: `2px solid ${scanning ? 'var(--neon-mint)' : '#222'}`, 
+        overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center'
       }}>
-        {['ALLA MATCHNINGAR', 'EFTERSÖKT', 'AUKTIONER', 'DIREKTKÖP'].map((tab) => (
-          <div 
-            key={tab} 
-            onClick={() => setActiveTab(tab)} 
-            style={{ 
-              paddingBottom: '8px', fontSize: '9px', fontWeight: 900, 
-              color: activeTab === tab ? '#fff' : '#444', 
-              borderBottom: activeTab === tab ? '2px solid var(--neon-purple)' : 'none',
-              cursor: 'pointer', whiteSpace: 'nowrap'
-            }}
-          >
-            {tab}
-          </div>
-        ))}
-      </div>
-
-      {/* PRODUCT GRID - Tätare layout */}
-      <div className="product-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
-        
-        {/* TAB: EFTERSÖKT (Wanted) */}
-        {activeTab === 'EFTERSÖKT' && (
-          <div style={{ gridColumn: 'span 2', display: 'flex', flexDirection: 'column', gap: '10px' }}>
-            <div style={{ padding: '15px', background: 'rgba(157, 78, 221, 0.05)', borderRadius: '12px', border: '1px dashed var(--neon-purple)' }}>
-              <p style={{ fontSize: '10px', fontWeight: 800, marginBottom: '10px', textAlign: 'center' }}>
-                FOLK LETAR EFTER DETTA JUST NU:
-              </p>
-              {quickWanted.map(w => (
-                <div key={w.id} style={{ display: 'flex', justifyContent: 'space-between', background: 'rgba(0,0,0,0.2)', padding: '10px', borderRadius: '8px', marginBottom: '5px' }}>
-                  <div>
-                    <div style={{ fontSize: '11px', fontWeight: 900 }}>{w.item}</div>
-                    <div style={{ fontSize: '8px', color: 'var(--neon-purple)' }}>EFTERFRÅGAN: {w.demand}</div>
-                  </div>
-                  <button 
-                    onClick={() => router.push('/sell')}
-                    style={{ background: 'var(--neon-mint)', border: 'none', borderRadius: '4px', fontSize: '8px', fontWeight: 900, padding: '5px 10px' }}
-                  >SÄLJ</button>
-                </div>
-              ))}
-              <button 
-                onClick={() => router.push('/wanted')} 
-                style={{ width: '100%', background: 'none', border: '1px solid #333', color: '#fff', fontSize: '9px', padding: '10px', borderRadius: '8px', marginTop: '10px', fontWeight: 800 }}
-              >
-                VISA ALLA ÖNSKEMÅL
-              </button>
+        {!scanning ? (
+          <button onClick={startScan} className="primary-btn" style={{ width: 'auto', padding: '15px 30px' }}>
+            STARTA AI-KAMERA
+          </button>
+        ) : (
+          <div style={{ width: '100%', height: '100%' }}>
+            <div className="scan-line" />
+            
+            {/* Live Detected Tags */}
+            <div style={{ position: 'absolute', top: '40%', left: '30%', background: 'var(--neon-mint)', color: '#000', padding: '4px 8px', borderRadius: '4px', fontSize: '9px', fontWeight: 900, animation: 'pop 0.3s ease-out' }}>
+              IPHONE 15 PRO (99%)
             </div>
-          </div>
-        )}
-
-        {/* TAB: ALLA MATCHNINGAR */}
-        {activeTab === 'ALLA MATCHNINGAR' && (
-          <>
-            {/* AI WIZARD CARD - QUICK SELL ENTRY */}
-            <div 
-              onClick={() => router.push('/sell')} 
-              style={{ 
-                gridColumn: 'span 2', background: 'linear-gradient(135deg, #0a0514, #02040a)', 
-                padding: '15px', borderRadius: '12px', border: '1px solid rgba(157, 78, 221, 0.4)', 
-                display: 'flex', justifyContent: 'space-between', alignItems: 'center' 
-              }}
-            >
-              <div>
-                <div style={{ fontSize: '8px', fontWeight: 900, color: 'var(--neon-mint)', letterSpacing: '1px' }}>AI SCANNER</div>
-                <h3 style={{ fontSize: '1rem', fontWeight: 900, margin: '2px 0' }}>Sälj 25 objekt nu</h3>
-                <p style={{ fontSize: '8px', opacity: 0.5, margin: 0 }}>Fota direkt • AI sköter resten</p>
+            {foundItems.length > 1 && (
+              <div style={{ position: 'absolute', top: '60%', right: '20%', background: 'var(--neon-mint)', color: '#000', padding: '4px 8px', borderRadius: '4px', fontSize: '9px', fontWeight: 900, animation: 'pop 0.3s ease-out' }}>
+                AIRPODS MAX (96%)
               </div>
-              <button className="primary-btn" style={{ padding: '8px 15px', fontSize: '9px', width: 'auto' }}>STARTA</button>
+            )}
+            
+            <div style={{ position: 'absolute', bottom: '20px', left: '20px', right: '20px', display: 'flex', gap: '10px' }}>
+              <div className="glass-card" style={{ flex: 1, padding: '10px', textAlign: 'center', borderColor: 'var(--neon-mint)' }}>
+                <div style={{ fontSize: '14px', fontWeight: 900 }}>{foundItems.length}</div>
+                <div style={{ fontSize: '7px', opacity: 0.6 }}>OBJEKT</div>
+              </div>
+              <div className="glass-card" style={{ flex: 1, padding: '10px', textAlign: 'center' }}>
+                <div style={{ fontSize: '14px', fontWeight: 900, color: 'var(--neon-mint)' }}>12 400:-</div>
+                <div style={{ fontSize: '7px', opacity: 0.6 }}>EST. VÄRDE</div>
+              </div>
             </div>
-
-            <FeedCardSell id="1" title="iPhone 15 Pro Max" price={11450} trust={99} />
-            <FeedCardSell id="2" title="MacBook Pro M3" price={18900} trust={95} />
-            <FeedCardSell id="3" title="Sony WH-1000XM5" price={2800} trust={94} />
-            <FeedCardSell id="4" title="Stone Island Shell" price={4200} trust={98} />
-          </>
+          </div>
         )}
       </div>
+
+      {foundItems.length > 0 && (
+        <button 
+          onClick={() => router.push('/dashboard/seller')}
+          className="primary-btn" style={{ marginTop: '20px', background: 'var(--neon-purple)', color: '#fff' }}>
+          LISTA {foundItems.length} OBJEKT DIREKT
+        </button>
+      )}
 
       <style jsx>{`
-        .product-grid { margin-bottom: 80px; }
-        ::-webkit-scrollbar { display: none; }
-        .tab-container { -ms-overflow-style: none; scrollbar-width: none; }
+        .scan-line {
+          position: absolute; width: 100%; height: 2px; background: var(--neon-mint);
+          box-shadow: 0 0 15px var(--neon-mint); animation: move 2s infinite linear;
+        }
+        @keyframes move { 0% { top: 0% } 100% { top: 100% } }
+        @keyframes pop { 0% { transform: scale(0); } 100% { transform: scale(1); } }
       `}</style>
     </div>
   );
