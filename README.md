@@ -1,15 +1,16 @@
-# 🚀 MARKETBEG: AI-Driven Second-Hand Infrastructure
+// // README.md
+# 🚀 KARMA: AI-Driven Second-Hand Infrastructure
 
-Marketbeg är inte en marknadsplats. Det är en **likviditetsmotor**.
+KARMA (tidigare Marketbeg) är inte en traditionell marknadsplats. Det är en **likviditetsmotor** byggd för att stänga loopen i den cirkulära ekonomin.
 
-### 🧠 AI-Kärnan
-* **Quick Sell:** 3 bilder -> Fullständig annons via AI Vision.
-* **Match Score:** Matchar objekt mot aktiva köpare (0-100%).
-* **Market Pulse:** Live-data på vad som säljer just nu.
-* **Instant Sell:** Sälj direkt till köpare med stående bud – ingen annons behövs.
+### 🧠 Core Features 2026
+* **AI Quick Sell:** Från bild till live-annons på 3 sekunder via vision-modeller.
+* **The Match Score:** Varje objekt matchas mot realtids-efterfrågan (0-100% Match).
+* **Karma Shield:** BankID-integrerad escrow-tjänst för 100% säkerhet.
+* **Instant Liquidity:** Sälj direkt till systemets likviditets-pooler för omedelbar utbetalning.
 
-### 🛠 Tech Stack
-* Next.js 14 (App Router)
-* AI Match Engine (Mock v1)
-* BankID Trust System
-* Nordic Cross-Border Payments (Swish/Vipps/MobilePay)
+### 🛠 Stack
+- **Framework:** Next.js 14 (App Router)
+- **Styling:** CSS-in-JS & Global CSS Variables (Neon/Glassmorphism)
+- **Trust:** BankID-baserad verifiering
+- **AI:** Custom Match Engine & Vision API
