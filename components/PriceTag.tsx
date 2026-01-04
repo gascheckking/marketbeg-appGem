@@ -1,42 +1,28 @@
-// --- components/PriceTag.tsx ---
+// // components/PriceTag.tsx
 "use client";
 
-type Props = {
-  price: number;
-  size?: 'sm' | 'md' | 'lg';
-};
+type Props = { price: number; size?: 'sm' | 'md' | 'lg'; };
 
 export default function PriceTag({ price, size = 'md' }: Props) {
-  // Vi skippar Intl.NumberFormat för 'sm' för att få bort "SEK" och bara köra "kr" för att spara plats
   const sizes = {
-    sm: { fontSize: '10px', glow: '4px', suffix: ' kr' },
-    md: { fontSize: '14px', glow: '8px', suffix: ' kr' },
-    lg: { fontSize: '24px', glow: '15px', suffix: ' KR' } 
+    sm: { fontSize: '12px', suffixSize: '9px' },
+    md: { fontSize: '16px', suffixSize: '11px' },
+    lg: { fontSize: '24px', suffixSize: '14px' } 
   };
 
-  const currentStyle = sizes[size];
+  const style = sizes[size];
 
   return (
-    <div className="price-tag" style={{
-      fontSize: currentStyle.fontSize,
+    <div style={{
+      fontSize: style.fontSize,
       fontWeight: 900,
-      color: '#fff', // Vit text för priser som i bilden
-      letterSpacing: '-0.2px',
-      textShadow: `0 0 ${currentStyle.glow} rgba(0, 255, 136, 0.4)`,
-      lineHeight: 1,
-      display: 'inline-flex',
-      alignItems: 'baseline'
+      color: 'var(--neon-mint)', // Grönt pris för "Sälj"-fokus
+      display: 'flex',
+      alignItems: 'baseline',
+      gap: '2px'
     }}>
-      {price}
-      <span style={{ fontSize: '0.7em', marginLeft: '2px', opacity: 0.8 }}>
-        {currentStyle.suffix}
-      </span>
-
-      <style jsx>{`
-        .price-tag {
-          font-family: 'Inter', sans-serif;
-        }
-      `}</style>
+      {price.toLocaleString('sv-SE')}
+      <span style={{ fontSize: style.suffixSize, opacity: 0.9 }}>kr</span>
     </div>
   );
 }
