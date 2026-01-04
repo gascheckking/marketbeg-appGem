@@ -1,3 +1,4 @@
+// --- components/PriceTag.tsx ---
 "use client";
 
 type Props = {
@@ -6,17 +7,11 @@ type Props = {
 };
 
 export default function PriceTag({ price, size = 'md' }: Props) {
-  const formatted = new Intl.NumberFormat('sv-SE', { 
-    style: 'currency', 
-    currency: 'SEK',
-    maximumFractionDigits: 0 
-  }).format(price);
-
-  // Minskade storlekar för en mer utzoomad och lyxig känsla
+  // Vi skippar Intl.NumberFormat för 'sm' för att få bort "SEK" och bara köra "kr" för att spara plats
   const sizes = {
-    sm: { fontSize: '0.85rem', glow: '8px' },
-    md: { fontSize: '1.1rem', glow: '12px' },
-    lg: { fontSize: '1.8rem', glow: '20px' } 
+    sm: { fontSize: '10px', glow: '4px', suffix: ' kr' },
+    md: { fontSize: '14px', glow: '8px', suffix: ' kr' },
+    lg: { fontSize: '24px', glow: '15px', suffix: ' KR' } 
   };
 
   const currentStyle = sizes[size];
@@ -25,21 +20,21 @@ export default function PriceTag({ price, size = 'md' }: Props) {
     <div className="price-tag" style={{
       fontSize: currentStyle.fontSize,
       fontWeight: 900,
-      color: 'var(--neon-mint)',
-      letterSpacing: size === 'lg' ? '-1.5px' : '-0.5px',
-      textShadow: `0 0 ${currentStyle.glow} rgba(0, 255, 136, 0.25)`,
-      lineHeight: 1
+      color: '#fff', // Vit text för priser som i bilden
+      letterSpacing: '-0.2px',
+      textShadow: `0 0 ${currentStyle.glow} rgba(0, 255, 136, 0.4)`,
+      lineHeight: 1,
+      display: 'inline-flex',
+      alignItems: 'baseline'
     }}>
-      {formatted}
+      {price}
+      <span style={{ fontSize: '0.7em', marginLeft: '2px', opacity: 0.8 }}>
+        {currentStyle.suffix}
+      </span>
 
       <style jsx>{`
         .price-tag {
-          display: inline-block;
-          animation: pulse-glow 3s infinite ease-in-out;
-        }
-        @keyframes pulse-glow {
-          0%, 100% { opacity: 1; filter: brightness(1); }
-          50% { opacity: 0.9; filter: brightness(1.2); }
+          font-family: 'Inter', sans-serif;
         }
       `}</style>
     </div>
