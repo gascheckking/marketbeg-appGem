@@ -1,49 +1,59 @@
+// --- components/FeedCardSell.tsx ---
 "use client";
 import { useRouter } from "next/navigation";
-import PriceTag from "./PriceTag";
-import TrustBadge from "./TrustBadge";
 
-type Props = { id: string; title: string; price: number; trust: number; matchScore?: number; instant?: boolean; };
+type Props = { id: string; title: string; price: number; trust: number; matchScore?: number; };
 
-export default function FeedCardSell({ id, title, price, trust, matchScore = 95, instant = true }: Props) {
+export default function FeedCardSell({ id, title, price, trust }: Props) {
   const router = useRouter();
 
   return (
-    <div className="feed-card" onClick={() => router.push(`/listing/${id}`)}
-      style={{ 
-        cursor: 'pointer', position: 'relative', background: 'var(--glass)',
-        borderRadius: '16px', border: '1px solid var(--border)', overflow: 'hidden'
-      }}>
+    <div className="mini-card" onClick={() => router.push(`/listing/${id}`)}>
+      <div className="status-dots">
+        <div className="dot purple"></div>
+        <div className="dot mint"></div>
+      </div>
       
-      {/* Top Badges */}
-      <div style={{ position: 'absolute', top: '8px', left: '8px', right: '8px', display: 'flex', justifyContent: 'space-between', zIndex: 5 }}>
-        {/* Instant Sell Badge */}
-        {instant && (
-          <div style={{ background: 'var(--neon-purple)', padding: '2px 6px', borderRadius: '4px', fontSize: '6px', fontWeight: 900, color: '#fff' }}>
-            INSTANT ⚡
-          </div>
-        )}
-        {/* Match Score */}
-        <div style={{ background: 'rgba(0,0,0,0.7)', padding: '2px 6px', borderRadius: '4px', border: '1px solid var(--neon-mint)', color: 'var(--neon-mint)', fontSize: '6px', fontWeight: 900 }}>
-          {matchScore}% MATCH
-        </div>
+      <div className="card-visual">
+        {title.toLowerCase().includes('phone') ? '📱' : 
+         title.toLowerCase().includes('max') ? '🎧' : 
+         title.toLowerCase().includes('tee') ? '👕' : '📦'}
+      </div>
+      
+      <div className="card-info">
+        <h4 className="card-title">{title}</h4>
+        <div className="card-price">{price} kr</div>
+        <div className="card-trust">● TRUST {trust}%</div>
       </div>
 
-      <div style={{ aspectRatio: '1/1.1', background: '#080808', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '32px' }}>
-        {title.toLowerCase().includes('phone') ? '📱' : '📦'}
-      </div>
-      
-      <div style={{ padding: '10px' }}>
-        <h3 style={{ margin: '0 0 4px 0', fontSize: '11px', fontWeight: 800, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-          {title}
-        </h3>
-        <PriceTag price={price} size="sm" />
-        <div style={{ marginTop: '8px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <div style={{ transform: 'scale(0.85)', transformOrigin: 'left' }}>
-            <TrustBadge score={trust} />
-          </div>
-        </div>
-      </div>
+      <style jsx>{`
+        .mini-card {
+          background: rgba(255, 255, 255, 0.03);
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          border-radius: 8px;
+          padding: 8px;
+          position: relative;
+          cursor: pointer;
+        }
+        .status-dots {
+          position: absolute; top: 5px; left: 5px; display: flex; gap: 3px;
+        }
+        .dot { width: 4px; height: 4px; border-radius: 50%; }
+        .purple { background: var(--neon-purple); }
+        .mint { background: var(--neon-mint); }
+        .card-visual {
+          aspect-ratio: 1/1;
+          display: flex; align-items: center; justifyContent: center;
+          font-size: 20px; background: rgba(0,0,0,0.2); border-radius: 4px;
+        }
+        .card-info { marginTop: 6px; }
+        .card-title {
+          margin: 0; font-size: 8px; font-weight: 800; color: #eee;
+          white-space: nowrap; overflow: hidden; textOverflow: ellipsis;
+        }
+        .card-price { font-size: 10px; font-weight: 900; color: #fff; margin: 2px 0; }
+        .card-trust { font-size: 6px; font-weight: 900; color: var(--neon-mint); opacity: 0.6; }
+      `}</style>
     </div>
   );
 }
