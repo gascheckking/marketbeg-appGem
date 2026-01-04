@@ -1,3 +1,4 @@
+// --- components/LoadingAI.tsx ---
 "use client";
 
 export function LoadingAI() {
@@ -6,36 +7,48 @@ export function LoadingAI() {
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
-      gap: '10px', // Minskad gap
-      padding: '15px'
+      gap: '12px',
+      padding: '20px'
     }}>
-      <div className="loading-pulse" style={{
-        fontSize: '10px', // Mindre text för pro-look
-        fontWeight: 800,
-        color: 'var(--neon-purple)',
-        letterSpacing: '1.5px',
-        textTransform: 'uppercase',
-        display: 'flex',
-        alignItems: 'center',
-        gap: '8px'
-      }}>
+      <div className="ai-loader-container">
         <div className="dot-spin"></div>
-        AI ANALYSERAR PIXLAR...
+        <div className="scanner-line-mini"></div>
+      </div>
+      <div style={{
+        fontSize: '9px',
+        fontWeight: 900,
+        color: 'var(--neon-purple)',
+        letterSpacing: '2px',
+        textTransform: 'uppercase',
+        animation: 'pulseText 1.5s infinite'
+      }}>
+        AI Analyserar Pixlar...
       </div>
       
       <style jsx>{`
+        .ai-loader-container {
+          position: relative;
+          width: 40px;
+          height: 40px;
+          display: flex;
+          alignItems: center;
+          justifyContent: center;
+        }
         .dot-spin {
-          width: 6px;
-          height: 6px;
+          width: 8px;
+          height: 8px;
           border-radius: 50%;
           background: var(--neon-purple);
-          box-shadow: 0 0 12px var(--neon-purple);
-          animation: pulse 1.5s infinite;
+          box-shadow: 0 0 15px var(--neon-purple);
+          animation: bounce 0.6s infinite alternate;
         }
-        @keyframes pulse {
-          0% { transform: scale(0.8); opacity: 0.5; }
-          50% { transform: scale(1.2); opacity: 1; }
-          100% { transform: scale(0.8); opacity: 0.5; }
+        @keyframes bounce {
+          from { transform: translateY(-5px); }
+          to { transform: translateY(5px); }
+        }
+        @keyframes pulseText {
+          0%, 100% { opacity: 0.5; }
+          50% { opacity: 1; }
         }
       `}</style>
     </div>
