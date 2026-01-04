@@ -43,9 +43,9 @@ export default function Marketplace() {
         ))}
       </div>
 
-      {/* TABS - Mindre text */}
+      {/* TABS - Nu med EFTERSÖKT */}
       <div className="tab-container" style={{ marginBottom: '15px', borderBottom: '1px solid var(--border)', display: 'flex', gap: '15px' }}>
-        {['ALLA MATCHNINGAR', 'AUKTIONER', 'DIREKTKÖP'].map((tab) => (
+        {['ALLA MATCHNINGAR', 'EFTERSÖKT', 'AUKTIONER', 'DIREKTKÖP'].map((tab) => (
           <div 
             key={tab} 
             onClick={() => setActiveTab(tab)} 
@@ -53,7 +53,7 @@ export default function Marketplace() {
               paddingBottom: '8px', fontSize: '9px', fontWeight: 900, 
               color: activeTab === tab ? '#fff' : '#444', 
               borderBottom: activeTab === tab ? '2px solid var(--neon-purple)' : 'none',
-              cursor: 'pointer' 
+              cursor: 'pointer', whiteSpace: 'nowrap'
             }}
           >
             {tab}
@@ -63,9 +63,26 @@ export default function Marketplace() {
 
       {/* PRODUCT GRID - Tätare layout */}
       <div className="product-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
+        
+        {/* Om tabben är EFTERSÖKT - Visa snabb-vyn */}
+        {activeTab === 'EFTERSÖKT' && (
+          <div style={{ gridColumn: 'span 2', padding: '20px', background: 'rgba(157, 78, 221, 0.05)', borderRadius: '12px', textAlign: 'center', border: '1px dashed var(--neon-purple)' }}>
+            <div style={{ fontSize: '20px', marginBottom: '10px' }}>🔍</div>
+            <p style={{ fontSize: '11px', fontWeight: 800, marginBottom: '15px' }}>Här visas vad folk letar efter just nu.</p>
+            <button 
+              onClick={() => router.push('/wanted')} 
+              className="primary-btn"
+              style={{ padding: '10px 20px', fontSize: '10px', width: 'auto' }}
+            >
+              VISA ALLA ÖNSKEMÅL
+            </button>
+          </div>
+        )}
+
+        {/* Standardvyn - ALLA MATCHNINGAR */}
         {activeTab === 'ALLA MATCHNINGAR' && (
           <>
-            {/* AI WIZARD CARD - Nu med fokus på Behörighet/Snabbhet */}
+            {/* AI WIZARD CARD */}
             <div 
               onClick={() => router.push('/sell')} 
               style={{ 
