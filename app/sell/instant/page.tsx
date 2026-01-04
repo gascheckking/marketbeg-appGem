@@ -1,67 +1,76 @@
+// // app/sell/instant/page.tsx
 "use client";
 import { useState, useEffect, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
+import PriceTag from "@/components/PriceTag";
+import TrustBadge from "@/components/TrustBadge";
 
 function AISellForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const count = searchParams.get("count") || "1";
-  
-  const [isScanning, setIsScanning] = useState(true);
-  const [scanProgress, setScanProgress] = useState(0);
   const [aiPrice, setAiPrice] = useState(0);
 
   useEffect(() => {
+    const targetPrice = parseInt(count) * 1450;
     const timer = setInterval(() => {
-      setScanProgress(prev => {
-        if (prev >= 100) { clearInterval(timer); return 100; }
-        return prev + 1;
+      setAiPrice(prev => {
+        if (prev >= targetPrice) { clearInterval(timer); return targetPrice; }
+        return prev + Math.floor(targetPrice / 50);
       });
-      setAiPrice(prev => prev + Math.floor(Math.random() * 200));
-    }, 30);
+    }, 20);
     return () => clearInterval(timer);
-  }, []);
+  }, [count]);
+
+  const mockItems = [
+    { name: "iPhone 15 Pro", trust: 98, price: 9200, emoji: "📱" },
+    { name: "AirPods Max", trust: 94, price: 4100, emoji: "🎧" },
+    { name: "MacBook Pro M3", trust: 97, price: 18900, emoji: "💻" }
+  ];
 
   return (
-    <div className="page-wrapper" style={{ padding: '10px 15px' }}>
-      <header style={{ marginBottom: '25px', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
+    <div className="page-wrapper" style={{ padding: '15px' }}>
+      <header style={{ marginBottom: '25px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <div>
-          <div style={{ fontSize: '8px', fontWeight: 900, color: 'var(--neon-purple)', letterSpacing: '2px' }}>AI VISION SCAN</div>
-          <h1 style={{ fontSize: '2rem', fontWeight: 900, margin: 0, letterSpacing: '-1.5px' }}>Resultat</h1>
+          <div style={{ fontSize: '8px', fontWeight: 900, color: 'var(--neon-purple)', letterSpacing: '2px' }}>AI VISION SCAN COMPLETE</div>
+          <h1 style={{ fontSize: '1.8rem', fontWeight: 900, margin: 0 }}>Resultat</h1>
         </div>
-        <div style={{ textAlign: 'right' }}>
-          <div style={{ fontSize: '8px', fontWeight: 900, opacity: 0.5 }}>IDENTIFIERADE</div>
-          <div style={{ fontSize: '1.2rem', fontWeight: 900, color: 'var(--neon-mint)' }}>{count} st</div>
+        <div className="badge-match" style={{ padding: '8px 15px', borderRadius: '12px', border: '1px solid var(--neon-mint)', color: 'var(--neon-mint)', fontWeight: 900, fontSize: '12px' }}>
+          {count} OBJEKT
         </div>
       </header>
 
-      <div className="glass-card" style={{ padding: '20px', border: '1px solid var(--neon-mint)', background: 'rgba(0,255,136,0.03)', marginBottom: '20px' }}>
-        <div style={{ fontSize: '9px', fontWeight: 900, opacity: 0.6, letterSpacing: '1px' }}>TOTALT EST. VÄRDE</div>
-        <div style={{ fontSize: '2.5rem', fontWeight: 900 }}>{aiPrice}<span style={{ fontSize: '1rem', marginLeft: '5px', opacity: 0.4 }}>SEK</span></div>
-        <div style={{ fontSize: '8px', fontWeight: 900, color: 'var(--neon-mint)', marginTop: '5px' }}>MATCHNINGAR HITTADE DIREKT (4st)</div>
+      <div className="glass-card" style={{ padding: '25px', border: '1px solid var(--neon-mint)', background: 'rgba(0,255,136,0.03)', marginBottom: '20px', borderRadius: '24px' }}>
+        <div style={{ fontSize: '10px', fontWeight: 900, opacity: 0.6, marginBottom: '5px' }}>ESTIMERAT TOTALVÄRDE</div>
+        <div style={{ display: 'flex', alignItems: 'baseline', gap: '5px' }}>
+          <span style={{ fontSize: '2.8rem', fontWeight: 900 }}>{aiPrice.toLocaleString()}</span>
+          <span style={{ fontSize: '1.2rem', fontWeight: 900, color: 'var(--neon-mint)' }}>kr</span>
+        </div>
       </div>
 
-      <div style={{ display: 'grid', gap: '10px', marginBottom: '100px' }}>
-        {["iPhone 15 Pro", "AirPods Max", "Stone Island Beanie"].map((item, i) => (
-          <div key={i} className="glass-card" style={{ display: 'flex', justifyContent: 'space-between', padding: '15px' }}>
-            <div style={{ display: 'flex', gap: '12px' }}>
-              <div style={{ width: '40px', height: '40px', background: '#111', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>📦</div>
+      <div style={{ display: 'grid', gap: '12px', marginBottom: '120px' }}>
+        {mockItems.slice(0, parseInt(count)).map((item, i) => (
+          <div key={i} className="glass-card" style={{ display: 'flex', justifyContent: 'space-between', padding: '15px', borderRadius: '18px', alignItems: 'center' }}>
+            <div style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>
+              <div style={{ width: '50px', height: '50px', background: '#000', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '24px' }}>
+                {item.emoji}
+              </div>
               <div>
-                <div style={{ fontSize: '12px', fontWeight: 800 }}>{item}</div>
-                <div style={{ fontSize: '8px', color: 'var(--neon-mint)', fontWeight: 900 }}>INSTANT BUYER READY</div>
+                <div style={{ fontSize: '14px', fontWeight: 900, marginBottom: '4px' }}>{item.name}</div>
+                <TrustBadge score={item.trust} />
               </div>
             </div>
             <div style={{ textAlign: 'right' }}>
-              <div style={{ fontSize: '12px', fontWeight: 900 }}>{(i + 1) * 1200}:-</div>
-              <div style={{ fontSize: '7px', opacity: 0.5 }}>98% MATCH</div>
+              <PriceTag price={item.price} size="md" />
+              <div style={{ fontSize: '8px', color: 'var(--neon-purple)', fontWeight: 900, marginTop: '4px' }}>INSTANT MATCH ✨</div>
             </div>
           </div>
         ))}
       </div>
 
-      <div style={{ position: 'fixed', bottom: '0', left: 0, right: 0, padding: '20px', background: 'linear-gradient(to top, #000 80%, transparent)' }}>
-        <button onClick={() => router.push('/dashboard/seller')} className="primary-btn" style={{ padding: '18px', fontSize: '14px' }}>
-          ACCEPTERA & SÄLJ ALLA ({aiPrice}:-)
+      <div style={{ position: 'fixed', bottom: '100px', left: '15px', right: '15px', zIndex: 10 }}>
+        <button onClick={() => router.push('/dashboard/seller')} className="primary-btn" style={{ padding: '20px', borderRadius: '18px', boxShadow: '0 10px 30px rgba(0,255,136,0.2)' }}>
+          ACCEPTERA & SÄLJ ALLA
         </button>
       </div>
     </div>
