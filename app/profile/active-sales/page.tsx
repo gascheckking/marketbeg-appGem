@@ -1,3 +1,4 @@
+// // app/profile/active-sales/page.tsx
 "use client";
 import OrderTrack from "@/components/OrderTrack";
 
@@ -8,34 +9,35 @@ export default function ActiveSalesPage() {
   ];
 
   return (
-    <div className="page-wrapper" style={{ padding: '10px 15px' }}>
-      <header style={{ marginBottom: '20px' }}>
-        <h1 style={{ fontSize: '1.4rem', fontWeight: 900, margin: 0 }}>FÖRSÄLJNINGAR</h1>
-        <p style={{ fontSize: '9px', color: 'var(--neon-purple)', fontWeight: 800, letterSpacing: '1px', marginTop: '4px' }}>
-          MATCHED • READY • AGAIN
-        </p>
+    <div className="page-wrapper" style={{ padding: '20px' }}>
+      <header style={{ marginBottom: '25px' }}>
+        <h1 style={{ fontSize: '1.6rem', fontWeight: 900, margin: 0 }}>FÖRSÄLJNINGAR</h1>
+        <p style={{ fontSize: '10px', color: 'var(--neon-purple)', fontWeight: 900, letterSpacing: '1px' }}>MATCHED • READY • AGAIN</p>
       </header>
       
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
         {activeOrders.map(order => (
           <div key={order.id} className="glass-card" style={{ padding: '0', overflow: 'hidden' }}>
-            <div style={{ padding: '12px 15px', borderBottom: '1px solid var(--border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <div style={{ padding: '15px 20px', borderBottom: '1px solid var(--border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <div>
-                <strong style={{ fontSize: '0.9rem', fontWeight: 800 }}>{order.item}</strong>
-                <div className="muted" style={{ fontSize: '9px', fontWeight: 700 }}>ID: {order.id} • {order.price}</div>
+                <strong style={{ fontSize: '14px', fontWeight: 900 }}>{order.item.toUpperCase()}</strong>
+                <div className="muted" style={{ fontSize: '10px', fontWeight: 700 }}>ID: {order.id} • {order.price}</div>
               </div>
-              <span style={{ color: order.status === "Postad" ? 'var(--neon-mint)' : 'var(--neon-purple)', fontWeight: 900, fontSize: '8px', letterSpacing: '0.5px' }}>
+              <span style={{ color: order.status === "Postad" ? 'var(--neon-mint)' : '#ff4444', fontWeight: 900, fontSize: '9px' }}>
                 {order.status.toUpperCase()}
               </span>
             </div>
             
-            <div style={{ padding: '15px' }}>
+            <div style={{ padding: '20px' }}>
               {order.status === "Väntar på inlämning" ? (
                 <OrderTrack status="Visa QR vid inlämning" />
               ) : (
-                <p className="muted" style={{ fontSize: '9px', margin: 0, textAlign: 'center', lineHeight: '1.4' }}>
-                  Paketet är på väg. Karma Shield håller likviditeten tills köparen godkänt.
-                </p>
+                <div style={{ textAlign: 'center', padding: '20px' }}>
+                  <p className="muted" style={{ fontSize: '11px', margin: 0, lineHeight: '1.6' }}>
+                    Paketet är på väg till sortering. <br/>
+                    Karma Shield håller likviditeten säkrad.
+                  </p>
+                </div>
               )}
             </div>
           </div>
