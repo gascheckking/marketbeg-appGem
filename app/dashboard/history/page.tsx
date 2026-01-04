@@ -6,6 +6,7 @@ export default function PurchaseHistory() {
   const router = useRouter();
   const [loadingId, setLoadingId] = useState<number | null>(null);
 
+  // Vi ser till att nyckeln heter 'name' här...
   const previousPurchases = [
     { id: 101, name: "Vintage Levi's 501", price: "450 kr", img: "👖" },
     { id: 102, name: "iPad Air (4th Gen)", price: "3 200 kr", img: "📱" }
@@ -33,7 +34,8 @@ export default function PurchaseHistory() {
                 {item.img}
               </div>
               <div>
-                <h3 style={{ margin: 0, fontSize: '12px', fontWeight: 800 }}>{item.item}</h3>
+                {/* FIXAD RAD: Nu mappar vi mot {item.name} istället för {item.item} */}
+                <h3 style={{ margin: 0, fontSize: '12px', fontWeight: 800 }}>{item.name}</h3>
                 <p style={{ margin: 0, fontSize: '9px', opacity: 0.5 }}>{item.price}</p>
               </div>
             </div>
