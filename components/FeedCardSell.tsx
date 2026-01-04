@@ -1,58 +1,106 @@
-// --- components/FeedCardSell.tsx ---
+// // components/FeedCardSell.tsx
 "use client";
 import { useRouter } from "next/navigation";
+import PriceTag from "./PriceTag";
+import TrustBadge from "./TrustBadge";
 
-type Props = { id: string; title: string; price: number; trust: number; matchScore?: number; };
+type Props = { 
+  id: string; 
+  title: string; 
+  price: number; 
+  trust: number; 
+  matchScore?: number; 
+  isInstant?: boolean; 
+};
 
-export default function FeedCardSell({ id, title, price, trust }: Props) {
+export default function FeedCardSell({ id, title, price, trust, matchScore = 95, isInstant = true }: Props) {
   const router = useRouter();
 
   return (
     <div className="mini-card" onClick={() => router.push(`/listing/${id}`)}>
-      <div className="status-dots">
-        <div className="dot purple"></div>
-        <div className="dot mint"></div>
+      {/* Topp-badges som i bilden */}
+      <div className="card-badges">
+        {isInstant && <div className="badge-instant">INSTANT ⚡</div>}
+        <div className="badge-match">{matchScore}% MATCH</div>
       </div>
       
       <div className="card-visual">
-        {title.toLowerCase().includes('phone') ? '📱' : 
-         title.toLowerCase().includes('max') ? '🎧' : 
-         title.toLowerCase().includes('tee') ? '👕' : '📦'}
+        <div className="emoji-wrapper">
+          {title.toLowerCase().includes('phone') ? '📱' : 
+           title.toLowerCase().includes('max') ? '🎧' : 
+           title.toLowerCase().includes('mac') ? '💻' : '📦'}
+        </div>
       </div>
       
       <div className="card-info">
         <h4 className="card-title">{title}</h4>
-        <div className="card-price">{price} kr</div>
-        <div className="card-trust">● TRUST {trust}%</div>
+        <PriceTag price={price} size="sm" />
+        <div style={{ marginTop: '4px' }}>
+          <TrustBadge score={trust} />
+        </div>
       </div>
 
       <style jsx>{`
         .mini-card {
-          background: rgba(255, 255, 255, 0.03);
-          border: 1px solid rgba(255, 255, 255, 0.08);
-          border-radius: 8px;
-          padding: 8px;
+          background: rgba(10, 10, 10, 0.6);
+          border: 1px solid rgba(255, 255, 255, 0.05);
+          border-radius: 16px;
+          padding: 10px;
           position: relative;
           cursor: pointer;
+          transition: transform 0.2s ease;
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
         }
-        .status-dots {
-          position: absolute; top: 5px; left: 5px; display: flex; gap: 3px;
+        .mini-card:active { transform: scale(0.96); }
+        
+        .card-badges {
+          display: flex;
+          justify-content: space-between;
+          width: 100%;
+          position: absolute;
+          top: 8px;
+          left: 0;
+          padding: 0 8px;
+          z-index: 2;
         }
-        .dot { width: 4px; height: 4px; border-radius: 50%; }
-        .purple { background: var(--neon-purple); }
-        .mint { background: var(--neon-mint); }
+
+        .badge-instant {
+          background: var(--neon-purple);
+          color: #fff;
+          font-size: 6px;
+          font-weight: 900;
+          padding: 2px 5px;
+          border-radius: 4px;
+        }
+
+        .badge-match {
+          background: rgba(0, 255, 136, 0.1);
+          color: var(--neon-mint);
+          border: 1px solid var(--neon-mint);
+          font-size: 6px;
+          font-weight: 900;
+          padding: 1px 4px;
+          border-radius: 4px;
+        }
+
         .card-visual {
           aspect-ratio: 1/1;
-          display: flex; align-items: center; justifyContent: center;
-          font-size: 20px; background: rgba(0,0,0,0.2); border-radius: 4px;
+          display: flex; 
+          align-items: center; 
+          justify-content: center;
+          background: #000;
+          border-radius: 10px;
+          overflow: hidden;
         }
-        .card-info { marginTop: 6px; }
+        .emoji-wrapper { font-size: 24px; }
+        
+        .card-info { display: flex; flex-direction: column; gap: 2px; }
         .card-title {
-          margin: 0; font-size: 8px; font-weight: 800; color: #eee;
-          white-space: nowrap; overflow: hidden; textOverflow: ellipsis;
+          margin: 0; font-size: 9px; font-weight: 800; color: #fff;
+          white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
         }
-        .card-price { font-size: 10px; font-weight: 900; color: #fff; margin: 2px 0; }
-        .card-trust { font-size: 6px; font-weight: 900; color: var(--neon-mint); opacity: 0.6; }
       `}</style>
     </div>
   );
