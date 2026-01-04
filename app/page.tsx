@@ -1,41 +1,83 @@
 // --- app/page.tsx ---
 "use client";
-import React from 'react';
+import React, { useState } from 'react';
 import FeedCardSell from '@/components/FeedCardSell';
 
 export default function Marketplace() {
-  const trendingItems = [
-    { id: "1", title: "iPhone 15 Pro, 256GB", price: 9200, trust: 98, matchScore: 99, instant: true },
-    { id: "2", title: "AirPods Max (Silver)", price: 4100, trust: 92, matchScore: 94, instant: true },
-    { id: "3", title: "Stone Island Beanie", price: 850, trust: 85, matchScore: 88, instant: false },
-    { id: "4", title: "iPad Pro M4 11\"", price: 10500, trust: 99, matchScore: 97, instant: true }
-  ];
+  const [itemCount, setItemCount] = useState(100);
+  const categories = ["FYND 5-500:-", "KLÄDER 500-2000:-", "ELEKTRONIK 2K+", "VINTAGE"];
+  
+  const items = Array(12).fill({
+    id: "1", title: "Vintage Tee", price: 48, trust: 90
+  });
 
   return (
-    <div className="page-wrapper" style={{ padding: '10px 15px' }}>
-      <header style={{ marginBottom: '20px' }}>
-        <div style={{ fontSize: '8px', fontWeight: 900, color: 'var(--neon-mint)', letterSpacing: '2px' }}>LIVE MARKETPLACE</div>
-        <h1 style={{ fontSize: '1.8rem', fontWeight: 900, letterSpacing: '-1px', margin: '5px 0' }}>Utforska Loopen</h1>
-        <p style={{ fontSize: '10px', opacity: 0.5 }}>AI-matchade objekt baserat på din profil och Karma Score.</p>
-      </header>
+    <div className="page-wrapper" style={{ padding: '10px' }}>
+      {/* SNABBSÄJJ KONTROLL */}
+      <div className="glass-card" style={{ padding: '20px', borderRadius: '24px', marginBottom: '20px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <div style={{ flex: 1 }}>
+            <h2 style={{ fontSize: '1.2rem', fontWeight: 900, margin: 0 }}>SNABBSÄJJ OBJEKT</h2>
+            <div style={{ marginTop: '15px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '9px', fontWeight: 900, opacity: 0.6 }}>
+                <span>Antal Föremål</span>
+                <span>{itemCount}</span>
+              </div>
+              <input 
+                type="range" min="1" max="100" value={itemCount} 
+                onChange={(e) => setItemCount(parseInt(e.target.value))}
+                className="karma-slider"
+              />
+            </div>
+          </div>
+          <button className="primary-btn" style={{ width: 'auto', padding: '15px 20px', marginLeft: '20px', background: 'var(--neon-purple)' }}>
+            STARTA AI-KAMERA
+          </button>
+        </div>
+      </div>
 
-      <div style={{ 
-        display: 'grid', 
-        gridTemplateColumns: '1fr 1fr', 
-        gap: '12px' 
-      }}>
-        {trendingItems.map(item => (
-          <FeedCardSell 
-            key={item.id}
-            id={item.id}
-            title={item.title}
-            price={item.price}
-            trust={item.trust}
-            matchScore={item.matchScore}
-            instant={item.instant}
-          />
+      {/* HORISONTELLA TABS */}
+      <div style={{ display: 'flex', gap: '8px', overflowX: 'auto', paddingBottom: '15px', scrollbarWidth: 'none' }}>
+        {categories.map((cat, i) => (
+          <button key={i} style={{
+            whiteSpace: 'nowrap', padding: '8px 16px', borderRadius: '20px',
+            border: '1px solid #333', background: i === 0 ? 'rgba(0,255,136,0.1)' : 'transparent',
+            color: i === 0 ? 'var(--neon-mint)' : '#888', fontSize: '9px', fontWeight: 900
+          }}>
+            {cat}
+          </button>
         ))}
       </div>
+
+      {/* GRID KONTROLLER (Rullgardin/Filter) */}
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '15px' }}>
+        <div style={{ display: 'flex', gap: '5px' }}>
+           <select style={{ background: 'transparent', border: '1px solid #222', color: '#888', fontSize: '8px', padding: '5px', borderRadius: '5px' }}>
+              <option>ALLA KATEGORIER</option>
+              <option>BARN</option>
+              <option>UNISEX</option>
+           </select>
+        </div>
+        <div style={{ fontSize: '18px', cursor: 'pointer' }}>🛒</div>
+      </div>
+
+      {/* DET KOMPAKTA RUTNÄTET */}
+      <div style={{ 
+        display: 'grid', 
+        gridTemplateColumns: 'repeat(3, 1fr)', 
+        gap: '8px' 
+      }}>
+        {items.map((item, i) => (
+          <FeedCardSell key={i} {...item} />
+        ))}
+      </div>
+
+      <style jsx>{`
+        .karma-slider {
+          width: 100%; margin-top: 10px; accent-color: var(--neon-purple);
+          height: 4px; border-radius: 2px;
+        }
+      `}</style>
     </div>
   );
 }
