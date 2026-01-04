@@ -1,12 +1,23 @@
 // // components/BegLoan.tsx
 "use client";
+import { useEffect, useState } from "react";
 
-export default function BegLoan({ price }: { price: number }) {
+export default function BegLoan({ price = 5000 }: { price?: number }) {
+  const [mounted, setMounted] = useState(false);
+
+  // Förhindrar Hydration Error genom att bara rendera lokaliserad valuta på klienten
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null;
+
   return (
     <div className="glow-card" style={{ 
       marginTop: '25px', padding: '30px', borderRadius: '32px', 
       background: 'linear-gradient(145deg, #050505 0%, #0a1510 100%)',
-      border: '1px solid rgba(0, 255, 136, 0.2)'
+      border: '1px solid rgba(0, 255, 136, 0.2)',
+      boxShadow: '0 10px 40px rgba(0, 255, 136, 0.05)'
     }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
         <div>
@@ -26,7 +37,16 @@ export default function BegLoan({ price }: { price: number }) {
         </div>
       </div>
       
-      <button className="primary-btn" style={{ background: 'var(--neon-mint)', color: '#000', fontWeight: 900 }}>
+      <button className="primary-btn" style={{ 
+        background: 'var(--neon-mint)', 
+        color: '#000', 
+        fontWeight: 900, 
+        width: '100%',
+        padding: '16px',
+        borderRadius: '12px',
+        border: 'none',
+        cursor: 'pointer'
+      }}>
         ANSÖK PÅ 1 SEKUND
       </button>
     </div>
