@@ -7,6 +7,12 @@ export default function Marketplace() {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState('ALLA MATCHNINGAR');
 
+  // Demo-data för "Eftersökt" snabbvy
+  const quickWanted = [
+    { id: 1, item: "PoP Skaljacka", size: "116", demand: "HÖG" },
+    { id: 2, item: "Versace Tofflor", size: "42", demand: "EXTREM" }
+  ];
+
   return (
     <div className="page-wrapper" style={{ padding: '10px 15px' }}>
       {/* HEADER - Kompakt & Krispig */}
@@ -44,7 +50,13 @@ export default function Marketplace() {
       </div>
 
       {/* TABS - Nu med EFTERSÖKT */}
-      <div className="tab-container" style={{ marginBottom: '15px', borderBottom: '1px solid var(--border)', display: 'flex', gap: '15px' }}>
+      <div className="tab-container" style={{ 
+        marginBottom: '15px', 
+        borderBottom: '1px solid var(--border)', 
+        display: 'flex', 
+        gap: '15px',
+        overflowX: 'auto' 
+      }}>
         {['ALLA MATCHNINGAR', 'EFTERSÖKT', 'AUKTIONER', 'DIREKTKÖP'].map((tab) => (
           <div 
             key={tab} 
@@ -64,25 +76,39 @@ export default function Marketplace() {
       {/* PRODUCT GRID - Tätare layout */}
       <div className="product-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
         
-        {/* Om tabben är EFTERSÖKT - Visa snabb-vyn */}
+        {/* TAB: EFTERSÖKT (Wanted) */}
         {activeTab === 'EFTERSÖKT' && (
-          <div style={{ gridColumn: 'span 2', padding: '20px', background: 'rgba(157, 78, 221, 0.05)', borderRadius: '12px', textAlign: 'center', border: '1px dashed var(--neon-purple)' }}>
-            <div style={{ fontSize: '20px', marginBottom: '10px' }}>🔍</div>
-            <p style={{ fontSize: '11px', fontWeight: 800, marginBottom: '15px' }}>Här visas vad folk letar efter just nu.</p>
-            <button 
-              onClick={() => router.push('/wanted')} 
-              className="primary-btn"
-              style={{ padding: '10px 20px', fontSize: '10px', width: 'auto' }}
-            >
-              VISA ALLA ÖNSKEMÅL
-            </button>
+          <div style={{ gridColumn: 'span 2', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+            <div style={{ padding: '15px', background: 'rgba(157, 78, 221, 0.05)', borderRadius: '12px', border: '1px dashed var(--neon-purple)' }}>
+              <p style={{ fontSize: '10px', fontWeight: 800, marginBottom: '10px', textAlign: 'center' }}>
+                FOLK LETAR EFTER DETTA JUST NU:
+              </p>
+              {quickWanted.map(w => (
+                <div key={w.id} style={{ display: 'flex', justifyContent: 'space-between', background: 'rgba(0,0,0,0.2)', padding: '10px', borderRadius: '8px', marginBottom: '5px' }}>
+                  <div>
+                    <div style={{ fontSize: '11px', fontWeight: 900 }}>{w.item}</div>
+                    <div style={{ fontSize: '8px', color: 'var(--neon-purple)' }}>EFTERFRÅGAN: {w.demand}</div>
+                  </div>
+                  <button 
+                    onClick={() => router.push('/sell')}
+                    style={{ background: 'var(--neon-mint)', border: 'none', borderRadius: '4px', fontSize: '8px', fontWeight: 900, padding: '5px 10px' }}
+                  >SÄLJ</button>
+                </div>
+              ))}
+              <button 
+                onClick={() => router.push('/wanted')} 
+                style={{ width: '100%', background: 'none', border: '1px solid #333', color: '#fff', fontSize: '9px', padding: '10px', borderRadius: '8px', marginTop: '10px', fontWeight: 800 }}
+              >
+                VISA ALLA ÖNSKEMÅL
+              </button>
+            </div>
           </div>
         )}
 
-        {/* Standardvyn - ALLA MATCHNINGAR */}
+        {/* TAB: ALLA MATCHNINGAR */}
         {activeTab === 'ALLA MATCHNINGAR' && (
           <>
-            {/* AI WIZARD CARD */}
+            {/* AI WIZARD CARD - QUICK SELL ENTRY */}
             <div 
               onClick={() => router.push('/sell')} 
               style={{ 
@@ -110,6 +136,7 @@ export default function Marketplace() {
       <style jsx>{`
         .product-grid { margin-bottom: 80px; }
         ::-webkit-scrollbar { display: none; }
+        .tab-container { -ms-overflow-style: none; scrollbar-width: none; }
       `}</style>
     </div>
   );
