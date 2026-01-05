@@ -16,7 +16,7 @@ export default function CameraBatch() {
       setFileCount(count);
       setIsAnalyzing(true);
       
-      // AI-sekvens som matchar din "AI Scanner"-bild
+      // AI-sekvens
       setScanStep("IDENTIFIERAR OBJEKT...");
       
       setTimeout(() => setScanStep("ANALYSESAR MARKNADSVÄRDE..."), 800);
