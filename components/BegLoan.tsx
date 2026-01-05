@@ -4,11 +4,7 @@ import { useEffect, useState } from "react";
 
 export default function BegLoan({ price = 5000 }: { price?: number }) {
   const [mounted, setMounted] = useState(false);
-
-  // Förhindrar Hydration Error genom att bara rendera lokaliserad valuta på klienten
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  useEffect(() => setMounted(true), []);
 
   if (!mounted) return null;
 
@@ -37,16 +33,7 @@ export default function BegLoan({ price = 5000 }: { price?: number }) {
         </div>
       </div>
       
-      <button className="primary-btn" style={{ 
-        background: 'var(--neon-mint)', 
-        color: '#000', 
-        fontWeight: 900, 
-        width: '100%',
-        padding: '16px',
-        borderRadius: '12px',
-        border: 'none',
-        cursor: 'pointer'
-      }}>
+      <button className="primary-btn" style={{ background: 'var(--neon-mint)', color: '#000', fontWeight: 900 }}>
         ANSÖK PÅ 1 SEKUND
       </button>
     </div>
