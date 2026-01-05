@@ -8,7 +8,6 @@ export default function SplashScreen() {
 
   useEffect(() => {
     setMounted(true);
-    // Vi kollar sessionStorage först efter att komponenten monterats på klienten
     const hasSeen = sessionStorage.getItem("hasSeenKarmaSplash");
     
     if (!hasSeen) {
@@ -19,20 +18,19 @@ export default function SplashScreen() {
     }
   }, []);
 
-  // Om vi inte är på klienten än, eller om den ska vara osynlig, rendera inget.
   if (!mounted || !visible) return null;
 
   return (
     <div style={{ 
       position: 'fixed', 
       inset: 0, 
-      zIndex: 10000, // Högre än allt annat
+      zIndex: 10000,
       backgroundColor: '#02040a', 
       display: 'flex', 
       flexDirection: 'column', 
       alignItems: 'center', 
       justifyContent: 'center',
-      pointerEvents: 'none' // Tillåter klick igenom om något hänger sig
+      pointerEvents: 'none'
     }}>
       <div style={{ textAlign: 'center', animation: 'fadeInOut 2.8s forwards' }}>
         <div style={{ 
