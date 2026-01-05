@@ -47,15 +47,6 @@ export default function Sidebar() {
             <span style={{ fontWeight: 800, fontSize: '11px', letterSpacing: '0.5px' }}>{item.name.toUpperCase()}</span>
           </div>
         ))}
-
-        <div style={{ marginTop: '40px' }}>
-          <p style={{ fontSize: '9px', fontWeight: 900, color: 'var(--neon-mint)', marginBottom: '15px', letterSpacing: '1.5px' }}>AI SMART FOLDERS</p>
-          {['Vinterjackor', 'Apple Tech'].map(folder => (
-            <div key={folder} style={{ padding: '8px 15px', fontSize: '11px', color: '#444', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer' }}>
-              <span style={{opacity: 0.5}}>📂</span> {folder}
-            </div>
-          ))}
-        </div>
       </nav>
 
       <div 
@@ -68,8 +59,7 @@ export default function Sidebar() {
       >
         <div style={{ 
           width: '32px', height: '32px', borderRadius: '50%', 
-          background: 'linear-gradient(45deg, var(--neon-purple), var(--neon-mint))',
-          boxShadow: '0 0 10px rgba(157, 78, 221, 0.3)'
+          background: 'linear-gradient(45deg, var(--neon-purple), var(--neon-mint))'
         }}></div>
         <div>
           <div style={{ fontSize: '10px', fontWeight: 900, color: '#fff' }}>DITT VALV</div>
