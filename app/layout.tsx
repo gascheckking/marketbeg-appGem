@@ -22,7 +22,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="sv">
       <body style={{ background: 'var(--bg-deep)', color: '#fff', margin: 0, overflowX: 'hidden' }}>
-        {/* SplashScreen måste ha logik för att dölja sig själv, annars blockeras appen */}
         <SplashScreen />
         <CookieConsent />
         
@@ -31,7 +30,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           
           <main className="main-content" style={{ 
             flex: 1, 
-            paddingBottom: '120px', // Extra padding för att inte döljas bakom navigeringen
+            paddingBottom: '160px', 
             width: '100%', 
             maxWidth: '600px', 
             margin: '0 auto',
@@ -41,7 +40,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             {children}
           </main>
           
-          {/* QUICK SELL MENU OVERLAY */}
+          {/* NAVIGATION & SELL MENU */}
           <div className="sell-menu-container">
             <nav className="mobile-nav">
               <a href="/" className="mobile-tab">
