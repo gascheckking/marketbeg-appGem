@@ -51,16 +51,7 @@ export default function FeedCardSell({ id, title, price, trust, matchScore = 95,
           flex-direction: column;
           gap: 8px;
         }
-        .card-badges {
-          display: flex;
-          justify-content: space-between;
-          width: 100%;
-          position: absolute;
-          top: 8px;
-          left: 0;
-          padding: 0 8px;
-          z-index: 2;
-        }
+        .card-badges { display: flex; justify-content: space-between; width: 100%; position: absolute; top: 8px; left: 0; padding: 0 8px; z-index: 2; }
         .badge-instant { background: var(--neon-purple); color: #fff; font-size: 6px; font-weight: 900; padding: 2px 5px; border-radius: 4px; }
         .badge-match { background: rgba(0, 255, 136, 0.1); color: var(--neon-mint); border: 1px solid var(--neon-mint); font-size: 6px; font-weight: 900; padding: 1px 4px; border-radius: 4px; }
         .card-visual { aspect-ratio: 1/1; display: flex; align-items: center; justify-content: center; background: #000; border-radius: 10px; }
