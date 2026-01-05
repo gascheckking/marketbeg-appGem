@@ -18,7 +18,6 @@ export default function ShippingAI({ itemWeight }: { itemWeight: string }) {
       </p>
 
       <div style={{ display: 'grid', gap: '12px' }}>
-        {/* Option 1 */}
         <div className="glass-card" style={{ 
           padding: '18px', background: 'rgba(255,255,255,0.02)', 
           display: 'flex', justifyContent: 'space-between', alignItems: 'center', 
@@ -31,7 +30,6 @@ export default function ShippingAI({ itemWeight }: { itemWeight: string }) {
           <strong style={{ color: 'var(--neon-mint)', fontSize: '14px' }}>49 kr</strong>
         </div>
 
-        {/* Option 2 - Rekommenderad */}
         <div className="glass-card" style={{ 
           padding: '18px', background: 'linear-gradient(135deg, rgba(157, 78, 221, 0.08), transparent)', 
           border: '1px solid var(--neon-purple)', display: 'flex', justifyContent: 'space-between', 
