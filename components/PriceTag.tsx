@@ -15,7 +15,7 @@ export default function PriceTag({ price, size = 'md' }: Props) {
   };
 
   const style = sizes[size];
-  if (!mounted) return <div style={{ height: style.fontSize }} />;
+  if (!mounted) return <div style={{ height: '20px' }} />;
 
   return (
     <div style={{
