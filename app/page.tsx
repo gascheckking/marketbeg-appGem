@@ -44,11 +44,11 @@ export default function Marketplace() {
         </div>
       )}
 
-      {/* 2. SNABBSÄJJ KONTROLL */}
+      {/* 2. SNABBSÄLJ KONTROLL */}
       <div className="glass-card" style={{ padding: '20px', borderRadius: '24px', marginBottom: '20px' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '20px' }}>
           <div style={{ flex: 1 }}>
-            <h2 style={{ fontSize: '1.2rem', fontWeight: 900, margin: 0 }}>SNABBSÄJJ OBJEKT</h2>
+            <h2 style={{ fontSize: '1.2rem', fontWeight: 900, margin: 0 }}>SNABBSÄLJ OBJEKT</h2>
             <div style={{ marginTop: '15px' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '9px', fontWeight: 900, opacity: 0.6 }}>
                 <span>Antal Föremål</span>
