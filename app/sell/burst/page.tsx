@@ -10,60 +10,63 @@ export default function BurstSellPage() {
 
   const handleCapture = () => {
     setPhotoCount(prev => prev + 1);
-    // Haptisk feedback (simulerad)
-    if (navigator.vibrate) navigator.vibrate(50);
+    if (navigator.vibrate) navigator.vibrate(40);
   };
 
   const finishSession = () => {
     setIsProcessing(true);
     setTimeout(() => {
       router.push(`/sell/instant?count=${photoCount}`);
-    }, 2000);
+    }, 1800);
   };
 
   return (
-    <div className="page-wrapper" style={{ height: '92vh', display: 'flex', flexDirection: 'column', padding: '15px' }}>
-      <header style={{ marginBottom: '20px' }}>
-        <h1 style={{ fontSize: '2rem', fontWeight: 900, margin: 0 }}>Burst Mode</h1>
-        <p className="muted" style={{ fontSize: '12px' }}>Smatta av bilder på allt du vill sälja.</p>
+    <div className="page-wrapper" style={{ height: '90vh', display: 'flex', flexDirection: 'column', padding: '15px' }}>
+      <header style={{ marginBottom: '15px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div>
+          <h1 style={{ fontSize: '1.2rem', fontWeight: 900, margin: 0 }}>BURST MODE</h1>
+          <p style={{ fontSize: '8px', opacity: 0.5, fontWeight: 800 }}>SMATTA AV BILDER PÅ OBJEKTEN</p>
+        </div>
+        <div style={{ color: 'var(--neon-mint)', fontSize: '14px', fontWeight: 900 }}>{photoCount}</div>
       </header>
 
       <div style={{ 
-        flex: 1, background: '#050505', borderRadius: '32px', position: 'relative', 
-        overflow: 'hidden', border: '2px solid rgba(157, 78, 221, 0.3)', display: 'flex', 
-        alignItems: 'center', justifyContent: 'center', boxShadow: 'inset 0 0 50px rgba(157, 78, 221, 0.1)'
+        flex: 1, background: '#000', borderRadius: '24px', position: 'relative', 
+        overflow: 'hidden', border: '1px solid rgba(157, 78, 221, 0.3)', display: 'flex', 
+        alignItems: 'center', justifyContent: 'center'
       }}>
-        <div style={{ fontSize: '50px', opacity: 0.2 }}>📸</div>
+        {/* Viewfinder Corners */}
+        <div style={{ position: 'absolute', top: 20, left: 20, width: 20, height: 20, borderTop: '1px solid #fff', borderLeft: '1px solid #fff', opacity: 0.3 }} />
+        <div style={{ position: 'absolute', top: 20, right: 20, width: 20, height: 20, borderTop: '1px solid #fff', borderRight: '1px solid #fff', opacity: 0.3 }} />
+        
+        <div style={{ fontSize: '40px', opacity: 0.1 }}>📸</div>
         
         <div style={{ 
-          position: 'absolute', top: '25px', background: 'rgba(0,0,0,0.8)', 
-          padding: '12px 25px', borderRadius: '40px', fontWeight: 900, 
-          border: '1px solid var(--neon-mint)', color: 'var(--neon-mint)', fontSize: '12px'
+          position: 'absolute', top: '20px', background: 'rgba(0,0,0,0.8)', 
+          padding: '8px 15px', borderRadius: '30px', fontWeight: 900, 
+          border: '1px solid var(--neon-mint)', color: 'var(--neon-mint)', fontSize: '9px'
         }}>
-          {photoCount} OBJEKT IDENTIFIERADE
+          {photoCount > 0 ? `${photoCount} OBJEKT IDENTIFIERADE` : "SIKTA PÅ OBJEKTET"}
         </div>
 
-        <button 
-          onClick={handleCapture}
-          className="shutter-btn"
-        />
+        <button onClick={handleCapture} className="shutter-btn" />
       </div>
 
-      <div style={{ padding: '25px 0', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <button onClick={() => router.back()} style={{ background: 'none', border: 'none', color: '#555', fontWeight: 900, fontSize: '12px' }}>AVBRYT</button>
+      <div style={{ padding: '20px 0', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <button onClick={() => router.back()} style={{ background: 'none', border: 'none', color: '#444', fontWeight: 900, fontSize: '10px' }}>AVBRYT</button>
         
         {photoCount > 0 && (
-          <button onClick={finishSession} className="primary-btn" style={{ width: 'auto', padding: '15px 35px', background: 'var(--neon-purple)' }}>
-            {isProcessing ? "ANALYSERAR..." : "KLAR & ANALYSERA"}
+          <button onClick={finishSession} className="primary-btn" style={{ width: 'auto', padding: '12px 25px', background: 'var(--neon-purple)', fontSize: '10px' }}>
+            {isProcessing ? "ANALYSERAR..." : "SLUTFÖR ANALYS"}
           </button>
         )}
       </div>
 
       <style jsx>{`
         .shutter-btn {
-          position: absolute; bottom: 40px; width: 75px; height: 75px; 
-          borderRadius: 50%; border: 6px solid #fff; background: transparent;
-          cursor: pointer; transition: all 0.1s;
+          position: absolute; bottom: 30px; width: 65px; height: 65px; 
+          border-radius: 50%; border: 4px solid #fff; background: transparent;
+          cursor: pointer; transition: all 0.1s; box-shadow: 0 0 20px rgba(0,0,0,0.5);
         }
         .shutter-btn:active { transform: scale(0.9); background: rgba(255,255,255,0.2); }
       `}</style>
