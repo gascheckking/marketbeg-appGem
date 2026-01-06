@@ -29,6 +29,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     { flag: '🇩🇰', code: 'DK' }, { flag: '🇫🇮', code: 'FI' },
     { flag: '🇬🇧', code: 'EN' }, { flag: '🇷🇺', code: 'RU' },
     { flag: '🇫🇷', code: 'FR' }, { flag: '🇩🇪', code: 'DE' }
+{ flag: '🇪🇸', code: 'ES' }, // Spanska
+{ flag: '🇮🇹', code: 'IT' }, // Italienska
+{ flag: '🇵🇱', code: 'PL' }, // Polska
+{ flag: '🇳🇱', code: 'NL' }  // Nederländska
   ];
 
   return (
