@@ -10,7 +10,8 @@ export default function LoadingAI() {
     }}>
       <div className="scanner-container" style={{ position: 'relative', width: '80px', height: '80px', marginBottom: '20px' }}>
         <div style={{ 
-          fontSize: '40px', animation: 'pulse 1.5s infinite ease-in-out' 
+          fontSize: '40px', animation: 'pulse 1.5s infinite ease-in-out',
+          filter: 'drop-shadow(0 0 10px var(--neon-mint))'
         }}>🧠</div>
         <div className="scanner-laser" style={{
           position: 'absolute',
@@ -22,22 +23,22 @@ export default function LoadingAI() {
           animation: 'scan 2s infinite linear'
         }} />
       </div>
-      <h3 style={{ fontWeight: 900, fontSize: '14px', letterSpacing: '1px', color: 'var(--neon-mint)', margin: 0 }}>
+      <h3 style={{ fontWeight: 900, fontSize: '13px', letterSpacing: '1px', color: 'var(--neon-mint)', margin: 0 }}>
         ANALYSERSAR LIKVIDITET...
       </h3>
-      <p className="muted" style={{ fontSize: '10px', marginTop: '8px', textTransform: 'uppercase', letterSpacing: '1px' }}>
+      <p style={{ fontSize: '9px', marginTop: '8px', textTransform: 'uppercase', letterSpacing: '1px', opacity: 0.4, fontWeight: 800 }}>
         Optimera matchning via BegAI Engine
       </p>
       
       <style jsx>{`
         @keyframes pulse {
-          0% { transform: scale(1); opacity: 0.8; }
+          0%, 100% { transform: scale(1); opacity: 0.7; }
           50% { transform: scale(1.1); opacity: 1; }
-          100% { transform: scale(1); opacity: 0.8; }
         }
         @keyframes scan {
           0% { top: 0%; opacity: 0; }
-          50% { opacity: 1; }
+          20% { opacity: 1; }
+          80% { opacity: 1; }
           100% { top: 100%; opacity: 0; }
         }
       `}</style>
