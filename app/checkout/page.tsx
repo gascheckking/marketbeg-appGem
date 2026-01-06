@@ -1,123 +1,75 @@
 // // app/checkout/page.tsx
 "use client";
 import React, { useState } from 'react';
-import ShippingAI from '@/components/ShippingAI';
+import { useRouter } from 'next/navigation';
 
 export default function CheckoutPage() {
   const [shieldActive, setShieldActive] = useState(true);
+  const router = useRouter();
 
-  // Vi räknar ut totalen baserat på Shield-status
   const itemPrice = 11450;
   const shieldFee = shieldActive ? 149 : 0;
   const total = itemPrice + shieldFee;
 
   return (
     <div className="page-wrapper" style={{ padding: '20px', animation: 'fadeIn 0.4s ease' }}>
-      
-      {/* ORIENTERING & STATUS */}
       <header style={{ marginBottom: '25px' }}>
-        <h1 style={{ fontSize: '1.6rem', fontWeight: 900, margin: 0 }}>SLUTFÖR <span style={{ color: 'var(--neon-mint)' }}>KÖP</span></h1>
+        <h1 style={{ fontSize: '1.6rem', fontWeight: 900, margin: 0 }}>KASSA</h1>
         <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginTop: '6px' }}>
-          <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: 'var(--neon-mint)', boxShadow: '0 0 8px var(--neon-mint)' }}></div>
-          <span style={{ fontSize: '9px', fontWeight: 800, opacity: 0.6, letterSpacing: '1px', textTransform: 'uppercase' }}>
-            Verifierad Match • Redo för Escrow
-          </span>
+          <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: 'var(--neon-mint)' }}></div>
+          <span style={{ fontSize: '9px', fontWeight: 800, opacity: 0.6, letterSpacing: '1px' }}>SÄKER BETALNING</span>
         </div>
       </header>
-      
+
       <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
-        
-        {/* KARMA SHIELD (UPPGRADERAD MED MER DESCRIPTIVE UI) */}
-        <div className="glass-card" style={{ 
-          padding: '20px', 
-          border: shieldActive ? '1px solid var(--neon-purple)' : '1px solid #222',
+        {/* KARMA SHIELD */}
+        <div style={{ 
+          padding: '20px', borderRadius: '24px',
           background: shieldActive ? 'rgba(157, 78, 221, 0.05)' : 'rgba(255,255,255,0.02)',
-          borderRadius: '24px',
-          transition: 'all 0.3s ease'
+          border: shieldActive ? '1px solid var(--neon-purple)' : '1px solid #222'
         }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
             <div style={{ flex: 1 }}>
-              <h3 style={{ margin: 0, fontSize: '13px', fontWeight: 900, display: 'flex', alignItems: 'center', gap: '6px' }}>
-                🛡️ Karma Shield {shieldActive && <span style={{ fontSize: '8px', background: 'var(--neon-purple)', padding: '2px 6px', borderRadius: '4px' }}>AKTIV</span>}
-              </h3>
+              <h3 style={{ margin: 0, fontSize: '13px', fontWeight: 900 }}>🛡️ KARMA SHIELD</h3>
               <p style={{ fontSize: '10px', marginTop: '6px', opacity: 0.5, lineHeight: '1.4' }}>
-                Pengarna hålls i förvar (escrow). Säljaren får betalt först när du godkänt varan.
+                Pengarna släpps till säljaren när varan är godkänd.
               </p>
             </div>
-            <div 
-              onClick={() => setShieldActive(!shieldActive)}
-              style={{ 
-                width: '44px', height: '24px', background: shieldActive ? 'var(--neon-purple)' : '#333',
-                borderRadius: '12px', position: 'relative', cursor: 'pointer', transition: '0.3s'
-              }}>
-              <div style={{ 
-                width: '18px', height: '18px', background: '#fff', borderRadius: '50%',
-                position: 'absolute', top: '3px', left: shieldActive ? '23px' : '3px', transition: '0.3s'
-              }}></div>
+            <div onClick={() => setShieldActive(!shieldActive)} className="toggle-btn">
+              <div style={{ left: shieldActive ? '23px' : '3px' }} className="toggle-dot"></div>
             </div>
           </div>
-        </div>
-
-        {/* FRAKT AI */}
-        <div style={{ margin: '5px 0' }}>
-           <ShippingAI itemWeight="1.2kg" />
         </div>
 
         {/* ORDER SPECS */}
-        <div className="glass-card" style={{ padding: '20px', borderRadius: '24px', background: 'rgba(255,255,255,0.02)' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px', fontSize: '12px', fontWeight: 700 }}>
-            <span style={{ opacity: 0.4 }}>OBJEKT</span>
-            <span>iPhone 15 Pro Max</span>
-          </div>
-          <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px', fontSize: '12px', fontWeight: 700 }}>
-            <span style={{ opacity: 0.4 }}>PRIS</span>
-            <span>{itemPrice.toLocaleString()} KR</span>
-          </div>
-          <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '12px', fontWeight: 700, color: shieldActive ? 'var(--neon-purple)' : '#555' }}>
-            <span style={{ opacity: 0.4 }}>SHIELD & FRAKT</span>
-            <span>{shieldFee} KR</span>
-          </div>
-          
-          <div style={{ 
-            display: 'flex', justifyContent: 'space-between', 
-            paddingTop: '15px', borderTop: '1px solid #222', 
-            marginTop: '15px' 
-          }}>
-            <strong style={{ fontSize: '1.1rem', fontWeight: 900 }}>TOTALT</strong>
-            <strong style={{ fontSize: '1.1rem', color: 'var(--neon-mint)', fontWeight: 900 }}>
-              {total.toLocaleString()} KR
-            </strong>
+        <div style={{ padding: '25px', borderRadius: '24px', background: 'rgba(255,255,255,0.02)', border: '1px solid #111' }}>
+          <div className="row"><span>OBJEKT</span><span>iPhone 15 Pro Max</span></div>
+          <div className="row"><span>PRIS</span><span>{itemPrice.toLocaleString()} KR</span></div>
+          <div className="row" style={{ color: 'var(--neon-purple)' }}><span>FRAKT & SKYDD</span><span>{shieldFee} KR</span></div>
+          <div className="total-row">
+            <span>TOTALT</span>
+            <span style={{ color: 'var(--neon-mint)' }}>{total.toLocaleString()} KR</span>
           </div>
         </div>
 
-        {/* SOCIAL PROOF / TRYGGHETSDATA */}
-        <div style={{ textAlign: 'center', marginTop: '10px', paddingBottom: '120px' }}>
-          <p style={{ fontSize: '9px', fontWeight: 800, opacity: 0.3, letterSpacing: '1px' }}>
-            TRANSAKTIONEN KRYPTERAS VIA BANKID & KARMA PROTOCOL
-          </p>
-        </div>
+        <p style={{ textAlign: 'center', fontSize: '9px', opacity: 0.3, fontWeight: 800 }}>
+          TRANSAKTIONEN KRYPTERAS VIA BANKID
+        </p>
       </div>
 
-      {/* FIXERAD BETALKNAPP (SWISH-FOKUS) */}
-      <div style={{ 
-        position: 'fixed', bottom: 0, left: 0, right: 0, 
-        padding: '20px 25px calc(20px + env(safe-area-inset-bottom))',
-        background: 'rgba(2, 4, 10, 0.9)', backdropFilter: 'blur(20px)',
-        borderTop: '1px solid #222', zIndex: 100
-      }}>
-        <button style={{ 
-          width: '100%', padding: '18px', borderRadius: '18px', 
-          background: '#fff', color: '#000', 
-          fontWeight: 900, fontSize: '14px', border: 'none',
-          boxShadow: '0 0 20px rgba(255,255,255,0.1)',
-          display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px'
-        }}>
-          ÖPPNA SWISH & SIGNERA
+      <div className="sticky-bottom">
+        <button onClick={() => router.push('/checkout/success')} className="swish-btn">
+          BETALA MED BANKID
         </button>
       </div>
 
       <style jsx>{`
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+        .row { display: flex; justify-content: space-between; margin-bottom: 12px; fontSize: 11px; fontWeight: 800; opacity: 0.8; }
+        .total-row { display: flex; justify-content: space-between; border-top: 1px solid #222; paddingTop: 15px; marginTop: 15px; fontWeight: 900; fontSize: 16px; }
+        .toggle-btn { width: 44px; height: 24px; background: ${shieldActive ? 'var(--neon-purple)' : '#333'}; borderRadius: 12px; position: relative; cursor: pointer; }
+        .toggle-dot { width: 18px; height: 18px; background: #fff; borderRadius: 50%; position: absolute; top: 3px; transition: 0.3s; }
+        .sticky-bottom { position: fixed; bottom: 0; left: 0; right: 0; padding: 20px 25px calc(20px + env(safe-area-inset-bottom)); background: rgba(2,4,10,0.9); backdrop-filter: blur(20px); border-top: 1px solid #111; }
+        .swish-btn { width: 100%; padding: 18px; borderRadius: 18px; background: #fff; color: #000; fontWeight: 900; border: none; fontSize: 14px; }
       `}</style>
     </div>
   );
