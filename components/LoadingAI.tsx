@@ -27,7 +27,7 @@ export default function LoadingAI() {
         ANALYSERSAR LIKVIDITET...
       </h3>
       <p style={{ fontSize: '9px', marginTop: '8px', textTransform: 'uppercase', letterSpacing: '1px', opacity: 0.4, fontWeight: 800 }}>
-        Optimera matchning via BegAI Engine
+        Optimera matchning via KARMA Engine
       </p>
       
       <style jsx>{`
