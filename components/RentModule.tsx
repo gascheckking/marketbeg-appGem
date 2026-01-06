@@ -3,33 +3,40 @@
 
 export default function RentModule() {
   return (
-    <div className="rent-card" style={{
+    <div style={{
       position: 'relative', overflow: 'hidden', borderRadius: '24px',
-      border: '1px solid rgba(157, 78, 221, 0.2)', background: '#02040a',
-      marginTop: '25px', height: '150px', cursor: 'pointer',
-      boxShadow: '0 10px 30px rgba(0,0,0,0.4)'
+      border: '1px solid rgba(157, 78, 221, 0.3)', background: '#02040a',
+      marginTop: '20px', height: '140px', cursor: 'pointer',
+      boxShadow: '0 15px 35px rgba(0,0,0,0.4)',
+      display: 'flex', alignItems: 'center', justifyContent: 'center'
     }}>
       <div style={{
-        position: 'absolute', inset: 0, zIndex: 10,
-        background: 'linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(2,4,10,0.95))',
+        position: 'absolute', inset: 0, zIndex: 2,
+        background: 'linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(2,4,10,0.9))',
         display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
-        backdropFilter: 'blur(6px)'
+        backdropFilter: 'blur(4px)', padding: '20px'
       }}>
         <div style={{
-          background: 'var(--neon-purple)', color: '#fff', fontSize: '9px', 
-          padding: '4px 10px', borderRadius: '12px', fontWeight: 900, marginBottom: '10px',
-          boxShadow: '0 0 15px rgba(157, 78, 221, 0.4)', letterSpacing: '1px'
-        }}>Q4 RELEASE</div>
+          background: 'var(--neon-purple)', color: '#fff', fontSize: '8px', 
+          padding: '3px 10px', borderRadius: '10px', fontWeight: 900, marginBottom: '8px',
+          boxShadow: '0 0 15px rgba(157, 78, 221, 0.4)', letterSpacing: '1.5px'
+        }}>COMING SOON</div>
         
-        <h3 style={{margin: 0, fontSize: '1.3rem', fontWeight: 900, letterSpacing: '-0.5px'}}>Karma Rent</h3>
-        <p className="muted" style={{fontSize: '11px', marginTop: '6px', textAlign: 'center', maxWidth: '220px', lineHeight: '1.4'}}>
-          Aktivera passiv inkomst på dina prylar. Fullt försäkrat via Karma Shield.
+        <h3 style={{margin: 0, fontSize: '1.2rem', fontWeight: 900, letterSpacing: '-0.5px'}}>KARMA RENT</h3>
+        <p style={{
+          fontSize: '9px', marginTop: '6px', textAlign: 'center', 
+          maxWidth: '200px', lineHeight: '1.4', opacity: 0.5, fontWeight: 700
+        }}>
+          Hyr ut dina prylar istället för att sälja. Säkrat via Karma Shield.
         </p>
       </div>
 
-      {/* Bakgrunds-ikoner för textur */}
-      <div style={{ padding: '25px', opacity: 0.1, display: 'flex', justifyContent: 'space-around', fontSize: '35px', filter: 'grayscale(1)' }}>
-        <span>🎸</span><span>📷</span><span>🚲</span>
+      {/* Dekorativa ikoner */}
+      <div style={{ 
+        display: 'flex', gap: '30px', opacity: 0.15, fontSize: '30px', 
+        filter: 'blur(1px)', position: 'absolute', zIndex: 1 
+      }}>
+        <span>🎸</span><span>📸</span><span>🚲</span><span>🎮</span>
       </div>
     </div>
   );
