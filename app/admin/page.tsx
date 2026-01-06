@@ -4,59 +4,56 @@ import React from 'react';
 
 export default function AdminPage() {
   return (
-    <div style={{ background: '#02040a', minHeight: '100vh', color: '#fff', padding: '40px 20px' }}>
-      <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
-        <header style={{ marginBottom: '50px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #111', paddingBottom: '20px' }}>
-          <div>
-            <h1 style={{ fontSize: '1.8rem', fontWeight: 900, letterSpacing: '-2px', margin: 0 }}>
-              KARMA <span style={{ color: 'var(--neon-purple)' }}>CONTROL</span>
-            </h1>
-            <p style={{ fontSize: '11px', color: '#555', fontWeight: 700, marginTop: '4px' }}>SYSTEM MONITOR v2.6.0</p>
-          </div>
-          <div style={{ background: 'rgba(0,255,136,0.05)', padding: '8px 16px', borderRadius: '10px', border: '1px solid rgba(0,255,136,0.1)' }}>
-            <span style={{ color: 'var(--neon-mint)', fontWeight: 900, fontSize: '10px', letterSpacing: '1px' }}>NODE: STHLM-HQ</span>
+    <div style={{ background: 'var(--bg-deep)', minHeight: '100vh', color: '#fff', padding: '20px 15px' }}>
+      <div style={{ maxWidth: '600px', margin: '0 auto' }}>
+        <header style={{ marginBottom: '30px', borderBottom: '1px solid var(--border)', paddingBottom: '15px' }}>
+          <h1 style={{ fontSize: '1.4rem', fontWeight: 900, letterSpacing: '-1.5px', margin: 0 }}>
+            KARMA <span style={{ color: 'var(--neon-purple)' }}>CONTROL</span>
+          </h1>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '5px' }}>
+            <p style={{ fontSize: '9px', color: '#555', fontWeight: 800 }}>SYSTEM MONITOR v2.6.0</p>
+            <span style={{ color: 'var(--neon-mint)', fontWeight: 900, fontSize: '9px', letterSpacing: '1px' }}>● STHLM-HQ ONLINE</span>
           </div>
         </header>
 
-        {/* Stats Grid */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px', marginBottom: '40px' }}>
+        {/* Stats Grid - 2 kolumner för mobilen */}
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', marginBottom: '20px' }}>
           {[
-            { label: 'Aktiva Loops', val: '1,284', change: '+12%', color: 'var(--neon-mint)' },
-            { label: 'Karma Engine', val: 'ONLINE', change: '99.9% UPTIME', color: 'var(--neon-purple)' },
-            { label: 'AI Match Rate', val: '94.2%', change: 'OPTIMAL', color: '#fff' }
+            { label: 'Loops', val: '1,284', color: 'var(--neon-mint)' },
+            { label: 'Uptime', val: '99.9%', color: 'var(--neon-purple)' },
+            { label: 'AI Match', val: '94.2%', color: '#fff' },
+            { label: 'Nodes', val: '12', color: '#555' }
           ].map((s, i) => (
-            <div key={i} className="glass-card" style={{ padding: '30px', border: `1px solid ${i === 1 ? 'var(--neon-purple)' : 'rgba(255,255,255,0.05)'}` }}>
-              <h3 style={{ fontSize: '10px', color: '#555', textTransform: 'uppercase', letterSpacing: '1px', margin: 0 }}>{s.label}</h3>
-              <p style={{ fontSize: '2.5rem', fontWeight: 900, margin: '15px 0' }}>{s.val}</p>
-              <span style={{ fontSize: '10px', color: s.color, fontWeight: 900 }}>{s.change}</span>
+            <div key={i} className="glass-card" style={{ padding: '15px', border: '1px solid rgba(255,255,255,0.05)' }}>
+              <h3 style={{ fontSize: '8px', color: '#555', textTransform: 'uppercase', margin: 0 }}>{s.label}</h3>
+              <p style={{ fontSize: '1.2rem', fontWeight: 900, margin: '5px 0', color: s.color }}>{s.val}</p>
             </div>
           ))}
         </div>
 
         {/* Market Pulse Log */}
-        <div className="glass-card" style={{ padding: '30px', borderRadius: '24px' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '25px' }}>
-            <h2 style={{ fontSize: '1.2rem', fontWeight: 900, margin: 0 }}>AI Market Pulse Log</h2>
-            <button style={{ background: 'rgba(255,255,255,0.05)', border: 'none', color: '#666', fontSize: '10px', padding: '5px 10px', borderRadius: '6px', fontWeight: 800 }}>RENSA LOGG</button>
+        <div className="glass-card" style={{ padding: '15px', borderRadius: '16px' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '15px' }}>
+            <h2 style={{ fontSize: '11px', fontWeight: 900, margin: 0 }}>MARKET PULSE</h2>
+            <button style={{ background: 'none', border: 'none', color: '#444', fontSize: '9px', fontWeight: 800 }}>RENSA</button>
           </div>
           
-          <div style={{ display: 'grid', gap: '10px' }}>
+          <div style={{ display: 'grid', gap: '8px' }}>
             {[
-              { time: '14:22:01', event: 'Instant Sell matchad', detail: 'iPhone 15 Pro -> Köpare id_882', status: 'COMPLETE' },
-              { time: '14:21:45', event: 'Ny Loop skapad', detail: 'MacBook M3 (AI-verifierad)', status: 'ACTIVE' },
-              { time: '14:20:12', event: 'BankID Verifiering', detail: 'Användare "Alex L" (99% Trust)', status: 'SUCCESS' },
+              { time: '14:22', event: 'Match', detail: 'iPhone 15 Pro', status: 'OK' },
+              { time: '14:21', event: 'Loop', detail: 'MacBook M3', status: 'LIVE' },
+              { time: '14:20', event: 'Auth', detail: 'BankID Verify', status: 'SEC' },
             ].map((log, i) => (
               <div key={i} style={{ 
-                display: 'flex', justifyContent: 'space-between', padding: '16px', 
-                background: 'rgba(255,255,255,0.01)', borderRadius: '14px', border: '1px solid rgba(255,255,255,0.03)',
-                fontSize: '12px', alignItems: 'center'
+                display: 'flex', justifyContent: 'space-between', padding: '10px', 
+                background: 'rgba(255,255,255,0.01)', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.03)',
+                fontSize: '10px', alignItems: 'center'
               }}>
-                <div style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>
-                  <span style={{ opacity: 0.3, fontFamily: 'monospace', fontSize: '10px' }}>{log.time}</span>
+                <div style={{ display: 'flex', gap: '10px' }}>
+                  <span style={{ opacity: 0.3, fontFamily: 'monospace' }}>{log.time}</span>
                   <span style={{ fontWeight: 800 }}>{log.event}</span>
-                  <span style={{ opacity: 0.5 }}>{log.detail}</span>
                 </div>
-                <span style={{ color: i === 1 ? 'var(--neon-purple)' : 'var(--neon-mint)', fontWeight: 900, fontSize: '9px' }}>{log.status}</span>
+                <span style={{ color: i === 1 ? 'var(--neon-purple)' : 'var(--neon-mint)', fontWeight: 900 }}>{log.status}</span>
               </div>
             ))}
           </div>
