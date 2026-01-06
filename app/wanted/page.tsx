@@ -14,8 +14,11 @@ export default function WantedPage() {
   return (
     <div className="page-wrapper" style={{ padding: '15px' }}>
       <header style={{ marginBottom: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <h1 style={{ fontSize: '1.6rem', fontWeight: 900, margin: 0 }}>Efterfrågan</h1>
-        <div style={{ fontSize: '8px', background: 'rgba(0,255,136,0.1)', color: 'var(--neon-mint)', padding: '5px 10px', borderRadius: '20px', fontWeight: 900 }}>
+        <div>
+          <h1 style={{ fontSize: '1.4rem', fontWeight: 900, margin: 0 }}>EFTERFRÅGAN</h1>
+          <p style={{ fontSize: '8px', color: 'var(--neon-purple)', fontWeight: 900 }}>STOCKHOLM NODE • LIVE</p>
+        </div>
+        <div style={{ fontSize: '8px', background: 'rgba(0,255,136,0.1)', color: 'var(--neon-mint)', padding: '5px 12px', borderRadius: '20px', fontWeight: 900 }}>
           1.2k KÖPARE ONLINE
         </div>
       </header>
@@ -23,16 +26,16 @@ export default function WantedPage() {
       <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
         {matchingRequests.map(req => (
           <div key={req.id} className="glass-card" style={{ 
-            padding: '16px', 
-            borderLeft: req.demand === 'EXTREM' ? '3px solid var(--neon-purple)' : '1px solid rgba(255,255,255,0.05)',
-            display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderRadius: '18px'
+            padding: '15px', 
+            borderLeft: req.demand === 'EXTREM' ? '3px solid var(--neon-purple)' : '1px solid var(--border)',
+            display: 'flex', justifyContent: 'space-between', alignItems: 'center'
           }}>
             <div>
-              <span style={{ fontSize: '7px', fontWeight: 900, color: req.demand === 'EXTREM' ? 'var(--neon-purple)' : 'var(--neon-mint)' }}>{req.demand} EFTERFRÅGAN</span>
-              <div style={{ fontSize: '13px', fontWeight: 900, margin: '2px 0' }}>{req.item}</div>
+              <span style={{ fontSize: '7px', fontWeight: 900, color: req.demand === 'EXTREM' ? 'var(--neon-purple)' : 'var(--neon-mint)' }}>{req.demand} PRESSURE</span>
+              <div style={{ fontSize: '12px', fontWeight: 900, margin: '2px 0' }}>{req.item}</div>
               <div style={{ fontSize: '9px', opacity: 0.4 }}>BUDGET: {req.budget} • STR: {req.size}</div>
             </div>
-            <button onClick={() => router.push('/sell')} className="primary-btn" style={{ width: 'auto', padding: '8px 15px', fontSize: '9px' }}>SÄLJ</button>
+            <button onClick={() => router.push('/sell/burst')} className="primary-btn" style={{ width: 'auto', padding: '8px 15px', fontSize: '9px', background: 'var(--neon-purple)', color: '#fff' }}>SÄLJ</button>
           </div>
         ))}
       </div>
