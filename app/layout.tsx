@@ -25,15 +25,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   ];
 
   const languages = [
-    { flag: '🇸🇪', code: 'SV' }, { flag: '🇳🇴', code: 'NO' }, 
-    { flag: '🇩🇰', code: 'DK' }, { flag: '🇫🇮', code: 'FI' },
-    { flag: '🇬🇧', code: 'EN' }, { flag: '🇷🇺', code: 'RU' },
-    { flag: '🇫🇷', code: 'FR' }, { flag: '🇩🇪', code: 'DE' }
-{ flag: '🇪🇸', code: 'ES' }, // Spanska
-{ flag: '🇮🇹', code: 'IT' }, // Italienska
-{ flag: '🇵🇱', code: 'PL' }, // Polska
-{ flag: '🇳🇱', code: 'NL' }  // Nederländska
-  ];
+  { flag: '🇸🇪', code: 'SV' }, 
+  { flag: '🇳🇴', code: 'NO' }, 
+  { flag: '🇬🇧', code: 'EN' }, 
+  { flag: '🇩🇰', code: 'DK' }, 
+  { flag: '🇫🇮', code: 'FI' }, 
+  { flag: '🇷🇺', code: 'RU' }, 
+  { flag: '🇫🇷', code: 'FR' }, 
+  { flag: '🇪🇸', code: 'ES' },
+  { flag: '🇩🇪', code: 'DE' }
+];
 
   return (
     <html lang="sv">
