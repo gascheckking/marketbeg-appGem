@@ -6,86 +6,100 @@ export default function Profile() {
   const user = {
     name: "Alex Lindgren",
     karma: 2450,
-    level: "Pålitlig",
-    statusText: "Du handlar smidigt. Det märks."
+    trustScore: "98.2%",
+    loops: 42,
+    statusText: "Du handlar smidigt. Det märks på dina villkor."
   };
 
   return (
-    <div className="page-wrapper" style={{ animation: 'fadeIn 0.5s ease' }}>
+    <div className="page-wrapper" style={{ animation: 'fadeIn 0.5s ease', background: '#02040a', minHeight: '100vh' }}>
       
-      {/* LÅST SYSTEM-NAV (Samma som på Marketplace för enhetlighet) */}
+      {/* SYSTEM-NAV (Smidig överblick) */}
       <div style={{ 
         position: 'sticky', top: 0, zIndex: 100, 
         background: 'rgba(2, 4, 10, 0.95)', backdropFilter: 'blur(20px)',
         borderBottom: '1px solid rgba(255,255,255,0.05)', padding: '12px 20px' 
       }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <span style={{ fontSize: '10px', fontWeight: 900, letterSpacing: '1px' }}>DIN PROFIL</span>
-          <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-             <span style={{ fontSize: '11px', fontWeight: 900, color: 'var(--neon-mint)' }}>{user.karma} KARMA</span>
-             <div style={{ width: '1px', height: '12px', background: '#333' }}></div>
-             <span style={{ fontSize: '11px', fontWeight: 900 }}>14 250 KR</span>
+          <span style={{ fontSize: '10px', fontWeight: 900, letterSpacing: '1px', opacity: 0.6 }}>DIN PROFIL</span>
+          <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+             <div style={{ textAlign: 'right' }}>
+                <div style={{ fontSize: '11px', fontWeight: 900, color: 'var(--neon-mint)' }}>{user.karma} KARMA</div>
+                <div style={{ fontSize: '7px', fontWeight: 800, opacity: 0.4 }}>TILLGÅNGAR</div>
+             </div>
+             <div style={{ width: '1px', height: '18px', background: 'rgba(255,255,255,0.1)' }}></div>
+             <div style={{ textAlign: 'right' }}>
+                <div style={{ fontSize: '11px', fontWeight: 900 }}>14 250 KR</div>
+                <div style={{ fontSize: '7px', fontWeight: 800, opacity: 0.4 }}>SALDO</div>
+             </div>
           </div>
         </div>
       </div>
 
       <div style={{ padding: '20px' }}>
-        {/* HEADER SECTION */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '15px', marginBottom: '25px' }}>
+        
+        {/* HEADER SECTION (Fokus på Verifiering & Tillit) */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '20px', marginBottom: '30px', marginTop: '10px' }}>
           <div style={{ 
-            width: '60px', height: '60px', borderRadius: '50%', 
-            border: '2px solid var(--neon-mint)', display: 'flex', 
-            alignItems: 'center', justifyContent: 'center', fontSize: '24px', 
-            background: '#080808', boxShadow: '0 0 15px rgba(0, 255, 136, 0.1)' 
+            width: '70px', height: '70px', borderRadius: '24px', 
+            border: '1px solid rgba(255,255,255,0.1)', display: 'flex', 
+            alignItems: 'center', justifyContent: 'center', fontSize: '28px', 
+            background: 'linear-gradient(135deg, #0a0a0a 0%, #111 100%)'
           }}>🛡️</div>
           <div>
-            <h1 style={{ fontSize: '1.3rem', fontWeight: 900, margin: 0 }}>{user.name}</h1>
-            <div style={{ display: 'flex', gap: '5px', marginTop: '4px' }}>
-              <span style={{ background: 'var(--neon-purple)', color: '#fff', fontSize: '8px', fontWeight: 900, padding: '3px 10px', borderRadius: '6px' }}>
-                NIVÅ: {user.level.toUpperCase()}
+            <h1 style={{ fontSize: '1.4rem', fontWeight: 900, margin: 0, letterSpacing: '-0.5px' }}>{user.name}</h1>
+            <div style={{ display: 'flex', gap: '6px', marginTop: '6px' }}>
+              <span style={{ color: 'var(--neon-mint)', fontSize: '9px', fontWeight: 900, letterSpacing: '0.5px' }}>
+                BANKID VERIFIERAD
               </span>
-              <span style={{ background: 'rgba(255,255,255,0.05)', color: '#666', fontSize: '8px', fontWeight: 900, padding: '3px 10px', borderRadius: '6px' }}>EST. 2023</span>
+              <span style={{ color: 'rgba(255,255,255,0.3)', fontSize: '9px', fontWeight: 900 }}>• MEDLEM SEDAN 2023</span>
             </div>
           </div>
         </div>
 
-        {/* STATS GRID (Smala avlånga rutor) */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '8px', marginBottom: '20px' }}>
-          {[
-            { val: '98.2%', label: 'TRUST SCORE', color: 'var(--neon-mint)' },
-            { val: user.karma.toLocaleString(), label: 'KARMA', color: '#fff' },
-            { val: '42', label: 'LOOPS', color: '#fff' }
-          ].map((stat, i) => (
-            <div key={i} className="glass-card" style={{ textAlign: 'center', padding: '15px 5px', borderRadius: '15px', background: 'rgba(255,255,255,0.02)' }}>
-              <div style={{ fontSize: '1rem', fontWeight: 900, color: stat.color }}>{stat.val}</div>
-              <div style={{ fontSize: '7px', fontWeight: 900, opacity: 0.4, marginTop: '4px', letterSpacing: '0.5px' }}>{stat.label}</div>
-            </div>
-          ))}
+        {/* TILLIT & AKTIVITET (Rensat Grid) */}
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', marginBottom: '20px' }}>
+          <div style={{ background: 'rgba(255,255,255,0.02)', padding: '20px', borderRadius: '20px', border: '1px solid rgba(255,255,255,0.05)' }}>
+            <div style={{ fontSize: '20px', fontWeight: 900, color: 'var(--neon-mint)' }}>{user.trustScore}</div>
+            <div style={{ fontSize: '8px', fontWeight: 900, opacity: 0.4, marginTop: '4px' }}>TILLIT HOS ANDRA</div>
+          </div>
+          <div style={{ background: 'rgba(255,255,255,0.02)', padding: '20px', borderRadius: '20px', border: '1px solid rgba(255,255,255,0.05)' }}>
+            <div style={{ fontSize: '20px', fontWeight: 900 }}>{user.loops}</div>
+            <div style={{ fontSize: '8px', fontWeight: 900, opacity: 0.4, marginTop: '4px' }}>SLUTFÖRDA LOOPS</div>
+          </div>
         </div>
 
-        {/* AI HANDELS-DNA */}
-        <div className="glass-card" style={{ 
-          padding: '20px', 
-          background: 'rgba(157, 78, 221, 0.05)', 
-          border: '1px solid rgba(157, 78, 221, 0.2)', 
-          borderRadius: '20px' 
+        {/* DINA FÖRMÅNER (Ersätter DNA/Hype) */}
+        <div style={{ 
+          padding: '25px', 
+          background: 'rgba(157, 78, 221, 0.03)', 
+          border: '1px solid rgba(157, 78, 221, 0.1)', 
+          borderRadius: '24px' 
         }}>
-          <div style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>
-            <div style={{ fontSize: '28px' }}>🤖</div>
-            <div>
-              <span style={{ fontSize: '8px', color: 'var(--neon-purple)', fontWeight: 900, letterSpacing: '1px' }}>AI HANDELS-DNA</span>
-              <strong style={{ fontSize: '1.1rem', display: 'block', margin: '2px 0', fontWeight: 900 }}>"The Quick Flipper"</strong>
-              <p style={{ margin: 0, fontSize: '10px', opacity: 0.5, lineHeight: '1.4' }}>
-                Du säljer <span style={{color: '#fff', fontWeight: 700}}>42% snabbare</span> än snittet inom <span style={{color: 'var(--neon-mint)', fontWeight: 700}}>Apple Tech</span>.
-              </p>
+          <h3 style={{ margin: '0 0 15px 0', fontSize: '10px', fontWeight: 900, color: 'var(--neon-purple)', letterSpacing: '1px' }}>AKTIVA FÖRMÅNER</h3>
+          
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              <span style={{ fontSize: '12px' }}>⚡</span>
+              <span style={{ fontSize: '12px', fontWeight: 800 }}>Prioriterad i Snabbsälj</span>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              <span style={{ fontSize: '12px' }}>🛡️</span>
+              <span style={{ fontSize: '12px', fontWeight: 800 }}>Reducerad Karma Shield-avgift</span>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              <span style={{ fontSize: '12px' }}>📦</span>
+              <span style={{ fontSize: '12px', fontWeight: 800 }}>Förtur på PostNord-etiketter</span>
             </div>
           </div>
         </div>
 
-        {/* LUGN INFO-RAD (Tradera-smart) */}
-        <p style={{ textAlign: 'center', fontSize: '10px', opacity: 0.3, marginTop: '30px', fontWeight: 700 }}>
-          {user.statusText}
-        </p>
+        {/* LUGN INFO-RAD */}
+        <div style={{ marginTop: '40px', textAlign: 'center' }}>
+          <p style={{ fontSize: '10px', opacity: 0.3, fontWeight: 700, lineHeight: '1.5', maxWidth: '200px', margin: '0 auto' }}>
+            {user.statusText.toUpperCase()}
+          </p>
+        </div>
       </div>
 
       <style jsx>{`
