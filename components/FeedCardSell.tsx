@@ -18,7 +18,6 @@ export default function FeedCardSell({ id, title, price, trust, matchScore = 95,
 
   return (
     <div className="mini-card" onClick={() => router.push(`/listing/${id}`)}>
-      {/* BADGES - Nu mer kompakta för 3-kolumns layout */}
       <div className="card-header-badges">
         <div className="match-dot">{matchScore}%</div>
         {isInstant && <div className="instant-icon">⚡</div>}
@@ -51,79 +50,52 @@ export default function FeedCardSell({ id, title, price, trust, matchScore = 95,
           padding: 6px;
           position: relative;
           cursor: pointer;
-          transition: transform 0.2s;
-          display: flex;
-          flex-direction: column;
+          transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .mini-card:active { transform: scale(0.96); }
+        .mini-card:active { transform: scale(0.94); background: rgba(255, 255, 255, 0.05); }
 
         .card-header-badges {
-          position: absolute;
-          top: 10px;
-          left: 10px;
-          right: 10px;
-          display: flex;
-          justify-content: space-between;
-          z-index: 5;
+          position: absolute; top: 8px; left: 8px; right: 8px;
+          display: flex; justify-content: space-between; z-index: 5;
         }
 
         .match-dot {
-          background: var(--bg-deep);
-          color: var(--neon-mint);
+          background: #000; color: var(--neon-mint);
           border: 1px solid var(--neon-mint);
-          font-size: 7px;
-          font-weight: 900;
-          padding: 1px 4px;
-          border-radius: 4px;
+          font-size: 6px; font-weight: 900;
+          padding: 1px 3px; border-radius: 3px;
         }
 
         .instant-icon {
-          background: var(--neon-purple);
-          color: #fff;
-          font-size: 7px;
-          padding: 1px 4px;
-          border-radius: 4px;
-          box-shadow: 0 0 10px rgba(157, 78, 221, 0.4);
+          background: var(--neon-purple); color: #fff;
+          font-size: 6px; padding: 1px 3px; border-radius: 3px;
+          box-shadow: 0 0 8px rgba(157, 78, 221, 0.5);
         }
 
         .card-visual {
-          width: 100%;
-          aspect-ratio: 1/1;
-          background: #000;
-          border-radius: 8px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          margin-bottom: 6px;
+          width: 100%; aspect-ratio: 1/1;
+          background: linear-gradient(180deg, #050505 0%, #111 100%);
+          border-radius: 8px; display: flex;
+          align-items: center; justify-content: center; margin-bottom: 6px;
         }
 
-        .emoji-display { font-size: 20px; }
+        .emoji-display { font-size: 22px; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.5)); }
 
-        .card-content {
-          display: flex;
-          flex-direction: column;
-          gap: 2px;
-        }
+        .card-content { display: flex; flex-direction: column; gap: 1px; }
 
         .item-name {
-          margin: 0;
-          font-size: 9px;
-          font-weight: 700;
-          color: #ccc;
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
+          margin: 0; font-size: 8px; font-weight: 800;
+          color: #eee; white-space: nowrap;
+          overflow: hidden; text-overflow: ellipsis;
+          text-transform: uppercase; letter-spacing: 0.2px;
         }
 
-        .price-row {
-          margin: 2px 0;
-        }
+        .price-row { margin: 1px 0; }
 
         .trust-row {
-          opacity: 0.8;
-          transform: scale(0.85);
-          transform-origin: left;
+          opacity: 0.7; transform: scale(0.75);
+          transform-origin: left; margin-top: -2px;
         }
       `}</style>
     </div>
