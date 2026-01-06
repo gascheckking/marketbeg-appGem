@@ -18,7 +18,7 @@ export default function BegLoan({ price = 5000 }: { price?: number }) {
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
         <div>
           <div style={{ fontSize: '8px', fontWeight: 900, color: 'var(--neon-mint)', letterSpacing: '1.5px', marginBottom: '4px' }}>LIQUIDITY ENGINE</div>
-          <strong style={{ fontSize: '1rem', color: '#fff' }}>BegAI Instant Loan</strong>
+          <strong style={{ fontSize: '1rem', color: '#fff' }}>KARMA-AI Instant Loan</strong>
           <p style={{ fontSize: '10px', opacity: 0.5, marginTop: '2px' }}>Baserat på din 98.2% Trust Score.</p>
         </div>
         <div style={{ fontSize: '24px' }}>🏦</div>
