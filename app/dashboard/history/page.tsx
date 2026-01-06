@@ -21,50 +21,38 @@ export default function PurchaseHistory() {
 
   return (
     <div className="page-wrapper" style={{ padding: '15px' }}>
-      <header style={{ marginBottom: '30px' }}>
-        <h1 style={{ fontSize: '2rem', fontWeight: 900, letterSpacing: '-1.5px', margin: 0 }}>MINA KÖP</h1>
-        <p style={{ fontSize: '11px', color: 'var(--neon-purple)', fontWeight: 900, marginTop: '5px' }}>CIRKULÄR STATUS: AKTIV 🔄</p>
+      <header style={{ marginBottom: '20px' }}>
+        <h1 style={{ fontSize: '1.5rem', fontWeight: 900, letterSpacing: '-1px', margin: 0 }}>MINA KÖP</h1>
+        <p style={{ fontSize: '9px', color: 'var(--neon-purple)', fontWeight: 900, marginTop: '3px' }}>CIRKULÄR STATUS: AKTIV 🔄</p>
       </header>
 
-      <div style={{ display: 'grid', gap: '15px' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
         {previousPurchases.map((item) => (
-          <div key={item.id} className="glass-card loop-item">
-            <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
-              <div className="item-img-box">{item.img}</div>
+          <div key={item.id} className="glass-card" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.05)' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <div style={{ width: '45px', height: '45px', background: '#000', borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '20px', border: '1px solid rgba(255,255,255,0.08)' }}>
+                {item.img}
+              </div>
               <div>
-                <h3 style={{ margin: 0, fontSize: '14px', fontWeight: 900 }}>{item.name}</h3>
-                <p style={{ margin: 0, fontSize: '10px', opacity: 0.5 }}>{item.price} • {item.date}</p>
+                <h3 style={{ margin: 0, fontSize: '12px', fontWeight: 900 }}>{item.name}</h3>
+                <p style={{ margin: 0, fontSize: '9px', opacity: 0.4 }}>{item.price} • {item.date}</p>
               </div>
             </div>
 
             <button 
               onClick={() => handleLoopAgain(item.id)}
               className="loop-btn"
+              style={{
+                background: 'transparent', border: '1px solid var(--neon-purple)',
+                color: 'var(--neon-purple)', fontSize: '9px', fontWeight: 900,
+                padding: '8px 12px', borderRadius: '10px', cursor: 'pointer'
+              }}
             >
-              {loadingId === item.id ? "HÄMTAR..." : "LOOPA IGEN"}
+              {loadingId === item.id ? "..." : "LOOPA"}
             </button>
           </div>
         ))}
       </div>
-
-      <style jsx>{`
-        .loop-item {
-          display: flex; align-items: center; justify-content: space-between;
-          padding: 18px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.08);
-        }
-        .item-img-box {
-          width: 55px; height: 55px; background: #000; border-radius: 14px;
-          display: flex; align-items: center; justify-content: center;
-          font-size: 24px; border: 1px solid rgba(255,255,255,0.1);
-        }
-        .loop-btn {
-          background: transparent; border: 1px solid var(--neon-purple);
-          color: var(--neon-purple); font-size: 10px; font-weight: 900;
-          padding: 10px 16px; borderRadius: 12px; cursor: pointer;
-          transition: all 0.2s;
-        }
-        .loop-btn:hover { background: var(--neon-purple); color: #fff; }
-      `}</style>
     </div>
   );
 }
