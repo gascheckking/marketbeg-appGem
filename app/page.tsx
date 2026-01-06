@@ -5,8 +5,8 @@ import FeedCardSell from '@/components/FeedCardSell';
 import LoadingAI from '@/components/LoadingAI';
 
 export default function Marketplace() {
-  const [itemCount, setItemCount] = useState(100);
   const [isAnalysing, setIsAnalysing] = useState(false);
+  const [isListening, setIsListening] = useState(false);
   const [activePulse, setActivePulse] = useState("Marknaden är het 🔥 124 aktiva matcher");
 
   // A. Användarorientering & B. Social Proof (Pulse-effekt)
@@ -23,9 +23,13 @@ export default function Marketplace() {
     return () => clearInterval(timer);
   }, []);
 
-  const categories = ["BÄSTA MATCH", "NÄRA MIG", "REDO ATT SÄLJAS", "FYND 5-500:-", "VINTAGE"];
+  // Smalare, avlånga kategorier för att slippa scroll
+  const categories = [
+    { n: "MATCH", i: "🎯" }, { n: "NÄRA", i: "📍" }, 
+    { n: "REDO", i: "⚡" }, { n: "FYND", i: "🏷️" }, 
+    { n: "VINTAGE", i: "💎" }, { n: "TECH", i: "💻" }
+  ];
   
-  // Utökad data för att stödja "Loop-tänket" och AI-beslut
   const items = [
     { id: "1", title: "Vintage Tee", price: 480, trust: 92, loop: 3, aiNote: "Hög likviditet" },
     { id: "2", title: "USB-C Hub", price: 245, trust: 95, loop: 1, aiNote: "Prisvärd match" },
@@ -38,53 +42,75 @@ export default function Marketplace() {
   return (
     <div className="page-wrapper" style={{ animation: 'fadeIn 0.5s ease' }}>
       
-      {/* 1️⃣ TOP SECTION - IDENTITET & SOCIAL PROOF */}
-      <div style={{ padding: '20px 20px 10px 20px' }}>
-        <h1 style={{ fontSize: '1.8rem', fontWeight: 900, margin: 0, letterSpacing: '-1px' }}>
-          UPPTÄCK <span style={{ color: 'var(--neon-purple)' }}>DEALS</span>
-        </h1>
-        <div style={{ 
-          fontSize: '10px', 
-          fontWeight: 800, 
-          color: 'var(--neon-mint)', 
-          marginTop: '5px',
-          textTransform: 'uppercase',
-          letterSpacing: '1px'
-        }}>
-          {activePulse}
+      {/* 1️⃣ LÅST SYSTEM-NAV (Toppen - Saldo & Karma) */}
+      <div style={{ 
+        position: 'sticky', top: 0, zIndex: 100, 
+        background: 'rgba(2, 4, 10, 0.98)', backdropFilter: 'blur(20px)',
+        borderBottom: '1px solid rgba(255,255,255,0.05)', padding: '12px 15px' 
+      }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <div style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>
+             <button style={{ background: 'none', border: 'none', color: 'var(--neon-mint)', fontWeight: 900, fontSize: '10px' }}>HEM</button>
+             <button style={{ background: 'none', border: 'none', color: '#555', fontWeight: 900, fontSize: '10px' }}>MATCH</button>
+          </div>
+          <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+             <div style={{ background: 'rgba(157, 78, 221, 0.1)', padding: '4px 10px', borderRadius: '8px', border: '1px solid rgba(157, 78, 221, 0.2)' }}>
+                <span style={{ fontSize: '10px', fontWeight: 900, color: 'var(--neon-purple)' }}>KARMA: 2 450</span>
+             </div>
+             <div style={{ background: 'rgba(255,255,255,0.03)', padding: '4px 10px', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.05)' }}>
+                <span style={{ fontSize: '10px', fontWeight: 900 }}>14 250 KR</span>
+             </div>
+          </div>
         </div>
       </div>
 
-      <div style={{ 
-        position: 'sticky', 
-        top: 0, 
-        zIndex: 10, 
-        background: 'rgba(2, 4, 10, 0.95)', 
-        backdropFilter: 'blur(15px)',
-        padding: '10px 20px',
-        borderBottom: '1px solid rgba(255,255,255,0.05)'
-      }}>
-        {/* 2️⃣ PRIMÄR HANDLING - AI SOM AKTÖR */}
-        <div className="glass-card" style={{ 
-          padding: '15px', 
-          borderRadius: '20px', 
-          marginBottom: '10px', 
-          border: '1px solid rgba(157, 78, 221, 0.3)' 
+      <div style={{ padding: '20px' }}>
+        {/* 2️⃣ IDENTITY & PULSE */}
+        <header style={{ marginBottom: '25px' }}>
+          <h1 style={{ fontSize: '2rem', fontWeight: 900, margin: 0, letterSpacing: '-1.5px' }}>
+            UTFORSKA <span style={{ color: 'var(--neon-purple)' }}>VALVET</span>
+          </h1>
+          <div style={{ fontSize: '9px', fontWeight: 800, color: 'var(--neon-mint)', marginTop: '6px', letterSpacing: '1px' }}>
+            {activePulse.toUpperCase()}
+          </div>
+        </header>
+
+        {/* 3️⃣ SÖK MED RÖSTSTYRNING */}
+        <div style={{ 
+          background: 'rgba(255,255,255,0.02)', borderRadius: '16px', 
+          padding: '12px 18px', display: 'flex', alignItems: 'center', gap: '12px',
+          border: '1px solid rgba(255,255,255,0.05)', marginBottom: '20px'
         }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '15px' }}>
-            <div style={{ flex: 1 }}>
-              <h2 style={{ fontSize: '0.9rem', fontWeight: 900, margin: 0 }}>OPTIMERA LIKVIDITET</h2>
-              <p style={{ fontSize: '8px', opacity: 0.5, margin: '2px 0 8px' }}>AI matchar dig direkt mot redo köpare</p>
-              <input 
-                type="range" min="1" max="100" value={itemCount} 
-                onChange={(e) => setItemCount(parseInt(e.target.value))}
-                className="karma-slider"
-              />
+          <span style={{ fontSize: '14px' }}>🔍</span>
+          <input 
+            type="text" placeholder="Sök i loopen..." 
+            style={{ background: 'transparent', border: 'none', color: '#fff', flex: 1, outline: 'none', fontSize: '13px', fontWeight: 600 }} 
+          />
+          <button 
+            onClick={() => setIsListening(!isListening)}
+            style={{ 
+              background: isListening ? 'var(--neon-purple)' : 'transparent', 
+              border: 'none', borderRadius: '50%', width: '32px', height: '32px', transition: '0.3s',
+              boxShadow: isListening ? '0 0 15px var(--neon-purple)' : 'none'
+            }}>
+            {isListening ? '🎙️' : '🎤'}
+          </button>
+        </div>
+
+        {/* 4️⃣ SNABBSÄLJ (AI SOM AKTÖR) */}
+        <div className="glass-card" style={{ 
+          padding: '20px', borderRadius: '24px', marginBottom: '25px', 
+          border: '1px solid rgba(157, 78, 221, 0.3)', background: 'rgba(157, 78, 221, 0.02)' 
+        }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <div>
+              <h2 style={{ fontSize: '13px', fontWeight: 900, margin: 0 }}>SNABBSÄLJ</h2>
+              <p style={{ fontSize: '9px', opacity: 0.5, margin: '4px 0 0' }}>AI matchar dig direkt mot redo köpare</p>
             </div>
             <button 
               onClick={() => setIsAnalysing(!isAnalysing)}
               className="primary-btn" 
-              style={{ background: 'var(--neon-purple)', color: '#fff', padding: '10px 15px' }}>
+              style={{ background: '#fff', color: '#000', padding: '12px 20px', fontSize: '11px' }}>
               {isAnalysing ? 'STOPPA' : 'STARTA AI'}
             </button>
           </div>
@@ -92,67 +118,58 @@ export default function Marketplace() {
 
         {isAnalysing && <LoadingAI />}
 
-        {/* 3️⃣ KATEGORIER (Förstärkta chips) */}
-        <div style={{ display: 'flex', gap: '8px', overflowX: 'auto', padding: '5px 0', scrollbarWidth: 'none' }}>
+        {/* 5️⃣ SMALA KATEGORIER (3 i bredd för noll scroll) */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '8px', marginBottom: '30px' }}>
           {categories.map((cat, i) => (
-            <button key={i} style={{
-              whiteSpace: 'nowrap', padding: '8px 14px', borderRadius: '20px',
-              border: '1px solid #222', background: i === 0 ? 'rgba(0,255,136,0.1)' : '#0a0a0a',
-              color: i === 0 ? 'var(--neon-mint)' : '#555', fontSize: '9px', fontWeight: 900
+            <div key={i} style={{ 
+              background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.05)',
+              borderRadius: '12px', padding: '12px 5px', textAlign: 'center', display: 'flex',
+              flexDirection: 'column', alignItems: 'center', gap: '5px'
             }}>
-              {cat}
-            </button>
+              <span style={{ fontSize: '18px' }}>{cat.i}</span>
+              <span style={{ fontSize: '8px', fontWeight: 900, opacity: 0.5 }}>{cat.n}</span>
+            </div>
           ))}
         </div>
-      </div>
 
-      {/* 4️⃣ FEED - LOOP-TÄNK & HANDLING */}
-      <div style={{ padding: '15px' }}>
-        <p style={{ fontSize: '11px', fontWeight: 800, opacity: 0.4, marginBottom: '15px', textTransform: 'uppercase' }}>
-          AI-matchade objekt nära dig
-        </p>
-
-        {/* Rutnät optimerat för visuell data (2-i-bredd för tydlighet, eller behåll 3) */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '12px' }}>
+        {/* 6️⃣ FEED - LOOP-TÄNK */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '15px' }}>
           {items.map((item, i) => (
-            <div key={i} style={{ position: 'relative' }}>
+            <div key={i} style={{ position: 'relative', animation: 'fadeIn 0.5s ease' }}>
               <FeedCardSell {...item} />
               
-              {/* Loop History Tag */}
               <div style={{ 
-                position: 'absolute', top: '8px', left: '8px', 
-                background: 'rgba(0,0,0,0.7)', padding: '2px 6px', 
-                borderRadius: '6px', fontSize: '7px', fontWeight: 900,
+                position: 'absolute', top: '10px', left: '10px', 
+                background: 'rgba(0,0,0,0.8)', padding: '3px 7px', 
+                borderRadius: '6px', fontSize: '8px', fontWeight: 900,
                 border: '1px solid rgba(255,255,255,0.1)', backdropFilter: 'blur(4px)'
               }}>
                 LOOP #{item.loop}
               </div>
 
-              {/* AI Insight (Vägledning) */}
               <div style={{ 
-                marginTop: '6px', fontSize: '8px', color: 'var(--neon-purple)', 
+                marginTop: '8px', fontSize: '9px', color: 'var(--neon-purple)', 
                 fontWeight: 800, display: 'flex', alignItems: 'center', gap: '4px' 
               }}>
-                <span style={{ fontSize: '10px' }}>✨</span> {item.aiNote}
+                <span style={{ fontSize: '11px' }}>✨</span> {item.aiNote}
               </div>
             </div>
           ))}
         </div>
       </div>
 
-      {/* 5️⃣ BOTTEN: TRYGGHET (Karma Shield) */}
+      {/* 7️⃣ BOTTEN: TRYGGHET */}
       <div style={{ 
-        padding: '40px 20px', textAlign: 'center', opacity: 0.3,
+        padding: '60px 20px', textAlign: 'center', opacity: 0.2,
         borderTop: '1px solid rgba(255,255,255,0.05)', marginTop: '20px' 
       }}>
-        <p style={{ fontSize: '9px', fontWeight: 900, letterSpacing: '1px' }}>
-          🛡️ SKYDDAD VIA KARMA SHIELD • ESCROW AKTIVERAT
+        <p style={{ fontSize: '10px', fontWeight: 900, letterSpacing: '2px' }}>
+          🛡️ KARMA SHIELD PROTECTED • ESCROW NOD: ACTIVE
         </p>
       </div>
 
       <style jsx>{`
-        .karma-slider { width: 100%; accent-color: var(--neon-purple); }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
       `}</style>
     </div>
   );
