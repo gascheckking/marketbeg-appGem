@@ -8,6 +8,7 @@ export default function SplashScreen() {
 
   useEffect(() => {
     setMounted(true);
+    // Förhindra att den visas vid varje sidbyte under samma session
     const hasSeen = sessionStorage.getItem("hasSeenKarmaSplash");
     
     if (!hasSeen) {
@@ -22,43 +23,36 @@ export default function SplashScreen() {
 
   return (
     <div style={{ 
-      position: 'fixed', 
-      inset: 0, 
-      zIndex: 10000,
-      backgroundColor: '#02040a', 
-      display: 'flex', 
-      flexDirection: 'column', 
-      alignItems: 'center', 
-      justifyContent: 'center',
-      pointerEvents: 'none'
+      position: 'fixed', inset: 0, zIndex: 10000,
+      backgroundColor: '#02040a', display: 'flex', flexDirection: 'column', 
+      alignItems: 'center', justifyContent: 'center', pointerEvents: 'none'
     }}>
       <div style={{ textAlign: 'center', animation: 'fadeInOut 2.8s forwards' }}>
         <div style={{ 
-          width: '50px', height: '50px', border: '2px solid #00ff88', 
-          borderRadius: '14px', display: 'flex', alignItems: 'center', 
-          justifyContent: 'center', margin: '0 auto 20px',
-          boxShadow: '0 0 20px rgba(0, 255, 136, 0.2)'
+          width: '60px', height: '60px', border: '2px solid var(--neon-mint)', 
+          borderRadius: '18px', display: 'flex', alignItems: 'center', 
+          justifyContent: 'center', margin: '0 auto 25px',
+          boxShadow: '0 0 30px rgba(0, 255, 136, 0.15)'
         }}>
-          <span style={{ color: '#00ff88', fontSize: '24px', fontWeight: 'bold' }}>∞</span>
+          <span style={{ color: 'var(--neon-mint)', fontSize: '30px', fontWeight: 'bold' }}>∞</span>
         </div>
         <h1 style={{ 
-          fontSize: '1.5rem', fontWeight: 900, letterSpacing: '8px', 
-          background: 'linear-gradient(45deg, #9d4edd, #00ff88)', 
+          fontSize: '1.8rem', fontWeight: 900, letterSpacing: '10px', 
+          background: 'linear-gradient(45deg, var(--neon-purple), var(--neon-mint))', 
           WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
-          margin: 0,
-          fontFamily: 'sans-serif'
+          margin: 0
         }}>KARMA</h1>
         <p style={{ 
-          fontSize: '7px', letterSpacing: '3px', color: '#00ff88', 
-          marginTop: '12px', opacity: 0.6, fontWeight: 800 
+          fontSize: '7px', letterSpacing: '3px', color: 'var(--neon-mint)', 
+          marginTop: '15px', opacity: 0.6, fontWeight: 800 
         }}>KNOW • ACQUIRE • REUSE • MATCH • AGAIN</p>
       </div>
       <style jsx>{` 
         @keyframes fadeInOut { 
-          0% { opacity: 0; transform: translateY(10px) scale(0.95); } 
-          15% { opacity: 1; transform: translateY(0) scale(1); } 
-          85% { opacity: 1; transform: translateY(0); } 
-          100% { opacity: 0; transform: translateY(-10px); } 
+          0% { opacity: 0; transform: scale(0.95); filter: blur(10px); } 
+          15% { opacity: 1; transform: scale(1); filter: blur(0px); } 
+          85% { opacity: 1; transform: scale(1); } 
+          100% { opacity: 0; transform: scale(1.05); filter: blur(5px); } 
         } 
       `}</style>
     </div>
