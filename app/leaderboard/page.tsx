@@ -10,27 +10,23 @@ export default function Leaderboard() {
   ];
 
   return (
-    <div className="page-wrapper" style={{ padding: '20px' }}>
-      <header style={{ marginBottom: '40px' }}>
-        <h1 style={{ fontSize: '2.5rem', fontWeight: 900, letterSpacing: '-2px', margin: 0 }}>Leaderboard</h1>
-        <p className="muted" style={{ fontSize: '12px', marginTop: '8px' }}>De mest betrodda handlarna i ekosystemet.</p>
+    <div className="page-wrapper" style={{ padding: '15px' }}>
+      <header style={{ marginBottom: '25px' }}>
+        <h1 style={{ fontSize: '1.4rem', fontWeight: 900, margin: 0 }}>LEADERBOARD</h1>
+        <p style={{ fontSize: '9px', opacity: 0.5, fontWeight: 800 }}>TOPP-TRADERS I EKOSYSTEMET</p>
       </header>
 
-      <div style={{ display: 'grid', gap: '12px' }}>
+      <div style={{ display: 'grid', gap: '8px' }}>
         {users.map((u, i) => (
-          <div key={i} className="glass-card" style={{ 
-            padding: '20px', 
-            border: i === 0 ? '1px solid var(--neon-mint)' : '1px solid rgba(255,255,255,0.05)', 
-            display: 'flex', alignItems: 'center', gap: '20px', borderRadius: '24px'
-          }}>
-            <div style={{ fontWeight: 900, fontSize: '24px', color: i === 0 ? 'var(--neon-mint)' : '#333', width: '40px' }}>{i+1}</div>
+          <div key={i} className="glass-card" style={{ padding: '12px 15px', border: i === 0 ? '1px solid var(--neon-mint)' : '1px solid var(--border)', display: 'flex', alignItems: 'center', gap: '15px', borderRadius: '16px' }}>
+            <div style={{ fontWeight: 900, fontSize: '18px', color: i === 0 ? 'var(--neon-mint)' : '#222', width: '25px' }}>{i+1}</div>
             <div style={{ flex: 1 }}>
-              <div style={{ fontWeight: 900, fontSize: '15px' }}>{u.name}</div>
-              <div style={{ fontSize: '8px', color: u.color, fontWeight: 900, letterSpacing: '1px', marginTop: '4px' }}>{u.rank}</div>
+              <div style={{ fontWeight: 900, fontSize: '12px' }}>{u.name}</div>
+              <div style={{ fontSize: '7px', color: u.color, fontWeight: 900, letterSpacing: '0.5px' }}>{u.rank}</div>
             </div>
             <div style={{ textAlign: 'right' }}>
-              <div style={{ fontWeight: 900, fontSize: '13px' }}>{u.sales} lopps</div>
-              <div style={{ fontSize: '10px', color: 'var(--neon-mint)', fontWeight: 800 }}>{u.trust}% TRUST</div>
+              <div style={{ fontWeight: 900, fontSize: '11px' }}>{u.sales} LOPPS</div>
+              <div style={{ fontSize: '9px', color: 'var(--neon-mint)', fontWeight: 800 }}>{u.trust}%</div>
             </div>
           </div>
         ))}
