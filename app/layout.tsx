@@ -1,11 +1,5 @@
 // app/layout.tsx
 import "./globals.css";
-import ClientLayout from "@/components/ClientLayout";
-
-export const metadata = {
-  title: "KARMA",
-  description: "Snabb, trygg och intelligent marknadsplats",
-};
 
 export default function RootLayout({
   children,
@@ -14,8 +8,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="sv">
-      <body>
-        <ClientLayout>{children}</ClientLayout>
+      <body
+        style={{
+          background: "#02040a",
+          color: "#fff",
+          margin: 0,
+        }}
+      >
+        {children}
       </body>
     </html>
   );
