@@ -1,45 +1,45 @@
-// // components/LoadingAI.tsx
+// components/LoadingAI.tsx
 "use client";
-import React from 'react';
+import React from "react";
 
-export default function LoadingAI() {
+export default function LoadingAI({ label = "Analyserar objekt..." }: { label?: string }) {
   return (
     <div style={{ 
-      display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', 
-      padding: '40px', textAlign: 'center', minHeight: '200px'
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      padding: "40px 20px",
+      textAlign: "center"
     }}>
-      <div className="scanner-container" style={{ position: 'relative', width: '80px', height: '80px', marginBottom: '20px' }}>
-        <div style={{ 
-          fontSize: '40px', animation: 'pulse 1.5s infinite ease-in-out',
-          filter: 'drop-shadow(0 0 10px var(--neon-mint))'
-        }}>🧠</div>
-        <div className="scanner-laser" style={{
-          position: 'absolute',
-          width: '100%',
-          height: '2px',
-          background: 'var(--neon-mint)',
-          top: '50%',
-          boxShadow: '0 0 15px var(--neon-mint)',
-          animation: 'scan 2s infinite linear'
+      <div style={{ fontSize: "36px", marginBottom: "18px", opacity: 0.9 }}>
+        🧠
+      </div>
+
+      <div style={{
+        width: "120px",
+        height: "2px",
+        background: "rgba(255,255,255,0.1)",
+        position: "relative",
+        overflow: "hidden",
+        borderRadius: "2px",
+        marginBottom: "14px"
+      }}>
+        <div style={{
+          width: "40%",
+          height: "100%",
+          background: "var(--neon-mint)",
+          animation: "scan 1.4s infinite"
         }} />
       </div>
-      <h3 style={{ fontWeight: 900, fontSize: '13px', letterSpacing: '1px', color: 'var(--neon-mint)', margin: 0 }}>
-        ANALYSERSAR LIKVIDITET...
-      </h3>
-      <p style={{ fontSize: '9px', marginTop: '8px', textTransform: 'uppercase', letterSpacing: '1px', opacity: 0.4, fontWeight: 800 }}>
-        Optimera matchning via KARMA Engine
-      </p>
-      
+
+      <div style={{ fontSize: "11px", fontWeight: 800, opacity: 0.6 }}>
+        {label}
+      </div>
+
       <style jsx>{`
-        @keyframes pulse {
-          0%, 100% { transform: scale(1); opacity: 0.7; }
-          50% { transform: scale(1.1); opacity: 1; }
-        }
         @keyframes scan {
-          0% { top: 0%; opacity: 0; }
-          20% { opacity: 1; }
-          80% { opacity: 1; }
-          100% { top: 100%; opacity: 0; }
+          0% { transform: translateX(-100%); }
+          100% { transform: translateX(250%); }
         }
       `}</style>
     </div>
