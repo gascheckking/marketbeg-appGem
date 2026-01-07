@@ -1,6 +1,9 @@
+// app/sell/page.tsx
 "use client";
+
 import React, { useState } from "react";
 import CameraBatch from "@/components/CameraBatch";
+import MatchFoundOverlay from "@/components/MatchFoundOverlay";
 
 export default function StandardSell() {
   const [isRecording, setIsRecording] = useState(false);
@@ -9,6 +12,7 @@ export default function StandardSell() {
   const [priceSuggestion, setPriceSuggestion] = useState<number | null>(null);
   const [buyerTrust, setBuyerTrust] = useState<number | null>(null);
   const [demand, setDemand] = useState<string | null>(null);
+  const [showOverlay, setShowOverlay] = useState(false);
 
   const startVoiceScan = () => {
     setIsRecording(true);
@@ -16,6 +20,7 @@ export default function StandardSell() {
     setPriceSuggestion(null);
     setBuyerTrust(null);
     setDemand(null);
+    setShowOverlay(false);
 
     setTimeout(() => {
       setIsRecording(false);
@@ -28,6 +33,7 @@ export default function StandardSell() {
         setBuyerTrust(98);
         setDemand("Hög efterfrågan");
         setAiStatus("Förslag klart");
+        setShowOverlay(true);
       }, 1800);
     }, 1200);
   };
@@ -244,6 +250,20 @@ export default function StandardSell() {
           </div>
         </div>
       </div>
+
+      {/* MATCH FOUND OVERLAY */}
+      {showOverlay && isReady && (
+        <MatchFoundOverlay
+          price={priceSuggestion!}
+          trust={buyerTrust!}
+          demand={demand!}
+          onAccept={() => {
+            setShowOverlay(false);
+            // här går du vidare till checkout
+          }}
+          onClose={() => setShowOverlay(false)}
+        />
+      )}
 
       <style jsx>{`
         @keyframes fadeIn {
