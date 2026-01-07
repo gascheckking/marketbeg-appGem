@@ -1,6 +1,6 @@
 /* // app/globals.css */
 :root {
-  --bg-deep: #0a0c10; /* Ljusat upp från #02040a för mer djup */
+  --bg-deep: #0a0c10;
   --glass: rgba(255, 255, 255, 0.02);
   --border: rgba(255, 255, 255, 0.05);
   --neon-purple: #9d4edd;
@@ -9,12 +9,20 @@
   --muted: #666;
 }
 
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
 body {
   background: var(--bg-deep);
   color: var(--text-main);
   font-family: 'Inter', sans-serif;
   margin: 0;
-  background-image: radial-gradient(circle at 50% -10%, rgba(157, 78, 221, 0.05), transparent);
+  background-image: radial-gradient(
+    circle at 50% -10%,
+    rgba(157, 78, 221, 0.05),
+    transparent
+  );
 }
 
 .primary-btn {
@@ -29,6 +37,15 @@ body {
   width: 100%;
   cursor: pointer;
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
-.primary-btn:active { transform: scale(0.96); }
+.primary-btn:active {
+  transform: scale(0.96);
+}
+
+.primary-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
