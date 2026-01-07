@@ -1,134 +1,261 @@
-// // app/sell/page.tsx
 "use client";
-import React, { useState } from 'react';
-import CameraBatch from '@/components/CameraBatch';
+import React, { useState } from "react";
+import CameraBatch from "@/components/CameraBatch";
 
 export default function StandardSell() {
   const [isRecording, setIsRecording] = useState(false);
-  const [aiStatus, setAiStatus] = useState("Väntar på data...");
   const [isAnalysing, setIsAnalysing] = useState(false);
+  const [aiStatus, setAiStatus] = useState("Väntar på data...");
+  const [priceSuggestion, setPriceSuggestion] = useState<number | null>(null);
+  const [buyerTrust, setBuyerTrust] = useState<number | null>(null);
+  const [demand, setDemand] = useState<string | null>(null);
 
   const startVoiceScan = () => {
     setIsRecording(true);
     setAiStatus("Analyserar objekt...");
+    setPriceSuggestion(null);
+    setBuyerTrust(null);
+    setDemand(null);
+
     setTimeout(() => {
       setIsRecording(false);
       setIsAnalysing(true);
-      // Sekvensen från din vision
-      setTimeout(() => setAiStatus("Matchar mot köpare..."), 1000);
+      setAiStatus("Matchar mot köpare...");
+
       setTimeout(() => {
         setIsAnalysing(false);
-        setAiStatus("Förslag klart: 9 800 KR");
-      }, 2500);
-    }, 1500);
+        setPriceSuggestion(9800);
+        setBuyerTrust(98);
+        setDemand("Hög efterfrågan");
+        setAiStatus("Förslag klart");
+      }, 1800);
+    }, 1200);
   };
 
+  const isReady = priceSuggestion !== null;
+
   return (
-    <div className="page-wrapper" style={{ animation: 'fadeIn 0.5s ease', background: '#02040a', minHeight: '100vh' }}>
-      
-      {/* SYSTEM-NAV (Toppen - Rensad för att matcha din vision) */}
-      <div style={{ 
-        position: 'sticky', top: 0, zIndex: 100, 
-        background: 'rgba(2, 4, 10, 0.95)', backdropFilter: 'blur(20px)',
-        borderBottom: '1px solid rgba(255,255,255,0.05)', padding: '12px 20px' 
-      }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <span style={{ fontSize: '10px', fontWeight: 900, color: 'var(--neon-purple)', letterSpacing: '1px' }}>SÄLJ SNABBT</span>
-          <div style={{ background: 'rgba(255,255,255,0.03)', padding: '5px 12px', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.05)' }}>
-             <span style={{ fontSize: '10px', fontWeight: 900 }}>14 250 💰</span>
-          </div>
+    <div
+      className="page-wrapper"
+      style={{
+        minHeight: "100vh",
+        background: "#02040a",
+        animation: "fadeIn 0.4s ease",
+      }}
+    >
+      {/* TOP NAV */}
+      <div
+        style={{
+          position: "sticky",
+          top: 0,
+          zIndex: 100,
+          background: "rgba(2,4,10,0.95)",
+          backdropFilter: "blur(20px)",
+          borderBottom: "1px solid rgba(255,255,255,0.05)",
+          padding: "12px 20px",
+        }}
+      >
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <span
+            style={{
+              fontSize: "10px",
+              fontWeight: 900,
+              letterSpacing: "1px",
+              color: "var(--neon-purple)",
+            }}
+          >
+            SNABBSÄLJ
+          </span>
+          <span
+            style={{
+              fontSize: "10px",
+              fontWeight: 900,
+              opacity: 0.8,
+            }}
+          >
+            14 250 kr
+          </span>
         </div>
       </div>
 
-      <div style={{ padding: '20px' }}>
-        <header style={{ marginBottom: '30px', textAlign: 'center' }}>
-          <h1 style={{ fontSize: '1.8rem', fontWeight: 900, margin: 0, letterSpacing: '-1px' }}>Sälj snabbt</h1>
-          <p style={{ fontSize: '11px', opacity: 0.6, fontWeight: 700, marginTop: '8px' }}>
-            Vi matchar dig direkt mot köpare. Ingen annonsering krävs.
+      <div style={{ padding: "20px" }}>
+        {/* HEADER */}
+        <header style={{ textAlign: "center", marginBottom: "28px" }}>
+          <h1
+            style={{
+              fontSize: "1.9rem",
+              fontWeight: 900,
+              margin: 0,
+              letterSpacing: "-1px",
+            }}
+          >
+            Sälj snabbt
+          </h1>
+          <p
+            style={{
+              fontSize: "11px",
+              fontWeight: 700,
+              opacity: 0.6,
+              marginTop: "8px",
+            }}
+          >
+            Fota ditt objekt – vi matchar dig direkt mot redo köpare.
           </p>
         </header>
 
-        {/* RÖST-AKTIVERING */}
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '35px' }}>
-          <button 
+        {/* PRIMARY ACTION */}
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            marginBottom: "30px",
+          }}
+        >
+          <button
             onClick={startVoiceScan}
-            style={{ 
-              width: '75px', height: '75px', borderRadius: '26px', 
-              background: isRecording || isAnalysing ? 'var(--neon-purple)' : 'rgba(255,255,255,0.02)',
-              border: isRecording || isAnalysing ? '2px solid var(--neon-purple)' : '1px solid rgba(255,255,255,0.1)',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              fontSize: '28px', transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-              boxShadow: isRecording || isAnalysing ? '0 0 30px rgba(157, 78, 221, 0.3)' : 'none'
-            }}>
-            {isRecording ? '🎙️' : '🎤'}
+            style={{
+              width: "78px",
+              height: "78px",
+              borderRadius: "28px",
+              background:
+                isRecording || isAnalysing
+                  ? "var(--neon-purple)"
+                  : "rgba(255,255,255,0.02)",
+              border:
+                isRecording || isAnalysing
+                  ? "2px solid var(--neon-purple)"
+                  : "1px solid rgba(255,255,255,0.1)",
+              fontSize: "28px",
+              boxShadow:
+                isRecording || isAnalysing
+                  ? "0 0 32px rgba(157,78,221,0.35)"
+                  : "none",
+              transition: "0.25s",
+            }}
+          >
+            {isRecording ? "🎙️" : "📸"}
           </button>
-          <div style={{ marginTop: '12px', textAlign: 'center' }}>
-            <span style={{ fontSize: '12px', fontWeight: 900, display: 'block' }}>Starta snabbsälj</span>
-            <span style={{ fontSize: '9px', opacity: 0.5, fontWeight: 700 }}>Fota → vi sköter resten.</span>
+
+          <div style={{ marginTop: "12px", textAlign: "center" }}>
+            <div style={{ fontSize: "12px", fontWeight: 900 }}>
+              Starta snabbsälj
+            </div>
+            <div style={{ fontSize: "9px", opacity: 0.5, fontWeight: 700 }}>
+              Fota → vi sköter resten
+            </div>
           </div>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '15px' }}>
-          <CameraBatch />
+        {/* CAMERA */}
+        <CameraBatch />
 
-          {/* ESTIMERINGSKORT (Lugn copy och resultat) */}
-          <div className="glass-card" style={{ 
-            display: 'flex', flexDirection: 'column', gap: '20px', padding: '25px',
-            borderRadius: '24px',
-            background: 'rgba(255,255,255,0.02)',
-            border: aiStatus.includes("klart") ? '1px solid rgba(0, 255, 136, 0.3)' : '1px solid rgba(255,255,255,0.05)'
-          }}>
-            <div style={{ textAlign: 'center' }}>
-              <div style={{ 
-                fontSize: '10px', fontWeight: 900, letterSpacing: '1px', opacity: 0.4, marginBottom: '10px'
-              }}>
-                {isAnalysing ? "SÖKER MATCHNING..." : "STATUS"}
-              </div>
-              
-              <div style={{ 
-                fontSize: '1.4rem', 
-                fontWeight: 900, 
-                color: aiStatus.includes("klart") ? '#fff' : 'rgba(255,255,255,0.4)',
-                transition: '0.3s'
-              }}>
+        {/* AI RESULT CARD */}
+        <div
+          className="glass-card"
+          style={{
+            marginTop: "18px",
+            padding: "24px",
+            borderRadius: "24px",
+            background: "rgba(255,255,255,0.02)",
+            border: isReady
+              ? "1px solid rgba(0,255,136,0.35)"
+              : "1px solid rgba(255,255,255,0.06)",
+          }}
+        >
+          <div style={{ textAlign: "center" }}>
+            <div
+              style={{
+                fontSize: "9px",
+                fontWeight: 900,
+                letterSpacing: "1px",
+                opacity: 0.4,
+                marginBottom: "10px",
+              }}
+            >
+              {isAnalysing ? "MATCHNING PÅGÅR" : "STATUS"}
+            </div>
+
+            {!isReady && (
+              <div
+                style={{
+                  fontSize: "1.2rem",
+                  fontWeight: 900,
+                  opacity: 0.4,
+                }}
+              >
                 {aiStatus}
               </div>
-              
-              {aiStatus.includes("klart") && (
-                <p style={{ fontSize: '10px', color: 'var(--neon-mint)', fontWeight: 800, marginTop: '8px' }}>
-                  VI HAR HITTAT KÖPARE MED HÖG TILLIT
-                </p>
-              )}
-            </div>
-            
-            <button 
-              className="primary-btn" 
-              style={{ 
-                padding: '18px', borderRadius: '16px', fontSize: '12px', fontWeight: 900,
-                background: aiStatus.includes("klart") ? '#fff' : 'rgba(255,255,255,0.05)',
-                color: aiStatus.includes("klart") ? '#000' : '#444',
-                border: 'none', transition: '0.3s'
-              }}
-              disabled={!aiStatus.includes("klart")}
-            >
-              ACCEPTERA AFFÄR
-            </button>
+            )}
+
+            {isReady && (
+              <>
+                <div
+                  style={{
+                    fontSize: "2.2rem",
+                    fontWeight: 900,
+                    letterSpacing: "-1px",
+                  }}
+                >
+                  {priceSuggestion?.toLocaleString("sv-SE")} kr
+                </div>
+
+                <div
+                  style={{
+                    marginTop: "8px",
+                    fontSize: "10px",
+                    fontWeight: 800,
+                    color: "var(--neon-mint)",
+                  }}
+                >
+                  Köpare hittad • {buyerTrust}% tillit • {demand}
+                </div>
+              </>
+            )}
           </div>
 
-          {/* TRYGGHETSRADER */}
-          <div style={{ textAlign: 'center', padding: '10px' }}>
-            <p style={{ fontSize: '11px', fontWeight: 800, opacity: 0.7, margin: '0 0 5px' }}>
-              Säker affär. Pengar hålls tills köparen godkänt.
-            </p>
-            <p style={{ fontSize: '9px', fontWeight: 700, opacity: 0.4 }}>
-              Bättre villkor när du säljer smidigt via din KARMA.
-            </p>
+          <button
+            disabled={!isReady}
+            style={{
+              marginTop: "22px",
+              width: "100%",
+              padding: "18px",
+              borderRadius: "16px",
+              border: "none",
+              fontSize: "12px",
+              fontWeight: 900,
+              background: isReady ? "#fff" : "rgba(255,255,255,0.05)",
+              color: isReady ? "#000" : "#444",
+              cursor: isReady ? "pointer" : "default",
+              transition: "0.3s",
+            }}
+          >
+            ACCEPTERA AFFÄR
+          </button>
+        </div>
+
+        {/* SAFETY */}
+        <div style={{ textAlign: "center", marginTop: "18px" }}>
+          <div style={{ fontSize: "11px", fontWeight: 800, opacity: 0.7 }}>
+            Säker affär. Pengar hålls tills köparen godkänt.
+          </div>
+          <div style={{ fontSize: "9px", fontWeight: 700, opacity: 0.4 }}>
+            Smidigare villkor när du säljer via din KARMA.
           </div>
         </div>
       </div>
 
       <style jsx>{`
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+            transform: translateY(6px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
       `}</style>
     </div>
   );
