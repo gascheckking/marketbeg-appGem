@@ -1,45 +1,69 @@
-// // app/wallet/page.tsx
 "use client";
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import BegLoan from "@/components/BegLoan";
 
 export default function Wallet() {
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
-
   if (!mounted) return null;
 
   return (
-    <div className="page-wrapper" style={{ maxWidth: '900px', margin: '0 auto', padding: '20px' }}>
-      <header style={{ marginBottom: '30px' }}>
-        <h1 style={{ fontSize: '2.5rem', fontWeight: 900, letterSpacing: '-2px', margin: 0 }}>VAULT</h1>
-        <p className="muted" style={{ fontSize: '12px', fontWeight: 700, marginTop: '5px' }}>DIN DIGITALA PLÅNBOK</p>
+    <div className="page-wrapper" style={{ padding: 20 }}>
+      <header style={{ marginBottom: 24 }}>
+        <h1 style={{ margin: 0, fontSize: "1.8rem", fontWeight: 900 }}>
+          Ditt saldo
+        </h1>
+        <div style={{ fontSize: 10, opacity: 0.5 }}>
+          Tillgängligt för utbetalning
+        </div>
       </header>
 
-      <div className="glass-card" style={{ padding: '30px', position: 'relative', background: 'linear-gradient(145deg, #050505 0%, #0a1015 100%)' }}>
-        <div style={{ position: 'absolute', top: '15px', right: '20px', color: 'var(--neon-mint)', fontWeight: 900, fontSize: '9px' }}>● LIVE LIKVIDITET</div>
-        <small className="muted" style={{ fontWeight: 800, fontSize: '9px' }}>TILLGÄNGLIGT SALDO</small>
-        <div style={{ fontSize: '3.5rem', fontWeight: 900, margin: '10px 0', letterSpacing: '-2px' }}>
-          14 250,00 <span style={{fontSize: '1rem', color: '#444'}}>SEK</span>
+      <div className="glass-card" style={{ padding: 20, marginBottom: 20 }}>
+        <div style={{ fontSize: 28, fontWeight: 900 }}>
+          14 250 kr
         </div>
+        <button style={{
+          marginTop: 16,
+          width: "100%",
+          background: "#fff",
+          color: "#000",
+          border: "none",
+          padding: "14px",
+          borderRadius: 14,
+          fontWeight: 900
+        }}>
+          Gör utbetalning
+        </button>
       </div>
 
       <BegLoan price={5000} />
 
-      <div style={{ marginTop: '40px' }}>
-        <h3 style={{ marginBottom: '15px', fontWeight: 900, fontSize: '1rem' }}>TRANSAKTIONSHISTORIK</h3>
-        <div className="glass-card" style={{ padding: '0' }}>
+      <section style={{ marginTop: 30 }}>
+        <h3 style={{ fontSize: 12, fontWeight: 900, marginBottom: 10 }}>
+          Senaste transaktioner
+        </h3>
+
+        <div className="glass-card">
           {[
-            { label: "Sälj-bonus: iPhone 15 Pro", amount: "+142 Tokens", date: "Idag" },
-            { label: "Cashback: MacBook M3", amount: "+450 Tokens", date: "Igår" }
-          ].map((item, i) => (
-            <div key={i} style={{ display: 'flex', justifyContent: 'space-between', padding: '18px 20px', borderBottom: '1px solid rgba(255,255,255,0.03)' }}>
-              <div><div style={{ fontWeight: 800, fontSize: '12px' }}>{item.label}</div><small className="muted" style={{ fontSize: '9px' }}>{item.date}</small></div>
-              <strong style={{ color: 'var(--neon-mint)', fontSize: '13px' }}>{item.amount}</strong>
+            { label: "Såld iPhone 15 Pro", amount: "+9 800 kr", date: "Idag" }
+          ].map((t, i) => (
+            <div key={i} style={{
+              display: "flex",
+              justifyContent: "space-between",
+              padding: 16,
+              borderBottom: "1px solid rgba(255,255,255,0.04)"
+            }}>
+              <div>
+                <div style={{ fontWeight: 800, fontSize: 11 }}>{t.label}</div>
+                <div style={{ fontSize: 9, opacity: 0.4 }}>{t.date}</div>
+              </div>
+              <div style={{ fontWeight: 900, color: "var(--neon-mint)" }}>
+                {t.amount}
+              </div>
             </div>
           ))}
         </div>
-      </div>
+      </section>
     </div>
   );
 }
