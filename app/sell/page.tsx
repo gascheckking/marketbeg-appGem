@@ -2,10 +2,13 @@
 "use client";
 
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 import CameraBatch from "@/components/CameraBatch";
 import MatchFoundOverlay from "@/components/MatchFoundOverlay";
 
 export default function StandardSell() {
+  const router = useRouter();
+
   const [isRecording, setIsRecording] = useState(false);
   const [isAnalysing, setIsAnalysing] = useState(false);
   const [aiStatus, setAiStatus] = useState("Väntar på data...");
@@ -259,7 +262,11 @@ export default function StandardSell() {
           demand={demand!}
           onAccept={() => {
             setShowOverlay(false);
-            // här går du vidare till checkout
+            router.push(
+              `/checkout?price=${priceSuggestion}&trust=${buyerTrust}&demand=${encodeURIComponent(
+                demand!
+              )}`
+            );
           }}
           onClose={() => setShowOverlay(false)}
         />
