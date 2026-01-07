@@ -31,7 +31,6 @@ export default function Navbar({ onOpenMenu }: Props) {
           color: "#fff",
           fontSize: "20px",
           opacity: 0.6,
-          cursor: "pointer",
         }}
       >
         ☰
