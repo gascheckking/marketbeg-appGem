@@ -1,10 +1,5 @@
-// app/layout.tsx
 import "./globals.css";
-
-export const metadata = {
-  title: "KARMA",
-  description: "AI-driven circular marketplace",
-};
+import ClientLayout from "@/components/ClientLayout";
 
 export default function RootLayout({
   children,
@@ -14,7 +9,9 @@ export default function RootLayout({
   return (
     <html lang="sv">
       <body>
-        {children}
+        <ClientLayout>
+          {children}
+        </ClientLayout>
       </body>
     </html>
   );
