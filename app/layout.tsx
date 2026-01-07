@@ -1,6 +1,11 @@
 // app/layout.tsx
 import "./globals.css";
 
+export const metadata = {
+  title: "KARMA",
+  description: "AI-driven circular marketplace",
+};
+
 export default function RootLayout({
   children,
 }: {
