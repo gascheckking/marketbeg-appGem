@@ -8,13 +8,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="sv">
-      <body
-        style={{
-          background: "#02040a",
-          color: "#fff",
-          margin: 0,
-        }}
-      >
+      <body>
         {children}
       </body>
     </html>
