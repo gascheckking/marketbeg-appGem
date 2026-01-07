@@ -60,7 +60,6 @@ export default function RentModule() {
         >
           KARMA RENT
         </h3>
-
         <p
           style={{
             fontSize: "9px",
@@ -76,7 +75,7 @@ export default function RentModule() {
         </p>
       </div>
 
-      {/* Dekorativa ikoner */}
+      {/* Dekor */}
       <div
         style={{
           display: "flex",
