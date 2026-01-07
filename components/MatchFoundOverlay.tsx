@@ -1,7 +1,9 @@
 // components/MatchFoundOverlay.tsx
 "use client";
-import React from "react";
+
+import React, { useEffect, useState } from "react";
 import TrustBadge from "@/components/TrustBadge";
+import PriceTag from "@/components/PriceTag";
 
 type Props = {
   price: number;
@@ -18,13 +20,39 @@ export default function MatchFoundOverlay({
   onAccept,
   onClose,
 }: Props) {
+  const [animatedPrice, setAnimatedPrice] = useState(0);
+
+  // --- PRIS-LANDNING (B) ---
+  useEffect(() => {
+    let start = 0;
+    const duration = 800; // ms – premium, lugnt
+    const startTime = performance.now();
+
+    const easeOut = (t: number) => 1 - Math.pow(1 - t, 3);
+
+    const tick = (now: number) => {
+      const progress = Math.min((now - startTime) / duration, 1);
+      const eased = easeOut(progress);
+      const value = Math.round(start + (price - start) * eased);
+
+      setAnimatedPrice(value);
+
+      if (progress < 1) {
+        requestAnimationFrame(tick);
+      }
+    };
+
+    requestAnimationFrame(tick);
+  }, [price]);
+
   return (
     <div className="overlay-backdrop">
       <div className="overlay-card">
         <div className="overlay-eyebrow">MATCH HITTAD</div>
 
+        {/* PRIS – LANDAR */}
         <div className="overlay-price">
-          {price.toLocaleString("sv-SE")} kr
+          <PriceTag price={animatedPrice} size="lg" color="#fff" />
         </div>
 
         <div className="overlay-meta">
@@ -77,13 +105,10 @@ export default function MatchFoundOverlay({
           letter-spacing: 2px;
           color: var(--neon-purple);
           opacity: 0.9;
-          margin-bottom: 12px;
+          margin-bottom: 14px;
         }
 
         .overlay-price {
-          font-size: 2.4rem;
-          font-weight: 900;
-          letter-spacing: -1px;
           margin-bottom: 14px;
         }
 
