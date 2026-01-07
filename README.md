@@ -14,3 +14,7 @@ KARMA (tidigare Marketbeg) är inte en traditionell marknadsplats. Det är en **
 - **Styling:** CSS-in-JS & Global CSS Variables (Neon/Glassmorphism)
 - **Trust:** BankID-baserad verifiering
 - **AI:** Custom Match Engine & Vision API
+### 🧱 Architecture Philosophy
+KARMA är byggt som ett modulärt protokoll snarare än en monolitisk marknadsplats.
+Alla kärnfunktioner (Match, Trust, Liquidity, Vision) är separerbara och framtidssäkra
+för onchain- eller partnerintegrationer.
