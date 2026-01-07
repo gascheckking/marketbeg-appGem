@@ -1,12 +1,12 @@
 /* // app/globals.css */
 :root {
-  --bg-deep: #02040a;
-  --glass: rgba(255, 255, 255, 0.03);
-  --border: rgba(255, 255, 255, 0.06);
+  --bg-deep: #0a0c10; /* Ljusat upp från #02040a för mer djup */
+  --glass: rgba(255, 255, 255, 0.02);
+  --border: rgba(255, 255, 255, 0.05);
   --neon-purple: #9d4edd;
   --neon-mint: #00ff88;
   --text-main: #f0f0f0;
-  --muted: #555;
+  --muted: #666;
 }
 
 body {
@@ -14,52 +14,21 @@ body {
   color: var(--text-main);
   font-family: 'Inter', sans-serif;
   margin: 0;
-  overflow-x: hidden;
-  background-image: radial-gradient(circle at 50% -20%, rgba(157, 78, 221, 0.12), transparent);
-}
-
-.glass-card {
-  background: var(--glass);
-  backdrop-filter: blur(15px);
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  transition: transform 0.2s ease;
+  background-image: radial-gradient(circle at 50% -10%, rgba(157, 78, 221, 0.05), transparent);
 }
 
 .primary-btn {
   background: #fff;
   color: #000;
   border: none;
-  padding: 14px;
-  border-radius: 12px;
+  padding: 18px;
+  border-radius: 16px;
   font-weight: 900;
-  font-size: 11px;
-  text-transform: uppercase;
+  font-size: 13px;
+  letter-spacing: 0.5px;
   width: 100%;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.primary-btn:active { transform: scale(0.97); opacity: 0.9; }
-
-.muted { color: var(--muted); }
-::-webkit-scrollbar { display: none; }
-
-/* Custom Slider */
-.karma-slider {
-  -webkit-appearance: none;
-  width: 100%;
-  height: 4px;
-  background: #1a1a1a;
-  border-radius: 5px;
-  outline: none;
-}
-.karma-slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  width: 18px;
-  height: 18px;
-  background: var(--neon-purple);
-  border-radius: 50%;
-  cursor: pointer;
-  box-shadow: 0 0 10px var(--neon-purple);
-}
+.primary-btn:active { transform: scale(0.96); }
