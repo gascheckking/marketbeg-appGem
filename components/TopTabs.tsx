@@ -1,6 +1,7 @@
 "use client";
+
 import { usePathname, useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const tabs = [
   {
@@ -37,44 +38,69 @@ export default function TopTabs() {
   const pathname = usePathname();
   const router = useRouter();
   const [openTab, setOpenTab] = useState<string | null>(null);
+  const ref = useRef<HTMLDivElement>(null);
+
+  // Stäng dropdown vid route change
+  useEffect(() => {
+    setOpenTab(null);
+  }, [pathname]);
+
+  // Klick utanför = stäng
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) {
+        setOpenTab(null);
+      }
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, []);
 
   return (
-    <div style={{ position: "sticky", top: 56, zIndex: 50 }}>
-      {/* Tabs */}
+    <div ref={ref} style={{ position: "sticky", top: 56, zIndex: 50 }}>
+      {/* TOP TABS */}
       <div
         style={{
           display: "flex",
-          gap: 6,
-          padding: "8px 12px",
-          background: "rgba(14,15,18,0.85)",
+          gap: 8,
+          padding: "10px 12px",
+          background: "rgba(14,15,18,0.9)",
           backdropFilter: "blur(16px)",
           borderBottom: "1px solid var(--border-soft)",
         }}
       >
         {tabs.map((tab) => {
           const active = pathname.startsWith(tab.path);
+
           return (
             <button
               key={tab.key}
               onClick={() => {
-                router.push(tab.path);
-                setOpenTab(openTab === tab.key ? null : tab.key);
+                if (active) {
+                  setOpenTab(openTab === tab.key ? null : tab.key);
+                } else {
+                  router.push(tab.path);
+                  setOpenTab(null);
+                }
               }}
               style={{
                 flex: 1,
-                height: 36,
-                borderRadius: 12,
+                height: 38,
+                borderRadius: 14,
                 border: "1px solid var(--border-soft)",
                 background: active
                   ? "linear-gradient(135deg,#1b1e24,#15171c)"
                   : "transparent",
-                color: active ? "var(--accent-mint)" : "var(--text-muted)",
-                fontWeight: 800,
+                color: active
+                  ? "var(--accent-mint)"
+                  : "var(--text-muted)",
+                fontWeight: 900,
                 fontSize: 11,
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
                 gap: 6,
+                transition: "all 0.15s ease",
               }}
             >
               <span style={{ opacity: 0.9 }}>{tab.icon}</span>
@@ -84,35 +110,36 @@ export default function TopTabs() {
         })}
       </div>
 
-      {/* RULLGARDIN */}
+      {/* DROPDOWN ACTIONS */}
       {openTab && (
         <div
           style={{
             background: "var(--bg-card)",
             borderBottom: "1px solid var(--border-soft)",
-            padding: "10px 14px",
+            padding: "10px 12px 12px",
             display: "flex",
             gap: 8,
-            animation: "fadeIn 0.15s ease",
+            animation: "fadeIn 0.12s ease",
           }}
         >
           {tabs
             .find((t) => t.key === openTab)
-            ?.actions.map((a) => (
-              <div
-                key={a}
+            ?.actions.map((action) => (
+              <button
+                key={action}
                 style={{
-                  padding: "8px 12px",
-                  borderRadius: 10,
+                  padding: "8px 14px",
+                  borderRadius: 12,
                   background: "var(--bg-soft)",
                   fontSize: 10,
-                  fontWeight: 800,
+                  fontWeight: 900,
                   color: "var(--text-main)",
                   border: "1px solid var(--border-soft)",
+                  whiteSpace: "nowrap",
                 }}
               >
-                {a}
-              </div>
+                {action}
+              </button>
             ))}
         </div>
       )}
