@@ -1,11 +1,10 @@
-// components/ClientLayout.tsx
 "use client";
 
 import React, { useState } from "react";
 import SplashScreen from "@/components/SplashScreen";
 import Navbar from "@/components/Navbar";
+import TopTabs from "@/components/TopTabs";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 
 export default function ClientLayout({
   children,
@@ -13,7 +12,6 @@ export default function ClientLayout({
   children: React.ReactNode;
 }) {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
-  const pathname = usePathname();
 
   const sidebarItems = [
     { icon: "⚙️", label: "INSTÄLLNINGAR", href: "/settings" },
@@ -34,7 +32,7 @@ export default function ClientLayout({
               style={{
                 fontWeight: 900,
                 letterSpacing: "2px",
-                color: "var(--neon-purple)",
+                color: "var(--accent-purple)",
               }}
             >
               KARMA∞
@@ -72,55 +70,18 @@ export default function ClientLayout({
       {/* APP CONTAINER */}
       <div className={`app-container ${isSidebarOpen ? "pushed" : ""}`}>
         <Navbar onOpenMenu={() => setSidebarOpen(true)} />
+        <TopTabs />
 
         <main
           style={{
             maxWidth: "600px",
             margin: "0 auto",
-            paddingBottom: "calc(120px + env(safe-area-inset-bottom))",
+            paddingBottom: "40px",
             minHeight: "100vh",
           }}
         >
           {children}
         </main>
-
-        {/* BOTTOM NAV */}
-        <nav className="mobile-nav">
-          <Link href="/" className={`tab ${pathname === "/" ? "active" : ""}`}>
-            <span>🧭</span>
-            <small>Hem</small>
-          </Link>
-
-          <Link
-            href="/match"
-            className={`tab ${pathname === "/match" ? "active" : ""}`}
-          >
-            <span>🤝</span>
-            <small>Match</small>
-          </Link>
-
-          <div className="center-fab">
-            <Link href="/sell">
-              <button>+</button>
-            </Link>
-          </div>
-
-          <Link
-            href="/buy"
-            className={`tab ${pathname.includes("/buy") ? "active" : ""}`}
-          >
-            <span>🛍️</span>
-            <small>Utforska</small>
-          </Link>
-
-          <Link
-            href="/chat"
-            className={`tab ${pathname.includes("/chat") ? "active" : ""}`}
-          >
-            <span>💬</span>
-            <small>Chatt</small>
-          </Link>
-        </nav>
       </div>
 
       {/* GLOBAL STYLES */}
@@ -131,10 +92,10 @@ export default function ClientLayout({
           top: 0;
           width: 280px;
           height: 100%;
-          background: #05070a;
+          background: #0e0f12;
           z-index: 2000;
           transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-          border-right: 1px solid #111;
+          border-right: 1px solid var(--border-soft);
           padding-top: env(safe-area-inset-top);
         }
 
@@ -155,11 +116,12 @@ export default function ClientLayout({
           gap: 15px;
           padding: 15px;
           text-decoration: none;
-          color: #fff;
+          color: var(--text-main);
           font-size: 11px;
           font-weight: 900;
-          background: rgba(255, 255, 255, 0.02);
+          background: var(--bg-soft);
           border-radius: 12px;
+          border: 1px solid var(--border-soft);
         }
 
         .app-container {
@@ -170,58 +132,6 @@ export default function ClientLayout({
         .app-container.pushed {
           transform: translateX(280px);
           pointer-events: none;
-        }
-
-        .mobile-nav {
-          position: fixed;
-          bottom: 0;
-          width: 100%;
-          height: calc(80px + env(safe-area-inset-bottom));
-          background: rgba(2, 4, 10, 0.98);
-          backdrop-filter: blur(20px);
-          display: flex;
-          border-top: 1px solid rgba(255, 255, 255, 0.05);
-          z-index: 1000;
-          padding-bottom: env(safe-area-inset-bottom);
-        }
-
-        .tab {
-          flex: 1;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          text-decoration: none;
-          color: #444;
-        }
-
-        .tab.active {
-          color: #fff;
-        }
-
-        .tab small {
-          font-size: 8px;
-          font-weight: 900;
-          margin-top: 4px;
-        }
-
-        .center-fab {
-          position: relative;
-          width: 70px;
-        }
-
-        .center-fab button {
-          position: absolute;
-          top: -25px;
-          left: 50%;
-          transform: translateX(-50%);
-          width: 60px;
-          height: 60px;
-          background: var(--neon-purple);
-          border-radius: 22px;
-          border: 5px solid #02040a;
-          color: #fff;
-          font-size: 30px;
         }
       `}</style>
     </>
