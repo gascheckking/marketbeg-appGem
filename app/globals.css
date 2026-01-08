@@ -1,12 +1,16 @@
 /* // app/globals.css */
 :root {
-  --bg-deep: #0a0c10;
-  --glass: rgba(255, 255, 255, 0.02);
-  --border: rgba(255, 255, 255, 0.05);
-  --neon-purple: #9d4edd;
-  --neon-mint: #00ff88;
-  --text-main: #f0f0f0;
-  --muted: #666;
+  --bg-main: #0e0f12;
+  --bg-card: #15171c;
+  --bg-soft: #1b1e24;
+
+  --text-main: #f5f6f7;
+  --text-muted: #9aa0aa;
+
+  --accent-mint: #37f2c2;
+  --accent-purple: #9d4edd;
+
+  --border-soft: rgba(255,255,255,0.06);
 }
 
 *, *::before, *::after {
