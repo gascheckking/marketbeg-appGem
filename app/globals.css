@@ -18,15 +18,12 @@
 }
 
 body {
-  background: var(--bg-deep);
-  color: var(--text-main);
-  font-family: 'Inter', sans-serif;
-  margin: 0;
-  background-image: radial-gradient(
-    circle at 50% -10%,
-    rgba(157, 78, 221, 0.05),
-    transparent
+  background: radial-gradient(
+    1200px 800px at 50% -200px,
+    #15171c,
+    var(--bg-main)
   );
+  color: var(--text-main);
 }
 
 .primary-btn {
