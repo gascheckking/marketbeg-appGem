@@ -28,30 +28,11 @@ export default function ClientLayout({
       <div className={`sidebar-drawer ${isSidebarOpen ? "open" : ""}`}>
         <div className="sidebar-inner">
           <div className="sidebar-header">
-            <span
-              style={{
-                fontWeight: 900,
-                letterSpacing: "2px",
-                color: "var(--accent-purple)",
-              }}
-            >
-              KARMA∞
-            </span>
-            <button
-              onClick={() => setSidebarOpen(false)}
-              style={{
-                background: "none",
-                border: "none",
-                color: "#fff",
-                fontSize: "20px",
-                cursor: "pointer",
-              }}
-            >
-              ✕
-            </button>
+            <span className="logo">KARMA∞</span>
+            <button onClick={() => setSidebarOpen(false)}>✕</button>
           </div>
 
-          <nav style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+          <nav className="sidebar-nav">
             {sidebarItems.map((item) => (
               <Link
                 key={item.label}
@@ -59,27 +40,20 @@ export default function ClientLayout({
                 className="sidebar-link"
                 onClick={() => setSidebarOpen(false)}
               >
-                <span style={{ fontSize: "16px" }}>{item.icon}</span>
-                <span>{item.label}</span>
+                <span>{item.icon}</span>
+                {item.label}
               </Link>
             ))}
           </nav>
         </div>
       </div>
 
-      {/* APP CONTAINER */}
+      {/* APP */}
       <div className={`app-container ${isSidebarOpen ? "pushed" : ""}`}>
         <Navbar onOpenMenu={() => setSidebarOpen(true)} />
         <TopTabs />
 
-        <main
-          style={{
-            maxWidth: "600px",
-            margin: "0 auto",
-            paddingBottom: "40px",
-            minHeight: "100vh",
-          }}
-        >
+        <main className="app-main">
           {children}
         </main>
       </div>
@@ -92,11 +66,10 @@ export default function ClientLayout({
           top: 0;
           width: 280px;
           height: 100%;
-          background: #0e0f12;
+          background: var(--bg-card);
           z-index: 2000;
-          transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+          transition: transform 0.35s ease;
           border-right: 1px solid var(--border-soft);
-          padding-top: env(safe-area-inset-top);
         }
 
         .sidebar-drawer.open {
@@ -104,34 +77,58 @@ export default function ClientLayout({
         }
 
         .sidebar-inner {
+          padding: 40px 20px;
           display: flex;
           flex-direction: column;
           height: 100%;
-          padding: 40px 20px;
+        }
+
+        .sidebar-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 24px;
+        }
+
+        .logo {
+          font-weight: 900;
+          letter-spacing: 2px;
+          color: var(--accent-purple);
+        }
+
+        .sidebar-nav {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
         }
 
         .sidebar-link {
           display: flex;
-          align-items: center;
-          gap: 15px;
-          padding: 15px;
-          text-decoration: none;
+          gap: 12px;
+          padding: 14px;
+          border-radius: 12px;
+          background: var(--bg-soft);
+          border: 1px solid var(--border-soft);
           color: var(--text-main);
+          text-decoration: none;
           font-size: 11px;
           font-weight: 900;
-          background: var(--bg-soft);
-          border-radius: 12px;
-          border: 1px solid var(--border-soft);
         }
 
         .app-container {
-          transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
           min-height: 100vh;
+          transition: transform 0.35s ease;
         }
 
         .app-container.pushed {
           transform: translateX(280px);
           pointer-events: none;
+        }
+
+        .app-main {
+          max-width: 600px;
+          margin: 0 auto;
+          padding: 20px 16px 40px;
         }
       `}</style>
     </>
