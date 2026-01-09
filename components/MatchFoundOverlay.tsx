@@ -1,168 +1,70 @@
-// components/MatchFoundOverlay.tsx
+// // components/MatchFoundOverlay.tsx
 "use client";
-
 import React, { useEffect, useState } from "react";
 import TrustBadge from "@/components/TrustBadge";
 import PriceTag from "@/components/PriceTag";
 
-type Props = {
-  price: number;
-  trust: number;
-  demand: string;
-  onAccept: () => void;
-  onClose: () => void;
-};
-
-export default function MatchFoundOverlay({
-  price,
-  trust,
-  demand,
-  onAccept,
-  onClose,
-}: Props) {
+export default function MatchFoundOverlay({ price, trust, demand, onAccept, onClose }: any) {
   const [animatedPrice, setAnimatedPrice] = useState(0);
 
-  // --- PRIS-LANDNING (B) ---
   useEffect(() => {
     let start = 0;
-    const duration = 800; // ms – premium, lugnt
+    const duration = 1000;
     const startTime = performance.now();
-
-    const easeOut = (t: number) => 1 - Math.pow(1 - t, 3);
-
     const tick = (now: number) => {
       const progress = Math.min((now - startTime) / duration, 1);
-      const eased = easeOut(progress);
-      const value = Math.round(start + (price - start) * eased);
-
-      setAnimatedPrice(value);
-
-      if (progress < 1) {
-        requestAnimationFrame(tick);
-      }
+      setAnimatedPrice(Math.round(start + (price - start) * (1 - Math.pow(1 - progress, 3))));
+      if (progress < 1) requestAnimationFrame(tick);
     };
-
     requestAnimationFrame(tick);
   }, [price]);
 
   return (
-    <div className="overlay-backdrop">
-      <div className="overlay-card">
-        <div className="overlay-eyebrow">MATCH HITTAD</div>
-
-        {/* PRIS – LANDAR */}
-        <div className="overlay-price">
-          <PriceTag price={animatedPrice} size="lg" color="#fff" />
+    <div style={{
+      position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.9)',
+      backdropFilter: 'blur(20px)', zIndex: 1000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px'
+    }}>
+      <div style={{
+        width: '100%', maxWidth: '360px', background: '#1DB954', borderRadius: '32px',
+        padding: '40px 24px', textAlign: 'center', color: '#000',
+        animation: 'slideUp 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)'
+      }}>
+        <div style={{ fontSize: '10px', fontWeight: 900, letterSpacing: '2px', opacity: 0.7, marginBottom: '20px' }}>
+          AFFÄR MATCHAD
         </div>
 
-        <div className="overlay-meta">
-          <TrustBadge score={trust} />
-          <span className="overlay-demand">{demand}</span>
+        <div style={{ marginBottom: '20px' }}>
+          <PriceTag price={animatedPrice} size="lg" color="#000" />
         </div>
 
-        <p className="overlay-copy">
-          En köpare med hög tillit är redo att genomföra affären direkt.
-          Pengar hålls säkert tills köparen godkänt.
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '10px', marginBottom: '24px' }}>
+          <div style={{ background: 'rgba(0,0,0,0.1)', padding: '6px 12px', borderRadius: '12px' }}>
+             <TrustBadge score={trust} />
+          </div>
+          <span style={{ fontSize: '11px', fontWeight: 900, opacity: 0.7, alignSelf: 'center' }}>{demand.toUpperCase()}</span>
+        </div>
+
+        <p style={{ fontSize: '13px', fontWeight: 600, lineHeight: '1.5', marginBottom: '30px', opacity: 0.8 }}>
+          En köpare med hög Karma har accepterat ditt pris. Pengarna skickas sekunden du postar.
         </p>
 
-        <button className="overlay-primary" onClick={onAccept}>
-          Acceptera affär
+        <button 
+          onClick={onAccept}
+          style={{
+            width: '100%', background: '#000', color: '#fff', border: 'none',
+            padding: '20px', borderRadius: '18px', fontWeight: 900, fontSize: '15px', marginBottom: '12px'
+          }}
+        >
+          ACCEPTERA & SÄLJ
         </button>
 
-        <button className="overlay-secondary" onClick={onClose}>
-          Inte nu
+        <button onClick={onClose} style={{ background: 'transparent', border: 'none', fontSize: '12px', fontWeight: 800, opacity: 0.6 }}>
+          Kanske senare
         </button>
       </div>
 
       <style jsx>{`
-        .overlay-backdrop {
-          position: fixed;
-          inset: 0;
-          background: rgba(2, 4, 10, 0.75);
-          backdrop-filter: blur(14px);
-          z-index: 1000;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          animation: fadeIn 0.25s ease;
-        }
-
-        .overlay-card {
-          width: 100%;
-          max-width: 340px;
-          background: #0b0f1a;
-          border-radius: 28px;
-          padding: 28px 22px 24px;
-          text-align: center;
-          border: 1px solid rgba(255,255,255,0.08);
-          box-shadow: 0 30px 80px rgba(0,0,0,0.6);
-          animation: popIn 0.35s cubic-bezier(0.2, 0.9, 0.3, 1.2);
-        }
-
-        .overlay-eyebrow {
-          font-size: 9px;
-          font-weight: 900;
-          letter-spacing: 2px;
-          color: var(--neon-purple);
-          opacity: 0.9;
-          margin-bottom: 14px;
-        }
-
-        .overlay-price {
-          margin-bottom: 14px;
-        }
-
-        .overlay-meta {
-          display: flex;
-          justify-content: center;
-          gap: 10px;
-          margin-bottom: 14px;
-        }
-
-        .overlay-demand {
-          font-size: 9px;
-          font-weight: 800;
-          opacity: 0.6;
-        }
-
-        .overlay-copy {
-          font-size: 11px;
-          line-height: 1.6;
-          opacity: 0.65;
-          margin-bottom: 22px;
-        }
-
-        .overlay-primary {
-          width: 100%;
-          background: #fff;
-          color: #000;
-          border: none;
-          padding: 16px;
-          border-radius: 16px;
-          font-weight: 900;
-          font-size: 12px;
-          margin-bottom: 10px;
-          cursor: pointer;
-        }
-
-        .overlay-secondary {
-          background: transparent;
-          border: none;
-          color: rgba(255,255,255,0.5);
-          font-size: 10px;
-          font-weight: 800;
-          cursor: pointer;
-        }
-
-        @keyframes fadeIn {
-          from { opacity: 0; }
-          to { opacity: 1; }
-        }
-
-        @keyframes popIn {
-          from { transform: scale(0.92); opacity: 0; }
-          to { transform: scale(1); opacity: 1; }
-        }
+        @keyframes slideUp { from { transform: translateY(100px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
       `}</style>
     </div>
   );
