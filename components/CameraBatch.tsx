@@ -1,135 +1,85 @@
+// // components/CameraBatch.tsx
 "use client";
-import { useState, useRef, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useState, useRef } from "react";
 
-export default function CameraBatch() {
-  const [isAnalyzing, setIsAnalyzing] = useState(false);
-  const [fileCount, setFileCount] = useState(0);
-  const [scanStep, setScanStep] = useState("");
+export default function CameraBatch({ onScanComplete }: { onScanComplete: (price: number) => void }) {
+  const [status, setStatus] = useState<"idle" | "scanning" | "success">("idle");
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const router = useRouter();
 
-  useEffect(() => {
-    return () => {
-      // säkerställer att inga timers kör efter unmount
-    };
-  }, []);
-
-  const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!e.target.files?.length) return;
-
-    const count = e.target.files.length;
-    setFileCount(count);
-    setIsAnalyzing(true);
-
-    setScanStep("IDENTIFIERAR OBJEKT...");
-    setTimeout(() => setScanStep("ANALYSERAR MARKNADSVÄRDE..."), 800);
-    setTimeout(() => setScanStep("MATCHAR MOT KÖPARE..."), 1600);
-
+  const handleUpload = () => {
+    setStatus("scanning");
+    // Fredde-speed: Vi simulerar en blixtsnabb AI-analys
     setTimeout(() => {
-      router.push(`/sell/instant?count=${count}`);
-    }, 2500);
+      setStatus("success");
+      setTimeout(() => {
+        onScanComplete(9800); // Skickar upp priset till sidan
+        setStatus("idle");
+      }, 800);
+    }, 1500);
   };
 
   return (
-    <div style={{ margin: "15px 0" }}>
-      <input
-        ref={fileInputRef}
-        type="file"
-        accept="image/*"
-        capture="environment"
-        multiple
-        hidden
-        onChange={handleFile}
+    <div style={{ margin: "20px 0" }}>
+      <input 
+        type="file" 
+        ref={fileInputRef} 
+        hidden 
+        onChange={handleUpload} 
+        accept="image/*" 
+        multiple 
       />
 
-      {!isAnalyzing ? (
-        <div
-          style={{
-            background: "rgba(157,78,221,0.05)",
-            border: "1px solid rgba(157,78,221,0.2)",
-            borderRadius: "20px",
-            padding: "20px",
-            display: "flex",
-            justifyContent: "space-between",
-          }}
-        >
-          <div>
-            <span
-              style={{
-                color: "var(--neon-mint)",
-                fontSize: "7px",
-                fontWeight: 900,
-                letterSpacing: "1px",
-              }}
-            >
-              AI SCANNER
+      <div 
+        onClick={() => fileInputRef.current?.click()}
+        style={{
+          height: "140px",
+          background: status === "scanning" ? "#1DB954" : "#121212",
+          borderRadius: "24px",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          border: "1px dashed rgba(255,255,255,0.1)",
+          transition: "0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+          cursor: "pointer",
+          position: "relative",
+          overflow: "hidden"
+        }}
+      >
+        {status === "idle" && (
+          <>
+            <span style={{ fontSize: "32px" }}>📸</span>
+            <span style={{ fontSize: "12px", fontWeight: 800, marginTop: "10px", opacity: 0.6 }}>
+              AI BATCH SCAN (MAX 25)
             </span>
-            <h2 style={{ fontSize: "1rem", fontWeight: 900 }}>
-              Sälj upp till 25 objekt
-            </h2>
-            <p style={{ fontSize: "9px", opacity: 0.5 }}>
-              Fota direkt • AI sköter resten
-            </p>
+          </>
+        )}
+
+        {status === "scanning" && (
+          <div style={{ textAlign: "center", color: "#000" }}>
+            <div className="ai-loader" />
+            <div style={{ fontSize: "14px", fontWeight: 900, marginTop: "10px" }}>ANALYSERAR...</div>
           </div>
-          <button
-            className="primary-btn"
-            style={{ width: "auto", padding: "10px 20px", fontSize: "10px" }}
-            onClick={() => fileInputRef.current?.click()}
-          >
-            STARTA
-          </button>
-        </div>
-      ) : (
-        <div
-          style={{
-            height: "100px",
-            background: "#050505",
-            borderRadius: "20px",
-            border: "1px solid var(--neon-mint)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            position: "relative",
-          }}
-        >
-          <div className="scanner-line" />
-          <div style={{ textAlign: "center", zIndex: 1 }}>
-            <div
-              style={{
-                fontSize: "9px",
-                fontWeight: 900,
-                color: "var(--neon-mint)",
-              }}
-            >
-              {scanStep}
-            </div>
-            <div style={{ fontSize: "7px", opacity: 0.4 }}>
-              {fileCount} FILER DETEKTERADE
-            </div>
-          </div>
-        </div>
-      )}
+        )}
+
+        {status === "success" && (
+          <div style={{ fontSize: "40px", animation: "pop 0.4s ease" }}>✅</div>
+        )}
+      </div>
 
       <style jsx>{`
-        .scanner-line {
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          height: 2px;
-          background: var(--neon-mint);
-          box-shadow: 0 0 15px var(--neon-mint);
-          animation: scan 1.5s ease-in-out infinite;
+        .ai-loader {
+          width: 30px; height: 30px;
+          border: 4px solid rgba(0,0,0,0.1);
+          border-top: 4px solid #000;
+          border-radius: 50%;
+          animation: spin 0.8s linear infinite;
+          margin: 0 auto;
         }
-        @keyframes scan {
-          0%,
-          100% {
-            transform: translateY(0);
-          }
-          50% {
-            transform: translateY(100px);
-          }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+        @keyframes pop { 
+          0% { transform: scale(0.5); opacity: 0; }
+          100% { transform: scale(1); opacity: 1; }
         }
       `}</style>
     </div>
