@@ -17,244 +17,157 @@ export default function StandardSell() {
   const [demand, setDemand] = useState<string | null>(null);
   const [showOverlay, setShowOverlay] = useState(false);
 
+  const triggerMatch = () => {
+    setIsRecording(false);
+    setIsAnalysing(true);
+    setAiStatus("Matchar mot köpare...");
+
+    setTimeout(() => {
+      setIsAnalysing(false);
+      setPriceSuggestion(9800);
+      setBuyerTrust(98);
+      setDemand("Hög efterfrågan");
+      setAiStatus("Förslag klart");
+      setShowOverlay(true);
+    }, 1800);
+  };
+
   const startVoiceScan = () => {
     setIsRecording(true);
     setAiStatus("Analyserar objekt...");
     setPriceSuggestion(null);
-    setBuyerTrust(null);
-    setDemand(null);
     setShowOverlay(false);
-
-    setTimeout(() => {
-      setIsRecording(false);
-      setIsAnalysing(true);
-      setAiStatus("Matchar mot köpare...");
-
-      setTimeout(() => {
-        setIsAnalysing(false);
-        setPriceSuggestion(9800);
-        setBuyerTrust(98);
-        setDemand("Hög efterfrågan");
-        setAiStatus("Förslag klart");
-        setShowOverlay(true);
-      }, 1800);
-    }, 1200);
+    setTimeout(triggerMatch, 1200);
   };
 
   const isReady = priceSuggestion !== null;
 
   return (
-    <div
-      className="page-wrapper"
-      style={{
-        minHeight: "100vh",
-        background: "#02040a",
-        animation: "fadeIn 0.4s ease",
-      }}
-    >
-      {/* TOP NAV */}
-      <div
-        style={{
-          position: "sticky",
-          top: 0,
-          zIndex: 100,
-          background: "rgba(2,4,10,0.95)",
-          backdropFilter: "blur(20px)",
-          borderBottom: "1px solid rgba(255,255,255,0.05)",
-          padding: "12px 20px",
-        }}
-      >
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <span
-            style={{
-              fontSize: "10px",
-              fontWeight: 900,
-              letterSpacing: "1px",
-              color: "var(--neon-purple)",
-            }}
-          >
-            SNABBSÄLJ
-          </span>
-          <span
-            style={{
-              fontSize: "10px",
-              fontWeight: 900,
-              opacity: 0.8,
-            }}
-          >
-            14 250 kr
-          </span>
+    <div className="page-wrapper" style={{
+      minHeight: "100vh",
+      background: "#000", // Ren svart för lyxigare känsla
+      color: "#fff",
+      animation: "fadeIn 0.4s ease"
+    }}>
+      
+      {/* CLEAN NAV */}
+      <nav style={{
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+        padding: "20px 24px",
+        borderBottom: "1px solid rgba(255,255,255,0.05)"
+      }}>
+        <span style={{ fontSize: "12px", fontWeight: 900, letterSpacing: "1px", color: "var(--neon-purple)" }}>
+          SNABBSÄLJ
+        </span>
+        <div style={{ textAlign: "right" }}>
+          <div style={{ fontSize: "8px", opacity: 0.4, fontWeight: 800 }}>DITT SALDO</div>
+          <div style={{ fontSize: "14px", fontWeight: 900 }}>14 250 kr</div>
         </div>
-      </div>
+      </nav>
 
-      <div style={{ padding: "20px" }}>
-        {/* HEADER */}
-        <header style={{ textAlign: "center", marginBottom: "28px" }}>
-          <h1
-            style={{
-              fontSize: "1.9rem",
-              fontWeight: 900,
-              margin: 0,
-              letterSpacing: "-1px",
-            }}
-          >
-            Sälj snabbt
+      <div style={{ padding: "40px 24px" }}>
+        {/* MINIMALIST HEADER */}
+        <header style={{ marginBottom: "40px" }}>
+          <h1 style={{ fontSize: "2.4rem", fontWeight: 900, letterSpacing: "-1.5px", margin: 0 }}>
+            Sälj direkt.
           </h1>
-          <p
-            style={{
-              fontSize: "11px",
-              fontWeight: 700,
-              opacity: 0.6,
-              marginTop: "8px",
-            }}
-          >
-            Fota ditt objekt – vi matchar dig direkt mot redo köpare.
+          <p style={{ fontSize: "13px", opacity: 0.5, marginTop: "10px", lineHeight: "1.5" }}>
+            Fota ditt objekt – vår AI matchar dig direkt mot verifierade köpare.
           </p>
         </header>
 
-        {/* PRIMARY ACTION */}
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            marginBottom: "30px",
-          }}
-        >
+        {/* MAIN ACTION HUB */}
+        <div style={{ 
+          display: "flex", 
+          flexDirection: "column", 
+          alignItems: "center", 
+          marginBottom: "50px" 
+        }}>
           <button
             onClick={startVoiceScan}
             style={{
-              width: "78px",
-              height: "78px",
-              borderRadius: "28px",
-              background:
-                isRecording || isAnalysing
-                  ? "var(--neon-purple)"
-                  : "rgba(255,255,255,0.02)",
-              border:
-                isRecording || isAnalysing
-                  ? "2px solid var(--neon-purple)"
-                  : "1px solid rgba(255,255,255,0.1)",
-              fontSize: "28px",
-              boxShadow:
-                isRecording || isAnalysing
-                  ? "0 0 32px rgba(157,78,221,0.35)"
-                  : "none",
-              transition: "0.25s",
+              width: "90px",
+              height: "90px",
+              borderRadius: "32px",
+              background: isRecording || isAnalysing ? "var(--neon-purple)" : "#111",
+              border: "1px solid rgba(255,255,255,0.1)",
+              fontSize: "32px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              boxShadow: isRecording || isAnalysing ? "0 0 40px rgba(157,78,221,0.3)" : "0 20px 40px rgba(0,0,0,0.4)",
+              transition: "0.3s cubic-bezier(0.2, 0.8, 0.2, 1)",
+              cursor: "pointer"
             }}
           >
             {isRecording ? "🎙️" : "📸"}
           </button>
-
-          <div style={{ marginTop: "12px", textAlign: "center" }}>
-            <div style={{ fontSize: "12px", fontWeight: 900 }}>
-              Starta snabbsälj
-            </div>
-            <div style={{ fontSize: "9px", opacity: 0.5, fontWeight: 700 }}>
-              Fota → vi sköter resten
-            </div>
+          
+          <div style={{ marginTop: "16px", textAlign: "center" }}>
+            <div style={{ fontSize: "14px", fontWeight: 900 }}>Starta scanning</div>
+            <div style={{ fontSize: "10px", opacity: 0.4, marginTop: "4px" }}>Tryck för att identifiera objekt</div>
           </div>
         </div>
 
-        {/* CAMERA */}
-        <CameraBatch />
-
-        {/* AI RESULT CARD */}
-        <div
-          className="glass-card"
-          style={{
-            marginTop: "18px",
-            padding: "24px",
-            borderRadius: "24px",
-            background: "rgba(255,255,255,0.02)",
-            border: isReady
-              ? "1px solid rgba(0,255,136,0.35)"
-              : "1px solid rgba(255,255,255,0.06)",
+        {/* DISKRET CAMERA BATCH */}
+        <CameraBatch 
+          onScanStart={() => {
+            setIsAnalysing(true);
+            setAiStatus("Analyserar bilder...");
           }}
-        >
+          onScanComplete={triggerMatch}
+        />
+
+        {/* RESULT AREA - Nu mer integrerad */}
+        <div style={{
+          marginTop: "30px",
+          padding: "24px",
+          borderRadius: "24px",
+          background: isReady ? "#fff" : "rgba(255,255,255,0.03)",
+          color: isReady ? "#000" : "#fff",
+          border: isReady ? "none" : "1px solid rgba(255,255,255,0.06)",
+          transition: "0.4s"
+        }}>
           <div style={{ textAlign: "center" }}>
-            <div
-              style={{
-                fontSize: "9px",
-                fontWeight: 900,
-                letterSpacing: "1px",
-                opacity: 0.4,
-                marginBottom: "10px",
-              }}
-            >
-              {isAnalysing ? "MATCHNING PÅGÅR" : "STATUS"}
+            <div style={{ fontSize: "9px", fontWeight: 900, letterSpacing: "1px", opacity: 0.5, marginBottom: "8px" }}>
+              {isAnalysing ? "ANALYSERAR..." : "STATUS"}
             </div>
 
-            {!isReady && (
-              <div
-                style={{
-                  fontSize: "1.2rem",
-                  fontWeight: 900,
-                  opacity: 0.4,
-                }}
-              >
-                {aiStatus}
-              </div>
-            )}
-
-            {isReady && (
+            {!isReady ? (
+              <div style={{ fontSize: "1.1rem", fontWeight: 900, opacity: 0.4 }}>{aiStatus}</div>
+            ) : (
               <>
-                <div
-                  style={{
-                    fontSize: "2.2rem",
-                    fontWeight: 900,
-                    letterSpacing: "-1px",
-                  }}
-                >
+                <div style={{ fontSize: "2.5rem", fontWeight: 900, letterSpacing: "-1.5px" }}>
                   {priceSuggestion?.toLocaleString("sv-SE")} kr
                 </div>
-
-                <div
+                <div style={{ fontSize: "10px", fontWeight: 800, color: "var(--neon-mint)", marginTop: "4px" }}>
+                  MATCHAD MED KÖPARE ({buyerTrust}% TILLIT)
+                </div>
+                <button
+                  onClick={() => setShowOverlay(true)}
                   style={{
-                    marginTop: "8px",
-                    fontSize: "10px",
-                    fontWeight: 800,
-                    color: "var(--neon-mint)",
+                    marginTop: "20px",
+                    width: "100%",
+                    padding: "16px",
+                    borderRadius: "14px",
+                    background: "#000",
+                    color: "#fff",
+                    border: "none",
+                    fontWeight: 900,
+                    fontSize: "13px"
                   }}
                 >
-                  Köpare hittad • {buyerTrust}% tillit • {demand}
-                </div>
+                  SLUTFÖR AFFÄR
+                </button>
               </>
             )}
-          </div>
-
-          <button
-            disabled={!isReady}
-            style={{
-              marginTop: "22px",
-              width: "100%",
-              padding: "18px",
-              borderRadius: "16px",
-              border: "none",
-              fontSize: "12px",
-              fontWeight: 900,
-              background: isReady ? "#fff" : "rgba(255,255,255,0.05)",
-              color: isReady ? "#000" : "#444",
-              cursor: isReady ? "pointer" : "default",
-              transition: "0.3s",
-            }}
-          >
-            ACCEPTERA AFFÄR
-          </button>
-        </div>
-
-        {/* SAFETY */}
-        <div style={{ textAlign: "center", marginTop: "18px" }}>
-          <div style={{ fontSize: "11px", fontWeight: 800, opacity: 0.7 }}>
-            Säker affär. Pengar hålls tills köparen godkänt.
-          </div>
-          <div style={{ fontSize: "9px", fontWeight: 700, opacity: 0.4 }}>
-            Smidigare villkor när du säljer via din KARMA.
           </div>
         </div>
       </div>
 
-      {/* MATCH FOUND OVERLAY */}
+      {/* OVERLAY */}
       {showOverlay && isReady && (
         <MatchFoundOverlay
           price={priceSuggestion!}
@@ -262,27 +175,14 @@ export default function StandardSell() {
           demand={demand!}
           onAccept={() => {
             setShowOverlay(false);
-            router.push(
-              `/checkout?price=${priceSuggestion}&trust=${buyerTrust}&demand=${encodeURIComponent(
-                demand!
-              )}`
-            );
+            router.push(`/checkout?price=${priceSuggestion}`);
           }}
           onClose={() => setShowOverlay(false)}
         />
       )}
 
       <style jsx>{`
-        @keyframes fadeIn {
-          from {
-            opacity: 0;
-            transform: translateY(6px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
       `}</style>
     </div>
   );
