@@ -15,53 +15,76 @@ export default function MatchScanner() {
 
   return (
     <div style={{ 
-      background: 'rgba(157, 78, 221, 0.03)', 
-      border: '1px dashed rgba(157, 78, 221, 0.3)', 
-      borderRadius: '24px', padding: '30px', textAlign: 'center' 
+      background: '#121212', 
+      border: '1px solid rgba(255, 255, 255, 0.05)', 
+      borderRadius: '32px', padding: '40px 20px', textAlign: 'center',
+      boxShadow: '0 20px 40px rgba(0,0,0,0.4)'
     }}>
       {status === 'IDLE' && (
-        <div style={{ animation: 'fadeIn 0.3s' }}>
-          <div style={{ fontSize: '32px', marginBottom: '15px' }}>⚡</div>
-          <h3 style={{ fontSize: '14px', fontWeight: 900, marginBottom: '8px' }}>HITTA BILLIGARE</h3>
-          <p style={{ fontSize: '10px', opacity: 0.5, marginBottom: '20px' }}>Fota objektet så söker vi i loopen direkt.</p>
-          <button onClick={startScan} className="primary-btn" style={{ background: 'var(--neon-purple)', color: '#fff' }}>
-            STARTA SCANNER
+        <div style={{ animation: 'fadeIn 0.4s ease' }}>
+          <div style={{ fontSize: '40px', marginBottom: '20px' }}>⚡</div>
+          <h3 style={{ fontSize: '18px', fontWeight: 900, marginBottom: '8px', letterSpacing: '-0.5px' }}>HITTA BILLIGARE</h3>
+          <p style={{ fontSize: '12px', opacity: 0.5, marginBottom: '25px', padding: '0 20px' }}>
+            AI-skanna objektet så hittar vi det i Loopen till lägre pris direkt.
+          </p>
+          <button 
+            onClick={startScan} 
+            style={{ 
+              background: '#fff', color: '#000', border: 'none', 
+              padding: '16px 32px', borderRadius: '30px', fontWeight: 900, fontSize: '13px'
+            }}
+          >
+            STARTA AI-RADAR
           </button>
         </div>
       )}
 
       {status === 'SCANNING' && (
         <div style={{ padding: '20px' }}>
-          <div className="searching-loader"></div>
-          <p style={{ fontSize: '10px', fontWeight: 900, color: 'var(--neon-purple)', letterSpacing: '1px' }}>SÖKER I LOOPEN...</p>
+          <div className="radar-animation">
+            <div className="dot"></div>
+          </div>
+          <p style={{ fontSize: '11px', fontWeight: 900, color: '#1DB954', letterSpacing: '2px', marginTop: '30px' }}>
+            ANALYS PÅGÅR...
+          </p>
         </div>
       )}
 
       {status === 'MATCHED' && (
-        <div style={{ animation: 'popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)' }}>
-          <div style={{ fontSize: '32px', marginBottom: '10px' }}>💎</div>
-          <h3 style={{ fontSize: '14px', fontWeight: 900, color: 'var(--neon-mint)' }}>MATCHNING FUNNEN!</h3>
-          <p style={{ fontSize: '10px', opacity: 0.6, marginBottom: '15px' }}>Vi hittade 3 identiska objekt till -40% pris.</p>
-          <button className="primary-btn" style={{ background: 'var(--neon-mint)', color: '#000' }}>VISA MATCHNINGAR</button>
+        <div style={{ animation: 'popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)' }}>
+          <div style={{ fontSize: '40px', marginBottom: '15px' }}>💎</div>
+          <h3 style={{ fontSize: '18px', fontWeight: 900, color: '#1DB954' }}>MATCHNING FUNNEN!</h3>
+          <p style={{ fontSize: '12px', opacity: 0.6, marginBottom: '20px' }}>Vi hittade 3 identiska objekt till -40% pris.</p>
+          <button style={{ background: '#1DB954', color: '#000', border: 'none', padding: '16px 32px', borderRadius: '30px', fontWeight: 900 }}>
+            VISA DEALS
+          </button>
         </div>
       )}
 
       {status === 'WISHLIST' && (
         <div style={{ animation: 'fadeIn 0.3s' }}>
-          <div style={{ fontSize: '32px', marginBottom: '10px' }}>🔍</div>
-          <p style={{ fontSize: '11px', fontWeight: 700, marginBottom: '15px' }}>Ingen matchning just nu.<br/><span style={{opacity: 0.5}}>Lagt till i din bevakningslista.</span></p>
-          <button onClick={() => setStatus('IDLE')} className="primary-btn" style={{ background: 'transparent', border: '1px solid #333', color: '#fff' }}>STÄNG</button>
+          <div style={{ fontSize: '40px', marginBottom: '15px' }}>🔍</div>
+          <p style={{ fontSize: '13px', fontWeight: 700, marginBottom: '20px' }}>Ingen matchning just nu.<br/><span style={{opacity: 0.5}}>Lagt till i din bevakningslista.</span></p>
+          <button onClick={() => setStatus('IDLE')} style={{ background: 'transparent', border: '1px solid #333', color: '#fff', padding: '12px 24px', borderRadius: '30px', fontSize: '12px' }}>STÄNG</button>
         </div>
       )}
 
       <style jsx>{`
-        .searching-loader {
-          width: 40px; height: 40px; border: 3px solid rgba(157, 78, 221, 0.1);
-          border-top: 3px solid var(--neon-purple); border-radius: 50%;
-          margin: 0 auto 15px auto; animation: spin 1s linear infinite;
+        .radar-animation {
+          position: relative; width: 80px; height: 80px; margin: 0 auto;
+          border: 2px solid rgba(29, 185, 84, 0.2); border-radius: 50%;
         }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .radar-animation::after {
+          content: ''; position: absolute; inset: -10px;
+          border: 2px solid rgba(29, 185, 84, 0.1); border-radius: 50%;
+          animation: pulse 1.5s infinite;
+        }
+        .dot {
+          width: 10px; height: 10px; background: #1DB954; border-radius: 50%;
+          position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+          box-shadow: 0 0 15px #1DB954;
+        }
+        @keyframes pulse { 0% { transform: scale(0.8); opacity: 1; } 100% { transform: scale(1.5); opacity: 0; } }
         @keyframes popIn { 0% { transform: scale(0.9); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
       `}</style>
     </div>
