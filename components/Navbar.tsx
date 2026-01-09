@@ -1,4 +1,4 @@
-// components/Navbar.tsx
+// // components/Navbar.tsx
 "use client";
 import React from "react";
 import Link from "next/link";
@@ -14,10 +14,10 @@ export default function Navbar({ onOpenMenu }: Props) {
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",
-        padding: "12px 20px",
-        background: "rgba(10, 12, 16, 0.95)",
+        padding: "16px 24px",
+        background: "rgba(0, 0, 0, 0.8)",
         backdropFilter: "blur(20px)",
-        borderBottom: "1px solid rgba(255,255,255,0.03)",
+        borderBottom: "1px solid rgba(255,255,255,0.05)",
         position: "sticky",
         top: 0,
         zIndex: 1000,
@@ -29,41 +29,31 @@ export default function Navbar({ onOpenMenu }: Props) {
           background: "none",
           border: "none",
           color: "#fff",
-          fontSize: "20px",
-          opacity: 0.6,
+          fontSize: "22px",
+          cursor: "pointer",
+          padding: 0
         }}
       >
         ☰
       </button>
 
       <Link href="/" style={{ textDecoration: "none", textAlign: "center" }}>
-        <div
-          style={{
-            fontWeight: 900,
-            fontSize: "14px",
-            color: "#fff",
-            letterSpacing: "2px",
-          }}
-        >
+        <div style={{ fontWeight: 900, fontSize: "16px", color: "#fff", letterSpacing: "3px" }}>
           KARMA∞
-        </div>
-        <div
-          style={{
-            fontSize: "7px",
-            color: "var(--neon-mint)",
-            fontWeight: 800,
-            opacity: 0.6,
-          }}
-        >
-          PRYLAR UT • PENGAR IN
         </div>
       </Link>
 
-      <div style={{ display: "flex", gap: "15px", alignItems: "center" }}>
-        <Link href="/my-karma" style={{ textDecoration: "none", opacity: 0.4 }}>
+      <div style={{ display: "flex", gap: "12px", alignItems: "center" }}>
+        <Link href="/my-karma" style={{ 
+          width: "32px", height: "32px", borderRadius: "50%", background: "#121212", 
+          display: "flex", alignItems: "center", justifyContent: "center", textDecoration: "none", fontSize: "14px"
+        }}>
           🛡️
         </Link>
-        <Link href="/dashboard" style={{ textDecoration: "none", opacity: 0.4 }}>
+        <Link href="/wallet" style={{ 
+          width: "32px", height: "32px", borderRadius: "50%", background: "#1DB954", 
+          display: "flex", alignItems: "center", justifyContent: "center", textDecoration: "none", fontSize: "14px"
+        }}>
           💰
         </Link>
       </div>
