@@ -8,13 +8,12 @@ export default function SplashScreen() {
 
   useEffect(() => {
     setMounted(true);
-    // Förhindra att den visas vid varje sidbyte under samma session
     const hasSeen = sessionStorage.getItem("hasSeenKarmaSplash");
     
     if (!hasSeen) {
       setVisible(true);
       sessionStorage.setItem("hasSeenKarmaSplash", "true");
-      const timer = setTimeout(() => setVisible(false), 2800);
+      const timer = setTimeout(() => setVisible(false), 2400);
       return () => clearTimeout(timer);
     }
   }, []);
@@ -24,36 +23,37 @@ export default function SplashScreen() {
   return (
     <div style={{ 
       position: 'fixed', inset: 0, zIndex: 10000,
-      backgroundColor: '#02040a', display: 'flex', flexDirection: 'column', 
+      backgroundColor: '#000', display: 'flex', flexDirection: 'column', 
       alignItems: 'center', justifyContent: 'center', pointerEvents: 'none'
     }}>
-      <div style={{ textAlign: 'center', animation: 'fadeInOut 2.8s forwards' }}>
+      <div style={{ textAlign: 'center', animation: 'karmaIn 2.4s ease-in-out forwards' }}>
         <div style={{ 
-          width: '60px', height: '60px', border: '2px solid var(--neon-mint)', 
-          borderRadius: '18px', display: 'flex', alignItems: 'center', 
-          justifyContent: 'center', margin: '0 auto 25px',
-          boxShadow: '0 0 30px rgba(0, 255, 136, 0.15)'
+          fontSize: '60px', fontWeight: 900, letterSpacing: '-4px', color: '#fff',
+          marginBottom: '10px', position: 'relative'
         }}>
-          <span style={{ color: 'var(--neon-mint)', fontSize: '30px', fontWeight: 'bold' }}>∞</span>
+          KARMA
+          <span style={{ color: '#1DB954', position: 'absolute', right: '-35px', top: '5px' }}>∞</span>
         </div>
-        <h1 style={{ 
-          fontSize: '1.8rem', fontWeight: 900, letterSpacing: '10px', 
-          background: 'linear-gradient(45deg, var(--neon-purple), var(--neon-mint))', 
-          WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
-          margin: 0
-        }}>KARMA</h1>
+        <div style={{ 
+          height: '2px', width: '0%', background: '#1DB954', margin: '0 auto',
+          animation: 'loadBar 1.5s ease-out forwards 0.3s'
+        }} />
         <p style={{ 
-          fontSize: '7px', letterSpacing: '3px', color: 'var(--neon-mint)', 
-          marginTop: '15px', opacity: 0.6, fontWeight: 800 
-        }}>KNOW • ACQUIRE • REUSE • MATCH • AGAIN</p>
+          fontSize: '9px', letterSpacing: '4px', color: '#fff', 
+          marginTop: '20px', opacity: 0.4, fontWeight: 900 
+        }}>FUTURE OF COMMERCE</p>
       </div>
       <style jsx>{` 
-        @keyframes fadeInOut { 
-          0% { opacity: 0; transform: scale(0.95); filter: blur(10px); } 
-          15% { opacity: 1; transform: scale(1); filter: blur(0px); } 
-          85% { opacity: 1; transform: scale(1); } 
-          100% { opacity: 0; transform: scale(1.05); filter: blur(5px); } 
+        @keyframes karmaIn { 
+          0% { opacity: 0; transform: translateY(20px) scale(0.9); } 
+          20% { opacity: 1; transform: translateY(0) scale(1); } 
+          80% { opacity: 1; transform: scale(1); filter: blur(0px); } 
+          100% { opacity: 0; transform: scale(1.1); filter: blur(10px); } 
         } 
+        @keyframes loadBar {
+          0% { width: 0%; }
+          100% { width: 100%; }
+        }
       `}</style>
     </div>
   );
