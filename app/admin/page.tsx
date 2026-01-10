@@ -3,60 +3,54 @@
 import React from 'react';
 
 export default function AdminPage() {
-  return (
-    <div style={{ background: 'var(--bg-deep)', minHeight: '100vh', color: '#fff', padding: '20px 15px' }}>
-      <div style={{ maxWidth: '600px', margin: '0 auto' }}>
-        <header style={{ marginBottom: '30px', borderBottom: '1px solid var(--border)', paddingBottom: '15px' }}>
-          <h1 style={{ fontSize: '1.4rem', fontWeight: 900, letterSpacing: '-1.5px', margin: 0 }}>
-            KARMA <span style={{ color: 'var(--neon-purple)' }}>CONTROL</span>
-          </h1>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '5px' }}>
-            <p style={{ fontSize: '9px', color: '#555', fontWeight: 800 }}>SYSTEM MONITOR v2.6.0</p>
-            <span style={{ color: 'var(--neon-mint)', fontWeight: 900, fontSize: '9px', letterSpacing: '1px' }}>● STHLM-HQ ONLINE</span>
-          </div>
-        </header>
+  const stats = [
+    { label: 'LOOPS 24H', val: '1,284', color: '#1DB954' },
+    { label: 'SYSTEM LOAD', val: '12%', color: '#fff' },
+    { label: 'AI PRECISION', val: '99.4%', color: '#1DB954' },
+    { label: 'ACTIVE NODES', val: '42', color: '#fff' }
+  ];
 
-        {/* Stats Grid - 2 kolumner för mobilen */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', marginBottom: '20px' }}>
-          {[
-            { label: 'Loops', val: '1,284', color: 'var(--neon-mint)' },
-            { label: 'Uptime', val: '99.9%', color: 'var(--neon-purple)' },
-            { label: 'AI Match', val: '94.2%', color: '#fff' },
-            { label: 'Nodes', val: '12', color: '#555' }
-          ].map((s, i) => (
-            <div key={i} className="glass-card" style={{ padding: '15px', border: '1px solid rgba(255,255,255,0.05)' }}>
-              <h3 style={{ fontSize: '8px', color: '#555', textTransform: 'uppercase', margin: 0 }}>{s.label}</h3>
-              <p style={{ fontSize: '1.2rem', fontWeight: 900, margin: '5px 0', color: s.color }}>{s.val}</p>
+  return (
+    <div className="page-wrapper" style={{ background: '#000', minHeight: '100vh', padding: '20px' }}>
+      <header style={{ marginBottom: '40px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+          <div>
+            <h1 style={{ fontSize: '2rem', fontWeight: 900, letterSpacing: '-2px', color: '#fff' }}>
+              CONTROL<span style={{ color: '#1DB954' }}>CENTER</span>
+            </h1>
+            <p style={{ fontSize: '10px', fontWeight: 900, opacity: 0.3, letterSpacing: '2px' }}>GLOBAL LOOP MONITOR</p>
+          </div>
+          <div style={{ background: '#1DB95415', padding: '8px 15px', borderRadius: '30px', border: '1px solid #1DB95444' }}>
+            <span style={{ color: '#1DB954', fontWeight: 900, fontSize: '10px' }}>● SYSTEM ONLINE</span>
+          </div>
+        </div>
+      </header>
+
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px', marginBottom: '30px' }}>
+        {stats.map((s, i) => (
+          <div key={i} style={{ background: '#111', padding: '20px', borderRadius: '24px', border: '1px solid rgba(255,255,255,0.03)' }}>
+            <h3 style={{ fontSize: '9px', color: '#444', fontWeight: 900, marginBottom: '8px' }}>{s.label}</h3>
+            <p style={{ fontSize: '1.8rem', fontWeight: 900, color: s.color, margin: 0 }}>{s.val}</p>
+          </div>
+        ))}
+      </div>
+
+      <div style={{ background: '#111', borderRadius: '24px', padding: '20px', border: '1px solid #111' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '20px' }}>
+          <h2 style={{ fontSize: '12px', fontWeight: 900 }}>REALTIDS-LOGG</h2>
+          <div style={{ width: '8px', height: '8px', background: '#1DB954', borderRadius: '50%' }}></div>
+        </div>
+        
+        <div style={{ display: 'grid', gap: '10px' }}>
+          {['14:22 - Match Found - iPhone 15', '14:21 - BankID Verify - *9282', '14:20 - Loop Closed - MacBook M3'].map((log, i) => (
+            <div key={i} style={{ 
+              padding: '12px', background: '#000', borderRadius: '12px', 
+              fontSize: '11px', color: '#666', fontFamily: 'monospace',
+              border: '1px solid #111'
+            }}>
+              {log}
             </div>
           ))}
-        </div>
-
-        {/* Market Pulse Log */}
-        <div className="glass-card" style={{ padding: '15px', borderRadius: '16px' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '15px' }}>
-            <h2 style={{ fontSize: '11px', fontWeight: 900, margin: 0 }}>MARKET PULSE</h2>
-            <button style={{ background: 'none', border: 'none', color: '#444', fontSize: '9px', fontWeight: 800 }}>RENSA</button>
-          </div>
-          
-          <div style={{ display: 'grid', gap: '8px' }}>
-            {[
-              { time: '14:22', event: 'Match', detail: 'iPhone 15 Pro', status: 'OK' },
-              { time: '14:21', event: 'Loop', detail: 'MacBook M3', status: 'LIVE' },
-              { time: '14:20', event: 'Auth', detail: 'BankID Verify', status: 'SEC' },
-            ].map((log, i) => (
-              <div key={i} style={{ 
-                display: 'flex', justifyContent: 'space-between', padding: '10px', 
-                background: 'rgba(255,255,255,0.01)', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.03)',
-                fontSize: '10px', alignItems: 'center'
-              }}>
-                <div style={{ display: 'flex', gap: '10px' }}>
-                  <span style={{ opacity: 0.3, fontFamily: 'monospace' }}>{log.time}</span>
-                  <span style={{ fontWeight: 800 }}>{log.event}</span>
-                </div>
-                <span style={{ color: i === 1 ? 'var(--neon-purple)' : 'var(--neon-mint)', fontWeight: 900 }}>{log.status}</span>
-              </div>
-            ))}
-          </div>
         </div>
       </div>
     </div>
