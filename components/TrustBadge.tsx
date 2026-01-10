@@ -2,40 +2,40 @@
 "use client";
 
 export default function TrustBadge({ score }: { score: number }) {
-  const color = score >= 95 ? 'var(--neon-mint)' : 'var(--neon-purple)';
+  const isHigh = score >= 95;
+  const color = isHigh ? '#1DB954' : '#fff';
 
   return (
     <div style={{
       display: 'inline-flex', 
       alignItems: 'center', 
-      gap: '6px',
-      padding: '4px 8px', 
-      background: 'rgba(255,255,255,0.03)',
-      borderRadius: '8px', 
-      border: `1px solid ${color}44`,
-      backdropFilter: 'blur(10px)'
+      gap: '8px',
+      padding: '6px 12px', 
+      background: '#121212',
+      borderRadius: '20px', 
+      border: `1px solid ${isHigh ? 'rgba(29, 185, 84, 0.3)' : 'rgba(255,255,255,0.1)'}`,
     }}>
       <div style={{
-        width: '5px', height: '5px', borderRadius: '50%',
+        width: '6px', height: '6px', borderRadius: '50%',
         background: color, 
-        boxShadow: `0 0 8px ${color}`,
-        animation: score >= 98 ? 'pulse 2s infinite' : 'none'
+        boxShadow: isHigh ? `0 0 10px ${color}` : 'none',
+        animation: isHigh ? 'karma-pulse 2s infinite' : 'none'
       }}></div>
       
       <span style={{ 
-        fontSize: '8px', 
+        fontSize: '10px', 
         fontWeight: 900, 
         color: '#fff', 
-        letterSpacing: '0.5px'
+        letterSpacing: '1px'
       }}>
-        {score}% TILLIT
+        {score}% TRUST
       </span>
 
       <style jsx>{`
-        @keyframes pulse {
-          0% { transform: scale(1); opacity: 1; }
-          50% { transform: scale(1.4); opacity: 0.5; }
-          100% { transform: scale(1); opacity: 1; }
+        @keyframes karma-pulse {
+          0% { opacity: 1; transform: scale(1); }
+          50% { opacity: 0.4; transform: scale(1.2); }
+          100% { opacity: 1; transform: scale(1); }
         }
       `}</style>
     </div>
