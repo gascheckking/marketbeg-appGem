@@ -1,9 +1,7 @@
 // // app/chat/[id]/page.tsx
 "use client";
-
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import TopTabs from "@/components/TopTabs";
 
 export default function ChatPage() {
   const [msg, setMsg] = useState("");
@@ -15,80 +13,45 @@ export default function ChatPage() {
   ];
 
   return (
-    <div style={{ background: "#000", minHeight: "100vh", color: "#fff", display: "flex", flexDirection: "column" }}>
-      <TopTabs />
-
+    <div style={{ background: "#000", minHeight: "calc(100vh - 120px)", display: "flex", flexDirection: "column" }}>
       {/* CHAT HEADER */}
-      <div style={{ 
-        padding: "20px", 
-        display: "flex", 
-        alignItems: "center", 
-        gap: "12px", 
-        borderBottom: "1px solid rgba(255,255,255,0.05)" 
-      }}>
-        <div style={{ width: "40px", height: "40px", borderRadius: "50%", background: "#282828", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 900 }}>E</div>
+      <div style={{ padding: "20px 0", display: "flex", alignItems: "center", gap: "12px", borderBottom: "1px solid #111" }}>
+        <div style={{ width: "40px", height: "40px", borderRadius: "12px", background: "#111", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 900 }}>E</div>
         <div style={{ flex: 1 }}>
           <div style={{ fontSize: "14px", fontWeight: 900 }}>ERIK S.</div>
-          <div style={{ fontSize: "10px", color: "#1DB954", fontWeight: 800 }}>98% TRUST SCORE</div>
+          <div style={{ fontSize: "9px", color: "#1DB954", fontWeight: 900 }}>VERIFIERAD KÖPARE</div>
         </div>
-        <button
-          onClick={() => router.push("/checkout")}
-          style={{
-            background: "#fff",
-            color: "#000",
-            borderRadius: "12px",
-            padding: "10px 18px",
-            fontWeight: 900,
-            fontSize: "12px",
-            border: "none"
-          }}
-        >
+        <button onClick={() => router.push("/checkout")} style={{ background: "#fff", color: "#000", borderRadius: "10px", padding: "8px 16px", fontWeight: 900, fontSize: "11px", border: "none" }}>
           KÖP NU
         </button>
       </div>
 
-      {/* MESSAGES AREA */}
-      <div style={{ flex: 1, padding: "20px", display: "flex", flexDirection: "column", gap: "16px", overflowY: "auto" }}>
+      {/* MESSAGES */}
+      <div style={{ flex: 1, padding: "25px 0", display: "flex", flexDirection: "column", gap: "20px", overflowY: "auto" }}>
         {messages.map((m, i) => (
-          <div key={i} style={{ 
-            alignSelf: m.sender === "me" ? "flex-end" : "flex-start",
-            maxWidth: "80%"
-          }}>
+          <div key={i} style={{ alignSelf: m.sender === "me" ? "flex-end" : "flex-start", maxWidth: "80%" }}>
             <div style={{ 
-              background: m.sender === "me" ? "#1DB954" : "#282828",
+              background: m.sender === "me" ? "#1DB954" : "#111",
               color: m.sender === "me" ? "#000" : "#fff",
-              padding: "12px 16px",
-              borderRadius: m.sender === "me" ? "18px 18px 2px 18px" : "18px 18px 18px 2px",
-              fontSize: "14px",
-              fontWeight: 600
+              padding: "14px 18px", borderRadius: "18px", fontSize: "14px", fontWeight: 500, lineHeight: "1.4"
             }}>
               {m.text}
             </div>
-            <div style={{ fontSize: "9px", opacity: 0.4, marginTop: "4px", textAlign: m.sender === "me" ? "right" : "left" }}>{m.time}</div>
+            <div style={{ fontSize: "8px", opacity: 0.2, marginTop: "6px", textAlign: m.sender === "me" ? "right" : "left", fontWeight: 900 }}>{m.time}</div>
           </div>
         ))}
       </div>
 
-      {/* INPUT HUB */}
-      <div style={{ padding: "20px", background: "#000", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
-        <div style={{ display: "flex", gap: "10px", background: "#121212", padding: "8px", borderRadius: "24px" }}>
+      {/* INPUT */}
+      <div style={{ padding: "20px 0" }}>
+        <div style={{ display: "flex", gap: "10px", background: "#111", padding: "8px", borderRadius: "20px", border: "1px solid #222" }}>
           <input
             value={msg}
             onChange={(e) => setMsg(e.target.value)}
-            placeholder="Skriv ett meddelande..."
-            style={{ 
-              flex: 1, 
-              background: "transparent", 
-              border: "none", 
-              color: "#fff", 
-              padding: "0 15px",
-              fontSize: "14px",
-              outline: "none"
-            }}
+            placeholder="Skriv..."
+            style={{ flex: 1, background: "transparent", border: "none", color: "#fff", padding: "0 15px", fontSize: "14px", outline: "none" }}
           />
-          <button style={{ 
-            width: "40px", height: "40px", borderRadius: "50%", background: "#fff", color: "#000", border: "none", fontWeight: 900 
-          }}>➔</button>
+          <button style={{ width: "35px", height: "35px", borderRadius: "12px", background: "#fff", color: "#000", border: "none", fontWeight: 900 }}>➔</button>
         </div>
       </div>
     </div>
