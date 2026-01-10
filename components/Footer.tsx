@@ -4,25 +4,25 @@
 export default function Footer() {
   return (
     <footer style={{ 
-      marginTop: '60px', 
-      padding: '40px 20px 120px 20px', 
-      borderTop: '1px solid rgba(255,255,255,0.03)', 
+      marginTop: '80px', 
+      padding: '60px 20px 120px 20px', 
+      borderTop: '1px solid #111', 
       textAlign: 'center',
-      background: 'linear-gradient(to bottom, transparent, rgba(157, 78, 221, 0.02))'
+      background: '#000'
     }}>
-      <h3 style={{ fontWeight: 900, letterSpacing: '2px', fontSize: '16px', margin: 0 }}>
-        KARMA<span style={{color: 'var(--neon-purple)'}}>∞</span>
+      <h3 style={{ fontWeight: 900, letterSpacing: '4px', fontSize: '14px', margin: 0, color: '#fff' }}>
+        KARMA<span style={{color: '#1DB954'}}>∞</span>
       </h3>
       <p style={{ 
-        fontSize: '8px', 
+        fontSize: '9px', 
         color: '#444', 
-        fontWeight: 900, 
-        marginTop: '8px',
-        letterSpacing: '1px'
+        fontWeight: 800, 
+        marginTop: '12px',
+        letterSpacing: '2px'
       }}>
-        NORDIC PROTOCOL FOR CIRCULAR VALUE.
+        FUTURE OF COMMERCE.
       </p>
-      <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'center', gap: '20px', opacity: 0.3, fontSize: '10px' }}>
+      <div style={{ marginTop: '30px', display: 'flex', justifyContent: 'center', gap: '25px', opacity: 0.2, fontSize: '10px', fontWeight: 900 }}>
         <span>VILLKOR</span>
         <span>INTEGRITET</span>
         <span>SUPPORT</span>
