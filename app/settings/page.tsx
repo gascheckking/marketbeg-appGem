@@ -6,111 +6,39 @@ export default function Settings() {
   const menuItems = [
     { label: "Personuppgifter", icon: "👤" },
     { label: "Betalningsmetoder", icon: "💳" },
-    { label: "Notiser", icon: "🔔" },
-    { label: "Karma Shield & Skydd", icon: "🛡️" },
+    { label: "Karma Shield", icon: "🛡️" },
     { label: "Hjälp & Support", icon: "🎧" },
   ];
 
   return (
-    <div style={{ padding: '30px 20px', background: '#000', minHeight: '100vh' }}>
-      <header style={{ marginBottom: '40px' }}>
-        <h1 style={{ fontSize: '2.5rem', fontWeight: 900, letterSpacing: '-2px', margin: 0 }}>
-          Inställningar
-        </h1>
-      </header>
+    <div className="page-wrapper">
+      <h1 style={{ fontSize: "2rem", fontWeight: 900, marginBottom: "30px", letterSpacing: "-1px" }}>Inställningar</h1>
 
-      {/* TRUST CARD - SLIM VERSION */}
-      <section style={{ marginBottom: '32px' }}>
-        <div style={{ fontSize: '9px', fontWeight: 900, color: '#1DB954', letterSpacing: '2px', marginBottom: '12px' }}>
-          VERIFIERAD STATUS
-        </div>
-        <div style={{ 
-          display: 'flex', 
-          justifyContent: 'space-between', 
-          alignItems: 'center', 
-          padding: '20px', 
-          background: '#121212',
-          borderRadius: '24px',
-          border: '1px solid rgba(255,255,255,0.05)'
-        }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
-            <div style={{ fontSize: '24px' }}>🆔</div>
-            <div>
-              <div style={{ fontWeight: 900, fontSize: '14px', color: '#fff' }}>BankID Verifierad</div>
-              <div style={{ fontSize: '11px', opacity: 0.4, fontWeight: 700 }}>Global Trust: 98.2%</div>
-            </div>
-          </div>
-          <div style={{ 
-            background: 'rgba(29, 185, 84, 0.1)', 
-            color: '#1DB954', 
-            padding: '6px 12px', 
-            borderRadius: '12px', 
-            fontSize: '10px', 
-            fontWeight: 900 
-          }}>
-            AKTIV
+      <div style={{ background: "#111", borderRadius: "20px", padding: "15px", marginBottom: "30px", border: "1px solid #1DB95422", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+          <div style={{ fontSize: "20px" }}>🆔</div>
+          <div>
+            <div style={{ fontWeight: 900, fontSize: "13px" }}>BankID Verifierad</div>
+            <div style={{ fontSize: "10px", opacity: 0.4 }}>Global Trust: 98.2%</div>
           </div>
         </div>
-      </section>
+        <div style={{ background: "#1DB95422", color: "#1DB954", padding: "4px 8px", borderRadius: "8px", fontSize: "9px", fontWeight: 900 }}>AKTIV</div>
+      </div>
 
-      {/* MENU LIST - SPOTIFY STYLE */}
-      <section style={{ marginBottom: '40px' }}>
+      <div style={{ borderTop: "1px solid #111" }}>
         {menuItems.map((item, i) => (
-          <div 
-            key={i}
-            style={{ 
-              display: 'flex', 
-              justifyContent: 'space-between', 
-              alignItems: 'center', 
-              padding: '20px 0',
-              borderBottom: '1px solid rgba(255,255,255,0.05)',
-              cursor: 'pointer'
-            }}
-          >
-            <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
-              <span style={{ fontSize: '18px', opacity: 0.7 }}>{item.icon}</span>
-              <span style={{ fontWeight: 700, fontSize: '15px' }}>{item.label}</span>
+          <div key={i} style={{ display: "flex", justifyContent: "space-between", padding: "20px 0", borderBottom: "1px solid #111", cursor: "pointer" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "15px" }}>
+              <span style={{ fontSize: "16px", opacity: 0.5 }}>{item.icon}</span>
+              <span style={{ fontWeight: 700, fontSize: "14px" }}>{item.label}</span>
             </div>
-            <span style={{ opacity: 0.2, fontSize: '12px' }}>❯</span>
+            <span style={{ opacity: 0.2 }}>❯</span>
           </div>
         ))}
-      </section>
-
-      {/* LANGUAGE SELECTOR */}
-      <section style={{ marginBottom: '40px' }}>
-        <div style={{ fontSize: '9px', fontWeight: 900, color: '#444', letterSpacing: '2px', marginBottom: '16px' }}>
-          SPRÅK
-        </div>
-        <div style={{ display: 'flex', gap: '10px', background: '#121212', padding: '6px', borderRadius: '16px' }}>
-          <button style={{ 
-            flex: 1, background: '#fff', color: '#000', border: 'none', 
-            padding: '12px', borderRadius: '12px', fontWeight: 900, fontSize: '11px' 
-          }}>SVENSKA</button>
-          <button style={{ 
-            flex: 1, background: 'transparent', color: '#fff', border: 'none', 
-            padding: '12px', borderRadius: '12px', fontWeight: 900, fontSize: '11px', opacity: 0.4 
-          }}>ENGLISH</button>
-        </div>
-      </section>
-
-      <button style={{ 
-        width: '100%',
-        background: 'transparent', 
-        border: '1px solid #ff4444', 
-        color: '#ff4444', 
-        padding: '18px', 
-        borderRadius: '16px', 
-        fontSize: '12px',
-        fontWeight: 900,
-        letterSpacing: '1px',
-        cursor: 'pointer'
-      }}>
-        LOGGA UT UR LOOPEN
-      </button>
-
-      <div style={{ textAlign: 'center', marginTop: '30px', fontSize: '10px', opacity: 0.2, fontWeight: 800 }}>
-        KARMA v2.0.6 (BUILD 2026)
       </div>
+
+      <button className="primary-btn" style={{ marginTop: "40px", background: "transparent", border: "1px solid #ff444422", color: "#ff4444" }}>LOGGA UT</button>
+      <div style={{ textAlign: "center", marginTop: "20px", fontSize: "8px", opacity: 0.1, fontWeight: 900 }}>KARMA v2.0.6 (2026)</div>
     </div>
   );
 }
