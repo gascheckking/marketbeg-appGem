@@ -3,30 +3,38 @@
 import React from 'react';
 
 export default function Dashboard() {
+  const transactions = [
+    { title: "Såld: iPhone 15 Pro", date: "Igår 14:20", amount: "+9 800", color: "#1DB954" },
+    { title: "Köpt: AirPods Max", date: "3 jan", amount: "-3 950", color: "#fff" },
+    { title: "Service: Karma Shield", date: "3 jan", amount: "-49", color: "#444" }
+  ];
+
   return (
-    <div className="page-wrapper" style={{ padding: '20px', animation: 'fadeIn 0.5s ease' }}>
+    <div className="page-wrapper">
       <header style={{ marginBottom: '30px' }}>
-        <h1 style={{ fontSize: '1.6rem', fontWeight: 900, margin: 0, letterSpacing: '-1px' }}>DITT SALDO</h1>
-        <p style={{ fontSize: '10px', fontWeight: 800, opacity: 0.4, color: 'var(--neon-mint)' }}>TILLGÄNGLIGT FÖR UTBETALNING</p>
+        <h1 style={{ fontSize: '2rem', fontWeight: 900, letterSpacing: '-1.5px' }}>Karma Wallet</h1>
+        <p style={{ fontSize: '11px', fontWeight: 900, color: '#1DB954', letterSpacing: '1px' }}>DIN CIRKULÄRA EKONOMI</p>
       </header>
 
-      <div style={{ background: '#fff', color: '#000', padding: '30px', borderRadius: '24px', marginBottom: '20px', textAlign: 'center' }}>
-        <div style={{ fontSize: '10px', fontWeight: 900, opacity: 0.5, letterSpacing: '1px' }}>SALDO JUST NU</div>
-        <div style={{ fontSize: '2.5rem', fontWeight: 900, margin: '5px 0' }}>14 250 KR</div>
-        <button style={{ width: '100%', background: '#000', color: '#fff', border: 'none', padding: '15px', borderRadius: '14px', fontWeight: 900, fontSize: '12px', marginTop: '15px' }}>
-          GÖR UTBETALNING
-        </button>
+      <div style={{ background: '#111', padding: '40px 20px', borderRadius: '32px', marginBottom: '30px', textAlign: 'center', border: '1px solid #222' }}>
+        <div style={{ fontSize: '10px', fontWeight: 900, opacity: 0.3, letterSpacing: '1px', marginBottom: '10px' }}>TOTALT INNEHAV</div>
+        <div style={{ fontSize: '3rem', fontWeight: 900, letterSpacing: '-2px' }}>14 250:-</div>
       </div>
 
-      <div style={{ display: 'grid', gap: '10px' }}>
-        <h3 style={{ fontSize: '10px', fontWeight: 900, opacity: 0.4, marginTop: '10px' }}>SENASTE TRANSAKTIONER</h3>
-        <div className="glass-card" style={{ padding: '15px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <div>
-             <div style={{ fontSize: '12px', fontWeight: 800 }}>Såld: iPhone 15 Pro</div>
-             <div style={{ fontSize: '9px', opacity: 0.4 }}>Igår 14:20</div>
+      <div style={{ display: 'grid', gap: '15px' }}>
+        <h3 style={{ fontSize: '10px', fontWeight: 900, opacity: 0.3, letterSpacing: '1px' }}>TRANSAKTIONER</h3>
+        {transactions.map((t, i) => (
+          <div key={i} style={{ 
+            padding: '20px', background: '#111', borderRadius: '24px', display: 'flex', 
+            justifyContent: 'space-between', alignItems: 'center', border: '1px solid rgba(255,255,255,0.02)'
+          }}>
+            <div>
+               <div style={{ fontSize: '13px', fontWeight: 800 }}>{t.title}</div>
+               <div style={{ fontSize: '9px', opacity: 0.3, marginTop: '4px' }}>{t.date}</div>
+            </div>
+            <div style={{ fontSize: '14px', fontWeight: 900, color: t.color }}>{t.amount}:-</div>
           </div>
-          <div style={{ fontSize: '12px', fontWeight: 900, color: 'var(--neon-mint)' }}>+9 800 KR</div>
-        </div>
+        ))}
       </div>
     </div>
   );
