@@ -1,47 +1,102 @@
-// // app/orders/[id]/approve/page.tsx
+// // app/login/page.tsx
 "use client";
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
-export default function ApproveOrderPage({ params }: { params: { id: string } }) {
-  const [approved, setApproved] = useState(false);
+export default function LoginPage() {
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
-  const handleFinalApprove = () => {
-    alert("KARMA SHIELD: Utbetalning påbörjad!");
-    router.push('/dashboard/seller');
+  const handleBankIDLogin = () => {
+    setIsLoading(true);
+    // Simulerar BankID-verifiering
+    setTimeout(() => {
+      router.push('/feed');
+    }, 2000);
   };
 
   return (
-    <div className="page-wrapper" style={{ padding: '15px' }}>
-      <div className="glass-card" style={{ textAlign: 'center', padding: '30px 15px', borderRadius: '24px', border: '1px solid rgba(255,255,255,0.05)' }}>
-        <div style={{ position: 'relative', width: '60px', height: '60px', margin: '0 auto 20px' }}>
-          <div style={{ fontSize: '40px' }}>📦</div>
-          <div style={{ position: 'absolute', bottom: 0, right: 0, background: 'var(--neon-mint)', borderRadius: '50%', width: '18px', height: '18px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '10px', boxShadow: '0 0 10px var(--neon-mint)' }}>✅</div>
+    <div className="page-wrapper" style={{ 
+      display: 'flex', 
+      flexDirection: 'column', 
+      justifyContent: 'center', 
+      minHeight: '100vh',
+      paddingBottom: '100px'
+    }}>
+      <div style={{ textAlign: 'center', marginBottom: '50px' }}>
+        <div style={{ 
+          width: '70px', height: '70px', background: 'var(--karma-green)', 
+          borderRadius: '20px', margin: '0 auto 20px', display: 'flex', 
+          alignItems: 'center', justifyContent: 'center', fontSize: '30px',
+          boxShadow: '0 0 30px rgba(29, 185, 84, 0.3)'
+        }}>
+          ♻️
         </div>
-
-        <h1 style={{ fontSize: '1.4rem', fontWeight: 900, marginBottom: '8px' }}>Verifiera</h1>
-        <p style={{ fontSize: '11px', lineHeight: '1.5', opacity: 0.6, margin: '0 10px' }}>
-          Genom att godkänna bekräftar du att varan matchar AI-scannern. Pengarna släpps direkt.
+        <h1 style={{ fontSize: '2.5rem', fontWeight: 900, letterSpacing: '-2px', margin: 0 }}>Karma</h1>
+        <p style={{ fontSize: '12px', fontWeight: 800, opacity: 0.4, letterSpacing: '2px', marginTop: '5px' }}>
+          VERIFIERAD HANDEL
         </p>
-        
-        <div style={{ margin: '25px 0', background: 'rgba(255,255,255,0.02)', padding: '15px', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.05)' }}>
-          <div style={{ display: 'flex', gap: '10px', alignItems: 'flex-start', textAlign: 'left' }}>
-            <input type="checkbox" id="approve-check" onChange={(e) => setApproved(e.target.checked)} style={{ width: '18px', height: '18px', marginTop: '2px', accentColor: 'var(--neon-mint)' }} />
-            <label htmlFor="approve-check" style={{ fontSize: '11px', fontWeight: 600, lineHeight: '1.3' }}>
-              Varan matchar. Släpp likviditet till säljaren.
-            </label>
-          </div>
-        </div>
-
-        <button disabled={!approved} onClick={handleFinalApprove} className="primary-btn" style={{ background: approved ? 'var(--neon-mint)' : 'rgba(255,255,255,0.05)', color: approved ? '#000' : '#444', fontSize: '11px' }}>
-          {approved ? "SLÄPP PENGAR DIREKT" : "VÄNTAR PÅ GODKÄNNANDE"}
-        </button>
-        
-        <button onClick={() => router.push('/dispute')} style={{ background: 'none', border: 'none', color: '#ff4444', marginTop: '15px', fontSize: '9px', fontWeight: 900 }}>
-          RAPPORTERA PROBLEM
-        </button>
       </div>
+
+      <div className="card" style={{ padding: '30px', textAlign: 'center' }}>
+        <h2 style={{ fontSize: '16px', fontWeight: 900, marginBottom: '10px' }}>Välkommen tillbaka</h2>
+        <p style={{ fontSize: '13px', opacity: 0.5, marginBottom: '30px', lineHeight: '1.5' }}>
+          För din säkerhet använder Karma BankID för att garantera 100% äkta profiler i loopen.
+        </p>
+
+        <button 
+          onClick={handleBankIDLogin}
+          disabled={isLoading}
+          style={{ 
+            width: '100%', 
+            padding: '20px', 
+            borderRadius: '16px', 
+            background: '#fff', 
+            color: '#000', 
+            border: 'none', 
+            fontWeight: 900, 
+            fontSize: '15px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '12px',
+            transition: '0.2s',
+            cursor: 'pointer'
+          }}
+        >
+          {isLoading ? (
+            <div className="spinner" />
+          ) : (
+            <>
+              <img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/BankID_logo.svg" alt="BankID" style={{ width: '24px' }} />
+              ÖPPNA BANKID
+            </>
+          )}
+        </button>
+
+        <p style={{ fontSize: '10px', opacity: 0.3, marginTop: '20px', fontWeight: 700 }}>
+          Genom att logga in godkänner du våra användarvillkor och <br/> Karma Shield-skydd.
+        </p>
+      </div>
+
+      <div style={{ position: 'absolute', bottom: '40px', left: 0, right: 0, textAlign: 'center' }}>
+        <span style={{ fontSize: '11px', fontWeight: 800, opacity: 0.2 }}>POWERED BY KARMA NODE v2.0</span>
+      </div>
+
+      <style jsx>{`
+        .spinner {
+          width: 20px;
+          height: 20px;
+          border: 3px solid rgba(0,0,0,0.1);
+          border-top: 3px solid #000;
+          border-radius: 50%;
+          animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+      `}</style>
     </div>
   );
 }
