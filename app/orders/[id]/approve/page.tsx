@@ -8,29 +8,38 @@ export default function ApproveOrderPage() {
   const router = useRouter();
 
   const handleFinalApprove = () => {
+    // Här triggas Karma Shield release
     alert("KARMA SHIELD: Likviditet släppt till säljaren.");
-    router.push('/dashboard/seller');
+    router.push('/wallet');
   };
 
   return (
-    <div className="page-wrapper" style={{ paddingTop: '40px' }}>
-      <div style={{ textAlign: 'center', padding: '40px 20px', borderRadius: '32px', background: '#111', border: '1px solid #222' }}>
-        <div style={{ fontSize: '50px', marginBottom: '20px' }}>📦</div>
+    <div className="page-wrapper" style={{ display: 'flex', alignItems: 'center', minHeight: '80vh' }}>
+      <div className="card" style={{ textAlign: 'center', padding: '50px 25px', width: '100%' }}>
+        <div style={{ fontSize: '60px', marginBottom: '25px' }}>📦</div>
 
-        <h1 style={{ fontSize: '1.8rem', fontWeight: 900, letterSpacing: '-1px', marginBottom: '10px' }}>Verifiera Leverans</h1>
-        <p style={{ fontSize: '13px', opacity: 0.4, lineHeight: '1.5', marginBottom: '30px' }}>
-          Genom att godkänna bekräftar du att varan matchar AI-scannern. Pengarna släpps från valvet direkt.
+        <h1 style={{ fontSize: '2rem', fontWeight: 900, letterSpacing: '-1.5px', marginBottom: '12px' }}>Verifiera Leverans</h1>
+        <p className="text-small" style={{ opacity: 0.5, lineHeight: '1.6', marginBottom: '35px' }}>
+          Genom att godkänna bekräftar du att varan matchar AI-scannern. Karma Shield släpper då betalningen från valvet direkt.
         </p>
         
-        <div style={{ margin: '30px 0', background: '#000', padding: '20px', borderRadius: '20px', border: '1px solid #222', textAlign: 'left' }}>
+        <div 
+          onClick={() => setApproved(!approved)}
+          style={{ 
+            marginBottom: '35px', background: 'rgba(255,255,255,0.02)', padding: '22px', 
+            borderRadius: '24px', border: approved ? '1px solid var(--karma-green)' : '1px solid var(--border)',
+            textAlign: 'left', cursor: 'pointer', transition: '0.2s'
+          }}
+        >
           <div style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>
-            <input 
-              type="checkbox" 
-              id="approve-check" 
-              onChange={(e) => setApproved(e.target.checked)} 
-              style={{ width: '22px', height: '22px', accentColor: '#1DB954' }} 
-            />
-            <label htmlFor="approve-check" style={{ fontSize: '12px', fontWeight: 700 }}>
+            <div style={{ 
+              width: '24px', height: '24px', borderRadius: '8px', 
+              border: '2px solid var(--karma-green)', background: approved ? 'var(--karma-green)' : 'transparent',
+              display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#000', fontSize: '14px', fontWeight: 900
+            }}>
+              {approved && "✓"}
+            </div>
+            <label style={{ fontSize: '13px', fontWeight: 700, cursor: 'pointer' }}>
               Jag har kontrollerat varan. Släpp betalningen.
             </label>
           </div>
@@ -40,12 +49,19 @@ export default function ApproveOrderPage() {
           disabled={!approved} 
           onClick={handleFinalApprove} 
           className="primary-btn" 
-          style={{ background: approved ? '#1DB954' : '#222', color: approved ? '#000' : '#444' }}
+          style={{ 
+            background: approved ? 'var(--karma-green)' : 'var(--border)', 
+            color: approved ? '#000' : '#444',
+            opacity: approved ? 1 : 0.5
+          }}
         >
           GODKÄNN & SLÄPP PENGAR
         </button>
         
-        <button onClick={() => router.push('/dispute')} style={{ background: 'none', border: 'none', color: '#ff4444', marginTop: '25px', fontSize: '11px', fontWeight: 900, opacity: 0.6 }}>
+        <button 
+          onClick={() => router.push('/support')} 
+          style={{ background: 'none', border: 'none', color: '#ff4444', marginTop: '30px', fontSize: '11px', fontWeight: 900, opacity: 0.8, letterSpacing: '0.5px' }}
+        >
           RAPPORTERA PROBLEM
         </button>
       </div>
