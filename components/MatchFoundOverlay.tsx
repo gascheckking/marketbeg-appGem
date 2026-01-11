@@ -9,63 +9,38 @@ export default function MatchFoundOverlay({ price, trust, demand, onAccept, onCl
 
   useEffect(() => {
     let start = 0;
-    const duration = 1000;
+    const duration = 1200;
     const startTime = performance.now();
     const tick = (now: number) => {
       const progress = Math.min((now - startTime) / duration, 1);
-      setAnimatedPrice(Math.round(start + (price - start) * (1 - Math.pow(1 - progress, 3))));
+      const easeOut = 1 - Math.pow(1 - progress, 4);
+      setAnimatedPrice(Math.round(start + (price - start) * easeOut));
       if (progress < 1) requestAnimationFrame(tick);
     };
     requestAnimationFrame(tick);
   }, [price]);
 
   return (
-    <div style={{
-      position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.9)',
-      backdropFilter: 'blur(20px)', zIndex: 1000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px'
-    }}>
-      <div style={{
-        width: '100%', maxWidth: '360px', background: '#1DB954', borderRadius: '32px',
-        padding: '40px 24px', textAlign: 'center', color: '#000',
-        animation: 'slideUp 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)'
+    <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.92)', backdropFilter: 'blur(25px)', zIndex: 2000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px' }}>
+      <div style={{ 
+        width: '100%', maxWidth: '380px', background: 'var(--karma-green)', borderRadius: '40px',
+        padding: '50px 30px', textAlign: 'center', color: '#000',
+        boxShadow: '0 30px 60px rgba(29, 185, 84, 0.3)',
+        animation: 'popIn 0.6s cubic-bezier(0.16, 1, 0.3, 1)'
       }}>
-        <div style={{ fontSize: '10px', fontWeight: 900, letterSpacing: '2px', opacity: 0.7, marginBottom: '20px' }}>
-          AFFÄR MATCHAD
-        </div>
-
-        <div style={{ marginBottom: '20px' }}>
-          <PriceTag price={animatedPrice} size="lg" color="#000" />
-        </div>
-
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '10px', marginBottom: '24px' }}>
-          <div style={{ background: 'rgba(0,0,0,0.1)', padding: '6px 12px', borderRadius: '12px' }}>
+        <div style={{ fontSize: '11px', fontWeight: 900, letterSpacing: '3px', opacity: 0.6, marginBottom: '25px' }}>MATCH FUNNEN</div>
+        <div style={{ marginBottom: '30px' }}><PriceTag price={animatedPrice} size="lg" color="#000" /></div>
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '12px', marginBottom: '30px' }}>
              <TrustBadge score={trust} />
-          </div>
-          <span style={{ fontSize: '11px', fontWeight: 900, opacity: 0.7, alignSelf: 'center' }}>{demand.toUpperCase()}</span>
+             <div style={{ background: 'rgba(0,0,0,0.08)', padding: '10px 15px', borderRadius: '15px', fontSize: '11px', fontWeight: 900 }}>{demand}</div>
         </div>
-
-        <p style={{ fontSize: '13px', fontWeight: 600, lineHeight: '1.5', marginBottom: '30px', opacity: 0.8 }}>
-          En köpare med hög Karma har accepterat ditt pris. Pengarna skickas sekunden du postar.
+        <p style={{ fontSize: '14px', fontWeight: 700, lineHeight: '1.6', marginBottom: '40px', opacity: 0.8 }}>
+          En köpare väntar i loopen. Pengarna släpps direkt när AI-logistiken bekräftar inlämning.
         </p>
-
-        <button 
-          onClick={onAccept}
-          style={{
-            width: '100%', background: '#000', color: '#fff', border: 'none',
-            padding: '20px', borderRadius: '18px', fontWeight: 900, fontSize: '15px', marginBottom: '12px'
-          }}
-        >
-          ACCEPTERA & SÄLJ
-        </button>
-
-        <button onClick={onClose} style={{ background: 'transparent', border: 'none', fontSize: '12px', fontWeight: 800, opacity: 0.6 }}>
-          Kanske senare
-        </button>
+        <button onClick={onAccept} style={{ width: '100%', background: '#000', color: '#fff', border: 'none', padding: '22px', borderRadius: '20px', fontWeight: 900, fontSize: '16px', marginBottom: '15px', cursor: 'pointer' }}>ACCEPTERA & SÄLJ</button>
+        <button onClick={onClose} style={{ background: 'transparent', border: 'none', fontSize: '13px', fontWeight: 800, opacity: 0.5 }}>Avbryt</button>
       </div>
-
-      <style jsx>{`
-        @keyframes slideUp { from { transform: translateY(100px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-      `}</style>
+      <style jsx>{` @keyframes popIn { from { transform: scale(0.85); opacity: 0; } to { transform: scale(1); opacity: 1; } } `}</style>
     </div>
   );
 }
