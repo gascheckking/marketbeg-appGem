@@ -8,28 +8,27 @@ export default function Sidebar() {
 
   const menuItems = [
     { name: 'Marknad', icon: '🌐', path: '/feed' },
-    { name: 'Matchningar', icon: '🤝', path: '/auctions' },
+    { name: 'Matchningar', icon: '🤝', path: '/match' },
     { name: 'Eftersökt', icon: '🔍', path: '/wanted' },
-    { name: 'Sändningar', icon: '📦', path: '/shipments' },
+    { name: 'Sändningar', icon: '📦', path: '/profile/active-sales' },
     { name: 'Belöningar', icon: '💰', path: '/rewards' },
   ];
 
   return (
     <aside style={{
-      width: '240px', height: '100vh', position: 'fixed', left: 0, top: 0,
-      background: 'rgba(2, 4, 10, 0.95)', backdropFilter: 'blur(20px)',
-      borderRight: '1px solid var(--border)', padding: '30px 20px',
-      display: 'flex', flexDirection: 'column', zIndex: 1000
+      width: '280px', height: '100vh', position: 'fixed', left: 0, top: 0,
+      background: '#000', borderRight: '1px solid var(--border)', padding: '40px 24px',
+      display: 'flex', flexDirection: 'column', zIndex: 2001
     }}>
       <div 
         onClick={() => router.push('/')}
-        style={{ fontSize: '1.2rem', fontWeight: 900, marginBottom: '40px', cursor: 'pointer', letterSpacing: '3px', color: '#fff' }}
+        style={{ fontSize: '1.4rem', fontWeight: 900, marginBottom: '50px', cursor: 'pointer', letterSpacing: '3px' }}
       >
-        KARMA<span style={{color: 'var(--neon-purple)'}}>∞</span>
+        KARMA<span style={{color: 'var(--karma-green)'}}>∞</span>
       </div>
 
       <nav style={{ flex: 1 }}>
-        <p style={{ fontSize: '9px', fontWeight: 900, color: '#444', marginBottom: '15px', letterSpacing: '1.5px' }}>NAVIGATION</p>
+        <p className="text-small" style={{ color: '#444', marginBottom: '20px' }}>NAVIGATION</p>
         {menuItems.map((item) => {
           const isActive = pathname === item.path;
           return (
@@ -37,38 +36,32 @@ export default function Sidebar() {
               key={item.path}
               onClick={() => router.push(item.path)}
               style={{
-                padding: '12px 15px', borderRadius: '14px', cursor: 'pointer', marginBottom: '6px',
-                display: 'flex', alignItems: 'center', gap: '12px',
-                background: isActive ? 'rgba(157, 78, 221, 0.08)' : 'transparent',
-                color: isActive ? '#fff' : '#888',
-                border: isActive ? '1px solid rgba(157, 78, 221, 0.2)' : '1px solid transparent',
+                padding: '16px', borderRadius: '16px', cursor: 'pointer', marginBottom: '8px',
+                display: 'flex', alignItems: 'center', gap: '15px',
+                background: isActive ? 'rgba(29, 185, 84, 0.1)' : 'transparent',
+                color: isActive ? 'var(--karma-green)' : '#888',
                 transition: '0.2s all ease'
               }}
             >
-              <span style={{ fontSize: '16px', filter: isActive ? 'grayscale(0)' : 'grayscale(1)' }}>{item.icon}</span>
-              <span style={{ fontWeight: isActive ? 900 : 700, fontSize: '11px', letterSpacing: '0.5px' }}>{item.name.toUpperCase()}</span>
+              <span style={{ fontSize: '18px' }}>{item.icon}</span>
+              <span style={{ fontWeight: 900, fontSize: '12px' }}>{item.name.toUpperCase()}</span>
             </div>
           );
         })}
       </nav>
 
-      {/* Profil/Valv-snabbknapp i botten */}
       <div 
         onClick={() => router.push('/profile')}
-        style={{
-          padding: '16px', background: 'rgba(255, 255, 255, 0.03)', borderRadius: '18px',
-          display: 'flex', alignItems: 'center', gap: '12px', cursor: 'pointer', 
-          border: '1px solid var(--border)', transition: '0.2s'
-        }}
+        className="card"
+        style={{ display: 'flex', alignItems: 'center', gap: '12px', cursor: 'pointer', padding: '15px' }}
       >
         <div style={{ 
-          width: '32px', height: '32px', borderRadius: '50%', 
-          background: 'linear-gradient(45deg, var(--neon-purple), var(--neon-mint))',
-          boxShadow: '0 0 10px rgba(157, 78, 221, 0.3)'
-        }}></div>
+          width: '35px', height: '35px', borderRadius: '12px', 
+          background: 'var(--karma-green)', display: 'flex', alignItems: 'center', justifyContent: 'center'
+        }}>👤</div>
         <div>
-          <div style={{ fontSize: '10px', fontWeight: 900, color: '#fff' }}>DITT VALV</div>
-          <div style={{ fontSize: '8px', color: 'var(--neon-mint)', fontWeight: 900 }}>98.2% TRUST</div>
+          <div style={{ fontSize: '11px', fontWeight: 900 }}>DITT VALV</div>
+          <div style={{ fontSize: '9px', color: 'var(--karma-green)', fontWeight: 900 }}>98.2% TRUST</div>
         </div>
       </div>
     </aside>
