@@ -21,54 +21,56 @@ export default function BurstSellPage() {
   };
 
   return (
-    <div className="page-wrapper" style={{ height: '90vh', display: 'flex', flexDirection: 'column', padding: '15px' }}>
-      <header style={{ marginBottom: '15px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+    <div className="page-wrapper" style={{ height: '85vh', display: 'flex', flexDirection: 'column' }}>
+      <header style={{ marginBottom: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <div>
-          <h1 style={{ fontSize: '1.2rem', fontWeight: 900, margin: 0 }}>BURST MODE</h1>
-          <p style={{ fontSize: '8px', opacity: 0.5, fontWeight: 800 }}>SMATTA AV BILDER PÅ OBJEKTEN</p>
+          <h1 style={{ fontSize: '1.4rem', fontWeight: 900, margin: 0 }}>BURST MODE</h1>
+          <p className="text-small" style={{ opacity: 0.5 }}>SMATTA AV BILDER PÅ OBJEKTEN</p>
         </div>
-        <div style={{ color: 'var(--neon-mint)', fontSize: '14px', fontWeight: 900 }}>{photoCount}</div>
+        <div style={{ color: 'var(--karma-green)', fontSize: '18px', fontWeight: 900 }}>{photoCount}</div>
       </header>
 
       <div style={{ 
-        flex: 1, background: '#000', borderRadius: '24px', position: 'relative', 
-        overflow: 'hidden', border: '1px solid rgba(157, 78, 221, 0.3)', display: 'flex', 
+        flex: 1, background: '#0a0a0a', borderRadius: '32px', position: 'relative', 
+        overflow: 'hidden', border: '1px solid var(--border)', display: 'flex', 
         alignItems: 'center', justifyContent: 'center'
       }}>
-        {/* Viewfinder Corners */}
-        <div style={{ position: 'absolute', top: 20, left: 20, width: 20, height: 20, borderTop: '1px solid #fff', borderLeft: '1px solid #fff', opacity: 0.3 }} />
-        <div style={{ position: 'absolute', top: 20, right: 20, width: 20, height: 20, borderTop: '1px solid #fff', borderRight: '1px solid #fff', opacity: 0.3 }} />
+        <div style={{ position: 'absolute', top: 30, left: 30, width: 25, height: 25, borderTop: '2px solid rgba(255,255,255,0.2)', borderLeft: '2px solid rgba(255,255,255,0.2)' }} />
+        <div style={{ position: 'absolute', top: 30, right: 30, width: 25, height: 25, borderTop: '2px solid rgba(255,255,255,0.2)', borderRight: '2px solid rgba(255,255,255,0.2)' }} />
         
-        <div style={{ fontSize: '40px', opacity: 0.1 }}>📸</div>
+        <div style={{ fontSize: '50px', opacity: 0.1 }}>📸</div>
         
-        <div style={{ 
-          position: 'absolute', top: '20px', background: 'rgba(0,0,0,0.8)', 
-          padding: '8px 15px', borderRadius: '30px', fontWeight: 900, 
-          border: '1px solid var(--neon-mint)', color: 'var(--neon-mint)', fontSize: '9px'
-        }}>
-          {photoCount > 0 ? `${photoCount} OBJEKT IDENTIFIERADE` : "SIKTA PÅ OBJEKTET"}
-        </div>
+        {photoCount > 0 && (
+          <div style={{ 
+            position: 'absolute', top: '30px', background: 'var(--karma-green)', 
+            padding: '8px 20px', borderRadius: '30px', fontWeight: 900, 
+            color: '#000', fontSize: '10px', animation: 'fadeIn 0.2s'
+          }}>
+            {photoCount} OBJEKT IDENTIFIERADE
+          </div>
+        )}
 
         <button onClick={handleCapture} className="shutter-btn" />
       </div>
 
-      <div style={{ padding: '20px 0', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <button onClick={() => router.back()} style={{ background: 'none', border: 'none', color: '#444', fontWeight: 900, fontSize: '10px' }}>AVBRYT</button>
+      <div style={{ padding: '30px 0', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <button onClick={() => router.back()} style={{ background: 'none', border: 'none', color: '#444', fontWeight: 900, fontSize: '11px' }}>AVBRYT</button>
         
         {photoCount > 0 && (
-          <button onClick={finishSession} className="primary-btn" style={{ width: 'auto', padding: '12px 25px', background: 'var(--neon-purple)', fontSize: '10px' }}>
-            {isProcessing ? "ANALYSERAR..." : "SLUTFÖR ANALYS"}
+          <button onClick={finishSession} className="primary-btn" style={{ width: 'auto', padding: '12px 30px', fontSize: '11px' }}>
+            {isProcessing ? "ANALYSERAR..." : "SLUTFÖR"}
           </button>
         )}
       </div>
 
       <style jsx>{`
         .shutter-btn {
-          position: absolute; bottom: 30px; width: 65px; height: 65px; 
-          border-radius: 50%; border: 4px solid #fff; background: transparent;
-          cursor: pointer; transition: all 0.1s; box-shadow: 0 0 20px rgba(0,0,0,0.5);
+          position: absolute; bottom: 40px; width: 70px; height: 70px; 
+          border-radius: 50%; border: 5px solid #fff; background: transparent;
+          cursor: pointer; transition: all 0.1s;
         }
-        .shutter-btn:active { transform: scale(0.9); background: rgba(255,255,255,0.2); }
+        .shutter-btn:active { transform: scale(0.9) translate(-50%, 0); background: rgba(255,255,255,0.2); }
+        .shutter-btn { left: 50%; transform: translateX(-50%); }
       `}</style>
     </div>
   );
