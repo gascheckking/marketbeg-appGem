@@ -4,29 +4,32 @@ import React from 'react';
 
 export default function Leaderboard() {
   const users = [
-    { name: "Satoshi_SE", sales: 142, trust: 99.9, rank: "GOD MODE", color: "var(--neon-mint)" },
+    { name: "Satoshi_SE", sales: 142, trust: 99.9, rank: "GOD MODE", color: "var(--karma-green)" },
     { name: "Viking_Trader", sales: 89, trust: 98.5, rank: "ELITE", color: "#fff" },
-    { name: "Nordic_Lux", sales: 76, trust: 99.2, rank: "PRO", color: "var(--neon-purple)" },
+    { name: "Nordic_Lux", sales: 76, trust: 99.2, rank: "PRO", color: "var(--karma-green)" },
   ];
 
   return (
-    <div className="page-wrapper" style={{ padding: '15px' }}>
-      <header style={{ marginBottom: '25px' }}>
-        <h1 style={{ fontSize: '1.4rem', fontWeight: 900, margin: 0 }}>LEADERBOARD</h1>
-        <p style={{ fontSize: '9px', opacity: 0.5, fontWeight: 800 }}>TOPP-TRADERS I EKOSYSTEMET</p>
+    <div className="page-wrapper">
+      <header style={{ marginBottom: '30px' }}>
+        <h1 style={{ fontSize: '2rem', fontWeight: 900, margin: 0, letterSpacing: '-1.5px' }}>LEADERBOARD</h1>
+        <p className="text-small" style={{ opacity: 0.4, fontWeight: 800 }}>TOPP-TRADERS I KARMA EKOSYSTEMET</p>
       </header>
 
-      <div style={{ display: 'grid', gap: '8px' }}>
+      <div style={{ display: 'grid', gap: '10px' }}>
         {users.map((u, i) => (
-          <div key={i} className="glass-card" style={{ padding: '12px 15px', border: i === 0 ? '1px solid var(--neon-mint)' : '1px solid var(--border)', display: 'flex', alignItems: 'center', gap: '15px', borderRadius: '16px' }}>
-            <div style={{ fontWeight: 900, fontSize: '18px', color: i === 0 ? 'var(--neon-mint)' : '#222', width: '25px' }}>{i+1}</div>
+          <div key={i} className="card" style={{ 
+            padding: '15px 20px', border: i === 0 ? '1px solid var(--karma-green)' : '1px solid var(--border)', 
+            display: 'flex', alignItems: 'center', gap: '20px'
+          }}>
+            <div style={{ fontWeight: 900, fontSize: '22px', color: i === 0 ? 'var(--karma-green)' : '#222', width: '30px' }}>{i+1}</div>
             <div style={{ flex: 1 }}>
-              <div style={{ fontWeight: 900, fontSize: '12px' }}>{u.name}</div>
-              <div style={{ fontSize: '7px', color: u.color, fontWeight: 900, letterSpacing: '0.5px' }}>{u.rank}</div>
+              <div style={{ fontWeight: 900, fontSize: '14px' }}>{u.name}</div>
+              <div style={{ fontSize: '8px', color: u.color, fontWeight: 900, letterSpacing: '1px', marginTop: '2px' }}>{u.rank}</div>
             </div>
             <div style={{ textAlign: 'right' }}>
-              <div style={{ fontWeight: 900, fontSize: '11px' }}>{u.sales} LOPPS</div>
-              <div style={{ fontSize: '9px', color: 'var(--neon-mint)', fontWeight: 800 }}>{u.trust}%</div>
+              <div style={{ fontWeight: 900, fontSize: '13px' }}>{u.sales} LOOPS</div>
+              <div style={{ fontSize: '10px', color: 'var(--karma-green)', fontWeight: 900 }}>{u.trust}% TRUST</div>
             </div>
           </div>
         ))}
