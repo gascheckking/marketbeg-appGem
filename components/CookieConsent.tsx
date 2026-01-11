@@ -15,23 +15,23 @@ export const CookieConsent = () => {
   
   return (
     <div style={{ 
-      position: 'fixed', bottom: '100px', left: '15px', right: '15px', zIndex: 10000,
-      animation: 'slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1)'
+      position: 'fixed', bottom: '110px', left: '20px', right: '20px', zLimit: 10000,
+      animation: 'slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1)'
     }}>
-      <div className="glass-card" style={{ 
-        padding: '18px', border: '1px solid var(--neon-purple)',
-        background: 'rgba(5, 5, 5, 0.95)', boxShadow: '0 -10px 40px rgba(0,0,0,0.8)' 
+      <div className="card" style={{ 
+        padding: '24px', border: '1px solid var(--karma-green)',
+        background: 'rgba(5, 5, 5, 0.98)', boxShadow: '0 20px 60px rgba(0,0,0,0.9)' 
       }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '12px' }}>
-          <span style={{ fontSize: '20px' }}>🔮</span>
-          <p style={{ fontSize: '10px', margin: 0, fontWeight: 700, lineHeight: '1.4' }}>
-            Vi kalibrerar din <span style={{ color: 'var(--neon-purple)' }}>Match-Score</span> med cookies för en sömlös upplevelse.
+        <div style={{ display: 'flex', alignItems: 'center', gap: '15px', marginBottom: '15px' }}>
+          <span style={{ fontSize: '24px' }}>🔮</span>
+          <p style={{ fontSize: '11px', margin: 0, fontWeight: 700, lineHeight: '1.5', opacity: 0.9 }}>
+            Vi kalibrerar din <span style={{ color: 'var(--karma-green)' }}>Match-Score</span> med cookies för en sömlös upplevelse i loopen.
           </p>
         </div>
         <button 
           onClick={() => { localStorage.setItem('karma_cookie_consent', 'true'); setShow(false); }} 
           className="primary-btn"
-          style={{ background: 'var(--neon-purple)', color: '#fff', fontSize: '9px', padding: '12px' }}
+          style={{ fontSize: '10px', padding: '14px' }}
         >
           STARTA KALIBRERING
         </button>
