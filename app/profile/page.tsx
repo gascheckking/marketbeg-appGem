@@ -12,99 +12,70 @@ export default function Profile() {
   };
 
   return (
-    <div className="page-wrapper" style={{ animation: 'fadeIn 0.5s ease', background: '#02040a', minHeight: '100vh' }}>
-      
-      {/* SYSTEM-NAV (Smidig överblick) */}
+    <div className="page-wrapper" style={{ paddingBottom: '40px' }}>
+      {/* SYSTEM-NAV */}
       <div style={{ 
-        position: 'sticky', top: 0, zIndex: 100, 
-        background: 'rgba(2, 4, 10, 0.95)', backdropFilter: 'blur(20px)',
-        borderBottom: '1px solid rgba(255,255,255,0.05)', padding: '12px 20px' 
+        margin: '0 -20px 30px -20px', padding: '15px 20px', 
+        background: '#080808', borderBottom: '1px solid #111',
+        display: 'flex', justifyContent: 'space-between', alignItems: 'center'
       }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <span style={{ fontSize: '10px', fontWeight: 900, letterSpacing: '1px', opacity: 0.6 }}>DIN PROFIL</span>
-          <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
-             <div style={{ textAlign: 'right' }}>
-                <div style={{ fontSize: '11px', fontWeight: 900, color: 'var(--neon-mint)' }}>{user.karma} KARMA</div>
-                <div style={{ fontSize: '7px', fontWeight: 800, opacity: 0.4 }}>TILLGÅNGAR</div>
-             </div>
-             <div style={{ width: '1px', height: '18px', background: 'rgba(255,255,255,0.1)' }}></div>
-             <div style={{ textAlign: 'right' }}>
-                <div style={{ fontSize: '11px', fontWeight: 900 }}>14 250 KR</div>
-                <div style={{ fontSize: '7px', fontWeight: 800, opacity: 0.4 }}>SALDO</div>
-             </div>
-          </div>
+        <span style={{ fontSize: '10px', fontWeight: 900, letterSpacing: '1.5px', opacity: 0.4 }}>NODE_042</span>
+        <div style={{ display: 'flex', gap: '15px' }}>
+           <div style={{ textAlign: 'right' }}>
+              <div style={{ fontSize: '11px', fontWeight: 900, color: '#1DB954' }}>{user.karma} KRM</div>
+           </div>
+           <div style={{ textAlign: 'right' }}>
+              <div style={{ fontSize: '11px', fontWeight: 900 }}>14 250:-</div>
+           </div>
         </div>
       </div>
 
-      <div style={{ padding: '20px' }}>
-        
-        {/* HEADER SECTION (Fokus på Verifiering & Tillit) */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '20px', marginBottom: '30px', marginTop: '10px' }}>
-          <div style={{ 
-            width: '70px', height: '70px', borderRadius: '24px', 
-            border: '1px solid rgba(255,255,255,0.1)', display: 'flex', 
-            alignItems: 'center', justifyContent: 'center', fontSize: '28px', 
-            background: 'linear-gradient(135deg, #0a0a0a 0%, #111 100%)'
-          }}>🛡️</div>
-          <div>
-            <h1 style={{ fontSize: '1.4rem', fontWeight: 900, margin: 0, letterSpacing: '-0.5px' }}>{user.name}</h1>
-            <div style={{ display: 'flex', gap: '6px', marginTop: '6px' }}>
-              <span style={{ color: 'var(--neon-mint)', fontSize: '9px', fontWeight: 900, letterSpacing: '0.5px' }}>
-                BANKID VERIFIERAD
-              </span>
-              <span style={{ color: 'rgba(255,255,255,0.3)', fontSize: '9px', fontWeight: 900 }}>• MEDLEM SEDAN 2023</span>
-            </div>
-          </div>
-        </div>
-
-        {/* TILLIT & AKTIVITET (Rensat Grid) */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', marginBottom: '20px' }}>
-          <div style={{ background: 'rgba(255,255,255,0.02)', padding: '20px', borderRadius: '20px', border: '1px solid rgba(255,255,255,0.05)' }}>
-            <div style={{ fontSize: '20px', fontWeight: 900, color: 'var(--neon-mint)' }}>{user.trustScore}</div>
-            <div style={{ fontSize: '8px', fontWeight: 900, opacity: 0.4, marginTop: '4px' }}>TILLIT HOS ANDRA</div>
-          </div>
-          <div style={{ background: 'rgba(255,255,255,0.02)', padding: '20px', borderRadius: '20px', border: '1px solid rgba(255,255,255,0.05)' }}>
-            <div style={{ fontSize: '20px', fontWeight: 900 }}>{user.loops}</div>
-            <div style={{ fontSize: '8px', fontWeight: 900, opacity: 0.4, marginTop: '4px' }}>SLUTFÖRDA LOOPS</div>
-          </div>
-        </div>
-
-        {/* DINA FÖRMÅNER (Ersätter DNA/Hype) */}
+      {/* HEADER */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: '25px', marginBottom: '40px' }}>
         <div style={{ 
-          padding: '25px', 
-          background: 'rgba(157, 78, 221, 0.03)', 
-          border: '1px solid rgba(157, 78, 221, 0.1)', 
-          borderRadius: '24px' 
-        }}>
-          <h3 style={{ margin: '0 0 15px 0', fontSize: '10px', fontWeight: 900, color: 'var(--neon-purple)', letterSpacing: '1px' }}>AKTIVA FÖRMÅNER</h3>
-          
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-              <span style={{ fontSize: '12px' }}>⚡</span>
-              <span style={{ fontSize: '12px', fontWeight: 800 }}>Prioriterad i Snabbsälj</span>
-            </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-              <span style={{ fontSize: '12px' }}>🛡️</span>
-              <span style={{ fontSize: '12px', fontWeight: 800 }}>Reducerad Karma Shield-avgift</span>
-            </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-              <span style={{ fontSize: '12px' }}>📦</span>
-              <span style={{ fontSize: '12px', fontWeight: 800 }}>Förtur på PostNord-etiketter</span>
-            </div>
+          width: '80px', height: '80px', borderRadius: '28px', 
+          background: '#111', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '32px'
+        }}>🛡️</div>
+        <div>
+          <h1 style={{ fontSize: '1.8rem', fontWeight: 900, margin: 0, letterSpacing: '-1px' }}>{user.name}</h1>
+          <div style={{ display: 'flex', gap: '10px', marginTop: '6px' }}>
+            <span style={{ color: '#1DB954', fontSize: '10px', fontWeight: 900 }}>BANKID VERIFIERAD</span>
           </div>
-        </div>
-
-        {/* LUGN INFO-RAD */}
-        <div style={{ marginTop: '40px', textAlign: 'center' }}>
-          <p style={{ fontSize: '10px', opacity: 0.3, fontWeight: 700, lineHeight: '1.5', maxWidth: '200px', margin: '0 auto' }}>
-            {user.statusText.toUpperCase()}
-          </p>
         </div>
       </div>
 
-      <style jsx>{`
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
-      `}</style>
+      {/* STATS */}
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', marginBottom: '30px' }}>
+        <div style={{ background: '#111', padding: '25px', borderRadius: '24px' }}>
+          <div style={{ fontSize: '24px', fontWeight: 900, color: '#1DB954' }}>{user.trustScore}</div>
+          <div style={{ fontSize: '9px', fontWeight: 900, opacity: 0.3, marginTop: '5px' }}>TRUST SCORE</div>
+        </div>
+        <div style={{ background: '#111', padding: '25px', borderRadius: '24px' }}>
+          <div style={{ fontSize: '24px', fontWeight: 900 }}>{user.loops}</div>
+          <div style={{ fontSize: '9px', fontWeight: 900, opacity: 0.3, marginTop: '5px' }}>SLUTFÖRDA LOOPS</div>
+        </div>
+      </div>
+
+      {/* PERKS */}
+      <div style={{ padding: '30px', background: '#1DB95408', border: '1px solid #1DB95422', borderRadius: '28px' }}>
+        <h3 style={{ margin: '0 0 20px 0', fontSize: '11px', fontWeight: 900, letterSpacing: '1px' }}>AKTIVA FÖRMÅNER</h3>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+          {[
+            { icon: '⚡', text: 'Prioriterad i Snabbsälj' },
+            { icon: '🛡️', text: 'Reducerad Shield-avgift' },
+            { icon: '📦', text: 'Förtur på fraktsedlar' }
+          ].map((perk, i) => (
+            <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <span style={{ fontSize: '14px' }}>{perk.icon}</span>
+              <span style={{ fontSize: '13px', fontWeight: 700 }}>{perk.text}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div style={{ marginTop: '40px', textAlign: 'center', opacity: 0.2 }}>
+        <p style={{ fontSize: '9px', fontWeight: 800, letterSpacing: '1px' }}>{user.statusText.toUpperCase()}</p>
+      </div>
     </div>
   );
 }
