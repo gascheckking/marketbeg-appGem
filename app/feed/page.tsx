@@ -2,7 +2,6 @@
 "use client";
 import React, { useState } from 'react';
 import FeedCardSell from "@/components/FeedCardSell";
-import LoadingAI from "@/components/LoadingAI";
 
 export default function GlobalMarket() {
   const [activeCategory, setActiveCategory] = useState('Alla');
@@ -16,41 +15,45 @@ export default function GlobalMarket() {
   ];
 
   return (
-    <div className="page-wrapper" style={{ paddingBottom: '100px', background: 'var(--bg-deep)', minHeight: '100vh' }}>
-      <div style={{ position: 'sticky', top: 0, zIndex: 100, background: 'rgba(2,4,10,0.9)', backdropFilter: 'blur(12px)', borderBottom: '1px solid var(--border)' }}>
-        <div style={{ padding: '15px 15px 10px 15px', display: 'flex', gap: '8px' }}>
+    <div className="page-wrapper" style={{ paddingBottom: '120px' }}>
+      <div style={{ position: 'sticky', top: 0, zIndex: 100, background: 'rgba(0,0,0,0.8)', backdropFilter: 'blur(20px)', borderBottom: '1px solid var(--border)', margin: '0 -20px 20px -20px', padding: '15px 20px' }}>
+        <div style={{ display: 'flex', gap: '10px', marginBottom: '15px' }}>
           <div style={{ flex: 1, position: 'relative' }}>
-            <input type="text" placeholder="Sök..." style={{ width: '100%', padding: '10px 35px', borderRadius: '10px', background: 'rgba(255,255,255,0.05)', border: '1px solid var(--border)', color: '#fff', fontSize: '13px' }} />
-            <span style={{ position: 'absolute', left: '12px', top: '10px', fontSize: '12px', opacity: 0.4 }}>🔍</span>
+            <input type="text" placeholder="Sök i loopen..." style={{ width: '100%', padding: '12px 40px', borderRadius: '15px', background: 'var(--bg-card)', border: '1px solid var(--border)', color: '#fff', fontSize: '14px', outline: 'none' }} />
+            <span style={{ position: 'absolute', left: '15px', top: '12px', opacity: 0.3 }}>🔍</span>
           </div>
-          <button onClick={() => setIsAnalysing(!isAnalysing)} style={{ width: '40px', borderRadius: '10px', border: '1px solid var(--neon-purple)', background: isAnalysing ? 'var(--neon-purple)' : 'transparent', fontSize: '16px' }}>🧠</button>
+          <button 
+            onClick={() => setIsAnalysing(!isAnalysing)} 
+            style={{ 
+              width: '45px', borderRadius: '15px', border: '1px solid var(--karma-green)', 
+              background: isAnalysing ? 'var(--karma-green)' : 'transparent', 
+              fontSize: '18px', cursor: 'pointer', transition: '0.3s' 
+            }}
+          >
+            {isAnalysing ? '🟢' : '🧠'}
+          </button>
         </div>
 
-        {isAnalysing && (
-          <div style={{ padding: '0 15px 10px 15px' }}>
-            <div style={{ background: 'rgba(157, 78, 221, 0.05)', borderRadius: '12px', border: '1px solid rgba(157, 78, 221, 0.2)', overflow: 'hidden' }}>
-              <LoadingAI />
-            </div>
-          </div>
-        )}
-
-        <div style={{ display: 'flex', gap: '6px', padding: '0 15px 12px 15px', overflowX: 'auto', scrollbarWidth: 'none' }}>
-          {['iPhone', 'Dunk Low', 'Vintage'].map(tag => (
-            <span key={tag} style={{ fontSize: '9px', color: 'var(--neon-mint)', background: 'rgba(0,255,136,0.05)', padding: '2px 8px', borderRadius: '5px', border: '1px solid rgba(0,255,136,0.1)', whiteSpace: 'nowrap' }}>#{tag}</span>
-          ))}
-        </div>
-
-        <nav style={{ display: 'flex', gap: '15px', padding: '0 15px 8px 15px', overflowX: 'auto' }}>
+        <nav style={{ display: 'flex', gap: '20px', overflowX: 'auto' }} className="no-scrollbar">
           {categories.map((cat) => (
-            <div key={cat.id} onClick={() => setActiveCategory(cat.name)} style={{ paddingBottom: '6px', borderBottom: activeCategory === cat.name ? '2px solid var(--neon-mint)' : '2px solid transparent', color: activeCategory === cat.name ? '#fff' : '#444', fontWeight: 900, fontSize: '10px', whiteSpace: 'nowrap' }}>
+            <div 
+              key={cat.id} 
+              onClick={() => setActiveCategory(cat.name)} 
+              style={{ 
+                paddingBottom: '10px', 
+                borderBottom: activeCategory === cat.name ? '2px solid var(--karma-green)' : '2px solid transparent', 
+                color: activeCategory === cat.name ? '#fff' : '#444', 
+                fontWeight: 900, fontSize: '11px', whiteSpace: 'nowrap', cursor: 'pointer'
+              }}
+            >
               {cat.icon} {cat.name.toUpperCase()}
             </div>
           ))}
         </nav>
       </div>
 
-      <section style={{ padding: '10px' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
+      <section>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
           <FeedCardSell id="1" title="iPhone 15 Pro" price={10500} trust={99} />
           <FeedCardSell id="2" title="MacBook Pro" price={18900} trust={96} />
           <FeedCardSell id="3" title="AirPods Max" price={4200} trust={98} />
