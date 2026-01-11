@@ -4,28 +4,40 @@
 export default function Footer() {
   return (
     <footer style={{ 
-      marginTop: '80px', 
-      padding: '60px 20px 120px 20px', 
-      borderTop: '1px solid #111', 
+      marginTop: '100px', 
+      padding: '80px 20px 140px 20px', 
+      borderTop: '1px solid var(--border)', 
       textAlign: 'center',
       background: '#000'
     }}>
-      <h3 style={{ fontWeight: 900, letterSpacing: '4px', fontSize: '14px', margin: 0, color: '#fff' }}>
-        KARMA<span style={{color: '#1DB954'}}>∞</span>
+      <h3 style={{ fontWeight: 900, letterSpacing: '5px', fontSize: '16px', margin: 0, color: '#fff' }}>
+        KARMA<span style={{color: 'var(--karma-green)'}}>∞</span>
       </h3>
       <p style={{ 
-        fontSize: '9px', 
+        fontSize: '10px', 
         color: '#444', 
-        fontWeight: 800, 
-        marginTop: '12px',
-        letterSpacing: '2px'
+        fontWeight: 900, 
+        marginTop: '15px',
+        letterSpacing: '2.5px'
       }}>
-        FUTURE OF COMMERCE.
+        THE FUTURE OF COMMERCE.
       </p>
-      <div style={{ marginTop: '30px', display: 'flex', justifyContent: 'center', gap: '25px', opacity: 0.2, fontSize: '10px', fontWeight: 900 }}>
+      <div style={{ 
+        marginTop: '40px', 
+        display: 'flex', 
+        justifyContent: 'center', 
+        gap: '30px', 
+        opacity: 0.3, 
+        fontSize: '10px', 
+        fontWeight: 900,
+        letterSpacing: '1px'
+      }}>
         <span>VILLKOR</span>
         <span>INTEGRITET</span>
         <span>SUPPORT</span>
+      </div>
+      <div style={{ marginTop: '40px', fontSize: '8px', fontWeight: 900, opacity: 0.1, letterSpacing: '1px' }}>
+        © 2026 KARMA TECH LABS INC.
       </div>
     </footer>
   );
