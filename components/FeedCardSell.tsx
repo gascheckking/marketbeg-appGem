@@ -10,13 +10,7 @@ type Props = {
   matchScore?: number;
 };
 
-export default function FeedCardSell({
-  id,
-  title,
-  price,
-  trust,
-  matchScore = 95
-}: Props) {
+export default function FeedCardSell({ id, title, price, trust, matchScore = 95 }: Props) {
   const router = useRouter();
 
   return (
@@ -39,44 +33,44 @@ export default function FeedCardSell({
 
       <style jsx>{`
         .karma-card {
-          background: #121212;
-          border-radius: 12px;
-          padding: 12px;
-          transition: background 0.3s ease;
+          background: var(--bg-card);
+          border-radius: 20px;
+          padding: 15px;
+          transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
           cursor: pointer;
+          border: 1px solid var(--border);
         }
         .karma-card:hover {
-          background: #181818;
+          transform: translateY(-5px);
+          border-color: rgba(29, 185, 84, 0.3);
         }
         .image-container {
           aspect-ratio: 1/1;
-          background: #282828;
-          border-radius: 8px;
+          background: #000;
+          border-radius: 14px;
           display: flex;
           align-items: center;
           justify-content: center;
           position: relative;
           margin-bottom: 12px;
-          box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+          overflow: hidden;
         }
         .match-badge {
           position: absolute;
-          top: 8px;
-          right: 8px;
-          background: #1DB954;
+          top: 10px;
+          right: 10px;
+          background: var(--karma-green);
           color: #000;
-          font-size: 8px;
+          font-size: 9px;
           font-weight: 900;
-          padding: 4px 8px;
-          border-radius: 10px;
+          padding: 4px 10px;
+          border-radius: 8px;
         }
-        .emoji-large {
-          font-size: 40px;
-        }
+        .emoji-large { font-size: 45px; }
         .title {
           margin: 0;
-          font-size: 14px;
-          font-weight: 800;
+          font-size: 15px;
+          font-weight: 900;
           color: #fff;
           white-space: nowrap;
           overflow: hidden;
@@ -85,25 +79,12 @@ export default function FeedCardSell({
         .price-row {
           display: flex;
           align-items: center;
-          gap: 6px;
-          margin-top: 4px;
+          gap: 8px;
+          margin-top: 6px;
         }
-        .price {
-          font-size: 12px;
-          font-weight: 700;
-          color: #b3b3b3;
-        }
-        .trust-dot {
-          width: 3px;
-          height: 3px;
-          background: #b3b3b3;
-          border-radius: 50%;
-        }
-        .trust {
-          font-size: 11px;
-          color: #b3b3b3;
-          font-weight: 600;
-        }
+        .price { font-size: 13px; font-weight: 800; color: #fff; opacity: 0.6; }
+        .trust-dot { width: 3px; height: 3px; background: var(--karma-green); border-radius: 50%; }
+        .trust { font-size: 11px; color: var(--karma-green); font-weight: 900; }
       `}</style>
     </div>
   );
