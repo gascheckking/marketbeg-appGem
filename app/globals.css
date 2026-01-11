@@ -5,12 +5,14 @@
   --bg-card: #121212;
   --text-main: #ffffff;
   --text-muted: #b3b3b3;
+  --border: rgba(255, 255, 255, 0.08);
 }
 
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {
@@ -21,7 +23,7 @@ body {
   overflow-x: hidden;
 }
 
-/* Ta bort scrollbar-fulträsket men behåll funktionalitet */
+/* Ta bort scrollbar men behåll funktionalitet */
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
@@ -30,11 +32,11 @@ body {
   scrollbar-width: none;
 }
 
-/* Primärknapp - Spotify Style */
+/* Primärknapp - Karma Edition */
 .primary-btn {
   width: 100%;
   padding: 18px;
-  border-radius: 30px; /* Mer rundad för Karma-touch */
+  border-radius: 30px;
   border: none;
   background: var(--karma-green);
   color: #000;
@@ -42,26 +44,43 @@ body {
   font-size: 14px;
   letter-spacing: 0.5px;
   cursor: pointer;
-  transition: transform 0.2s ease;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
 }
 
 .primary-btn:active {
-  transform: scale(0.97);
+  transform: scale(0.96);
+  filter: brightness(0.9);
+}
+
+.primary-btn:disabled {
+  background: #222;
+  color: #555;
+  cursor: not-allowed;
 }
 
 /* Den lyxiga kort-känslan */
 .card {
   background: var(--bg-card);
-  border-radius: 20px;
+  border-radius: 24px;
   padding: 20px;
-  border: 1px solid rgba(255,255,255,0.05);
+  border: 1px solid var(--border);
+  transition: background 0.2s ease;
 }
 
+/* Global Page Transition */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
 .page-wrapper {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
   animation: fadeIn 0.4s ease-out forwards;
 }
+
+/* Hjälpklasser för text */
+.text-small { font-size: 10px; font-weight: 900; letter-spacing: 1px; }
+.text-muted { color: var(--text-muted); }
