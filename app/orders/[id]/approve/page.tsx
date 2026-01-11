@@ -8,39 +8,44 @@ export default function ApproveOrderPage() {
   const router = useRouter();
 
   const handleFinalApprove = () => {
-    // Här triggas Karma Shield release
-    alert("KARMA SHIELD: Likviditet släppt till säljaren.");
+    alert("KARMA SHIELD: Utbetalning påbörjad!");
     router.push('/wallet');
   };
 
   return (
-    <div className="page-wrapper" style={{ display: 'flex', alignItems: 'center', minHeight: '80vh' }}>
-      <div className="card" style={{ textAlign: 'center', padding: '50px 25px', width: '100%' }}>
-        <div style={{ fontSize: '60px', marginBottom: '25px' }}>📦</div>
+    <div className="page-wrapper">
+      <div className="card" style={{ textAlign: 'center', padding: '50px 25px', borderRadius: '32px' }}>
+        <div style={{ position: 'relative', width: '80px', height: '80px', margin: '0 auto 25px' }}>
+          <div style={{ fontSize: '50px' }}>📦</div>
+          <div style={{ 
+            position: 'absolute', bottom: 0, right: 0, background: 'var(--karma-green)', 
+            borderRadius: '50%', width: '24px', height: '24px', display: 'flex', 
+            alignItems: 'center', justifyContent: 'center', fontSize: '12px', 
+            boxShadow: '0 0 15px var(--karma-green)', color: '#000' 
+          }}>✓</div>
+        </div>
 
-        <h1 style={{ fontSize: '2rem', fontWeight: 900, letterSpacing: '-1.5px', marginBottom: '12px' }}>Verifiera Leverans</h1>
-        <p className="text-small" style={{ opacity: 0.5, lineHeight: '1.6', marginBottom: '35px' }}>
-          Genom att godkänna bekräftar du att varan matchar AI-scannern. Karma Shield släpper då betalningen från valvet direkt.
+        <h1 style={{ fontSize: '1.8rem', fontWeight: 900, marginBottom: '10px' }}>Verifiera Köp</h1>
+        <p style={{ fontSize: '13px', lineHeight: '1.5', opacity: 0.5, margin: '0 20px 30px' }}>
+          Genom att godkänna bekräftar du att varan matchar beskrivningen. Karma Shield släpper likviditeten direkt.
         </p>
         
         <div 
           onClick={() => setApproved(!approved)}
           style={{ 
-            marginBottom: '35px', background: 'rgba(255,255,255,0.02)', padding: '22px', 
-            borderRadius: '24px', border: approved ? '1px solid var(--karma-green)' : '1px solid var(--border)',
-            textAlign: 'left', cursor: 'pointer', transition: '0.2s'
+            margin: '25px 0', background: 'rgba(255,255,255,0.02)', padding: '20px', 
+            borderRadius: '20px', border: approved ? '1px solid var(--karma-green)' : '1px solid var(--border)',
+            cursor: 'pointer', transition: '0.2s'
           }}
         >
-          <div style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>
+          <div style={{ display: 'flex', gap: '15px', alignItems: 'center', textAlign: 'left' }}>
             <div style={{ 
-              width: '24px', height: '24px', borderRadius: '8px', 
+              width: '22px', height: '22px', borderRadius: '6px', 
               border: '2px solid var(--karma-green)', background: approved ? 'var(--karma-green)' : 'transparent',
-              display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#000', fontSize: '14px', fontWeight: 900
-            }}>
-              {approved && "✓"}
-            </div>
-            <label style={{ fontSize: '13px', fontWeight: 700, cursor: 'pointer' }}>
-              Jag har kontrollerat varan. Släpp betalningen.
+              display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#000'
+            }}>{approved && "✓"}</div>
+            <label style={{ fontSize: '12px', fontWeight: 700, lineHeight: '1.3', cursor: 'pointer' }}>
+              Varan matchar. Släpp pengar till säljaren.
             </label>
           </div>
         </div>
@@ -51,17 +56,13 @@ export default function ApproveOrderPage() {
           className="primary-btn" 
           style={{ 
             background: approved ? 'var(--karma-green)' : 'var(--border)', 
-            color: approved ? '#000' : '#444',
-            opacity: approved ? 1 : 0.5
+            color: approved ? '#000' : '#444' 
           }}
         >
-          GODKÄNN & SLÄPP PENGAR
+          {approved ? "SLÄPP PENGAR DIREKT" : "VÄNTAR PÅ GODKÄNNANDE"}
         </button>
         
-        <button 
-          onClick={() => router.push('/support')} 
-          style={{ background: 'none', border: 'none', color: '#ff4444', marginTop: '30px', fontSize: '11px', fontWeight: 900, opacity: 0.8, letterSpacing: '0.5px' }}
-        >
+        <button onClick={() => router.push('/support')} style={{ background: 'none', border: 'none', color: '#ff4444', marginTop: '25px', fontSize: '11px', fontWeight: 900, opacity: 0.6 }}>
           RAPPORTERA PROBLEM
         </button>
       </div>
