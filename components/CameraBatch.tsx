@@ -8,11 +8,10 @@ export default function CameraBatch({ onScanComplete }: { onScanComplete: (price
 
   const handleUpload = () => {
     setStatus("scanning");
-    // Fredde-speed: Vi simulerar en blixtsnabb AI-analys
     setTimeout(() => {
       setStatus("success");
       setTimeout(() => {
-        onScanComplete(9800); // Skickar upp priset till sidan
+        onScanComplete(9800); 
         setStatus("idle");
       }, 800);
     }, 1500);
@@ -32,15 +31,15 @@ export default function CameraBatch({ onScanComplete }: { onScanComplete: (price
       <div 
         onClick={() => fileInputRef.current?.click()}
         style={{
-          height: "140px",
-          background: status === "scanning" ? "#1DB954" : "#121212",
-          borderRadius: "24px",
+          height: "160px",
+          background: status === "scanning" ? "var(--karma-green)" : "var(--bg-card)",
+          borderRadius: "32px",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          border: "1px dashed rgba(255,255,255,0.1)",
-          transition: "0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+          border: status === "scanning" ? "2px solid var(--karma-green)" : "1px dashed var(--border)",
+          transition: "0.4s cubic-bezier(0.16, 1, 0.3, 1)",
           cursor: "pointer",
           position: "relative",
           overflow: "hidden"
@@ -48,8 +47,8 @@ export default function CameraBatch({ onScanComplete }: { onScanComplete: (price
       >
         {status === "idle" && (
           <>
-            <span style={{ fontSize: "32px" }}>📸</span>
-            <span style={{ fontSize: "12px", fontWeight: 800, marginTop: "10px", opacity: 0.6 }}>
+            <span style={{ fontSize: "36px", marginBottom: "12px" }}>📸</span>
+            <span style={{ fontSize: "11px", fontWeight: 900, letterSpacing: "1px", opacity: 0.6 }}>
               AI BATCH SCAN (MAX 25)
             </span>
           </>
@@ -58,18 +57,18 @@ export default function CameraBatch({ onScanComplete }: { onScanComplete: (price
         {status === "scanning" && (
           <div style={{ textAlign: "center", color: "#000" }}>
             <div className="ai-loader" />
-            <div style={{ fontSize: "14px", fontWeight: 900, marginTop: "10px" }}>ANALYSERAR...</div>
+            <div style={{ fontSize: "13px", fontWeight: 900, marginTop: "15px", letterSpacing: "1px" }}>ANALYSERAR...</div>
           </div>
         )}
 
         {status === "success" && (
-          <div style={{ fontSize: "40px", animation: "pop 0.4s ease" }}>✅</div>
+          <div style={{ fontSize: "44px", animation: "pop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)" }}>✅</div>
         )}
       </div>
 
       <style jsx>{`
         .ai-loader {
-          width: 30px; height: 30px;
+          width: 35px; height: 35px;
           border: 4px solid rgba(0,0,0,0.1);
           border-top: 4px solid #000;
           border-radius: 50%;
