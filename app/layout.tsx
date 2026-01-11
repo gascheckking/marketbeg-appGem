@@ -1,11 +1,10 @@
 // // app/layout.tsx
 import "./globals.css";
 import ClientLayout from "@/components/ClientLayout";
-import { Metadata } from "next";
 
-export const metadata: Metadata = {
-  title: "Karma | Circular Economy",
-  description: "Din cirkulära ekonomi, verifierad.",
+export const metadata = {
+  title: "Karma",
+  description: "Circular Economy Platform",
 };
 
 export default function RootLayout({
