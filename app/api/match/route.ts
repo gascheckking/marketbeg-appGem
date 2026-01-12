@@ -8,33 +8,27 @@ export async function POST(request: Request) {
 
     const matches = items.map((item: string) => {
       const baseValue = Math.floor(Math.random() * 5000) + 200;
-      
-      // Algoritm: Om värdet är under 300 kr, föreslå Giveaway för att bygga Trust Score
-      const shouldGiveaway = baseValue < 300;
+      const isHighDemand = Math.random() > 0.7; // Simulerar hög efterfrågan
       
       return {
         itemId: Math.random().toString(36).substring(2, 11).toUpperCase(),
         itemName: item,
-        matchScore: Math.floor(Math.random() * (99 - 94 + 1) + 94),
+        matchScore: isHighDemand ? 99 : Math.floor(Math.random() * (98 - 90) + 90),
         instantOffer: baseValue,
-        type: shouldGiveaway ? "GIVEAWAY" : "SALE_OR_SWAP",
-        swapOptions: [
-          { item: "Storlek större (92)", diff: 0, status: "MATCHED" },
-          { item: "Premium-modell", diff: 349, status: "AVAILABLE" }
-        ],
-        karmaPointsOnGiveaway: 50,
-        status: "READY_TO_LOOP"
+        // AI avgör: Giveaway om lågt värde, annars Swap eller Cash
+        type: baseValue < 300 ? "GIVEAWAY" : (isHighDemand ? "SWAP_MATCH" : "CASH_OFFER"),
+        suggestedAction: isHighDemand ? "DIREKTBYTE TILLGÄNGLIGT" : "SÄLJ TILL VALVET",
+        karmaBonus: isHighDemand ? 150 : 50
       };
     });
 
     return NextResponse.json({
       success: true,
       matches,
-      totalLiquidity: matches.reduce((acc: number, curr: any) => acc + curr.instantOffer, 0),
-      loopIntegrity: "VERIFIED_BY_KARMA",
+      node: "STOCKHOLM_HUB_01",
       timestamp: new Date().toISOString()
     });
   } catch (error) {
-    return NextResponse.json({ success: false, error: "AI_NODE_OFFLINE" }, { status: 500 });
+    return NextResponse.json({ success: false, error: "AI_OFFLINE" }, { status: 500 });
   }
 }
