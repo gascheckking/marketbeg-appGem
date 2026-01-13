@@ -1,35 +1,26 @@
 // // components/FeedCardSell.tsx
 "use client";
 import React from 'react';
-import PriceTag from './PriceTag';
-import TrustBadge from './TrustBadge';
 
-export default function FeedCardSell({ id, title, price, trust, isSwap }: any) {
+export default function FeedCardSell({ title, price, trust, isSwap }: any) {
   return (
-    <div className="spotify-card" style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+    <div style={{ background: '#121212', padding: '8px', borderRadius: '4px' }}>
       <div style={{ 
-        width: '100%', aspectRatio: '1', background: '#333', borderRadius: '4px', 
-        position: 'relative', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center'
+        width: '100%', aspectRatio: '1', background: '#282828', 
+        borderRadius: '3px', marginBottom: '8px', position: 'relative' 
       }}>
-        <span style={{ fontSize: '40px' }}>📦</span>
         {isSwap && (
-          <div style={{ 
-            position: 'absolute', top: '8px', right: '8px', background: 'var(--karma-green)', 
-            color: '#000', fontSize: '8px', fontWeight: 900, padding: '2px 6px', borderRadius: '4px' 
-          }}>
-            SWAP ⇆
+          <div style={{ position: 'absolute', top: '6px', left: '6px', background: 'var(--karma-green)', color: '#000', fontSize: '8px', fontWeight: 900, padding: '2px 4px', borderRadius: '2px' }}>
+            BYTE 🔄
           </div>
         )}
       </div>
-      
-      <div>
-        <div style={{ fontSize: '13px', fontWeight: 900, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-          {title.toUpperCase()}
-        </div>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '4px' }}>
-          <PriceTag price={price} size="xs" />
-          <div style={{ fontSize: '9px', fontWeight: 900, color: 'var(--karma-green)' }}>{trust}% TRUST</div>
-        </div>
+      <div style={{ fontSize: '13px', fontWeight: 700, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+        {title.toUpperCase()}
+      </div>
+      <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '4px' }}>
+        <div style={{ fontSize: '13px', fontWeight: 900 }}>{price}:-</div>
+        <div style={{ fontSize: '9px', fontWeight: 800, color: 'var(--karma-green)' }}>{trust}% TRUST</div>
       </div>
     </div>
   );
