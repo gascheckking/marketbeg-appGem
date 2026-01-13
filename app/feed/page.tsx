@@ -1,31 +1,27 @@
 // // app/feed/page.tsx
 "use client";
 import React from 'react';
-import FeedCardSell from "@/components/FeedCardSell";
+import FeedCardSell from '@/components/FeedCardSell';
 
-export default function GlobalMarket() {
+export default function GlobalFeed() {
+  const items = [
+    { id: '1', title: "Vintage Tröja", price: 80, trust: 99 },
+    { id: '2', title: "Nike Air", price: 450, trust: 94 },
+    { id: '3', title: "Skaljacka", price: 150, trust: 100, isSwap: true },
+    { id: '4', title: "iPhone 13", price: 4200, trust: 98 }
+  ];
+
   return (
-    <div style={{ background: "var(--bg-black)", minHeight: "100vh", padding: "12px" }}>
-      {/* Search Bar - Spotify Style */}
-      <div style={{ position: 'sticky', top: 0, zIndex: 100, background: 'rgba(0,0,0,0.8)', backdropFilter: 'blur(20px)', padding: '10px 0' }}>
-        <div style={{ background: '#fff', borderRadius: '4px', padding: '12px', display: 'flex', alignItems: 'center', gap: '10px' }}>
-          <span style={{ color: '#000' }}>🔍</span>
-          <input placeholder="Sök i Karma..." style={{ border: 'none', width: '100%', fontWeight: 700, fontSize: '14px' }} />
-        </div>
+    <div style={{ padding: '12px', paddingBottom: '100px' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px', paddingTop: '10px' }}>
+        <h1 style={{ fontSize: '22px', fontWeight: 900 }}>Upptäck</h1>
+        <div style={{ background: '#282828', borderRadius: '50%', width: '32px', height: '32px' }} />
       </div>
 
-      <h2 style={{ fontSize: '20px', fontWeight: 900, margin: '20px 0 15px' }}>Hett i Loopen</h2>
-
-      {/* Grid med hög densitet */}
-      <div style={{ 
-        display: 'grid', 
-        gridTemplateColumns: 'repeat(2, 1fr)', 
-        gap: '12px' 
-      }}>
-        <FeedCardSell id="1" title="T-shirt Vintage" price={150} trust={99} />
-        <FeedCardSell id="2" title="Tjocktröja" price={80} trust={96} />
-        <FeedCardSell id="3" title="Skaljacka 92" price={450} trust={100} isSwap={true} />
-        <FeedCardSell id="4" title="Nike skor" price={290} trust={94} />
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
+        {items.map(item => (
+          <FeedCardSell key={item.id} {...item} />
+        ))}
       </div>
     </div>
   );
