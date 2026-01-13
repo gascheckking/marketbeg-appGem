@@ -1,29 +1,19 @@
 // // components/LoadingAI.tsx
 "use client";
-import React from "react";
+import React from 'react';
 
-export default function LoadingAI({ label = "Kopplar upp mot Karma-noden..." }: { label?: string }) {
+export default function LoadingAI() {
   return (
-    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", padding: "60px 20px", textAlign: "center" }}>
-      <div style={{ position: 'relative', marginBottom: '30px' }}>
-        <div className="pulse-ring" />
-        <div style={{ fontSize: "40px", position: 'relative', zIndex: 2 }}>🧠</div>
-      </div>
-
-      <div style={{ width: "140px", height: "3px", background: "rgba(255,255,255,0.05)", position: "relative", overflow: "hidden", borderRadius: "10px", marginBottom: "20px" }}>
-        <div style={{ width: "50%", height: "100%", background: "var(--karma-green)", animation: "scan 1.5s ease-in-out infinite", boxShadow: '0 0 15px var(--karma-green)' }} />
-      </div>
-
-      <div style={{ fontSize: "12px", fontWeight: 900, letterSpacing: "1px", color: "var(--karma-green)" }}>{label.toUpperCase()}</div>
-
+    <div style={{ height: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background: '#000' }}>
+      <div className="spinner" />
+      <p style={{ marginTop: '20px', fontSize: '12px', fontWeight: 900, letterSpacing: '2px', color: 'var(--karma-green)' }}>ANALYSERAR FÖRRÅD...</p>
       <style jsx>{`
-        .pulse-ring {
-          position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-          width: 60px; height: 60px; border: 2px solid var(--karma-green);
-          border-radius: 50%; animation: ringPulse 2s infinite;
+        .spinner {
+          width: 40px; height: 40px; border: 3px solid #181818;
+          border-top: 3px solid var(--karma-green); border-radius: 50%;
+          animation: spin 0.8s linear infinite;
         }
-        @keyframes scan { 0% { left: -100%; } 100% { left: 100%; } }
-        @keyframes ringPulse { 0% { width: 40px; height: 40px; opacity: 1; } 100% { width: 100px; height: 100px; opacity: 0; } }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
       `}</style>
     </div>
   );
