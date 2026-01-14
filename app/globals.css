@@ -1,46 +1,40 @@
-/* // app/globals.css */
+// // app/globals.css
 :root {
   --karma-green: #1DB954;
   --bg-black: #000000;
-  --bg-dark-gray: #121212;
-  --bg-card: #181818;
+  --bg-card: #121212;
+  --bg-hover: #181818;
   --text-main: #ffffff;
   --text-sub: #b3b3b3;
 }
 
-* {
-  box-sizing: border-box;
-  -webkit-font-smoothing: antialiased;
-}
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; }
 
 body {
   background-color: var(--bg-black);
   color: var(--text-main);
-  font-family: 'Circular', 'Inter', sans-serif; /* Spotify använder Circular */
-  margin: 0;
-  overflow-x: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  letter-spacing: -0.02em;
 }
 
-/* De ikoniska runda hörnen från dina screenshots */
-.card-karma {
-  background: var(--bg-card);
-  border-radius: 8px; /* Spotify-standard */
-  padding: 12px;
-  border: none;
-  transition: background 0.2s ease;
-}
-
-/* Gör scrollen osynlig men fungerande */
-.no-scrollbar::-webkit-scrollbar { display: none; }
-.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-
-/* Knapparna måste vara helt runda (Pill-shaped) */
-button.primary {
+.pill-btn {
   background: var(--karma-green);
   color: #000;
-  border-radius: 500px;
-  font-weight: 700;
-  padding: 12px 24px;
   border: none;
-  text-transform: none;
+  border-radius: 500px;
+  padding: 14px 28px;
+  font-weight: 900;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
 }
+
+.karma-card {
+  background: var(--bg-card);
+  border-radius: 4px;
+  padding: 12px;
+  border: 1px solid rgba(255,255,255,0.03);
+}
+
+.no-scrollbar::-webkit-scrollbar { display: none; }
