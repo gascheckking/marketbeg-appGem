@@ -1,30 +1,37 @@
 // // app/profile/page.tsx
 "use client";
 import React from 'react';
-import KarmaTrustCard from '@/components/KarmaTrustCard';
 
 export default function ProfilePage() {
   return (
-    <div style={{ padding: '20px', paddingBottom: '100px' }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: '20px', marginBottom: '30px' }}>
-        <div style={{ width: '80px', height: '80px', borderRadius: '50%', background: '#282828' }} />
+    <div style={{ padding: '24px', background: '#000', minHeight: '100vh', color: '#fff' }}>
+      {/* USER HEADER */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '32px' }}>
+        <div style={{ width: '64px', height: '64px', borderRadius: '50%', background: '#282828' }} />
         <div>
-          <h1 style={{ fontSize: '24px', fontWeight: 900 }}>Ditt Namn</h1>
-          <div style={{ fontSize: '12px', color: 'var(--karma-green)', fontWeight: 900 }}>KARMA MASTER • NIVÅ 4</div>
+          <h1 style={{ fontSize: '24px', fontWeight: 900 }}>Ditt Karma</h1>
+          <div style={{ color: 'var(--karma-green)', fontSize: '12px', fontWeight: 900 }}>98% TRUST • ELITE</div>
         </div>
       </div>
 
-      <KarmaTrustCard score={98} />
+      {/* SALDO & ACTION (Ersätter Vault) */}
+      <div style={{ background: '#121212', padding: '24px', borderRadius: '12px', marginBottom: '32px' }}>
+        <div style={{ fontSize: '10px', fontWeight: 900, opacity: 0.5, letterSpacing: '1px' }}>TILLGÄNGLIGT ATT TA UT</div>
+        <div style={{ fontSize: '42px', fontWeight: 900, margin: '8px 0' }}>14.250:-</div>
+        <button className="pill-btn" style={{ width: '100%', background: '#fff', color: '#000', marginTop: '12px' }}>
+          ÖVERFÖR TILL BANK
+        </button>
+      </div>
 
-      <div style={{ marginTop: '40px' }}>
-        <h2 style={{ fontSize: '16px', fontWeight: 900, marginBottom: '15px' }}>Dina Aktiva Loops</h2>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
-          {/* Exempel på egna listningar */}
-          <div style={{ background: '#121212', padding: '10px', borderRadius: '4px' }}>
-            <div style={{ width: '100%', aspectRatio: '1', background: '#282828', borderRadius: '2px', marginBottom: '8px' }} />
-            <div style={{ fontSize: '11px', fontWeight: 700 }}>VINTAGE HOODIE</div>
-            <div style={{ fontSize: '10px', color: 'var(--karma-green)' }}>6 BUD • 2 DAGAR KVAR</div>
+      {/* DINA LOOPAR (Resultatet av din Video Scan) */}
+      <h3 style={{ fontSize: '16px', fontWeight: 900, marginBottom: '16px' }}>Dina Aktiva Loops</h3>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+        <div className="karma-card" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <div>
+            <div style={{ fontSize: '14px', fontWeight: 700 }}>Mass-scan: Förråd Söder</div>
+            <div style={{ fontSize: '11px', opacity: 0.6 }}>12 objekt • Publicerat idag</div>
           </div>
+          <div style={{ fontSize: '14px', fontWeight: 900, color: 'var(--karma-green)' }}>ACTIVE</div>
         </div>
       </div>
     </div>
