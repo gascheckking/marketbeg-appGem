@@ -1,48 +1,56 @@
 // // components/AIScanView.tsx
 "use client";
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 export default function AIScanView() {
+  const router = useRouter();
+  const [analyzing, setAnalyzing] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setAnalyzing(false), 2500);
+    return () => clearTimeout(timer);
+  }, []);
+
+  const clusters = [
+    { id: 1, title: "7x Barnjackor (86-92)", action: "PAKET", price: 150 },
+    { id: 2, title: "Vintage Sneakers", action: "SÄLJ DIREKT", price: 450 },
+    { id: 3, title: "Leksaker & Småprylar", action: "BORTSKÄNKES", price: 0 }
+  ];
+
   return (
-    <div style={{ position: 'fixed', inset: 0, background: '#000', zIndex: 2000 }}>
-      {/* Kameravy-simulering */}
-      <div style={{ position: 'absolute', inset: 0, opacity: 0.6, background: 'linear-gradient(45deg, #111, #222)' }}>
-        {/* Här skulle kameraströmmen ligga */}
-      </div>
-
-      {/* Scanning-ramar */}
-      <div className="scanner-frame" />
-
-      {/* UI Overlay */}
-      <div style={{ position: 'absolute', bottom: '40px', left: 0, right: 0, padding: '0 30px', textAlign: 'center' }}>
-        <div style={{ 
-          background: 'rgba(0,0,0,0.7)', backdropFilter: 'blur(10px)', 
-          padding: '20px', borderRadius: '24px', border: '1px solid rgba(255,255,255,0.1)' 
-        }}>
-          <div style={{ color: '#1DB954', fontSize: '10px', fontWeight: 900, letterSpacing: '2px', marginBottom: '10px' }}>
-            AI-IDENTIFIERING PÅGÅR
-          </div>
-          <h2 style={{ fontSize: '18px', fontWeight: 900, margin: 0 }}>Håll objektet i ramen</h2>
-          <p style={{ fontSize: '12px', opacity: 0.5, marginTop: '5px' }}>Vi analyserar skick, modell och efterfrågan i realtid.</p>
+    <div style={{ background: '#000', minHeight: '100vh', paddingBottom: '100px' }}>
+      {/* SCANNER VIEWPORT */}
+      <div style={{ width: '100%', aspectRatio: '4/5', background: '#111', position: 'relative' }}>
+        {/* Simulerad AI-detektering ovanpå bilden */}
+        <div style={{ position: 'absolute', top: '30%', left: '20%', width: '40%', height: '30%', border: '2px solid var(--karma-green)', borderRadius: '4px' }}>
+          <div style={{ background: 'var(--karma-green)', color: '#000', fontSize: '10px', fontWeight: 900, padding: '2px 6px', width: 'fit-content' }}>7 OBJEKT DETEKTERADE</div>
         </div>
+        {analyzing && (
+          <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.4)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div style={{ fontWeight: 900, color: 'var(--karma-green)', letterSpacing: '2px' }}>ANALYSERAR FÖRRÅD...</div>
+          </div>
+        )}
       </div>
 
-      <style jsx>{`
-        .scanner-frame {
-          position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-          width: 280px; height: 380px;
-          border: 2px solid rgba(29, 185, 84, 0.3); border-radius: 30px;
-        }
-        .scanner-frame::after {
-          content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
-          background: #1DB954; box-shadow: 0 0 15px #1DB954;
-          animation: scanLine 2.5s ease-in-out infinite;
-        }
-        @keyframes scanLine { 
-          0%, 100% { top: 5%; } 
-          50% { top: 95%; } 
-        }
-      `}</style>
+      <div style={{ padding: '20px' }}>
+        <h2 style={{ fontSize: '11px', fontWeight: 900, opacity: 0.5, marginBottom: '15px' }}>AI-FÖRSLAG (BASERAT PÅ DITT KAOS)</h2>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+          {clusters.map(c => (
+            <div key={c.id} className="karma-card" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <div>
+                <div style={{ fontSize: '14px', fontWeight: 800 }}>{c.title}</div>
+                <div style={{ fontSize: '10px', color: 'var(--karma-green)', fontWeight: 900 }}>{c.action}</div>
+              </div>
+              <div style={{ fontSize: '16px', fontWeight: 900 }}>{c.price > 0 ? `${c.price}:-` : 'GRATIS'}</div>
+            </div>
+          ))}
+        </div>
+
+        <button onClick={() => router.push('/vault')} className="pill-btn" style={{ width: '100%', marginTop: '30px' }}>
+          Godkänn & Publicera Allt
+        </button>
+      </div>
     </div>
   );
 }
