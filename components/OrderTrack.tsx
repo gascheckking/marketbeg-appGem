@@ -1,39 +1,26 @@
 // // components/OrderTrack.tsx
 "use client";
-export default function OrderTrack({ status = "Aktiv" }: { status?: string }) {
-  return (
-    <div className="order-card">
-      <div className="order-header">
-         <h3>AFFÄR {status.toUpperCase()}</h3>
-         <div className="shield-tag">🛡️ KARMA SHIELD</div>
-      </div>
-      
-      <div className="qr-box">
-        <div className="qr-placeholder">🔳</div>
-        <p>SKANNA HOS OMBUD</p>
-        <small>Pengarna hålls i valvet tills båda är nöjda.</small>
-      </div>
+import React from 'react';
 
-      <style jsx>{`
-        .order-card { 
-          background: var(--bg-card); 
-          border: 1px solid var(--border); 
-          border-radius: 24px; 
-          padding: 20px; 
-        }
-        .order-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-        .order-header h3 { margin: 0; font-size: 11px; font-weight: 900; letter-spacing: 0.5px; }
-        .shield-tag { 
-          font-size: 8px; font-weight: 900; 
-          color: var(--karma-green); 
-          background: rgba(29, 185, 84, 0.1); 
-          padding: 5px 10px; border-radius: 10px; 
-        }
-        .qr-box { background: #fff; border-radius: 20px; padding: 30px; text-align: center; }
-        .qr-placeholder { font-size: 50px; color: #000; line-height: 1; }
-        .qr-box p { color: #000; font-weight: 900; font-size: 13px; margin: 10px 0 2px; }
-        .qr-box small { color: #666; font-size: 9px; font-weight: 700; }
-      `}</style>
+export default function OrderTrack({ step = 2 }) {
+  const steps = ['Packas', 'Skickat', 'Hämtat'];
+  
+  return (
+    <div style={{ padding: '20px', background: '#121212', borderRadius: '8px' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
+        {steps.map((s, i) => (
+          <div key={s} style={{ 
+            fontSize: '10px', fontWeight: 900, 
+            color: i < step ? 'var(--karma-green)' : '#333' 
+          }}>{s.toUpperCase()}</div>
+        ))}
+      </div>
+      <div style={{ height: '4px', background: '#282828', borderRadius: '2px', display: 'flex' }}>
+        <div style={{ 
+          width: step === 1 ? '33%' : step === 2 ? '66%' : '100%', 
+          background: 'var(--karma-green)', borderRadius: '2px', transition: 'width 0.5s' 
+        }} />
+      </div>
     </div>
   );
 }
