@@ -1,31 +1,23 @@
 // // components/Header.tsx
 "use client";
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import React from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function Header() {
   const router = useRouter();
-  const [pulseIndex, setPulseIndex] = useState(0);
-  const pulses = ["STRL 86 -> 92 SWAPS: +22% 🔥", "SNEAKERS SÄLJER SNABBT ⚡", "842 NYA I LOOPEN"];
-
-  useEffect(() => {
-    const timer = setInterval(() => setPulseIndex(p => (p + 1) % pulses.length), 4000);
-    return () => clearInterval(timer);
-  }, [pulses.length]);
-
   return (
     <header style={{ 
-      padding: '15px 20px', background: 'rgba(0,0,0,0.85)', backdropFilter: 'blur(20px)', 
-      position: 'sticky', top: 0, zIndex: 100, display: 'flex', 
-      justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #111'
+      padding: '16px 20px', display: 'flex', justifyContent: 'space-between', 
+      alignItems: 'center', position: 'sticky', top: 0, z.Index: 100,
+      background: 'rgba(0,0,0,0.8)', backdropFilter: 'blur(20px)' 
     }}>
-      <div onClick={() => router.push("/")} style={{ cursor: 'pointer' }}>
-        <div style={{ fontWeight: 900, fontSize: '18px' }}>Karma<span style={{color: '#1DB954'}}>∞</span></div>
-        <div style={{ fontSize: '8px', color: '#1DB954', fontWeight: 900 }}>{pulses[pulseIndex]}</div>
+      <div onClick={() => router.push('/feed')} style={{ fontSize: '22px', fontWeight: 900, color: 'var(--karma-green)', cursor: 'pointer' }}>
+        Karma
       </div>
-      <button onClick={() => router.push('/wallet')} style={{ background: '#111', border: '1px solid #222', padding: '8px 14px', borderRadius: '12px', fontSize: '11px', fontWeight: 900, color: '#fff' }}>
-        14 250:- 💰
-      </button>
+      <div style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>
+        <span onClick={() => router.push('/notifications')} style={{ fontSize: '18px' }}>🔔</span>
+        <div onClick={() => router.push('/profile')} style={{ width: '28px', height: '28px', background: '#282828', borderRadius: '50%' }} />
+      </div>
     </header>
   );
 }
