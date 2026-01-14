@@ -1,36 +1,17 @@
 // // app/sell/page.tsx
 "use client";
 import React from 'react';
-import { useRouter } from 'next/navigation';
+import AIScanView from '@/components/AIScanView';
 
 export default function SellPage() {
-  const router = useRouter();
-
+  // Vi kör Video Scan som default när man trycker på Sälj - precis som din vision
   return (
-    <div style={{ padding: '24px', background: '#000', minHeight: '100vh' }}>
-      <h1 style={{ fontSize: '32px', fontWeight: 900, marginBottom: '40px' }}>Sälj i loopen</h1>
+    <div style={{ background: '#000', minHeight: '100vh' }}>
+      <header style={{ padding: '20px', position: 'absolute', top: 0, zIndex: 10, width: '100%' }}>
+        <h1 style={{ fontSize: '18px', fontWeight: 900, textShadow: '0 2px 10px rgba(0,0,0,0.5)' }}>VIDEO SCAN ACTIVE</h1>
+      </header>
       
-      <div 
-        onClick={() => router.push('/sell/burst')}
-        style={{ 
-          background: 'var(--karma-green)', color: '#000', padding: '30px', 
-          borderRadius: '12px', marginBottom: '16px', cursor: 'pointer' 
-        }}
-      >
-        <div style={{ fontSize: '24px', fontWeight: 900 }}>VIDEO SCAN 🎥</div>
-        <p style={{ fontSize: '14px', fontWeight: 600, marginTop: '5px' }}>Töm förrådet på 2 minuter</p>
-      </div>
-
-      <div 
-        onClick={() => router.push('/sell/instant')}
-        style={{ 
-          background: '#121212', color: '#fff', padding: '24px', 
-          borderRadius: '12px', border: '1px solid #282828' 
-        }}
-      >
-        <div style={{ fontSize: '18px', fontWeight: 900 }}>Enstaka objekt 📸</div>
-        <p style={{ fontSize: '12px', opacity: 0.6 }}>Fota och sälj direkt</p>
-      </div>
+      <AIScanView />
     </div>
   );
 }
